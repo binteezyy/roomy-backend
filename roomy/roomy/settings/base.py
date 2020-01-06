@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # APPS
+    'roomy_admin',
     'roomy_core',
 ]
 
