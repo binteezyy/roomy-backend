@@ -1,8 +1,60 @@
 {% extends "layout.html" %}
 
+{% block title %}
+  Report
+{% endblock %}
+
 {% block content %}
-<div class="">
-sdfsdfsdfsd
+<div class="content">
+
+  <table cellpadding="10">
+    <tbody>
+      <tr>
+        <td>
+          <span class="filter-span">TYPE</span> <br>
+          <select class="filter-type" name="rental-type">
+            <option value="">ALL</option>
+            <option value="">Request</option>
+            <option value="">Complaint</option>
+          </select>
+        </td>
+        <td>
+          <span class="filter-span">KEYWORD</span> <br>
+          <input class="filter-input" type="text" name="" value="">
+        </td>
+      </tr>
+    </tbody>
+    <div class="text-left" style="float: right;">
+      Result(s): <br> <br>
+      <button class="btn btn-primary" type="button" name="button">DOWNLOAD EXCEL</button>
+    </div>
+  </table>
+
+  <br>
+
+  <table class="table table-bordered">
+    <thead>
+      <th>NO</th>
+      <th>PLACEHOLDER</th>
+      <th>PLACEHOLDER</th>
+      <th>PLACEHOLDER</th>
+      <th>PLACEHOLDER</th>
+      <th>PLACEHOLDER</th>
+      <th>PLACEHOLDER</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>
 
 {% endblock %}
