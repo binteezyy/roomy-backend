@@ -2,20 +2,23 @@
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="{% static "vendor/bootstrap/css/bootstrap.css" %}">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
+
     {% block extra_css %}{% endblock %}
+
   </head>
+
   <body>
     {% block layout %}
 
     {% endblock %}
   </body>
 
-  <script type="text/javascript">
-    alert("1")
-  </script>
-  {% block extra_js %}{% endblock %}
 </html>

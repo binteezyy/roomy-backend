@@ -1,14 +1,105 @@
 {% extends "index.html" %}
 
 {% block layout %}
-  <nav>
+<!-- page wrapper -->
+<div class="wrapper">
 
-  </nav>
+  <!-- sidebar -->
+  <div class="sidebar">
 
-  <div class="">
-    {% block content %}
+    <!-- sidebar brand logo-->
+    <div class="text-center">
+      <h5>logo</h5>
+    </div>
+    <!-- end of sidebar logo-->
 
-    {% endblock %}
+    <!-- sidebar divider-->
+      <div class="">
+        &nbsp
+      </div>
+    <!-- end of   sidebar divider-->
+
+    <!-- sidebar navigation-->
+    <div class="sidebar-nav">
+
+      <!-- menu navigation-->
+      <div class="nav d-flex flex-column justify-content-center">
+        <h6>Menu</h6>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Transaction</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Rental</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Tenant</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Payment</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Expense</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Cashflow</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Report</a>
+        </div>
+      </div>
+      <!-- end of menu navigation-->
+
+      <!-- sidebar divider-->
+      <div class="">
+        &nbsp
+      </div>
+      <!-- end of   sidebar divider-->
+
+      <!-- settings navigation-->
+      <div class="nav d-flex flex-column justify-content-center">
+        <h6>Settings</h6>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Property Management</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Room Management</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Admin Management</a>
+        </div>
+      </div>
+      <!-- end of settings navigation-->
+
+    </div>
+    <!-- end of sidebar navigation-->
+
   </div>
+  <!-- end of sidebar -->
+
+  <!-- content wrapper -->
+  <div class="content-wrapper d-flex flex-column">
+
+    <!-- topbar -->
+    <div class="topbar">
+
+    </div>
+    <!-- end of topbar -->
+
+    <!-- content -->
+    <div class="content">
+      {% block content %}
+
+      {% endblock %}
+    </div>
+    <!-- end of content -->
+
+  </div>
+  <!-- end of content wrapper -->
+
+</div>
+<!-- end of page wrapper-->
 
 {% endblock %}
