@@ -24,30 +24,30 @@
 
       <!-- menu navigation-->
       <div class="nav d-flex flex-column justify-content-center">
-        <h6>Menu</h6>
+        <h6>MENU</h6>
         <div class="nav-item">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="#">Transaction</a>
+          <a class="nav-link" href="{% url 'transaction' %}">Transaction</a>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="#">Rental</a>
+          <a class="nav-link" href="{% url 'rental' %}">Rental</a>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="#">Tenant</a>
+          <a class="nav-link" href="{% url 'tenant' %}">Tenant</a>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="#">Payment</a>
+          <a class="nav-link" href="{% url 'payment' %}">Payment</a>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="#">Expense</a>
+          <a class="nav-link" href="{% url 'expense' %}">Expense</a>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="#">Cashflow</a>
+          <a class="nav-link" href="{% url 'cashflow' %}">Cashflow</a>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="#">Report</a>
+          <a class="nav-link" href="{% url 'report' %}">Report</a>
         </div>
       </div>
       <!-- end of menu navigation-->
@@ -60,15 +60,15 @@
 
       <!-- settings navigation-->
       <div class="nav d-flex flex-column justify-content-center">
-        <h6>Settings</h6>
+        <h6>SETTINGS</h6>
         <div class="nav-item">
-          <a class="nav-link" href="#">Property Management</a>
+          <a class="nav-link" href="{% url 'property-management' %}">Property Management</a>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="#">Room Management</a>
+          <a class="nav-link" href="{% url 'room-management' %}">Room Management</a>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="#">Admin Management</a>
+          <a class="nav-link" href="{% url 'admin-management' %}">Admin Management</a>
         </div>
       </div>
       <!-- end of settings navigation-->
@@ -83,17 +83,31 @@
   <div class="content-wrapper d-flex flex-column">
 
     <!-- topbar -->
-    <div class="topbar">
+    <div class="topbar d-flex flex-row justify-content-between">
+
+          <div class="header">
+            {% block header %}
+
+            {% endblock %}
+          </div>
+
+          <div class="account dropdown">
+            <div class="account" type="dropdown-toggle" name="button" data-toggle="dropdown">
+              username &nbsp<i class="down"></i>
+            </div>
+            <ul class="dropdown-menu">
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">logout</a></li>
+            </ul>
+          </div>
 
     </div>
     <!-- end of topbar -->
 
     <!-- content -->
-    <div class="content">
-      {% block content %}
+    {% block content %}
 
-      {% endblock %}
-    </div>
+    {% endblock %}
     <!-- end of content -->
 
   </div>

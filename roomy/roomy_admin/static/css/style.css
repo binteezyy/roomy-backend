@@ -19,7 +19,8 @@
   height: 100%;
   position: fixed;
   padding-top: 20px;
-  background-color: #fad300;
+  background-color: white;
+  border-right: 1px solid black;
 }
 
 .sidebar-nav {}
@@ -37,6 +38,7 @@
 
 .nav-item:hover {
   background-color: black;
+  border-radius: 30px;
 }
 
 .nav-link {
@@ -46,24 +48,57 @@
 }
 
 .nav-link:hover {
-  color: #fad300;
+  color: white;
 }
 
 /* 3. content */
 
 .topbar {
   width: 100%;
-  height: 50px;
+  height: 40px;
   position: fixed;
-  margin-left: 250px;
-  padding: 0;
+  margin: 0 0 0 250px;
+  padding: 0 250px 0 0;
   background-color: #424242;
 }
 
+.header {
+  color: white;
+  font-size: 24px;
+  margin: auto 10px auto 10px;
+}
+
+.account {
+  color: white;
+  font-size: 16px;
+  margin: auto 10px auto 10px;
+}
+
+.account:hover {
+  cursor: pointer;
+}
+
+i {
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 4px;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
 .content-wrapper {
+  width: calc(100% - 290px);
+  height: auto;
 }
 
 .content {
-  width: auto;
-  margin: 70px 20px 20px 270px;
+  width: 100%;
+  height: auto;
+  margin: 60px 20px 20px 270px;
+  padding: 20px;
+  border: 1px solid gray;
 }

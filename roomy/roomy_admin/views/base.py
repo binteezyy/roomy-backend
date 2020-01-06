@@ -10,9 +10,9 @@ def index(request):
     return render(request,"",context)
 
 # home
-def home(request):
+def dashboard(request):
 
-    return render(request,"components/home.html",context)
+    return render(request,"components/dashboard.html",context)
 
 # transaction
 def transaction(request):
@@ -62,4 +62,4 @@ def room_management(request):
 # admin-management
 def admin_management(request):
 
-    return render(request,"components/admin_management.html",context)
+    return render(request,"components/admin-management.html",context)
