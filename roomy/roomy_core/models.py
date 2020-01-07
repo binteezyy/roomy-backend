@@ -14,6 +14,7 @@ class Property(models.Model):
 
     class Meta:
         unique_together = ('name', 'street', 'brgy', 'city')
+        verbose_name_plural = 'Properties'
 
 
 class ImageFile(models.Model):
