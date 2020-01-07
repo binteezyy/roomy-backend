@@ -30,26 +30,26 @@
         </div>
 
         <div class="nav-item">
-          <div class="nav-link transaction" href="{% url 'transaction' %}" type="dropdown-toggle" name="button" data-toggle="dropdown">Add transaction</div>
+          <div class="nav-link transaction" type="dropdown-toggle" name="button" data-toggle="dropdown">Add transaction</div>
           <ul class="dropdown-menu" style="width: auto; background-color: #858585; margin-left:150px;">
             <li>
               <div class="nav-item">
-                <a class="nav-link" href="{% url 'transaction_add_property' %}">Add property transaction</a>
+                <a class="nav-link" href="{% url 'add_property' %}">Add property transaction</a>
               </div>
             </li>
             <li>
               <div class="nav-item">
-                <a class="nav-link" href="{% url 'dashboard' %}">Add rental transaction</a>
+                <a class="nav-link" href="{% url 'add_rental' %}">Add rental transaction</a>
               </div>
             </li>
             <li>
               <div class="nav-item">
-                <a class="nav-link" href="{% url 'dashboard' %}">Add payment transaction</a>
+                <a class="nav-link" href="{% url 'add_payment' %}">Add payment transaction</a>
               </div>
             </li>
             <li>
               <div class="nav-item">
-                <a class="nav-link" href="{% url 'dashboard' %}">Add expense transaction</a>
+                <a class="nav-link" href="{% url 'add_expense' %}">Add expense transaction</a>
               </div>
             </li>
           </ul>
@@ -62,7 +62,7 @@
           <a class="nav-link" href="{% url 'tenant' %}">Tenant</a>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="{% url 'payment' %}">Billing</a>
+          <a class="nav-link" href="{% url 'billing' %}">Billing</a>
         </div>
         <div class="nav-item">
           <a class="nav-link" href="{% url 'expense' %}">Expense</a>
@@ -86,13 +86,13 @@
       <div class="nav d-flex flex-column justify-content-center">
         <h6>Settings</h6>
         <div class="nav-item">
-          <a class="nav-link" href="{% url 'property-management' %}">Property Management</a>
+          <a class="nav-link" href="{% url 'property_management' %}">Property Management</a>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="{% url 'room-management' %}">Room Management</a>
+          <a class="nav-link" href="{% url 'room_management' %}">Room Management</a>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="{% url 'admin-management' %}">Admin Management</a>
+          <a class="nav-link" href="{% url 'admin_management' %}">Admin Management</a>
         </div>
       </div>
       <!-- end of settings navigation-->

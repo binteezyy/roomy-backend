@@ -1,19 +1,19 @@
 {% extends "layout.html" %}
 
+{% block title %}
+  Transaction
+{% endblock %}
+
 {% block content %}
 
-  {% block transaction %}
-
-  {% endblock %}
-
-  <div class="wrapper">
-    <form class="main-transaction d-flex flex-column justify-content-start" action="index.html" method="post">
+  <div class="content">
+    <form class="d-flex flex-column justify-content-start" action="index.html" method="post">
       <div class="">
         <h5>Property Information</h5>
       </div>
       <div class="form-wrapper d-flex flex-column flex-wrap">
         <div class="form-group" style="margin: 10px;">
-          <label class="col-form-label">Property</label> <br>
+          <label class="col-form-label">Name</label> <br>
           <input class="form-control" type="text" name="" value="">
         </div>
         <div class="form-group" style="margin: 10px;">
@@ -38,4 +38,8 @@
     </form>
   </div>
 
+{% endblock %}
+
+{% block header %}
+  TRANSACTION
 {% endblock %}

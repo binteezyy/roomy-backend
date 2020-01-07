@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  Admin Management
+  Billing
 {% endblock %}
 
 {% block content %}
@@ -11,14 +11,18 @@
     <tbody>
       <tr>
         <td>
-          <span class="filter-span">Keyword</span> <br>
-          <input class="filter-input" type="text" name="" value="">
+          <label class="col-form-label">Date Range</label> <br>
+          <input class="form-control" type="text" placeholder="i dont know how to date range" name="" value="">
+        </td>
+        <td>
+          <label class="col-form-label">Keyword</label> <br>
+          <input class="form-control" type="text" name="" value="">
         </td>
       </tr>
     </tbody>
     <div class="text-left" style="float: right;">
       Result(s): <br> <br>
-      <button class="btn btn-primary" type="button" name="button">Add admin</button> <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
+      <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
     </div>
   </table>
 
@@ -27,13 +31,11 @@
   <table class="table table-bordered">
     <thead>
       <th>Id</th>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Action</th>
+      <th>Timestamp</th>
+      <th>Transaction Id</th>
     </thead>
     <tbody>
       <tr>
-        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -46,5 +48,5 @@
 {% endblock %}
 
 {% block header %}
-  ADMIN MANAGEMENT
+  Billing
 {% endblock %}

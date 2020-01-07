@@ -14,10 +14,25 @@ def dashboard(request):
 
     return render(request,"components/dashboard.html",context)
 
-# transaction-add-property
-def transaction_add_property(request):
+# add_property
+def add_property(request):
 
-    return render(request,"components/transaction-add-property.html",context)
+    return render(request,"components/add_property.html",context)
+
+# add_rental
+def add_rental(request):
+
+    return render(request,"components/add_rental.html",context)
+
+# add_payment
+def add_payment(request):
+
+    return render(request,"components/add_payment.html",context)
+
+# add_expense
+def add_expense(request):
+
+    return render(request,"components/add_expense.html",context)
 
 # rental
 def rental(request):
@@ -30,9 +45,9 @@ def tenant(request):
     return render(request,"components/tenant.html",context)
 
 # billing
-def payment(request):
+def billing(request):
 
-    return render(request,"components/payment.html",context)
+    return render(request,"components/billing.html",context)
 
 # expense
 def expense(request):
@@ -49,17 +64,17 @@ def report(request):
 
     return render(request,"components/report.html",context)
 
-# property-management
+# property_management
 def property_management(request):
 
-    return render(request,"components/property-management.html",context)
+    return render(request,"components/property_management.html",context)
 
-# room-management
+# room_management
 def room_management(request):
 
-    return render(request,"components/room-management.html",context)
+    return render(request,"components/room_management.html",context)
 
-# admin-management
+# admin_management
 def admin_management(request):
 
-    return render(request,"components/admin-management.html",context)
+    return render(request,"components/admin_management.html",context)
