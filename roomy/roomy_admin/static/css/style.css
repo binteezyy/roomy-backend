@@ -8,12 +8,6 @@
   display: flex;
 }
 
-.sidebar {
-  width: 250px;
-  height: 100%;
-  position: fixed;
-}
-
 .topbar {
   width: 100%;
   height: 40px;
