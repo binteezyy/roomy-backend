@@ -3,10 +3,10 @@ from django.conf.urls.static import static
 from .views import base
 urlpatterns = [
     path('dashboard/',      base.dashboard,                                        name='dashboard'),
-    path('transaction/',      base.transaction,                                        name='transaction'),
+    path('transaction-add-property/',      base.transaction_add_property,                                        name='transaction-add-property'),
     path('rental/',      base.rental,                                        name='rental'),
     path('tenant/',      base.tenant,                                        name='tenant'),
-    path('billing/',      base.billing,                                        name='billing'),
+    path('payment/',      base.payment,                                        name='payment'),
     path('expense/',      base.expense,                                        name='expense'),
     path('cashflow/',      base.cashflow,                                        name='cashflow'),
     path('report/',      base.report,                                        name='report'),

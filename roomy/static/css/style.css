@@ -69,10 +69,6 @@
   cursor: pointer;
 }
 
-.transaction:hover {
-  cursor: pointer;
-}
-
 i {
   border: solid white;
   border-width: 0 2px 2px 0;

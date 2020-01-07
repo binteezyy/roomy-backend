@@ -14,10 +14,10 @@ def dashboard(request):
 
     return render(request,"components/dashboard.html",context)
 
-# transaction
-def transaction(request):
+# transaction-add-property
+def transaction_add_property(request):
 
-    return render(request,"components/transaction.html",context)
+    return render(request,"components/transaction-add-property.html",context)
 
 # rental
 def rental(request):
@@ -30,9 +30,9 @@ def tenant(request):
     return render(request,"components/tenant.html",context)
 
 # billing
-def billing(request):
+def payment(request):
 
-    return render(request,"components/billing.html",context)
+    return render(request,"components/payment.html",context)
 
 # expense
 def expense(request):
