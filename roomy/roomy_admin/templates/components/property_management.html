@@ -24,7 +24,7 @@
     </tbody>
     <div class="text-left" style="float: right;">
       Result(s): <br> <br>
-      <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
+      <a class="btn btn-primary" href="{% url 'add_property' %}">Add property</a> <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
     </div>
   </table>
 
@@ -56,5 +56,5 @@
 {% endblock %}
 
 {% block header %}
-  PROPERTY MANAGEMENT
+  Property Management
 {% endblock %}

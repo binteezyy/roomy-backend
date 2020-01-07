@@ -18,7 +18,7 @@
     </tbody>
     <div class="text-left" style="float: right;">
       Result(s): <br> <br>
-      <button class="btn btn-primary" type="button" name="button">Add admin</button> <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
+      <a class="btn btn-primary" href="{% url 'add_admin' %}">Add admin</a> <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
     </div>
   </table>
 
@@ -27,9 +27,9 @@
   <table class="table table-bordered">
     <thead>
       <th>Id</th>
-      <th>Username</th>
+      <th>Name</th>
       <th>Email</th>
-      <th>Action</th>
+      <th>Username</th>
     </thead>
     <tbody>
       <tr>
@@ -46,5 +46,5 @@
 {% endblock %}
 
 {% block header %}
-  ADMIN MANAGEMENT
+  Admin Management
 {% endblock %}

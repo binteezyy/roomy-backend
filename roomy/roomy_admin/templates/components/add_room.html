@@ -9,28 +9,28 @@
   <div class="content">
     <form class="d-flex flex-column justify-content-start" action="index.html" method="post">
       <div class="">
-        <h5>Payment Information</h5>
+        <h5>Room Information</h5>
       </div>
       <div class="form-wrapper d-flex flex-column flex-wrap">
         <div class="form-group" style="margin: 10px;">
-          <label class="col-form-label">Amount</label> <br>
+          <label class="col-form-label">Floor</label> <br>
           <input class="form-control" type="text" name="" value="">
         </div>
         <div class="form-group" style="margin: 10px;">
-          <label class="col-form-label">Description</label> <br>
+          <label class="col-form-label">Number</label> <br>
           <input class="form-control" type="text" name="" value="">
         </div>
         <div class="form-group" style="margin: 10px;">
-          <label class="col-form-label">Rental Id</label> <br>
-          <select class="form-control" name="">
-            <option value="" selected>--- Select ---</option>
-            <option value="">Rental 1</option>
-            <option value="">Rental 2</option>
-          </select>
+          <label class="col-form-label">Rate</label> <br>
+          <input class="form-control" type="text" name="" value="">
         </div>
         <div class="form-group" style="margin: 10px;">
-          <label class="col-form-label">Date</label> <br>
-          <input class="form-control" type="date" name="" value="">
+          <label class="col-form-label">Type</label> <br>
+          <input class="form-control" type="text" name="" value="">
+        </div>
+        <div class="form-group" style="margin: 10px;">
+          <label class="col-form-label">Photos</label> <br>
+          <input class="" type="file" name="pic" accept="image/*" multiple>
         </div>
       </div>
       <div class="button-wrapper" style="margin-top: 50px; margin-right: auto; margin-left: auto;">
@@ -43,5 +43,5 @@
 {% endblock %}
 
 {% block header %}
-  TRANSACTION
+  Transaction - add room
 {% endblock %}

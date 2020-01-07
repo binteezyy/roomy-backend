@@ -5,100 +5,85 @@
 <div class="wrapper">
 
   <!-- sidebar -->
-  <div class="sidebar">
+  <div class="sidebar bg-light">
 
-    <!-- sidebar brand logo-->
-    <div class="text-center">
-      <h5>logo</h5>
-    </div>
-    <!-- end of sidebar logo-->
+    <!-- navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex flex-column">
 
-    <!-- sidebar divider-->
-      <div class="">
-        &nbsp
-      </div>
-    <!-- end of   sidebar divider-->
+      <!-- brand -->
+      <a class="navbar-brand" href="#">brand</a>
 
-    <!-- sidebar navigation-->
-    <div class="sidebar-nav">
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav d-flex flex-column">
 
-      <!-- menu navigation-->
-      <div class="nav d-flex flex-column justify-content-center">
-        <h6>Menu</h6>
-        <div class="nav-item">
-          <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-        </div>
+            <!-- sidebar divider-->
+            <li class="">
+              <hr>
+            </li>
 
-        <div class="nav-item">
-          <div class="nav-link transaction" type="dropdown-toggle" name="button" data-toggle="dropdown">Add transaction</div>
-          <ul class="dropdown-menu" style="width: auto; background-color: #858585; margin-left:150px;">
-            <li>
-              <div class="nav-item">
-                <a class="nav-link" href="{% url 'add_property' %}">Add property transaction</a>
+            <!-- navbar header -->
+            <li class="nav-header">
+              <h5>Menu</h5>
+            </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" style="color: black;" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Add transaction &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left: 150px;">
+                <a class="dropdown-item" href="{% url 'add_rental' %}">Add rental transaction</a>
+                <a class="dropdown-item" href="{% url 'add_billing' %}">Add billing transaction</a>
+                <a class="dropdown-item" href="{% url 'add_expense' %}">Add expense transaction</a>
               </div>
             </li>
-            <li>
-              <div class="nav-item">
-                <a class="nav-link" href="{% url 'add_rental' %}">Add rental transaction</a>
-              </div>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'rental' %}">Rental</a>
             </li>
-            <li>
-              <div class="nav-item">
-                <a class="nav-link" href="{% url 'add_payment' %}">Add payment transaction</a>
-              </div>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'tenant' %}">Tenant</a>
             </li>
-            <li>
-              <div class="nav-item">
-                <a class="nav-link" href="{% url 'add_expense' %}">Add expense transaction</a>
-              </div>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'billing' %}">Billing</a>
             </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'expense' %}">Expense</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'cashflow' %}">Cashflow</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'report' %}">Report</a>
+            </li>
+
+            <!-- sidebar divider-->
+            <li class="">
+              &nbsp
+            </li>
+
+            <!-- navbar header -->
+            <li class="nav-header">
+              <h5>Settings</h5>
+            </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'property_management' %}">Property Management</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'room_management' %}">Room Management</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'admin_management' %}">Admin Management</a>
+            </li>
+
           </ul>
         </div>
 
-        <div class="nav-item">
-          <a class="nav-link" href="{% url 'rental' %}">Rental</a>
-        </div>
-        <div class="nav-item">
-          <a class="nav-link" href="{% url 'tenant' %}">Tenant</a>
-        </div>
-        <div class="nav-item">
-          <a class="nav-link" href="{% url 'billing' %}">Billing</a>
-        </div>
-        <div class="nav-item">
-          <a class="nav-link" href="{% url 'expense' %}">Expense</a>
-        </div>
-        <div class="nav-item">
-          <a class="nav-link" href="{% url 'cashflow' %}">Cashflow</a>
-        </div>
-        <div class="nav-item">
-          <a class="nav-link" href="{% url 'report' %}">Report</a>
-        </div>
-      </div>
-      <!-- end of menu navigation-->
+    </nav>
 
-      <!-- sidebar divider-->
-      <div class="">
-        &nbsp
-      </div>
-      <!-- end of   sidebar divider-->
-
-      <!-- settings navigation-->
-      <div class="nav d-flex flex-column justify-content-center">
-        <h6>Settings</h6>
-        <div class="nav-item">
-          <a class="nav-link" href="{% url 'property_management' %}">Property Management</a>
-        </div>
-        <div class="nav-item">
-          <a class="nav-link" href="{% url 'room_management' %}">Room Management</a>
-        </div>
-        <div class="nav-item">
-          <a class="nav-link" href="{% url 'admin_management' %}">Admin Management</a>
-        </div>
-      </div>
-      <!-- end of settings navigation-->
-
-    </div>
-    <!-- end of sidebar navigation-->
+    <!-- end of navigation -->
 
   </div>
   <!-- end of sidebar -->
@@ -109,24 +94,20 @@
     <!-- topbar -->
     <div class="topbar d-flex flex-row justify-content-between">
 
-          <div class="header">
+          <div class="navbar-text" style="color: white; font-size: 16px; margin: auto 10px auto 10px;">
             {% block header %}
 
             {% endblock %}
           </div>
 
-          <div class="account">
-            <div class="account" type="dropdown-toggle" name="button" data-toggle="dropdown">
-              username &nbsp<i class="down"></i>
+          <div class="dropdown" style="color: white; font-size: 14px; margin: auto 10px auto 10px;">
+            <span class="header-text dropdown-toggle" type="dropdown-toggle" name="button" data-toggle="dropdown" style="color: white; font-size: 14px; margin: auto 10px auto 10px;">
+              username
+            </span>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item">Profile</a>
+              <a class="dropdown-item">Log out</a>
             </div>
-            <ul class="dropdown-menu">
-              <li class="dropdown-itemc">
-                <a href="#">Profile</a>
-              </li>
-              <li class="dropdown-itemc">
-                <a href="#">logout</a>
-              </li>
-            </ul>
           </div>
 
     </div>

@@ -33,7 +33,7 @@
     </tbody>
     <div class="text-left" style="float: right;">
       Result(s): <br> <br>
-      <button class="btn btn-primary" type="button" name="button">Add room</button> <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
+      <a class="btn btn-primary" href="{% url 'add_room' %}">Add room</a> <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
     </div>
   </table>
 
@@ -41,7 +41,7 @@
 
   <table class="table table-bordered">
     <thead>
-      <th>Room Id</th>
+      <th>Id</th>
       <th>Property</th>
       <th>Floor</th>
       <th>Number</th>

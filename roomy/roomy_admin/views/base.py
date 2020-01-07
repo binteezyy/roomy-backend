@@ -19,20 +19,30 @@ def add_property(request):
 
     return render(request,"components/add_property.html",context)
 
+# add_room
+def add_room(request):
+
+    return render(request,"components/add_room.html",context)
+
 # add_rental
 def add_rental(request):
 
     return render(request,"components/add_rental.html",context)
 
-# add_payment
-def add_payment(request):
+# add_billing
+def add_billing(request):
 
-    return render(request,"components/add_payment.html",context)
+    return render(request,"components/add_billing.html",context)
 
 # add_expense
 def add_expense(request):
 
     return render(request,"components/add_expense.html",context)
+
+# add_admin
+def add_admin(request):
+
+    return render(request,"components/add_admin.html",context)
 
 # rental
 def rental(request):
