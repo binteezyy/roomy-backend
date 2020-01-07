@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+
 class Property(models.Model):
     name = models.CharField(max_length=56, unique=True)
     street = models.CharField(max_length=56)
@@ -14,6 +15,19 @@ class Property(models.Model):
     class Meta:
         unique_together = ('name', 'street', 'brgy', 'city')
 
+
+class ImageFile(models.Model):
+    title = models.CharField(max_length=32)
+    img_path = models.ImageField(
+        upload_to='\media\images', null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.title} - {self.img_path}'
+
+    class Meta:
+        unique_together = ('title', 'img_path')
+
+
 class Room(models.Model):
     room_type_enum = [
         (0, 'Fixed Rate'),
@@ -24,12 +38,17 @@ class Room(models.Model):
     number = models.PositiveIntegerField(default=1)
     rate = models.DecimalField(max_digits=9, decimal_places=2)
     room_type = models.IntegerField(choices=room_type_enum, default=0)
+    image_3d = models.ManyToManyField(
+        ImageFile, blank=True, related_name='images_3d')
+    image_2d = models.ManyToManyField(
+        ImageFile, blank=True, related_name='images_2d')
 
     def __str__(self):
         return f'{self.property_id}, Floor {self.floor}, Room {self.number}'
 
     class Meta:
         unique_together = ('property_id', 'floor', 'number')
+
 
 class Transaction(models.Model):
     active = models.BooleanField(default=True)
@@ -38,6 +57,7 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f'{self.active}, {self.room_id}'
+
 
 class Fee(models.Model):
     description = models.CharField(max_length=56)
@@ -49,6 +69,7 @@ class Fee(models.Model):
     class Meta:
         unique_together = ('description', 'amount')
 
+
 class Billing(models.Model):
     time_stamp = models.DateTimeField(auto_now_add=True, null=True)
     transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE)
@@ -58,6 +79,7 @@ class Billing(models.Model):
     def __str__(self):
         return f'{self.paid}, {self.time_stamp}, {self.transaction_id}'
 
+
 class Request(models.Model):
     subject = models.CharField(max_length=56)
     description = models.TextField(blank=True, null=True)
@@ -65,7 +87,8 @@ class Request(models.Model):
 
     def __str__(self):
         return f'{self.subject}, {self.transaction_id}'
-        
+
+
 class UserAccount(models.Model):
     user_type_enum = [
         (0, 'Tennant'),
