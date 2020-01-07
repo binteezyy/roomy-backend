@@ -29,10 +29,10 @@ def tenant(request):
 
     return render(request,"components/tenant.html",context)
 
-# payment
-def payment(request):
+# billing
+def billing(request):
 
-    return render(request,"components/payment.html",context)
+    return render(request,"components/billing.html",context)
 
 # expense
 def expense(request):

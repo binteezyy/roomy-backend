@@ -5,8 +5,65 @@
 {% endblock %}
 
 {% block content %}
-<div class="">
-sdfsdfsdfsd
+<div class="content">
+
+  <table cellpadding="10">
+    <tbody>
+      <tr>
+        <td>
+          <span class="filter-span">Status</span> <br>
+          <select class="filter-type" name="rental-type">
+            <option value="">All</option>
+            <option value="">Occupied</option>
+            <option value="">Available</option>
+            <option value="">Under renovation</option>
+          </select>
+        </td>
+        <td>
+          <span class="filter-span">Property</span> <br>
+          <select class="filter-type" name="property">
+            <option value="">All</option>
+          </select>
+        </td>
+        <td>
+          <span class="filter-span">Keyword</span> <br>
+          <input class="filter-input" type="text" name="" value="">
+        </td>
+      </tr>
+    </tbody>
+    <div class="text-left" style="float: right;">
+      Result(s): <br> <br>
+      <button class="btn btn-primary" type="button" name="button">Add room</button> <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
+    </div>
+  </table>
+
+  <br>
+
+  <table class="table table-bordered">
+    <thead>
+      <th>Room Id</th>
+      <th>Property</th>
+      <th>Floor</th>
+      <th>Number</th>
+      <th>Rate</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>
 
 {% endblock %}

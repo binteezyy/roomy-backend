@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  Payment
+  Billing
 {% endblock %}
 
 {% block content %}
@@ -11,18 +11,18 @@
     <tbody>
       <tr>
         <td>
-          <span class="filter-span">DATE RANGE</span> <br>
+          <span class="filter-span">Date Range</span> <br>
           <input class="filter-input" type="text" placeholder="i dont know how to date range" name="" value="">
         </td>
         <td>
-          <span class="filter-span">KEYWORD</span> <br>
+          <span class="filter-span">Keyword</span> <br>
           <input class="filter-input" type="text" name="" value="">
         </td>
       </tr>
     </tbody>
     <div class="text-left" style="float: right;">
       Result(s): <br> <br>
-      <button class="btn btn-primary" type="button" name="button">DOWNLOAD EXCEL</button>
+      <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
     </div>
   </table>
 
@@ -30,20 +30,12 @@
 
   <table class="table table-bordered">
     <thead>
-      <th>NO</th>
-      <th>PLACEHOLDER</th>
-      <th>PLACEHOLDER</th>
-      <th>PLACEHOLDER</th>
-      <th>PLACEHOLDER</th>
-      <th>PLACEHOLDER</th>
-      <th>PLACEHOLDER</th>
+      <th>Id</th>
+      <th>Timestamp</th>
+      <th>Transaction Id</th>
     </thead>
     <tbody>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -56,5 +48,5 @@
 {% endblock %}
 
 {% block header %}
-  PAYMENT
+  Billing
 {% endblock %}
