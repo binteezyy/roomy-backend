@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Admin Management
+{% endblock %}
+
+{% block content %}
+<div class="content">
+
+  <table cellpadding="10">
+    <tbody>
+      <tr>
+        <td>
+          <label class="col-form-label">Keyword</label> <br>
+          <input class="form-control" type="text" name="" value="">
+        </td>
+      </tr>
+    </tbody>
+    <div class="text-left" style="float: right;">
+      Result(s): <br> <br>
+      <a class="btn btn-primary" href="{% url 'add_admin' %}">Add admin</a> <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
+    </div>
+  </table>
+
+  <br>
+
+  <table class="table table-bordered">
+    <thead>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Username</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+{% endblock %}
+
+{% block header %}
+  Admin Management
+{% endblock %}

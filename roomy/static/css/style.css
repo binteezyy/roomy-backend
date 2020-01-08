@@ -1,0 +1,148 @@
+* {
+  color: black;
+  font-size: 14px;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  padding-top: 20px;
+  background-color: #858585;
+}
+
+.sidebar-nav {}
+
+.nav {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.nav-item {
+  width: 200px;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item:hover {
+  background-color: #424242;
+  border-radius: 30px;
+}
+
+.nav-link {
+  color: black;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+.topbar {
+  width: 100%;
+  height: 40px;
+  position: fixed;
+  margin: 0 0 0 250px;
+  padding: 0 250px 0 0;
+  background-color: #424242;
+}
+
+.header {
+  color: white;
+  font-size: 16px;
+  margin: auto 10px auto 10px;
+}
+
+.account {
+  color: white;
+  font-size: 15px;
+  margin: auto 10px auto 10px;
+}
+
+.account:hover {
+  cursor: pointer;
+}
+
+i {
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 4px;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.dropdown-menu {
+  margin-right: 10px;
+  padding: 10px 5px 10px 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-itemc {
+  padding: 5px 5px 5px 5px;
+}
+
+.content-wrapper {
+  width: calc(100% - 290px);
+  min-width: calc(100% - 290px);
+  height: auto;
+}
+
+.content {
+  width: 100%;
+  min-width: 100%;
+  height: auto;
+  margin: 60px 20px 20px 270px;
+  padding: 20px 20px 20px 20px;
+}
+
+.filter-span {
+  font-size: 14px;
+}
+
+.filter-type {
+  width: 180px;
+  height: 28px;
+  margin-top: 2px;
+  padding: 1px;
+  border: 1px solid black;
+  font-size: 14px;
+}
+
+.filter-input {
+  width: 200px;
+  height: 28px;
+  border: 1px solid black;
+  margin-top: 2px;
+  padding-left: 5px;
+  font-size: 14px;
+}
+
+.menu {
+  width: 200px;
+  border-right: 2px solid black;
+  text-align: center;
+}
+
+.menu-item {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  margin: 10px;
+}
+
+.main-transaction {
+  width: 100%;
+  margin: 0 15px 0 35px;
+  padding: 10px;
+}

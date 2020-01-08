@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Billing
+{% endblock %}
+
+{% block content %}
+<div class="content">
+
+  <table cellpadding="10">
+    <tbody>
+      <tr>
+        <td>
+          <label class="col-form-label">Date Range</label> <br>
+          <input class="form-control" type="text" placeholder="i dont know how to date range" name="" value="">
+        </td>
+        <td>
+          <label class="col-form-label">Keyword</label> <br>
+          <input class="form-control" type="text" name="" value="">
+        </td>
+      </tr>
+    </tbody>
+    <div class="text-left" style="float: right;">
+      Result(s): <br> <br>
+      <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
+    </div>
+  </table>
+
+  <br>
+
+  <table class="table table-bordered">
+    <thead>
+      <th>Id</th>
+      <th>Rental Id</th>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Date</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+{% endblock %}
+
+{% block header %}
+  Billing
+{% endblock %}
