@@ -2,6 +2,7 @@ from django.urls import path,include
 from django.conf.urls.static import static
 from .views import base
 urlpatterns = [
+    path('demo/', base.demo, name='demo'),
     path('dashboard/',      base.dashboard,                                        name='dashboard'),
     path('transaction/add_property/',      base.add_property,                                        name='add_property'),
     path('transaction/add_room/',      base.add_room,                                        name='add_room'),

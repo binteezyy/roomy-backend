@@ -9,6 +9,9 @@ def index(request):
 
     return render(request,"",context)
 
+def demo(request):
+    return render(request,"demo.html",context)
+    
 # home
 def dashboard(request):
 
