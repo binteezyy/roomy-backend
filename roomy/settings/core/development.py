@@ -14,18 +14,18 @@ INSTALLED_APPS += [
 ]
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'development.sqlite3'),
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'roomy-test',
-        'USER': 'root',
-        'PASSWORD': 'Ml0KwIhHHvn9C2er',
-        'HOST': '35.240.212.211',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'development.sqlite3'),
     }
+    # 'mysql': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'roomy-test',
+    #     'USER': config('DB_USERNAME'),
+    #     'PASSWORD': config('DB_PASSWORD'),
+    #     'HOST': config('DB_HOST'),   # Or an IP Address that your DB is hosted on
+    #     'PORT': config('PORT'),
+    # }
 }
 
 MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
