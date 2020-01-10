@@ -131,7 +131,7 @@ class Booking(models.Model):
         Document, on_delete=models.CASCADE, related_name="document1")
     document2_id = models.ForeignKey(
         Document, on_delete=models.CASCADE, related_name="document2")
-    add_ons = models.ManyToManyField(Fee, blank=True, null=True)
+    add_ons = models.ManyToManyField(Fee, blank=True)
     approved = models.BooleanField(default=False)
 
     def __str__(self):
