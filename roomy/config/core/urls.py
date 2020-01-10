@@ -14,6 +14,6 @@ if settings.DEBUG:
                           document_root=settings.MEDIA_ROOT)
     urlpatterns += path('__debug__/', include(debug_toolbar.urls)),
 
-admin.site.site_header = "Roomy Admin"
-admin.site.site_title = "Roomy Admin Portal"
+admin.site.site_header = "Roomy Client"
+admin.site.site_title = "Roomy Client Portal"
 admin.site.index_title = "Welcome to Roomy Admin Portal"
