@@ -14,17 +14,9 @@ INSTALLED_APPS += [
 ]
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'development.sqlite3'),
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'roomy-test',
-        'USER': 'root',
-        'PASSWORD': 'Ml0KwIhHHvn9C2er',
-        'HOST': '35.240.212.211',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'development.sqlite3'),
     }
 }
 

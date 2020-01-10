@@ -92,12 +92,67 @@ class Request(models.Model):
 
 class UserAccount(models.Model):
     user_type_enum = [
-        (0, 'Tennant'),
-        (1, 'Owner/Manager'),
+        (0, 'Unknown'),
+        (1, 'Tenant'),
+        (2, 'Owner/Manager'),
     ]
     user_type = models.IntegerField(choices=user_type_enum, default=0)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    birthday = models.DateTimeField(null=True, blank=True)
+    cell_number = models.PositiveIntegerField(null=True, blank=True)
+    provincial_address = models.CharField(
+        max_length=128, null=True, blank=True)
     transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.get_user_type_display()} {self.user_id.username}, {self.transaction_id}'
+
+
+class Message(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=32)
+    body = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.user_id.username} - {self.title}'
+
+
+class Document(models.Model):
+    file_path = models.ImageField(upload_to="\media\files")
+
+    def __str__(self):
+        return f'{self.file_path}'
+
+
+class Booking(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
+    document1_id = models.ForeignKey(
+        Document, on_delete=models.CASCADE, related_name="document1")
+    document2_id = models.ForeignKey(
+        Document, on_delete=models.CASCADE, related_name="document2")
+    add_ons = models.ManyToManyField(Fee, blank=True)
+    approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'Booking: {self.user_id.username} - {self.room_id}'
+
+
+class Guest(models.Model):
+    name = models.CharField(max_length=128)
+    time_stamp = models.DateTimeField(auto_now_add=True)
+    transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    inside = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'Guest: {self.name}, {self.transaction_id}, In: {self.inside}'
+
+
+class Expense(models.Model):
+    property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
+    time_stamp = models.DateTimeField(auto_now_add=True)
+    description = models.CharField(max_length=56)
+    amount = models.DecimalField(max_digits=9, decimal_places=2)
+
+    def __str__(self):
+        return f'Expense - {self.description}, {self.amount}'

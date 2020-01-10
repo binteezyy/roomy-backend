@@ -5,6 +5,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = config('SECRET_KEY')
 
+ROOT_URLCONF = 'config.client.urls'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -15,8 +17,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'sslserver',
     # APPS
-    'apps.core.roomy_admin',
-    'apps.core.roomy_core',
+    'apps.client',
 ]
 
 MIDDLEWARE = [
@@ -31,7 +32,7 @@ MIDDLEWARE = [
 
 
 
-WSGI_APPLICATION = 'config.core.wsgi.application'
+WSGI_APPLICATION = 'config.client.wsgi.application'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
