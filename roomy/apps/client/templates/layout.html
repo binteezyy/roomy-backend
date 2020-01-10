@@ -1,43 +1,81 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block header %}
+{% block  layout%}
 
-<!-- header -->
-<div class="header">
-  <div class="container-fluid">
-    <div class="container">
-      <div class="row d-flex justify-content-between align-items-center" style="padding: 20px;">
+<!-- navbar -->
+<nav class="navbar navbar-expand-xl navbar-light" style="background-color: #E1DEE9">
+  <div class="container">
+    <!-- Brand logo -->
+    <a href="#homepage" style="margin-right: 20px;">
+      <img src="{% static "img\logo.png" %}" alt="" style="width:120px; height: 35px;">
+    </a>
 
-        <!-- Brand logo -->
-        <a href="#homepage" style="margin-right: 20px;">
-          <img src="{% static "img\logo.png" %}" alt="" style="width:120px; height: 35px;">
-        </a>
+    <!-- expand button -->
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="d-flex justify-content-end align-items-center">
-          <!-- Search bar -->
-          <form class="form-inline my-2 my-lg-0">
-            <div class="input-group">
-              <input class="form-control" style="width: 300px; min-width: 300px;" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button" name="button">
-                  <img src="{% static "img\search_icon.png" %}" alt="" style="width: 20px; height: 20px;">
-                </button>
-              </div>
-            </div>
-          </form>
+    <!-- navigation -->
+    <div class="navbar-collapse collapse" id="navbarsExample04" style="">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" style="color: black;" href="#">How To Book</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color: black;" href="#">Partner With Us</a>
+        </li>
+      </ul>
+      <!-- end of navigation -->
 
-          <!-- Button Wrapper -->
-          <div style="margin-left: 30px;">
-              <button class="btn btn-primary" type="" name="button" data-toggle="modal" data-target="#loginModal">Log in</button>
+      <style>
+        .nav-item:hover {
+          background-color: #B6A6CA;
+          border-top-right-radius: 20px;
+          border-bottom-right-radius: 20px;
+          padding: 2px 5px 2px 5px;
+          font-weight: 500;
+        }
+      </style>
+
+      <!-- search bar-->
+      <form class="form-inline my-2 my-md-0" action="" _lpchecked="1">
+        <div class="input-group">
+          <input class="form-control btn-dark" style="width: 300px; min-width: 300px; background-color: white; color: black;" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-dark" type="button" name="button">
+              <img src="{% static "img\search_icon.png" %}" alt="" style="width: 20px; height: 20px;">
+            </button>
           </div>
         </div>
+      </form>
 
+      <!-- login/signup -->
+      <div class="wrapper">
+        <button class="btn btn-dark" style="margin-left: 10px;" data-toggle="modal" data-target="#loginModal">Log in</button>
+        <button class="btn btn-dark" style="margin-right: 5px; margin-left: 5px;" data-toggle="modal" data-target="#signupModal">Sign up</button>
       </div>
+
+      <style>
+        @media screen and (max-width: 1200px) {
+          .wrapper {
+            margin-top: 10px;
+          }
+        }
+
+        @media screen and (max-width: 578px) {
+          .wrapper {
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      </style>
+
     </div>
   </div>
-</div>
-<!-- end of header -->
+</nav>
 
 <!-- login modal -->
 <form class="" action="#" method="post">
@@ -64,7 +102,7 @@
                   <input class="form-control" type="text" name="" value="">
                   <label class="col-form-label" for="">password</label>
                   <input class="form-control" type="password" name="" value=""> <br>
-                  <button type="button" class="form-control btn btn-primary">login</button> <br>
+                  <button type="button" class="form-control btn btn-dark">login</button> <br>
                 </div>
               </div>
             </div>
@@ -81,8 +119,8 @@
           <div class="container">
             <div class="row">
               <div class="col-md-12 text-center">
-                  <span>Don't have an account yet?</span>
-                  <a class="" href="#" type="button" name="button" data-toggle="modal" data-target="#signupModal" data-dismiss="modal">Sign up</a>
+                <span>Don't have an account yet?</span>
+                <a class="" href="#" type="button" name="button" data-toggle="modal" data-target="#signupModal" data-dismiss="modal">Sign up</a>
               </div>
             </div>
           </div>
@@ -117,12 +155,15 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <br>
-                  <input class="form-control" type="text" placeholder="Full Name" name="" value=""> <br>
-                  <input class="form-control" type="text" placeholder="Mobile" name="" value=""> <br>
-                  <input class="form-control" type="email" placeholder="Email" name="" value=""> <br>
-                  <input class="form-control" type="password" placeholder="Password" name="" value=""> <br>
-                  <button type="button" class="form-control btn btn-primary">Sign Up</button> <br>
+                  <label class="col-form-label" for="">Full Name</label>
+                  <input class="form-control" type="text" name="" value="">
+                  <label class="col-form-label" for="">Mobile</label>
+                  <input class="form-control" type="text" name="" value="">
+                  <label class="col-form-label" for="">Email</label>
+                  <input class="form-control" type="email" name="" value="">
+                  <label class="col-form-label" for="">Password</label>
+                  <input class="form-control" type="password" name="" value=""> <br>
+                  <button type="button" class="form-control btn btn-dark">Sign Up</button>
                 </div>
               </div>
             </div>
@@ -148,47 +189,9 @@
       </div>
     </div>
   </div>
-
 </form>
 <!-- end of signup modal -->
 
-{% endblock %}
-
-{% block layout %}
-
-<!-- navbar -->
-<div class="container-fluid bg-light">
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-hidden" aria-controls="navbar-hidden" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- navigation -->
-      <div class="collapse navbar-collapse justify-content-md-center" id="navbar-hidden">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'explore' %}">Explore</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Booking</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'faq' %}" tabindex="-1" aria-disabled="true">FAQ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'about' %}" tabindex="-1" aria-disabled="true">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Contact Us</a>
-          </li>
-        </ul>
-      </div>
-      <!-- end of navigation -->
-
-    </nav>
-  </div>
-</div>
 <!-- end of navbar -->
 
 {% endblock %}
@@ -196,7 +199,7 @@
 {% block footer %}
 
 <!-- footer -->
-<div class="footer">
+<div class="footer" style="width: 100%; background-color: #E1DEE9; color: white; text-align: center;}">
   <div class="container-fluid">
     <div class="container">
       <div class="row">
@@ -204,17 +207,22 @@
         <div class="col-md-1"></div>
         <div class="col-md-2" style="padding: 20px;">
           <ul class="navbar-nav d-flex flex-column justify-content-start text-left">
-            <li class="nav-item">
+            <li class="">
               <h6 style="color: black;">COMPANY</h6>
             </li>
             <li class="nav-item">
               <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link" style="margin: 0 0 0 2px; padding: 0;" href="#">Contact Us</a>
+                <a class="nav-link" style="margin: 0 0 0 2px; padding: 0;" href="{% url 'faq' %}">FAQ</a>
               </div>
             </li>
             <li class="nav-item">
               <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link" style="margin: 0 0 0 2px; padding: 0;" href="#">Partner With Us</a>
+                <a class="nav-link" style="margin: 0 0 0 2px; padding: 0;" href="{% url 'about' %}">About Us</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="d-flex justify-content-start align-items-center">
+                <a class="nav-link" style="margin: 0 0 0 2px; padding: 0;" href="{% url 'contact' %}">Contact Us</a>
               </div>
             </li>
             <li class="nav-item">
@@ -237,7 +245,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-2" style="padding: 20px;">
           <ul class="navbar-nav d-flex flex-column justify-content-start text-left">
-            <li class="nav-item">
+            <li class="">
               <h6 style="color: black;">FOLLOW</h6>
             </li>
             <li class="nav-item">
@@ -271,7 +279,7 @@
           </ul>
         </div>
         <div class="col-md-4" style="padding: 20px;">
-          <h5 style="color: black; margin-bottom: 10px;">DOWNLOAD THE ROOMY APP</h5>
+          <h5 style="color: black; margin-bottom: 10px;">DOWNLOAD OUR APP NOW</h5>
           <img src="{% static "img\svg_appstore.svg" %}" alt="">
           <img src="{% static "img\svg_playstore.svg" %}" alt="">
         </div>

@@ -5,15 +5,6 @@ context = {
     'AUTHORS': 'PPTT',
 }
 
-def index(request):
-    context.update(
-        {
-            'TITLE': "INDEX",
-            'CONTENT': "SAMPLE CONTENT"
-        }
-    )
-    return render(request,"components/index.html",context)
-
 def explore(request):
     return render(request,"components/navigation/explore.html",context)
 
@@ -22,3 +13,6 @@ def about(request):
 
 def faq(request):
     return render(request,"components/navigation/faq.html",context)
+
+def contact(request):
+    return render(request,"components/navigation/contact.html",context)
