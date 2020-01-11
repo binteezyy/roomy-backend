@@ -26,6 +26,16 @@
         <li class="nav-item nav-item-custom">
           <a class="nav-link" style="color: black;" href="{% url 'how_to_book' %}">How To Book</a>
         </li>
+        <li class="nav-item nav-item-custom dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">
+            About Us
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width: auto; height: auto; padding: 20px;">
+            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'about' %}">What is Roomy?</a>
+            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'contact' %}">Contact</a>
+            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'faq' %}">FAQs</a>
+          </div>
+        </li>
         <li class="nav-item nav-item-custom">
           <a class="nav-link" style="color: black;" href="{% url 'partner_with_us' %}">Partner With Us</a>
         </li>
@@ -33,7 +43,6 @@
       <!-- end of navigation -->
 
       <style>
-
         .nav-item-custom {
           padding: 2px 5px 2px 5px;
         }
@@ -42,14 +51,13 @@
           background-color: #B6A6CA;
           border-radius: 20px;
           padding: 2px 5px 2px 5px;
-          font-weight: 500;
         }
       </style>
 
       <!-- search bar-->
       <form class="form-inline my-2 my-md-0" action="" _lpchecked="1">
         <div class="input-group">
-          <input class="form-control btn-dark" style="width: 300px; min-width: 300px; background-color: white; color: black;" type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control btn-dark" style="width: 250px; min-width: 250px; background-color: white; color: black;" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
             <button class="btn btn-dark" type="button" name="button">
               <img src="{% static "img\search_icon.png" %}" alt="" style="width: 20px; height: 20px;">
@@ -79,7 +87,6 @@
             align-items: center;
           }
         }
-
       </style>
 
     </div>
@@ -340,7 +347,7 @@
           <img src="{% static "img\svg_playstore.svg" %}" alt="">
         </div>
 
-        <style >
+        <style>
           .nav-link-custom2:hover {
             border-bottom: 2px solid black;
           }

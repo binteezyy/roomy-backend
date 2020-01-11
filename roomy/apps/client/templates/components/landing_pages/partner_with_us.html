@@ -2,10 +2,130 @@
 {% load static %}
 
 {% block title %}
-  Partner With Us
+Partner With Us
 {% endblock %}
 
 {% block content %}
+<div class="container-fluid" data-spy="scroll" data-target=".row-custom" data-offset="50">
+  <div class="container">
+    <div class="row d-flex flex-row justify-content-center" style="height: 600px; margin-top: 20px;margin-bottom: 30px;">
+      <div class="wrapper d-flex flex-column justify-content-center align-items-center" style="">
+        <img src="{% static "img\partner.png" %}" alt="" style="width:100%; margin: 0; padding: 0;">
+      </div>
+      <div class="wrapper d-flex flex-column justify-content-center align-items-center" style="padding: 10px;">
+        <h3 class="text-center">Partner With Us</h3>
+        <p class="text-center">Reach new customers on the biggest local <br>discovery platform in the country</p>
+        <div class="wrapper d-flex flex-row justify-content-center">
+          <a class="btn btn-dark" style="width: 150px;" href="#rowCustom">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<div class="container-fluid" style="background-color: #E1DEE9;">
+  <div class="container">
+    <div class="row" id="rowCustom" style="height: 350px; margin: 20px; padding: 40px; background-color: #E1DEE9;">
+      <div class="col-md-12">
+        <h4 class="text-center">Your Growth, Our Goal</h4> <br>
+        <div class="d-flex justify-content-center">
+          <div class="first col-md-4 text-center">
+            <img src="{% static "img\goal_one.png" %}" alt=""> <br>
+            <p>We market your business through in-app listings, social media posts, and more!</p>
+          </div>
+          <div class="col-md-4 text-center">
+            <img src="{% static "img\goal_two.png" %}" alt=""> <br>
+            <p>Promote exclusive offers to get roomy members to come to your store!</p>
+          </div>
+          <div class="second col-md-4 text-center">
+            <img src="{% static "img\goal_three.png" %}" alt=""> <br>
+            <p>View and analyze transaction data via your own roomy dashboard!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="container">
+    <div class="row d-flex justify-content-center" style="height: 300px;margin: 20px;">
+      <div class="d-flex flex-column justify-content-center">
+        <h4 class="text-center">Ready to take your business to the next level?</h4>
+        <span class="text-center">Become a roomy partner today!</span>
+        <div class="wrapper d-flex flex-row justify-content-center">
+          <button class="btn btn-dark" style="width: 200px; margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#getInTouchModal">GET IN TOUCH</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- get in touch modal -->
+  <form class="" action="#" method="post">
+
+    <!-- modal -->
+    <div class="modal fade" id="getInTouchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+
+        <!-- modal content -->
+        <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
+
+          <!-- modal header -->
+          <div class="modal-header text-center">
+            <h4 class="text-center">Partner With Us</h4>
+          </div>
+
+          <!-- modal body -->
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="col-form-label" for="">First Name</label>
+                    <input class="form-control" type="text" name="" value="">
+                    <label class="col-form-label" for="">Email</label>
+                    <input class="form-control" type="email" name="" value="">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="col-form-label" for="">Last Name</label>
+                    <input class="form-control" type="text" name="" value="">
+                    <label class="col-form-label" for="">Mobile</label>
+                    <input class="form-control" type="text" name="" value="">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label class="col-form-label" for="">Message</label>
+                  <textarea class="form-control" name="name" rows="4" cols="50"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- modal footer -->
+          <div class="modal-footer">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <button class="btn btn-dark" type="button" name="button">Submit</button> <br>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </form>
+  <!-- end of login modal -->
+
+</div>
 
 {% endblock %}
