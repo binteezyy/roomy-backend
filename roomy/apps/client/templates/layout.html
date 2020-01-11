@@ -32,7 +32,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width: auto; height: auto; padding: 20px;">
             <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'about' %}">What is Roomy?</a>
-            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'contact' %}">Contact</a>
+            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'contact' %}">Contact Us</a>
             <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'faq' %}">FAQs</a>
           </div>
         </li>
@@ -184,7 +184,7 @@
             </div>
             <div class="row">
               <div class="col-md-12 text-center">
-                <span class="text-center" style="font-size: 12px;">By signing up, you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.</span>
+                <span class="text-center" style="font-size: 12px;">By signing up, you agree to our <a href="{% url 'terms_of_use' %}" target="_blank">Terms of Use</a> and <a href="{% url 'privacy' %}" target="_blank">Privacy Policy</a>.</span>
               </div>
             </div>
           </div>

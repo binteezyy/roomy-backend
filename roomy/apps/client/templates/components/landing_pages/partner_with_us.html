@@ -25,22 +25,20 @@ Partner With Us
 
 <div class="container-fluid" style="background-color: #E1DEE9;">
   <div class="container">
-    <div class="row" id="rowCustom" style="height: 350px; margin: 20px; padding: 40px; background-color: #E1DEE9;">
-      <div class="col-md-12">
-        <h4 class="text-center">Your Growth, Our Goal</h4> <br>
-        <div class="d-flex justify-content-center">
-          <div class="first col-md-4 text-center">
-            <img src="{% static "img\goal_one.png" %}" alt=""> <br>
-            <p>We market your business through in-app listings, social media posts, and more!</p>
-          </div>
-          <div class="col-md-4 text-center">
-            <img src="{% static "img\goal_two.png" %}" alt=""> <br>
-            <p>Promote exclusive offers to get roomy members to come to your store!</p>
-          </div>
-          <div class="second col-md-4 text-center">
-            <img src="{% static "img\goal_three.png" %}" alt=""> <br>
-            <p>View and analyze transaction data via your own roomy dashboard!</p>
-          </div>
+    <div class="row d-flex flex-wrap justify-content-center" id="rowCustom" style="margin: 20px; padding: 40px; background-color: #E1DEE9;">
+      <h4 class="text-center">Your Growth, Our Goal</h4> <br>
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="first col-md-4 text-center">
+          <img src="{% static "img\goal_one.png" %}" alt=""> <br>
+          <p>We market your business through in-app listings, social media posts, and more!</p>
+        </div>
+        <div class="col-md-4 text-center">
+          <img src="{% static "img\goal_two.png" %}" alt=""> <br>
+          <p>Promote exclusive offers to get roomy members to come to your store!</p>
+        </div>
+        <div class="second col-md-4 text-center">
+          <img src="{% static "img\goal_three.png" %}" alt=""> <br>
+          <p>View and analyze transaction data via your own roomy dashboard!</p>
         </div>
       </div>
     </div>
@@ -63,68 +61,68 @@ Partner With Us
 
 
 
-  <!-- get in touch modal -->
-  <form class="" action="#" method="post">
+<!-- get in touch modal -->
+<form class="" action="#" method="post">
 
-    <!-- modal -->
-    <div class="modal fade" id="getInTouchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+  <!-- modal -->
+  <div class="modal fade" id="getInTouchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
 
-        <!-- modal content -->
-        <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
+      <!-- modal content -->
+      <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
 
-          <!-- modal header -->
-          <div class="modal-header text-center">
-            <h4 class="text-center">Partner With Us</h4>
-          </div>
-
-          <!-- modal body -->
-          <div class="modal-body">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="col-form-label" for="">First Name</label>
-                    <input class="form-control" type="text" name="" value="">
-                    <label class="col-form-label" for="">Email</label>
-                    <input class="form-control" type="email" name="" value="">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="col-form-label" for="">Last Name</label>
-                    <input class="form-control" type="text" name="" value="">
-                    <label class="col-form-label" for="">Mobile</label>
-                    <input class="form-control" type="text" name="" value="">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <label class="col-form-label" for="">Message</label>
-                  <textarea class="form-control" name="name" rows="4" cols="50"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- modal footer -->
-          <div class="modal-footer">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12 text-center">
-                  <button class="btn btn-dark" type="button" name="button">Submit</button> <br>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <!-- modal header -->
+        <div class="modal-header text-center">
+          <h4 class="text-center">Partner With Us</h4>
         </div>
+
+        <!-- modal body -->
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-form-label" for="">First Name</label>
+                  <input class="form-control" type="text" name="" value="">
+                  <label class="col-form-label" for="">Email</label>
+                  <input class="form-control" type="email" name="" value="">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-form-label" for="">Last Name</label>
+                  <input class="form-control" type="text" name="" value="">
+                  <label class="col-form-label" for="">Mobile</label>
+                  <input class="form-control" type="text" name="" value="">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label class="col-form-label" for="">Message</label>
+                <textarea class="form-control" name="name" rows="4" cols="50"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- modal footer -->
+        <div class="modal-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <button class="btn btn-dark" type="button" name="button">Submit</button> <br>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
+  </div>
 
-  </form>
-  <!-- end of login modal -->
+</form>
+<!-- end of login modal -->
 
 </div>
 
