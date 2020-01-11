@@ -1,12 +1,23 @@
 {% extends "layout.html" %}
+{% load static %}
 
 {% block title %}
-  Explore
+Explore
 {% endblock %}
 
 {% block content %}
 
 <!-- main content -->
+<div class="container-fluid">
+  <form class="container" _lpchecked="1" action="" _lpchecked="1">
+      <div class="row d-flex justify-content-center" style="margin: 20px 0 20px 0; padding: 20px;">
+        <!-- search bar-->
+        <input class="form-control form-control-xl btn-dark" style="width: 50%; background-color: white; color: black;" type="search" placeholder="Enter keyword" aria-label="Search">
+        <button style="margin-left: 10px;" class="btn btn-xl btn-dark" type="button" name="button">Search</button>
+      </div>
+  </form>
+</div>
+
 <div class="container-fluid">
   <div class="container">
     <div class="row">

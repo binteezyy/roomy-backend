@@ -17,15 +17,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'development.sqlite3'),
-    },
-    'mysql': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'roomy-test',
-        'USER': config('DB_USERNAME'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),   # Or an IP Address that your DB is hosted on
-        'PORT': config('DB_PORT'),
     }
+#    'mysql': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'roomy-test',
+#        'USER': config('DB_USERNAME'),
+#        'PASSWORD': config('DB_PASSWORD'),
+#        'HOST': config('DB_HOST'),   # Or an IP Address that your DB is hosted on
+#        'PORT': config('DB_PORT'),
+#    }
 }
 
 MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
