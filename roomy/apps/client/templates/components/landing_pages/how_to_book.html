@@ -2,10 +2,105 @@
 {% load static %}
 
 {% block title %}
-  How To Book
+How To Book
 {% endblock %}
 
 {% block content %}
 
+<!-- main content -->
+<div class="container-fluid">
+  <div class="container">
+    <div class="row d-flex flex-column justify-content-center align-items-content">
+
+      <div class="" style="margin: 20px 0 80px 0; padding: 40px 20px 40px 20px;">
+        <h1 class="text-center">Your first roomy booking</h1>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="col-md-6 d-flex justify-content-center" style="margin-bottom: 40px;">
+          <img src="{% static "img\step1.png" %}" alt="">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center" style="margin-bottom: 40px;">
+          <h3 style="margin-right: 30px; margin-left: 30px;">Step 1</h3>
+          <h5 style="margin-right: 30px; margin-left: 30px;">Enter your personal details</h5>
+          <p style="margin-right: 30px; margin-left: 30px;">
+            Enter your name, birthday, address, and contact information. We'll also ask for your selfie, a valid government ID, a company ID, and your NBI / Police Clearance.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="col-md-6 d-flex justify-content-center" style="margin-bottom: 40px;">
+          <img src="{% static "img\step1.png" %}" alt="">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center" style="margin-bottom: 40px;">
+          <h3 style="margin-right: 30px; margin-left: 30px;">Step 2</h3>
+          <h5 style="margin-right: 30px; margin-left: 30px;">Confirm your mobile number</h5>
+          <p style="margin-right: 30px; margin-left: 30px;">
+            Enter the code sent to the mobile number you provided for verification.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="col-md-6 d-flex justify-content-center" style="margin-bottom: 40px;">
+          <img src="{% static "img\step1.png" %}" alt="">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center" style="margin-bottom: 40px;">
+          <h3 style="margin-right: 30px; margin-left: 30px;">Step 3</h3>
+          <h5 style="margin-right: 30px; margin-left: 30px;">Enter your booking details</h5>
+          <p style="margin-right: 30px; margin-left: 30px;">
+            Choose a property, your room type, check-in date, and booking length.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="col-md-6 d-flex justify-content-center" style="margin-bottom: 40px;">
+          <img src="{% static "img\step1.png" %}" alt="">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center" style="margin-bottom: 40px;">
+          <h3 style="margin-right: 30px; margin-left: 30px;">Step 4</h3>
+          <h5 style="margin-right: 30px; margin-left: 30px;">Confirm your reservation</h5>
+          <p style="margin-right: 30px; margin-left: 30px;">
+            Double-check that all the information you entered is correct.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="col-md-6 d-flex justify-content-center" style="margin-bottom: 80px;">
+          <img src="{% static "img\step1.png" %}" alt="">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center" style="margin-bottom: 40px;">
+          <h3 style="margin-right: 30px; margin-left: 30px;">Step 5</h3>
+          <h5 style="margin-right: 30px; margin-left: 30px;">Done!</h5>
+          <p style="margin-right: 30px; margin-left: 30px;">
+            Allow up to three days for us to review your booking. We'll contact you if we need anything else.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="text-center" style="margin: 20px 20px 140px 20px; padding: 50px 20px 20px 20px;">
+        <h1>Ready?</h1>
+        <h5 class="text-center">
+          Find your home in the city.
+        </h5>
+        <br>
+        <button class="btn btn-dark" type="button" name="button" data-toggle="modal" data-target="#signupModal">SIGN UP NOW</button>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<!-- end of main content -->
 
 {% endblock %}
