@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block  layout%}
+{% block layout %}
 
 <!-- navbar -->
-<nav class="navbar navbar-expand-xl navbar-light" style="background-color: #E1DEE9">
+<nav class="navbar navbar-expand-xl navbar-light" style="background-color: #E1DEE9;">
   <div class="container">
-    <!-- Brand logo -->
-    <a href="#homepage" style="margin-right: 20px;">
+
+    <!-- logo -->
+    <a href="{% url 'explore' %}" style="margin-right: 20px;">
       <img src="{% static "img\logo.png" %}" alt="" style="width:120px; height: 35px;">
     </a>
 
@@ -17,22 +18,29 @@
     </button>
 
     <!-- navigation -->
-    <div class="navbar-collapse collapse" id="navbarsExample04" style="">
+    <div class="navbar-collapse collapse" id="navbarsExample04">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" style="color: black;" href="#">How To Book</a>
+        <li class="nav-item nav-item-custom">
+          <a class="nav-link" style="color: black;" href="{% url 'explore' %}">Explore</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" style="color: black;" href="#">Partner With Us</a>
+        <li class="nav-item nav-item-custom">
+          <a class="nav-link" style="color: black;" href="{% url 'how_to_book' %}">How To Book</a>
+        </li>
+        <li class="nav-item nav-item-custom">
+          <a class="nav-link" style="color: black;" href="{% url 'partner_with_us' %}">Partner With Us</a>
         </li>
       </ul>
       <!-- end of navigation -->
 
       <style>
-        .nav-item:hover {
+
+        .nav-item-custom {
+          padding: 2px 5px 2px 5px;
+        }
+
+        .nav-item-custom:hover {
           background-color: #B6A6CA;
-          border-top-right-radius: 20px;
-          border-bottom-right-radius: 20px;
+          border-radius: 20px;
           padding: 2px 5px 2px 5px;
           font-weight: 500;
         }
@@ -71,10 +79,10 @@
             align-items: center;
           }
         }
+
       </style>
 
     </div>
-  </div>
 </nav>
 
 <!-- login modal -->
@@ -108,7 +116,7 @@
             </div>
             <div class="row">
               <div class="col-md-12 text-center">
-                <a href="#">Forgot password?</a> <br>
+                <a href="#" data-toggle="modal" data-target="#forgotPasswordModal" data-dismiss="modal">Forgot password?</a> <br>
               </div>
             </div>
           </div>
@@ -192,6 +200,55 @@
 </form>
 <!-- end of signup modal -->
 
+<!-- forgot password modal -->
+<form class="" action="#" method="post">
+
+  <!-- modal -->
+  <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <!-- modal content -->
+      <div class="modal-content" style="width: 400px; height: auto; margin: 0 auto; border-radius: 15px;">
+
+        <!-- modal header -->
+        <div class="modal-header">
+          <img src="{% static "img/logo.png" %}" alt="" style="width: 120px; height: 35px; margin: 0 auto;">
+        </div>
+
+        <!-- modal body -->
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="col-form-label" for="">Email</label>
+                  <input class="form-control" type="email" name="" value=""> <br>
+                  <button type="button" class="form-control btn btn-dark">Reset Password</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- modal footer -->
+        <div class="modal-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <span>Back to </span>
+                <a class="" href="#" type="button" name="button" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">log in</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</form>
+<!-- end of forgot password modal -->
+
 <!-- end of navbar -->
 
 {% endblock %}
@@ -212,32 +269,32 @@
             </li>
             <li class="nav-item">
               <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link" style="margin: 0 0 0 2px; padding: 0;" href="{% url 'faq' %}">FAQ</a>
+                <a class="nav-link nav-link-custom2" style="margin: 0 0 0 2px; padding: 0; color: black;" href="{% url 'about' %}">About</a>
               </div>
             </li>
             <li class="nav-item">
               <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link" style="margin: 0 0 0 2px; padding: 0;" href="{% url 'about' %}">About Us</a>
+                <a class="nav-link nav-link-custom2" style="margin: 0 0 0 2px; padding: 0; color: black;" href="{% url 'faq' %}">FAQs</a>
               </div>
             </li>
             <li class="nav-item">
               <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link" style="margin: 0 0 0 2px; padding: 0;" href="{% url 'contact' %}">Contact Us</a>
+                <a class="nav-link nav-link-custom2" style="margin: 0 0 0 2px; padding: 0; color: black;" href="{% url 'contact' %}">Contact Us</a>
               </div>
             </li>
             <li class="nav-item">
               <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link" style="margin: 0 0 0 2px; padding: 0;" href="#">Terms of use</a>
+                <a class="nav-link nav-link-custom2" style="margin: 0 0 0 2px; padding: 0; color: black;" href="{% url 'terms_of_use' %}">Terms of use</a>
               </div>
             </li>
             <li class="nav-item">
               <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link" style="margin: 0 0 0 2px; padding: 0;" href="#">Privacy</a>
+                <a class="nav-link nav-link-custom2" style="margin: 0 0 0 2px; padding: 0; color: black;" href="{% url 'privacy' %}">Privacy</a>
               </div>
             </li>
             <li class="nav-item">
               <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link" style="margin: 0 0 0 2px; padding: 0;" href="#">Help Center</a>
+                <a class="nav-link nav-link-custom2" style="margin: 0 0 0 2px; padding: 0; color: black;" href="{% url 'help_center' %}">Help Center</a>
               </div>
             </li>
           </ul>
@@ -252,37 +309,42 @@
               <div class="d-flex justify-content-start align-items-center">
                 <img src="{% static "img\facebook.png" %}" alt="" style="width: 15px; height: 15px;">
                 <span>&nbsp</span>
-                <a class="nav-link" style="margin: 0 0 0 2px; padding: 0;" href="#">Facebook</a>
+                <a class="nav-link nav-link-custom2" style="margin: 0 0 0 2px; padding: 0; color: black;" href="#">Facebook</a>
               </div>
             </li>
             <li class="nav-item">
               <div class="d-flex justify-content-start align-items-center">
                 <img src="{% static "img\twitter.png" %}" alt="" style="width: 15px; height: 15px;">
                 <span>&nbsp</span>
-                <a class="nav-link" style="margin: 0; padding: 0;" href="#">Twitter</a>
+                <a class="nav-link nav-link-custom2" style="margin: 0 0 0 2px; padding: 0; color: black;" href="#">Twitter</a>
               </div>
             </li>
             <li class="nav-item">
               <div class="d-flex justify-content-start align-items-center">
                 <img src="{% static "img\instagram.png" %}" alt="" style="width: 15px; height: 15px;">
                 <span>&nbsp</span>
-                <a class="nav-link" style="margin: 0; padding: 0;" href="#">Instagram</a>
+                <a class="nav-link nav-link-custom2" style="margin: 0 0 0 2px; padding: 0; color: black;" href="#">Instagram</a>
               </div>
             </li>
             <li class="nav-item">
               <div class="d-flex justify-content-start align-items-center">
                 <img src="{% static "img\youtube.png" %}" alt="" style="width: 15px; height: 15px;">
                 <span>&nbsp</span>
-                <a class="nav-link" style="margin: 0; padding: 0;" href="#">Youtube</a>
+                <a class="nav-link nav-link-custom2" style="margin: 0 0 0 2px; padding: 0; color: black;" href="#">Youtube</a>
               </div>
             </li>
           </ul>
         </div>
         <div class="col-md-4" style="padding: 20px;">
           <h5 style="color: black; margin-bottom: 10px;">DOWNLOAD OUR APP NOW</h5>
-          <img src="{% static "img\svg_appstore.svg" %}" alt="">
           <img src="{% static "img\svg_playstore.svg" %}" alt="">
         </div>
+
+        <style >
+          .nav-link-custom2:hover {
+            border-bottom: 2px solid black;
+          }
+        </style>
 
       </div>
     </div>
