@@ -9,16 +9,16 @@ def index(request):
 
     return render(request,"",context)
 
-def demo(request, place):
-    if place == "luneta":
-        context['place'] = "luneta.jpg"
-    elif place == "vigan":
-        context['place'] = "vigan.jpg"
-    elif place == "siargao":
-        context['place'] = "siargao.jpg"
-    else:
-        context['place'] = "alma.jpg"
-    return render(request,"demo.html",context)
+#def demo(request, place):
+#    if place == "luneta":
+#        context['place'] = "luneta.jpg"
+#    elif place == "vigan":
+#        context['place'] = "vigan.jpg"
+#    elif place == "siargao":
+#        context['place'] = "siargao.jpg"
+#    else:
+#        context['place'] = "alma.jpg"
+#    return render(request,"demo.html",context)
 
 # home
 def dashboard(request):

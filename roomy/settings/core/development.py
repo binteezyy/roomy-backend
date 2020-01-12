@@ -64,3 +64,5 @@ DEBUG_TOOLBAR_PANELS = [
 DEBUG_TOOLBAR_CONFIG = {
     'JQUERY_URL': '',
 }
+
+ROOT_URLCONF = 'apps.core.roomy_admin.urls'
