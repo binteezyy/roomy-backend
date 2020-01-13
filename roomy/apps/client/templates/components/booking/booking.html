@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+Booking
+{% endblock %}
+
+{% block content %}
+
+<!-- main content -->
+<div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3" style="padding: 10px; background-color: red;">
+        <span>Personal information</span>
+      </div>
+      <div class="col-md-3" style="padding: 10px; background-color: red;">
+        <span>Verification</span>
+      </div>
+      <div class="col-md-3" style="padding: 10px; background-color: red;">
+        <span>Booking details</span>
+      </div>
+      <div class="col-md-3" style="padding: 10px; background-color: red;">
+        <span>Confirmation</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <h2>Personal information</h2>
+        <h4>Wha can we call you?</h4>
+        <div class="form-group">
+          <label class="col-form-label" for="">First Name</label>
+          <input class="form-control" type="text" name="" value="">
+          <label class="col-form-label" for="">First Name</label>
+          <input class="form-control" type="text" name="" value="">
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+</div>
+<!-- end of main content -->
+
+{% endblock %}

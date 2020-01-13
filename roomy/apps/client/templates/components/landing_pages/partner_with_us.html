@@ -11,36 +11,41 @@ Partner With Us
 
 <div class="container-fluid" data-spy="scroll" data-target=".row-custom" data-offset="50">
   <div class="container">
-    <div class="row d-flex flex-row justify-content-center" style="height: 600px; margin-top: 20px;margin-bottom: 30px;">
-      <div class="wrapper d-flex flex-column justify-content-center align-items-center" style="">
-        <img src="{% static "img\partner.png" %}" alt="" style="width:100%; margin: 0; padding: 0;">
+
+    <div class="row d-flex flex-row flex-wrap first_row" style="margin-bottom: 100px; padding-top: 50px;">
+
+      <div class="wrapper d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 50px; flex-grow: 1;">
+        <img src="{% static "img\placeholder_500x350.png" %}" alt="" style="width:100%; margin: 0; padding: 0;">
       </div>
-      <div class="wrapper d-flex flex-column justify-content-center align-items-center" style="padding: 10px;">
-        <h3 class="text-center">Partner With Us</h3>
-        <p class="text-center">Reach new customers on the biggest local <br>discovery platform in the country</p>
-        <div class="wrapper d-flex flex-row justify-content-center">
+
+      <div class="wrapper d-flex flex-column justify-content-center" style="margin-bottom: 50px; padding: 10px; flex-grow: 1;">
+        <h2 class="text-center">Partner With Us</h2>
+        <p class="text-center" style="width: 400px; margin: 0 auto;">Nam vitae velit rhoncus, convallis est ut, iaculis neque.</p>
+        <div class="wrapper d-flex flex-row justify-content-center" style="margin-top: 10px;">
           <a class="btn btn-dark" style="width: 150px;" href="#rowCustom">Learn more</a>
         </div>
       </div>
+
     </div>
+
   </div>
 </div>
 
-<div class="container-fluid" style="background-color: #D8B9EA;">
+<div class="container-fluid" style="background-color: black;">
   <div class="container">
-    <div class="row d-flex flex-wrap justify-content-center" id="rowCustom" style="margin: 20px; padding: 40px; background-color: #D8B9EA;">
-      <h4 class="text-center">Your Growth, Our Goal</h4> <br>
+    <div class="row d-flex flex-wrap justify-content-center" id="rowCustom" style="margin: 20px; padding: 40px; background-color: black; color: white;">
+      <h4 class="text-center">Your Growth, Our Goal</h4> <br> <br> <br>
       <div class="d-flex flex-wrap justify-content-center">
         <div class="first col-md-4 text-center">
-          <img src="{% static "img\goal_one.png" %}" alt=""> <br>
+          <img src="{% static "img\placeholder_200x200.png" %}" alt=""> <br> <br>
           <p>We market your business through in-app listings, social media posts, and more!</p>
         </div>
         <div class="col-md-4 text-center">
-          <img src="{% static "img\goal_two.png" %}" alt=""> <br>
+          <img src="{% static "img\placeholder_200x200.png" %}" alt=""> <br> <br>
           <p>Promote exclusive offers to get roomy members to come to your store!</p>
         </div>
         <div class="second col-md-4 text-center">
-          <img src="{% static "img\goal_three.png" %}" alt=""> <br>
+          <img src="{% static "img\placeholder_200x200.png" %}" alt=""> <br> <br>
           <p>View and analyze transaction data via your own roomy dashboard!</p>
         </div>
       </div>
@@ -83,16 +88,16 @@ Partner With Us
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="col-form-label" for="">First Name</label>
+                  <label class="col-form-label" for="">Full Name</label>
                   <input class="form-control" type="text" name="" value="">
-                  <label class="col-form-label" for="">Email</label>
-                  <input class="form-control" type="email" name="" value="">
+                  <label class="col-form-label" for="">Company Name</label>
+                  <input class="form-control" type="text" name="" value="">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="col-form-label" for="">Last Name</label>
-                  <input class="form-control" type="text" name="" value="">
+                  <label class="col-form-label" for="">Email</label>
+                  <input class="form-control" type="email" name="" value="">
                   <label class="col-form-label" for="">Mobile</label>
                   <input class="form-control" type="text" name="" value="">
                 </div>
@@ -101,7 +106,7 @@ Partner With Us
             <div class="row">
               <div class="col-md-12">
                 <label class="col-form-label" for="">Message</label>
-                <textarea class="form-control" name="name" rows="4" cols="50"></textarea>
+                <textarea class="form-control" name="name" rows="7" cols="50"></textarea>
               </div>
             </div>
           </div>

@@ -8,24 +8,102 @@ Explore
 {% block content %}
 
 <!-- main content -->
-<div class="container-fluid">
-  <form class="container" _lpchecked="1" action="" _lpchecked="1">
-      <div class="row d-flex justify-content-center" style="margin: 20px 0 20px 0; padding: 20px;">
-        <!-- search bar-->
-        <input class="form-control form-control-xl btn-dark" style="width: 50%; background-color: white; color: black;" type="search" placeholder="Enter keyword" aria-label="Search">
-        <button style="margin-left: 10px;" class="btn btn-xl btn-dark" type="button" name="button">Search</button>
-      </div>
-  </form>
-</div>
-
-<div class="container-fluid">
+<div class="container-fluid" style="margin-bottom: 50px;">
   <div class="container">
     <div class="row">
-
+      <!-- search bar -->
+      <form class="form-inline md-form mr-auto mb-4 d-flex justify-content-center" _lpchecked="1" style="width: 100%;" action="#">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search name, location or keyword" aria-label="Search" style="width: 70%;">
+        <button class="btn btn-elegant btn-rounded btn-xl my-0 waves-effect waves-light" type="submit" style="border-radius: 30px;">Search</button>
+      </form>
+      <!-- end of search bar -->
     </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <!-- listings -->
+        <div class="d-flex flex-wrap justify-content-center" style="margin: 0 auto;">
 
+          <!-- main property container -->
+          <div class="" style="width: 100%; margin: 10px 0 50px 0;">
+            <div class="img-container">
+              <div class="wrapper d-flex justify-content-center">
+                <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
+              </div>
+              <div class="btn-over d-flex">
+                <button class="btn btn-sm btn-dark" type="" name="button">View</button>
+                <style>
+                  .img-container {
+                    position: relative;
+                  }
+
+                  .btn-over {
+                    position: absolute;
+                    top: 88%;
+                    left: 90%;
+                    transform: translate(-50%, -50%);
+                    -ms-transform: translate(-50%, -50%);
+                  }
+                </style>
+              </div>
+            </div>
+            <div class="d-flex flex-row justify-content-between">
+              <div class="wrapper" style="width: 100%;">
+                <div class="text-wrapper" style="padding: 15px 0 10px 0;">
+                  <h5 style="padding-bottom: 15px; border-bottom: 1px solid lightgrey;">Lorem Ipsum</h5>
+                  <h6 style="margin-bottom: 12px;">Nunc pellentesque hendrerit vestibulum</h6>
+                  <p class="bg-light" style="width: 100%; padding: 10px 10px 50px 10px; border-radius: 5px;">
+                    Quisque ac nisi suscipit, ultricies sapien non, condimentum mauris. Ut justo risus, elementum et semper eget, tempus sed urna. Vivamus in pharetra ex, quis porttitor eros.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of main property container -->
+
+          <!-- main property container -->
+          <div class="" style="width: 100%; margin: 10px 0 50px 0;">
+            <div class="img-container">
+              <div class="wrapper d-flex justify-content-center">
+                <img class="img-fluid" src="{% static "img\placeholder_300x300.png" %}" alt="">
+              </div>
+              <div class="btn-over d-flex">
+                <button class="btn btn-sm btn-dark" type="" name="button">View</button>
+                <style>
+                  .img-container {
+                    position: relative;
+                  }
+
+                  .btn-over {
+                    position: absolute;
+                    top: 88%;
+                    left: 90%;
+                    transform: translate(-50%, -50%);
+                    -ms-transform: translate(-50%, -50%);
+                  }
+                </style>
+              </div>
+            </div>
+            <div class="d-flex flex-row justify-content-between">
+              <div class="wrapper" style="width: 100%;">
+                <div class="text-wrapper" style="padding: 15px 0 10px 0;">
+                  <h5 style="padding-bottom: 15px; border-bottom: 1px solid lightgrey;">Lorem Ipsum</h5>
+                  <h6 style="margin-bottom: 12px;">Nunc pellentesque hendrerit vestibulum</h6>
+                  <p class="bg-light" style="width: 100%; padding: 10px 10px 50px 10px; border-radius: 5px;">
+                    Quisque ac nisi suscipit, ultricies sapien non, condimentum mauris. Ut justo risus, elementum et semper eget, tempus sed urna. Vivamus in pharetra ex, quis porttitor eros.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of main property container -->
+
+        </div>
+        <!-- end of listings -->
+      </div>
+      <div class="col-md-2"></div>
+    </div>
   </div>
-
 </div>
 <!-- end of main content -->
 

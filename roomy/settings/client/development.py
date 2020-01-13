@@ -1,7 +1,7 @@
 from .base import *
 import os
 
-ALLOWED_HOSTS = ['*', ]
+ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = [
     '*',

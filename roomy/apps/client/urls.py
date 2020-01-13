@@ -1,7 +1,10 @@
 from django.urls import path,include
 from django.conf.urls.static import static
 from .views import base
+
 urlpatterns = [
+    #navigation
+    path('home/', base.home, name='home'),
     path('explore/', base.explore, name='explore'),
     path('how_to_book/', base.how_to_book, name='how_to_book'),
     path('partner_with_us/', base.partner_with_us, name='partner_with_us'),

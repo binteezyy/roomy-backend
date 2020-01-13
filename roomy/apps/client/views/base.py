@@ -4,6 +4,8 @@ from django.shortcuts import render
 context = {
     'AUTHORS': 'PPTT',
 }
+def home(request):
+    return render(request,"components/landing_pages/home.html",context)
 
 def explore(request):
     return render(request,"components/landing_pages/explore.html",context)
