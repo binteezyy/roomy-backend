@@ -9,8 +9,172 @@ Home
 
 <!-- main content -->
 <div class="container-fluid">
-  <img src="{% static "img\placeholder.png" %}" alt="" style="width: 100%; height: 100%; margin: 0; padding: 0;">
+  <div class="container">
+    <div class="row d-flex flex-row justify-content-center" style="margin-top: 20px; margin-bottom: 100px;">
+
+      <div class="">
+        <div class="img-container">
+          <img src="{% static "img\placeholder_1200x500.png" %}" alt="">
+        </div>
+        <div class="wrapper-over d-flex flex-column justify-content-center">
+          <h1 class="text-center">Lorem Ipsum</h1>
+          <h5 class="text-center" style="width: 400px; margin: 0 auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae metus bibendum, suscipit dolor non, ultrices metus. Integer nec libero risus.</h5>
+          <div class="d-flex justify-content-center" style="margin-top: 20px;">
+            <button class="btn btn-dark" style="width: 200px; margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+            <button class="btn btn-dark" style="width: 200px; margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#getInTouchModal">GET IN TOUCH</button>
+          </div>
+        </div>
+
+        <style>
+          .img-container {
+            position: relative;
+          }
+
+          .wrapper-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+          }
+        </style>
+
+      </div>
+    </div>
+  </div>
 </div>
 <!-- end of main content -->
+
+<!-- signup modal -->
+<form class="" action="#" method="post">
+
+  <!-- modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+
+      <!-- modal content -->
+      <div class="modal-content" style="width: 400px; height: auto; margin: 0 auto; border-radius: 15px;">
+
+        <!-- modal body -->
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="d-flex justify-content-center" style="margin-bottom: 50px;">
+                    <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px;">
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3" style="width: 100px;">username</span>
+                    </div>
+                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3" style="width: 100px;">email</span>
+                    </div>
+                    <input type="email" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3" style="width: 100px;">password</span>
+                    </div>
+                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                  </div>
+                  <div class="d-flex justify-content-center" style="margin-top: 40px;">
+                    <button type="button" class="btn btn-sm btn-dark">Sign Up</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <span class="text-center" style="font-size: 12px;">By signing up, you agree to our <a href="{% url 'terms_of_use' %}" target="_blank">Terms of Use</a> and <a href="{% url 'privacy' %}" target="_blank">Privacy Policy</a>.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- modal footer -->
+        <div class="modal-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 text-center" style="font-size: 14px;">
+                <span>Already have an account?</span>
+                <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Log in</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- end of signup modal -->
+
+<!-- get in touch modal -->
+<form class="" action="#" method="post">
+
+  <!-- modal -->
+  <div class="modal fade" id="getInTouchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <!-- modal content -->
+      <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
+
+        <!-- modal header -->
+        <div class="modal-header text-center">
+          <h4 class="text-center">Partner With Us</h4>
+        </div>
+
+        <!-- modal body -->
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-form-label" for="">Full Name</label>
+                  <input class="form-control" type="text" name="" value="">
+                  <label class="col-form-label" for="">Company Name</label>
+                  <input class="form-control" type="text" name="" value="">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-form-label" for="">Email</label>
+                  <input class="form-control" type="email" name="" value="">
+                  <label class="col-form-label" for="">Mobile</label>
+                  <input class="form-control" type="text" name="" value="">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label class="col-form-label" for="">Message</label>
+                <textarea class="form-control" name="name" rows="7" cols="50"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- modal footer -->
+        <div class="modal-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <button class="btn btn-dark" type="button" name="button">Submit</button> <br>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</form>
+<!-- end of get in touch modal -->
 
 {% endblock %}

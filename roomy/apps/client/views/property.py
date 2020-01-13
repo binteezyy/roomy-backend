@@ -15,4 +15,4 @@ def photos(request):
     return render(request,"components/property/photos.html", context)
 
 def rates(request):
-    return render(request,"components/property/photos.html", context)
+    return render(request,"components/property/rates.html", context)

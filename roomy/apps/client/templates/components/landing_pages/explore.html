@@ -12,9 +12,13 @@ Explore
   <div class="container">
     <div class="row">
       <!-- search bar -->
-      <form class="form-inline md-form mr-auto mb-4 d-flex justify-content-center" _lpchecked="1" style="width: 100%;" action="#">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search name, location or keyword" aria-label="Search" style="width: 70%;">
-        <button class="btn btn-elegant btn-rounded btn-xl my-0 waves-effect waves-light" type="submit" style="border-radius: 30px;">Search</button>
+      <form class="form-inline mr-auto mb-4 d-flex justify-content-center" _lpchecked="1" style="width: 100%;" action="#">
+        <div class="input-group mb-3" style="width: 80%;">
+          <input type="text" class="form-control" placeholder="Search keyword" aria-label="Search" aria-describedby="button-addon2" style="width: 100%;">
+          <div class="input-group-append">
+            <button class="btn btn-elegant btn-rounded btn-sm my-0 waves-effect waves-light" type="button" id="button-addon2">Search</button>
+          </div>
+        </div>
       </form>
       <!-- end of search bar -->
     </div>
