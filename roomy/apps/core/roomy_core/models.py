@@ -3,20 +3,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class Property(models.Model):
-    name = models.CharField(max_length=56, unique=True)
-    street = models.CharField(max_length=56)
-    brgy = models.CharField(max_length=56)
-    city = models.CharField(max_length=56)
-
-    def __str__(self):
-        return f'{self.name}'
-
-    class Meta:
-        unique_together = ('name', 'street', 'brgy', 'city')
-        verbose_name_plural = 'Properties'
-
-
 class ImageFile(models.Model):
     title = models.CharField(max_length=32)
     img_path = models.ImageField(
@@ -27,6 +13,23 @@ class ImageFile(models.Model):
 
     class Meta:
         unique_together = ('title', 'img_path')
+
+
+class Property(models.Model):
+    name = models.CharField(max_length=56, unique=True)
+    description = models.TextField(blank=True, null=True)
+    street = models.CharField(max_length=56)
+    brgy = models.CharField(max_length=56)
+    city = models.CharField(max_length=56)
+    property_image = models.ManyToManyField(
+        ImageFile, blank=True, related_name='property_image')
+
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta:
+        unique_together = ('name', 'street', 'brgy', 'city')
+        verbose_name_plural = 'Properties'
 
 
 class Room(models.Model):
@@ -45,7 +48,7 @@ class Room(models.Model):
         ImageFile, blank=True, related_name='images_2d')
 
     def __str__(self):
-        return f'{self.property_id}, Floor {self.floor}, Room {self.number}'
+        return f'{self.property_id}: Floor {self.floor} - Room {self.number}'
 
     class Meta:
         unique_together = ('property_id', 'floor', 'number')
@@ -57,7 +60,10 @@ class Transaction(models.Model):
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.active}, {self.room_id}'
+        if self.active:
+            return f'Active - {self.room_id}'
+        else:
+            return f'Inactive - {self.room_id}'
 
 
 class Fee(models.Model):

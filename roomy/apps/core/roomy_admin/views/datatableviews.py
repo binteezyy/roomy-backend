@@ -18,11 +18,16 @@ def billing_table(request):
         if billing.paid == True:
             paid = "Paid"
         else:
-            paid = "Not Paid"
-        x = {"fields": {"id": billings.pk,
-                        "time": str(billing.time_stamp),
-                        "transaction": str(billing.transaction_id),
-                        "fee": str(billing.billing_fee),
+            paid = "Not paid"
+
+        time = billing.time_stamp.strftime("%Y, %B %d")
+        fees = ' | '.join([str(i) for i in billing.billing_fee.all()])
+        room = f'Property: {billing.transaction_id.room_id.property_id.name} \n Room: Floor-{billing.transaction_id.room_id.floor} Number-{billing.transaction_id.room_id.number}'
+
+        x = {"fields": {"id": billing.pk,
+                        "time": time,
+                        "room": room,
+                        "fee": fees,
                         "paid": paid,
                         }}
         data.append(x)

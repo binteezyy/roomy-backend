@@ -1,0 +1,67 @@
+{% load widget_tweaks %}
+<style media="screen">
+    .section p {
+        font-size: 0.75rem !important;
+    }
+</style>
+<div class="modal-header">
+    <h3 class="modal-title">{% if viewtype == 'billing' %} Billing {% if billing.paid %}
+        <button type="button" class="btn btn-success btn-rounded">Paid</button>
+        {% else %}
+        <button type="button" class="btn btn-warning btn-rounded">Unpaid</button>
+        {% endif %}
+        {% endif %}</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+
+    <div class="container-fluid">
+
+        {% if viewtype == 'billing' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> Property:
+                        {{billing.transaction_id.room_id.property_id}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Tenant/s:
+                        {% for tenant in tenants %}
+                        {{tenant.user_id.username}},
+                        {% endfor %}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Date:
+                        {{billing.time_stamp}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Fees: </h5>
+                    <h5>
+                        <ol>
+                            {% for fee in fees %}
+                            <li>{{fee}}</li>
+                            {% endfor %}
+                        </ol>
+                    </h5>
+                </li>
+                <li>
+                    <h5> Total Amount Due:
+                        {{total}}
+                    </h5>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>

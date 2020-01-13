@@ -1,6 +1,6 @@
 from django.urls import path, include
 from django.conf.urls.static import static
-from .views import base, datatableviews
+from .views import base, datatableviews, modalviews
 urlpatterns = [
     path('demo/<str:place>', base.demo, name='demo'),
     path('dashboard/',      base.dashboard,
@@ -37,5 +37,13 @@ urlpatterns = [
          name='admin_management'),
 
     # Data Table Paths
-    path('billing/table/', datatableviews.billing_table, name='admin-billing-table')
+    # Billing Table
+    path('billing/table/', datatableviews.billing_table,
+         name='admin-billing-table'),
+    path('read/billing/<int:pk>',
+         modalviews.BillingReadModal.as_view(), name='read-billing'),
+    path('delete/billing/<int:pk>',
+         modalviews.BillingDeleteModal.as_view(), name='delete-billing'),
+    path('update/billing/<int:pk>',
+         modalviews.BillingUpdateModal.as_view(), name='update-billing'),
 ]

@@ -12,7 +12,7 @@ Billing
 
 {% block content %}
 {% include "_modal.html" %}
-<div class="content">
+<div class="content container">
 
   <table cellpadding="10">
     <tbody>
@@ -29,7 +29,7 @@ Billing
     </tbody>
     <div class="text-left" style="float: right;">
       Result(s): <br> <br>
-      <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
+      <button class="btn btn-raised btn-block btn-success" type="button" name="button">Download Excel File</button>
     </div>
   </table>
 
@@ -46,9 +46,8 @@ Billing
               <thead>
                 <tr role="row">
                   <th style="width:10%">Id</th>
-                  <th style="width:10%">Time Stamp</th>
-                  <th style="width:10%">Transaction</th>
-                  <th style="width:10%">Amount Due</th>
+                  <th style="width:10%">Date</th>
+                  <th style="width:10%">Room</th>
                   <th style="width:10%">Paid</th>
                   <th style="width:10%">Actions</th>
                 </tr>
@@ -80,17 +79,17 @@ Billing
         "dataSrc": '',
         "url": "{% url 'admin-billing-table'%}",
       },
-      // "drawCallback": function (settings, json) {
-      //   $(".read-section-offering").each(function () {
-      //     $(this).modalForm({ formURL: $(this).data('id') });
-      //   });
-      //   $(".delete-section-offering").each(function () {
-      //     $(this).modalForm({ formURL: $(this).data('id') });
-      //   });
-      //   $(".update-section-offering").each(function () {
-      //     $(this).modalForm({ formURL: $(this).data('id') });
-      //   });
-      // },
+      "drawCallback": function (settings) {
+        $(".read-billing").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+        $(".delete-billing").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+        $(".update-billing").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+      },
       "columnDefs": [
         {
           "className": 'col-billing-id text-center',
@@ -103,40 +102,34 @@ Billing
           "data": "fields.time",
         },
         {
-          "className": 'col-billing-transaction text-center',
+          "className": 'col-billing-room text-center',
           "targets": 2,
-          "data": "fields.transaction",
-        },
-        {
-          "className": 'col-billing-amount text-center',
-          "targets": 3,
-          "data": "fields.fee",
+          "data": "fields.room",
         },
         {
           "className": 'col-billing-paid text-center',
-          "targets": 4,
+          "targets": 3,
           "data": "fields.paid",
         },
         {
           "className": 'col-billing-actions text-center',
-          "targets": 5,
+          "targets": 4,
           "data": "fields.id",
         },
-        // {
-        //   "className": 'col-details text-center',
-        //   "targets": -1,
-        //   "data": 'fields.id',
-        //   render: function (data, type, row) {
-        //     let render = '<button type="button" class="read-section-offering btn btn-sm btn-raised btn-primary m-1" data-id="/read/section-offering/' + data + '">' +
-        //       '<span class="far fa-eye"></span></button>' +
-        //       '<button type="button" class="delete-section-offering btn btn-sm btn-raised btn-warning m-1" data-id="/delete/section-offering/' + data + '">' +
-        //       '<span class="fa fa-trash"></span></button>' +
-        //       '<button type="button" class="update-section-offering btn btn-sm btn-raised btn-warning m-1" data-id="/update/section-offering/' + data + '">' +
-        //       '<span class="fa fa-edit"></span></button>';
-
-        //     return render
-        //   }
-        // },
+        {
+          "className": 'col-details text-center',
+          "targets": -1,
+          "data": 'fields.id',
+          render: function (data, type, row) {
+            let render = '<button type="button" class="read-billing btn btn-raised btn-sm btn-primary m-1" data-id="/read/billing/' + data + '">' +
+              '<span class="fa fa-eye"></span></button>' +
+              '<button type="button" class="delete-billing btn btn-sm btn-raised btn-warning m-1" data-id="/delete/billing/' + data + '">' +
+              '<span class="fa fa-trash"></span></button>' +
+              '<button type="button" class="update-billing btn btn-sm btn-raised btn-success m-1" data-id="/update/billing/' + data + '">' +
+              '<span class="fa fa-edit"></span></button>';
+            return render
+          }
+        },
       ]
     })
   });
