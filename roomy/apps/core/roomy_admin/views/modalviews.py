@@ -57,3 +57,21 @@ class BillingUpdateModal(BSModalUpdateView):
     form_class = BillingModalForm
     sucess_message = "Success: Billing updated"
     success_url = reverse_lazy('billing')
+
+
+class FeeDeleteModal(BSModalDeleteView):
+    model = Fee
+    context_object_name = 'fee'
+    template_name = 'components/modals/delete.html'
+    success_message = 'Success: Fee deleted'
+    success_url = reverse_lazy('fee')
+    # def test_func(self):
+    #     return self.request.user.is_superuser
+
+
+class FeeUpdateModal(BSModalUpdateView):
+    model = Fee
+    template_name = 'components/modals/update.html'
+    form_class = FeeModalForm
+    sucess_message = "Success: Fee updated"
+    success_url = reverse_lazy('fee')

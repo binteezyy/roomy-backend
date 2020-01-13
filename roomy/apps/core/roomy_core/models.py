@@ -67,8 +67,13 @@ class Transaction(models.Model):
 
 
 class Fee(models.Model):
+    fee_type_enum = [
+        (0, 'Misc Fees'),
+        (1, 'Add-ons'),
+    ]
     description = models.CharField(max_length=56)
     amount = models.DecimalField(max_digits=9, decimal_places=2)
+    fee_type = models.IntegerField(choices=fee_type_enum, default=0)
 
     def __str__(self):
         return f'{self.description}, {self.amount}'

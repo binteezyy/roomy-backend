@@ -4,13 +4,14 @@ from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from apps.core.roomy_core.models import *
 
+import json
+from pprint import pprint
 
 # @login_required
 # @user_passes_test(lambda u: u.is_superuser)
-def billing_table(request):
-    import json
-    from pprint import pprint
 
+
+def billing_table(request):
     billings = Billing.objects.all()
 
     data = []
@@ -29,6 +30,22 @@ def billing_table(request):
                         "room": room,
                         "fee": fees,
                         "paid": paid,
+                        }}
+        data.append(x)
+    data = json.dumps(data)
+    pprint(data)
+    return HttpResponse(data, content_type='application/json')
+
+
+def fee_table(request):
+    fees = Fee.objects.all()
+
+    data = []
+    for fee in fees:
+        x = {"fields": {"id": fee.pk,
+                        "type": fee.get_fee_type_display(),
+                        "description": fee.description,
+                        "amount": str(fee.amount),
                         }}
         data.append(x)
     data = json.dumps(data)

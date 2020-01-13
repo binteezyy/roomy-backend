@@ -23,6 +23,8 @@ urlpatterns = [
          name='tenant'),
     path('billing/',      base.billing,
          name='billing'),
+    path('fee/',      base.fee,
+         name='fee'),
     path('expense/',      base.expense,
          name='expense'),
     path('cashflow/',      base.cashflow,
@@ -46,4 +48,11 @@ urlpatterns = [
          modalviews.BillingDeleteModal.as_view(), name='delete-billing'),
     path('update/billing/<int:pk>',
          modalviews.BillingUpdateModal.as_view(), name='update-billing'),
+
+    # Fee Table
+    path('fee/table/', datatableviews.fee_table, name='admin-fee-table'),
+    path('delete/fee/<int:pk>',
+         modalviews.FeeDeleteModal.as_view(), name='delete-fee'),
+    path('update/fee/<int:pk>',
+         modalviews.FeeUpdateModal.as_view(), name='update-fee'),
 ]

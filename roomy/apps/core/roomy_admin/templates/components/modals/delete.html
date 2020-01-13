@@ -5,6 +5,7 @@
 
     <div class="modal-header">
         <h3 class="modal-title">Delete {% if billing %}Billing
+            {% elif fee %} Fee
             {% endif %}</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -16,6 +17,7 @@
         <p>Are you sure you want to delete <strong>
                 {% if billing %}
                 {{ billing }}</strong>
+            {% elif fee %} <strong> {{fee}}</strong>
             {% endif %}
             ?</p>
     </div>

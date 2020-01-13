@@ -6,4 +6,10 @@ from apps.core.roomy_core.models import *
 class BillingModalForm(BSModalForm):
     class Meta:
         model = Billing
-        exclude = ['transaction_id', 'billing_fee']
+        exclude = ['transaction_id', ]
+
+
+class FeeModalForm(BSModalForm):
+    class Meta:
+        model = Fee
+        exclude = ['']
