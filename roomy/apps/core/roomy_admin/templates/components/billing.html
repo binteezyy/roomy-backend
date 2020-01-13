@@ -1,10 +1,17 @@
 {% extends "layout.html" %}
+{% load static %}
 
 {% block title %}
-  Billing
+Billing
+{% endblock %}
+
+{% block extra_css %}
+<!-- SELECT2 -->
+<link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
 {% endblock %}
 
 {% block content %}
+{% include "_modal.html" %}
 <div class="content">
 
   <table cellpadding="10">
@@ -28,29 +35,110 @@
 
   <br>
 
-  <table class="table table-bordered">
-    <thead>
-      <th>Id</th>
-      <th>Rental Id</th>
-      <th>Description</th>
-      <th>Amount</th>
-      <th>Date</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="card-content">
+    <div class="container-fluid">
+
+      <div class="row p-3">
+        <div class="col">
+          <div class="table-responsive">
+            <table id="billing-table" class="table table-bordered table-hover" width="100%" cellspacing="0" role="grid"
+              aria-describedby="dataTable_info">
+              <thead>
+                <tr role="row">
+                  <th style="width:10%">Id</th>
+                  <th style="width:10%">Time Stamp</th>
+                  <th style="width:10%">Transaction</th>
+                  <th style="width:10%">Amount Due</th>
+                  <th style="width:10%">Paid</th>
+                  <th style="width:10%">Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 
 {% endblock %}
 
 {% block header %}
-  Billing
+Billing
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#billing-table').DataTable({
+      "dataType": 'json',
+      "ajax": {
+        "processing": true,
+        "dataSrc": '',
+        "url": "{% url 'admin-billing-table'%}",
+      },
+      // "drawCallback": function (settings, json) {
+      //   $(".read-section-offering").each(function () {
+      //     $(this).modalForm({ formURL: $(this).data('id') });
+      //   });
+      //   $(".delete-section-offering").each(function () {
+      //     $(this).modalForm({ formURL: $(this).data('id') });
+      //   });
+      //   $(".update-section-offering").each(function () {
+      //     $(this).modalForm({ formURL: $(this).data('id') });
+      //   });
+      // },
+      "columnDefs": [
+        {
+          "className": 'col-billing-id text-center',
+          "targets": 0,
+          "data": "fields.id",
+        },
+        {
+          "className": 'col-billing-time text-center',
+          "targets": 1,
+          "data": "fields.time",
+        },
+        {
+          "className": 'col-billing-transaction text-center',
+          "targets": 2,
+          "data": "fields.transaction",
+        },
+        {
+          "className": 'col-billing-amount text-center',
+          "targets": 3,
+          "data": "fields.fee",
+        },
+        {
+          "className": 'col-billing-paid text-center',
+          "targets": 4,
+          "data": "fields.paid",
+        },
+        {
+          "className": 'col-billing-actions text-center',
+          "targets": 5,
+          "data": "fields.id",
+        },
+        // {
+        //   "className": 'col-details text-center',
+        //   "targets": -1,
+        //   "data": 'fields.id',
+        //   render: function (data, type, row) {
+        //     let render = '<button type="button" class="read-section-offering btn btn-sm btn-raised btn-primary m-1" data-id="/read/section-offering/' + data + '">' +
+        //       '<span class="far fa-eye"></span></button>' +
+        //       '<button type="button" class="delete-section-offering btn btn-sm btn-raised btn-warning m-1" data-id="/delete/section-offering/' + data + '">' +
+        //       '<span class="fa fa-trash"></span></button>' +
+        //       '<button type="button" class="update-section-offering btn btn-sm btn-raised btn-warning m-1" data-id="/update/section-offering/' + data + '">' +
+        //       '<span class="fa fa-edit"></span></button>';
+
+        //     return render
+        //   }
+        // },
+      ]
+    })
+  });
+</script>
 {% endblock %}

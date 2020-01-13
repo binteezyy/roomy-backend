@@ -30,7 +30,6 @@ MIDDLEWARE = [
 ]
 
 
-
 WSGI_APPLICATION = 'config.core.wsgi.application'
 
 STATIC_URL = '/static/'

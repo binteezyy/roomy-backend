@@ -4,8 +4,8 @@ from django.urls import path, include
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('roomy_admin.urls')),
-    path('core/', include('roomy_core.urls'))
+    path('', include('apps.core.roomy_admin.urls')),
+    path('core/', include('apps.core.roomy_core.urls'))
 ]
 
 if settings.DEBUG:
