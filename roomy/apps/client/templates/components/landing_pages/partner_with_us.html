@@ -78,46 +78,50 @@ Partner With Us
       <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
 
         <!-- modal header -->
-        <div class="modal-header text-center">
-          <h4 class="text-center">Partner With Us</h4>
-        </div>
+
 
         <!-- modal body -->
         <div class="modal-body">
           <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="col-form-label" for="">Full Name</label>
-                  <input class="form-control" type="text" name="" value="">
-                  <label class="col-form-label" for="">Company Name</label>
-                  <input class="form-control" type="text" name="" value="">
+            <div class="row d-flex justify-content-center" style="padding-right: 10px; padding-left: 10px;">
+              <div class="d-flex justify-content-center" style="margin-bottom: 50px;">
+                <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px;">
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Full Name</span>
+                  </div>
+                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="col-form-label" for="">Email</label>
-                  <input class="form-control" type="email" name="" value="">
-                  <label class="col-form-label" for="">Mobile</label>
-                  <input class="form-control" type="text" name="" value="">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Company</span>
+                  </div>
+                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <label class="col-form-label" for="">Message</label>
-                <textarea class="form-control" name="name" rows="7" cols="50"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Mobile</span>
+                  </div>
+                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Email</span>
+                  </div>
+                  <input type="email" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                </div>
 
-        <!-- modal footer -->
-        <div class="modal-footer">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12 text-center">
-                <button class="btn btn-dark" type="button" name="button">Submit</button> <br>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Message</span>
+                  </div>
+                  <textarea class="form-control" name="name" rows="5" cols="50"></textarea>
+                </div>
+                <div class="d-flex justify-content-center" style="margin-top: 40px;">
+                  <button type="button" class="btn btn-sm btn-dark">Sign Up</button>
+                </div>
               </div>
             </div>
           </div>
