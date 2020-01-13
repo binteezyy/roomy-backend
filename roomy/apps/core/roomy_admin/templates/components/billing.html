@@ -7,7 +7,7 @@ Billing
 
 {% block extra_css %}
 <!-- SELECT2 -->
-<link rel="stylesheet" href="{% static "vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css" %}">
+<link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -70,7 +70,7 @@ Billing
 {% endblock %}
 
 {% block extra_js %}
-<script type="text/javascript" src="{% static "vendor/DataTables/datatables.min.js" %}"></script>
+<script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
 <script type="text/javascript">
   $(document).ready(function () {
     $('#billing-table').DataTable({
@@ -95,32 +95,32 @@ Billing
         {
           "className": 'col-billing-id text-center',
           "targets": 0,
-          "data": "fields.secOff-subject",
+          "data": "fields.id",
         },
         {
           "className": 'col-billing-time text-center',
           "targets": 1,
-          "data": "fields.secOff-section",
+          "data": "fields.time",
         },
         {
           "className": 'col-billing-transaction text-center',
           "targets": 2,
-          "data": "fields.secOff-type",
+          "data": "fields.transaction",
         },
         {
           "className": 'col-billing-amount text-center',
           "targets": 3,
-          "data": "fields.secOff-prof",
+          "data": "fields.fee",
         },
         {
           "className": 'col-billing-paid text-center',
           "targets": 4,
-          "data": "fields.secOff-prof",
+          "data": "fields.paid",
         },
         {
           "className": 'col-billing-actions text-center',
           "targets": 5,
-          "data": "fields.secOff-prof",
+          "data": "fields.id",
         },
         // {
         //   "className": 'col-details text-center',
