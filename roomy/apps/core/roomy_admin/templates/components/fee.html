@@ -15,7 +15,7 @@ Fee
 <div class="content container">
     <div class="card-content">
         <div class="container-fluid">
-
+            <h2>Fee</h2>
             <div class="row p-3">
                 <div class="col">
                     <div class="table-responsive">
@@ -56,6 +56,13 @@ Billing
                 "processing": true,
                 "dataSrc": '',
                 "url": "{% url 'admin-fee-table'%}",
+            },
+            "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-fee'>>>>" +
+                "<'row'<'col-md-6'><'col-md-6'>>" +
+                "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
+            "initComplete": function (settings, json) {
+                $("div.create-fee").html('<button type="button" id="create-fee" class="float-right btn btn-s btn-success btn-raised" name="button">Create <i class="fas fa-plus"></i></button>');
+                $(".create-fee").modalForm({ formURL: "{% url 'create-fee' %}" });
             },
             "drawCallback": function (settings) {
                 $(".delete-fee").each(function () {

@@ -10,6 +10,7 @@
         {% else %}
         <button type="button" class="btn btn-warning btn-rounded">Unpaid</button>
         {% endif %}
+        {% elif viewtype == 'transaction' %} Transaction
         {% endif %}</h3>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -53,6 +54,24 @@
                 <li>
                     <h5> Total Amount Due:
                         {{total}}
+                    </h5>
+                </li>
+            </ul>
+        </div>
+        {% elif viewtype == 'transaction' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> Room:
+                        {{room}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Tenant/s:
+                        <ol>{% for tenant in tenants %}
+                            <li>{{tenant.user_id.username}}</li>
+                            {% endfor %}
+                        </ol>
                     </h5>
                 </li>
             </ul>

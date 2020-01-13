@@ -51,3 +51,20 @@ def fee_table(request):
     data = json.dumps(data)
     pprint(data)
     return HttpResponse(data, content_type='application/json')
+
+
+def rental_table(request):
+    transactions = Transaction.objects.filter(active=True)
+
+    data = []
+    for transaction in transactions:
+        room = f'Room: Floor-{transaction.room_id.floor} Number-{transaction.room_id.number}'
+        date = transaction.start_date.strftime("%Y, %B %d")
+        x = {"fields": {"id": transaction.pk,
+                        "room": room,
+                        "date": date,
+                        }}
+        data.append(x)
+    data = json.dumps(data)
+    pprint(data)
+    return HttpResponse(data, content_type='application/json')

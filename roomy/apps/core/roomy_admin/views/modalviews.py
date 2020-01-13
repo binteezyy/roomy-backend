@@ -75,3 +75,51 @@ class FeeUpdateModal(BSModalUpdateView):
     form_class = FeeModalForm
     sucess_message = "Success: Fee updated"
     success_url = reverse_lazy('fee')
+
+
+class FeeCreateModal(BSModalCreateView):
+    model = Fee
+    model_type = 'fee'
+    template_name = 'components/modals/create.html'
+    form_class = FeeModalForm
+    success_message = 'Success: Fee created.'
+    success_url = reverse_lazy('fee')
+
+    # def test_func(self):
+    #     return self.request.user.is_superuser
+
+
+class RentalReadModal(BSModalReadView):
+    model = Transaction
+    context_object_name = 'transaction'
+    template_name = 'components/modals/read.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['viewtype'] = 'transaction'
+        context['transaction'] = kwargs['object']
+        context['room'] = f"Floor-{kwargs['object'].room_id.floor} Number-{kwargs['object'].room_id.number}"
+        context['tenants'] = UserAccount.objects.filter(
+            transaction_id=kwargs['object'])
+
+        return context
+    # def test_func(self):
+    #     return self.request.user.is_superuser
+
+
+class RentalDeleteModal(BSModalDeleteView):
+    model = Transaction
+    context_object_name = 'transaction'
+    template_name = 'components/modals/delete.html'
+    success_message = 'Success: Transaction deleted'
+    success_url = reverse_lazy('rental')
+    # def test_func(self):
+    #     return self.request.user.is_superuser
+
+
+class RentalUpdateModal(BSModalUpdateView):
+    model = Transaction
+    template_name = 'components/modals/update.html'
+    form_class = TransactionModalForm
+    sucess_message = "Success: Transaction updated"
+    success_url = reverse_lazy('rental')

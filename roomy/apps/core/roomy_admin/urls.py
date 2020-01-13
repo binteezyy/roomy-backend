@@ -55,4 +55,14 @@ urlpatterns = [
          modalviews.FeeDeleteModal.as_view(), name='delete-fee'),
     path('update/fee/<int:pk>',
          modalviews.FeeUpdateModal.as_view(), name='update-fee'),
+    path('create/fee', modalviews.FeeCreateModal.as_view(), name='create-fee'),
+
+    # Rental Table
+    path('rental/table', datatableviews.rental_table, name='admin-rental-table'),
+    path('read/rental/<int:pk>',
+         modalviews.RentalReadModal.as_view(), name='read-rental'),
+    path('delete/rental/<int:pk>',
+         modalviews.RentalDeleteModal.as_view(), name='delete-rental'),
+    path('update/rental/<int:pk>',
+         modalviews.RentalUpdateModal.as_view(), name='update-rental'),
 ]

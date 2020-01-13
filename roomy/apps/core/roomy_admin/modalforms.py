@@ -13,3 +13,9 @@ class FeeModalForm(BSModalForm):
     class Meta:
         model = Fee
         exclude = ['']
+
+
+class TransactionModalForm(BSModalForm):
+    class Meta:
+        model = Transaction
+        exclude = ['room_id']
