@@ -1,23 +1,18 @@
-{% extends "layout/layout.html" %}
+{% extends "layout/layout_2.html" %}
 {% load static %}
 
 {% block title %}
-Explore
+Rooms
 {% endblock %}
 
 {% block content %}
 
+
 <!-- main content -->
-<div class="container-fluid" style="margin-bottom: 50px;">
+<div class="container-fluid">
   <div class="container">
-    <div class="row">
-      <!-- search bar -->
-      <form class="form-inline md-form mr-auto mb-4 d-flex justify-content-center" _lpchecked="1" style="width: 100%;" action="#">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search name, location or keyword" aria-label="Search" style="width: 70%;">
-        <button class="btn btn-elegant btn-rounded btn-xl my-0 waves-effect waves-light" type="submit" style="border-radius: 30px;">Search</button>
-      </form>
-      <!-- end of search bar -->
-    </div>
+    
+    <!-- content -->
     <div class="row">
       <div class="col-md-2"></div>
       <div class="col-md-8">
@@ -31,7 +26,7 @@ Explore
                 <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
               </div>
               <div class="btn-over d-flex">
-                <a class="btn btn-sm btn-dark" href="{% url 'room' %}">View</a>
+                <button class="btn btn-sm btn-dark" type="" name="button">View</button>
                 <style>
                   .img-container {
                     position: relative;
@@ -68,7 +63,7 @@ Explore
                 <img class="img-fluid" src="{% static "img\placeholder_300x300.png" %}" alt="">
               </div>
               <div class="btn-over d-flex">
-                <a class="btn btn-sm btn-dark" href="{% url 'room' %}">View</a>
+                <button class="btn btn-sm btn-dark" type="" name="button">View</button>
                 <style>
                   .img-container {
                     position: relative;
@@ -103,6 +98,8 @@ Explore
       </div>
       <div class="col-md-2"></div>
     </div>
+    <!-- end of content -->
+
   </div>
 </div>
 <!-- end of main content -->

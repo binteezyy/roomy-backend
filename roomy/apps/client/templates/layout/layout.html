@@ -4,11 +4,11 @@
 {% block layout %}
 
 <!-- navbar -->
-<nav class="navbar navbar-expand-xl navbar-light white mb-4">
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark mb-4">
   <div class="container">
     <!-- logo -->
     <a href="{% url 'home' %}" style="margin-right: 20px;">
-      <img src="{% static "img\logo.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+      <img src="{% static "img\logo_white.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
     </a>
 
     <!-- expand button -->
@@ -23,16 +23,16 @@
           <a class="nav-link" style="" href="{% url 'explore' %}">Explore</a>
         </li>
         <li class="nav-item nav-item-custom">
-          <a class="nav-link" style="" href="{% url 'how_to_book' %}">How To Book</a>
+          <a class="nav-link" style="" href="{% url 'booking_guide' %}">Booking Guide</a>
         </li>
         <li class="nav-item nav-item-custom dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="">
             About Us
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width: auto; height: auto; padding: 20px;">
-            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'about' %}">What is Roomy?</a>
-            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'contact' %}">Contact Us</a>
-            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'faq' %}">FAQs</a>
+            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'about' %}">What is Roomy?</a>
+            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'contact' %}">Contact Us</a>
+            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'faq' %}">FAQs</a>
           </div>
         </li>
         <li class="nav-item nav-item-custom">
@@ -43,7 +43,7 @@
 
       <!-- login/signup -->
       <div class="wrapper">
-        <a class="btn btn-sm btn-dark" style="margin-left: 10px;" data-toggle="modal" data-target="#loginModal">Log in</a>
+        <button class="btn btn-sm btn-light" style="margin-left: 10px;" data-toggle="modal" data-target="#loginModal">Log in</button>
       </div>
 
     </div>
@@ -65,7 +65,7 @@
 
         <!-- modal header -->
         <div class="modal-header">
-          <img src="{% static "img\logo.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+          <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
         </div>
 
         <!-- modal body -->
@@ -120,7 +120,7 @@
 
         <!-- modal header -->
         <div class="modal-header">
-          <img src="{% static "img\logo.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+          <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
         </div>
 
         <!-- modal body -->
@@ -178,7 +178,7 @@
 
         <!-- modal header -->
         <div class="modal-header">
-          <img src="{% static "img\logo.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+          <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
         </div>
 
         <!-- modal body -->

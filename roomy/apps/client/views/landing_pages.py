@@ -4,14 +4,15 @@ from django.shortcuts import render
 context = {
     'AUTHORS': 'PPTT',
 }
+
 def home(request):
     return render(request,"components/landing_pages/home.html",context)
 
 def explore(request):
     return render(request,"components/landing_pages/explore.html",context)
 
-def how_to_book(request):
-    return render(request,"components/landing_pages/how_to_book.html",context)
+def booking_guide(request):
+    return render(request,"components/landing_pages/booking_guide.html",context)
 
 def partner_with_us(request):
     return render(request,"components/landing_pages/partner_with_us.html",context)
