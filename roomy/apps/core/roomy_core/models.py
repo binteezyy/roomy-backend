@@ -94,7 +94,8 @@ class UserAccount(models.Model):
     user_type_enum = [
         (0, 'Unknown'),
         (1, 'Tenant'),
-        (2, 'Owner/Manager'),
+        (2, 'Manager'),
+        (3, 'Owner'),
     ]
     user_type = models.IntegerField(choices=user_type_enum, default=0)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -102,10 +103,18 @@ class UserAccount(models.Model):
     cell_number = models.PositiveIntegerField(null=True, blank=True)
     provincial_address = models.CharField(
         max_length=128, null=True, blank=True)
-    transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    transaction_id = models.ForeignKey(
+        Transaction, on_delete=models.CASCADE, blank=True, null=True)
+    property_id = models.ForeignKey(
+        Property, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return f'{self.get_user_type_display()} {self.user_id.username}, {self.transaction_id}'
+        if self.user_type == 1:
+            return f'{self.get_user_type_display()} {self.user_id.username}, {self.transaction_id}'
+        elif self.user_type == 2:
+            return f'{self.get_user_type_display()} {self.user_id.username}, {self.property_id}'
+        else:
+            return f'{self.get_user_type_display()} {self.user_id.username}'
 
 
 class Message(models.Model):
@@ -118,7 +127,7 @@ class Message(models.Model):
 
 
 class Document(models.Model):
-    file_path = models.ImageField(upload_to="\media\files")
+    file_path = models.ImageField(upload_to="files")
 
     def __str__(self):
         return f'{self.file_path}'
