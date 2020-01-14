@@ -123,3 +123,20 @@ class RentalUpdateModal(BSModalUpdateView):
     form_class = TransactionModalForm
     sucess_message = "Success: Transaction updated"
     success_url = reverse_lazy('rental')
+
+
+class TenantReadModal(BSModalReadView):
+    model = UserAccount
+    context_object_name = 'tenant'
+    template_name = 'components/modals/read.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['viewtype'] = 'tenant'
+        context['tenant'] = kwargs['object']
+        context['transaction'] = kwargs['object'].transaction_id
+        context['room'] = f"Floor-{kwargs['object']} Number-{kwargs['object'].transaction_id.room_id.number}"
+
+        return context
+    # def test_func(self):
+    #     return self.request.user.is_superuser

@@ -68,3 +68,18 @@ def rental_table(request):
     data = json.dumps(data)
     pprint(data)
     return HttpResponse(data, content_type='application/json')
+
+
+def tenant_table(request):
+    tenants = UserAccount.objects.filter(user_type=1)
+
+    data = []
+    for tenant in tenants:
+        x = {"fields": {"id": tenant.pk,
+                        "name": f'{tenant.user_id.username} - {tenant.user_id.first_name} {tenant.user_id.last_name}',
+                        "room": f'Room: Floor-{tenant.transaction_id.room_id.floor} Number-{tenant.transaction_id.room_id.number}',
+                        }}
+        data.append(x)
+    data = json.dumps(data)
+    pprint(data)
+    return HttpResponse(data, content_type='application/json')

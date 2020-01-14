@@ -11,6 +11,7 @@
         <button type="button" class="btn btn-warning btn-rounded">Unpaid</button>
         {% endif %}
         {% elif viewtype == 'transaction' %} Transaction
+        {% elif viewtype == 'tenant' %} Tenant Info
         {% endif %}</h3>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -72,6 +73,21 @@
                             <li>{{tenant.user_id.username}}</li>
                             {% endfor %}
                         </ol>
+                    </h5>
+                </li>
+            </ul>
+        </div>
+        {% elif viewtype == 'tenant' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> Tenant Name:
+                        {{tenant.user_id.first_name}} {{tenant.user_id.last_name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Birthday:
+                        {{tenant.birthday.strftime("%B %d, %Y")}}
                     </h5>
                 </li>
             </ul>
