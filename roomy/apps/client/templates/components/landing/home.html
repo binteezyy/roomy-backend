@@ -10,34 +10,16 @@ Home
 <!-- main content -->
 <div class="container-fluid">
   <div class="container">
-    <div class="row d-flex flex-row justify-content-center" style="margin-top: 20px; margin-bottom: 100px;">
+    <div class="row d-flex flex-row justify-content-center" style="margin-top: 50px; margin-bottom: 80px;">
 
-      <div class="">
-        <div class="img-container">
-          <img src="{% static "img\placeholder_1200x500.png" %}" alt="">
-        </div>
-        <div class="wrapper-over d-flex flex-column justify-content-center">
-          <h1 class="text-center">Lorem Ipsum</h1>
-          <h5 class="text-center" style="width: 400px; margin: 0 auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae metus bibendum, suscipit dolor non, ultrices metus. Integer nec libero risus.</h5>
-          <div class="d-flex justify-content-center" style="margin-top: 20px;">
-            <button class="btn btn-dark" style="width: 200px; margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
-            <button class="btn btn-dark" style="width: 200px; margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#getInTouchModal">GET IN TOUCH</button>
-          </div>
+      <div class="d-flex flex-column justify-content-center" style="width: 100%; margin: 0; padding: 150px; background-image: url('/static/img/placeholder_1200x500.png')">
+        <h1 class="text-center">Lorem Ipsum</h1>
+        <p class="text-center" style="width: 100%; margin: 0 auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae metus bibendum, suscipit dolor non, ultrices metus. Integer nec libero risus.</p>
+        <div class="d-flex flex-wrap justify-content-center" style="margin-top: 20px;">
+          <button class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+          <button class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#getInTouchModal">GET IN TOUCH</button>
         </div>
 
-        <style>
-          .img-container {
-            position: relative;
-          }
-
-          .wrapper-over {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-          }
-        </style>
 
         <!-- modals -->
         <!-- signup modal -->
@@ -86,7 +68,8 @@ Home
                     </div>
                     <div class="row">
                       <div class="col-md-12 text-center">
-                        <span class="text-center" style="font-size: 12px;">By signing up, you agree to our <a href="{% url 'terms_of_use' %}" target="_blank">Terms of Use</a> and <a href="{% url 'privacy' %}" target="_blank">Privacy Policy</a>.</span>
+                        <span class="text-center" style="font-size: 12px;">By signing up, you agree to our <a href="{% url 'terms_of_use' %}" target="_blank">Terms of Use</a> and <a href="{% url 'privacy' %}" target="_blank">Privacy
+                            Policy</a>.</span>
                       </div>
                     </div>
                   </div>
