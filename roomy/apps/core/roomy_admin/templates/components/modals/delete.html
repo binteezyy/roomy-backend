@@ -11,6 +11,10 @@
             {% elif guest %} Guest
             {% elif trequest %} Request
             {% elif notif %} Notification
+            {% elif booking %} Booking
+            {% elif propertyo %} Property
+            {% elif room %} Room
+            {% elif adminacc %} Admin Account
             {% endif %}</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -28,6 +32,10 @@
             {% elif guest %} <strong> {{guest}}</strong>
             {% elif trequest %} <strong> {{trequest}}</strong>
             {% elif notif %} <strong> {{notif}}</strong>
+            {% elif booking %} <strong> {{booking}}</strong>
+            {% elif propertyo %} <strong> {{propertyo}}</strong>
+            {% elif room %} <strong> {{room}}</strong>
+            {% elif adminacc %} <strong> {{adminacc}}</strong>
             {% endif %}
             ?</p>
     </div>

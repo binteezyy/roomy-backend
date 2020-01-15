@@ -5,13 +5,15 @@
     }
 </style>
 <div class="modal-header">
-    <h3 class="modal-title">{% if viewtype == 'billing' %} Billing {% if billing.paid %}
+    <h3 class="modal-title">{% if viewtype == 'billing' %} Billing Info {% if billing.paid %}
         <button type="button" class="btn btn-success btn-rounded">Paid</button>
         {% else %}
         <button type="button" class="btn btn-warning btn-rounded">Unpaid</button>
         {% endif %}
-        {% elif viewtype == 'transaction' %} Transaction
+        {% elif viewtype == 'transaction' %} Transaction Info
         {% elif viewtype == 'tenants' %} Tenant Info
+        {% elif viewtype == 'booking' %} Booking Info
+        {% elif viewtype == 'adminacc' %} Admin Account
         {% endif %}</h3>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -87,7 +89,7 @@
                 </li>
                 <li>
                     <h5> Birthday:
-                        {{tenant.birthday}}
+                        {{birthday}}
                     </h5>
                 </li>
                 <li>
@@ -98,6 +100,69 @@
                 <li>
                     <h5> Provincial Address:
                         {{tenant.provincial_address}}
+                    </h5>
+                </li>
+            </ul>
+        </div>
+        {% elif viewtype == 'booking' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> User: {{user.username}} - {{user.first_name}} {{user.last_name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Room: {{room}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Room type: {{type}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Total Amount:
+                        {{total}}
+                    </h5>
+                    <h5>
+                        <ol>
+                            <h5> Fees: </h5>
+                            {% for fee in fees %}
+                            <li>{{fee}}</li>
+                            {% endfor %}
+                            <li> Room rate: {{rate}}</li>
+                        </ol>
+                    </h5>
+                </li>
+                <li>
+                    <h5> Status: {{status}}
+                    </h5>
+                </li>
+            </ul>
+        </div>
+        {% elif viewtype == 'adminacc' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> Property Handle:
+                        {{adminacc.property_id.name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Name:
+                        {{name}}
+                <li>
+                    <h5> Birthday:
+                        {{birthday}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Contact Number:
+                        {{adminacc.cell_number}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Provincial Address:
+                        {{adminacc.provincial_address}}
                     </h5>
                 </li>
             </ul>

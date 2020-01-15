@@ -135,7 +135,7 @@ class TenantReadModal(BSModalReadView):
         context['viewtype'] = 'tenants'
         context['tenant'] = kwargs['object']
         context['transaction'] = kwargs['object'].transaction_id
-        context['room'] = f"Floor-{kwargs['object']} Number-{kwargs['object'].transaction_id.room_id.number}"
+        context['birthday'] = kwargs['object'].birthday.strftime("%B %d, %Y")
 
         return context
     # def test_func(self):
@@ -248,3 +248,148 @@ class NotifCreateModal(BSModalCreateView):
 
     # def test_func(self):
     #     return self.request.user.is_superuser
+
+
+class BookingReadModal(BSModalReadView):
+    model = Booking
+    context_object_name = 'booking'
+    template_name = 'components/modals/read.html'
+
+    def get_context_data(self, **kwargs):
+        fee_objects = kwargs['object'].add_ons.all()
+        if kwargs['object'].approved:
+            status = "Approved"
+        else:
+            status = "No action"
+        total = 0
+        rate = int(kwargs['object'].room_id.rate)
+        total += rate
+        for fee_object in fee_objects:
+            total += int(fee_object.amount)
+        context = super().get_context_data(**kwargs)
+        context['viewtype'] = 'booking'
+        context['booking'] = kwargs['object']
+        context['user'] = kwargs['object'].user_id
+        context['room'] = f"Floor-{kwargs['object'].room_id.floor} Number-{kwargs['object'].room_id.number}"
+        context['type'] = kwargs['object'].room_id.get_room_type_display()
+        context['rate'] = rate
+        context['fees'] = kwargs['object'].add_ons.all()
+        context['total'] = total
+        context['status'] = status
+        return context
+    # def test_func(self):
+    #     return self.request.user.is_superuser
+
+
+class BookingDeleteModal(BSModalDeleteView):
+    model = Booking
+    context_object_name = 'booking'
+    template_name = 'components/modals/delete.html'
+    success_message = 'Success: Booking deleted'
+    success_url = reverse_lazy('booking')
+    # def test_func(self):
+    #     return self.notif.user.is_superuser
+
+
+class BookingUpdateModal(BSModalUpdateView):
+    model = Booking
+    template_name = 'components/modals/update.html'
+    form_class = BookingModalForm
+    sucess_message = "Success: Booking updated"
+    success_url = reverse_lazy('booking')
+
+
+class PropertyCreateModal(BSModalCreateView):
+    model = Property
+    model_type = 'property'
+    template_name = 'components/modals/create.html'
+    form_class = PropertyModalForm
+    success_message = 'Success: Property created.'
+    success_url = reverse_lazy('property')
+
+    # def test_func(self):
+    #     return self.request.user.is_superuser
+
+
+class PropertyDeleteModal(BSModalDeleteView):
+    model = Property
+    context_object_name = 'propertyo'
+    template_name = 'components/modals/delete.html'
+    success_message = 'Success: Property deleted'
+    success_url = reverse_lazy('property')
+    # def test_func(self):
+    #     return self.notif.user.is_superuser
+
+
+class PropertyUpdateModal(BSModalUpdateView):
+    model = Property
+    template_name = 'components/modals/update.html'
+    form_class = PropertyModalForm
+    sucess_message = "Success: Property updated"
+    success_url = reverse_lazy('property')
+
+
+class RoomCreateModal(BSModalCreateView):
+    model = Room
+    model_type = 'room'
+    template_name = 'components/modals/create.html'
+    form_class = RoomModalForm
+    success_message = 'Success: Room created.'
+    success_url = reverse_lazy('room')
+
+    # def test_func(self):
+    #     return self.request.user.is_superuser
+
+
+class RoomDeleteModal(BSModalDeleteView):
+    model = Room
+    context_object_name = 'room'
+    template_name = 'components/modals/delete.html'
+    success_message = 'Success: Room deleted'
+    success_url = reverse_lazy('room')
+    # def test_func(self):
+    #     return self.notif.user.is_superuser
+
+
+class RoomUpdateModal(BSModalUpdateView):
+    model = Room
+    template_name = 'components/modals/update.html'
+    form_class = RoomModalForm
+    sucess_message = "Success: Room updated"
+    success_url = reverse_lazy('room')
+
+
+class AdminAccReadModal(BSModalReadView):
+    model = UserAccount
+    context_object_name = 'adminacc'
+    template_name = 'components/modals/read.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['viewtype'] = 'adminacc'
+        context['adminacc'] = kwargs['object']
+        context['birthday'] = kwargs['object'].birthday.strftime("%B %d, %Y")
+        context['name'] = f"{kwargs['object'].user_id.first_name} {kwargs['object'].user_id.last_name}"
+        context['type'] = kwargs['object'].get_user_type_display()
+
+        return context
+    # def test_func(self):
+    #     return self.request.user.is_superuser
+
+
+class AdminAccDeleteModal(BSModalDeleteView):
+    model = UserAccount
+    context_object_name = 'adminacc'
+    template_name = 'components/modals/delete.html'
+    success_message = 'Success: Admin Account deleted'
+    success_url = reverse_lazy('admin_management')
+    # def test_func(self):
+    #     return self.notif.user.is_superuser
+
+
+class AdminAccUpdateModal(BSModalUpdateView):
+    model = UserAccount
+    template_name = 'components/modals/update.html'
+    form_class = AdminAccModalForm
+    sucess_message = "Success: Admin Account updated"
+    success_url = reverse_lazy('admin_management')

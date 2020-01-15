@@ -50,3 +50,27 @@ class NotifCreateModalForm(BSModalForm):
     class Meta:
         model = Message
         exclude = ['sent']
+
+
+class BookingModalForm(BSModalForm):
+    class Meta:
+        model = Booking
+        fields = ['approved']
+
+
+class PropertyModalForm(BSModalForm):
+    class Meta:
+        model = Property
+        exclude = ['property_image']
+
+
+class RoomModalForm(BSModalForm):
+    class Meta:
+        model = Room
+        exclude = ['image_3d', 'image_2d']
+
+
+class AdminAccModalForm(BSModalForm):
+    class Meta:
+        model = UserAccount
+        exclude = ['transaction_id', 'user_id']

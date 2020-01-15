@@ -168,3 +168,98 @@ def notif_table(request):
     data = json.dumps(data)
     pprint(data)
     return HttpResponse(data, content_type='application/json')
+
+
+def booking_table(request):
+    bookings = Booking.objects.all()
+
+    data = []
+    for booking in bookings:
+        if booking.approved:
+            status = "Approved"
+        else:
+            status = "No Action Yet"
+        x = {"fields": {"id": booking.pk,
+                        "user": f'{booking.user_id.username} - {booking.user_id.first_name} {booking.user_id.last_name}',
+                        "room": f'Room: Floor-{booking.room_id.floor} Number-{booking.room_id.number}',
+                        "status": status,
+                        }}
+        data.append(x)
+    data = json.dumps(data)
+    pprint(data)
+    return HttpResponse(data, content_type='application/json')
+
+
+def property_table(request):
+    propertys = Property.objects.all()
+
+    data = []
+    for property_obj in propertys:
+        if property_obj.property_image.all():
+            images = ' | '.join([str(i)
+                                 for i in property_obj.property_image.all()])
+        else:
+            images = "Empty"
+        x = {"fields": {"id": property_obj.pk,
+                        "name": property_obj.name,
+                        "description": property_obj.description,
+                        "images": images,
+                        }}
+        data.append(x)
+    data = json.dumps(data)
+    pprint(data)
+    return HttpResponse(data, content_type='application/json')
+
+
+def room_table(request):
+    rooms = Room.objects.all()
+
+    data = []
+    for room in rooms:
+        if UserAccount.objects.filter(transaction_id__room_id=room):
+            status = "Occupied"
+        else:
+            status = "Vacant"
+        if room.image_2d.all():
+            images2d = ' | '.join([str(i)
+                                   for i in room.image_2d.all()])
+        else:
+            images2d = 'Empty'
+        if room.image_3d.all():
+            images3d = ' | '.join([str(i)
+                                   for i in room.image_3d.all()])
+        else:
+            images3d = 'Empty'
+        x = {"fields": {"id": room.pk,
+                        "property": room.property_id.name,
+                        "floorno": f'Room: Floor-{room.floor} Number-{room.number}',
+                        "rate": int(room.rate),
+                        "type": room.get_room_type_display(),
+                        "images2d": images2d,
+                        "images3d": images3d,
+                        "status": status,
+                        }}
+        data.append(x)
+    data = json.dumps(data)
+    pprint(data)
+    return HttpResponse(data, content_type='application/json')
+
+
+def admin_acc_table(request):
+    admin_accs = UserAccount.objects.all()
+
+    data = []
+    for admin_acc in admin_accs:
+        if admin_acc.property_id:
+            property_name = admin_acc.property_id.name
+        else:
+            property_name = 'None. Tenant/Guest'
+        x = {"fields": {"id": admin_acc.pk,
+                        "type": admin_acc.get_user_type_display(),
+                        "name": f'{admin_acc.user_id.username} - {admin_acc.user_id.first_name} {admin_acc.user_id.last_name}',
+                        "property": property_name,
+                        }}
+        data.append(x)
+    data = json.dumps(data)
+    pprint(data)
+    return HttpResponse(data, content_type='application/json')

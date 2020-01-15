@@ -54,18 +54,6 @@ class Room(models.Model):
         unique_together = ('property_id', 'floor', 'number')
 
 
-class Transaction(models.Model):
-    active = models.BooleanField(default=True)
-    start_date = models.DateTimeField(null=True, auto_now_add=True)
-    room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
-
-    def __str__(self):
-        if self.active:
-            return f'Active - {self.room_id}'
-        else:
-            return f'Inactive - {self.room_id}'
-
-
 class Fee(models.Model):
     fee_type_enum = [
         (0, 'Misc Fees'),
@@ -80,6 +68,19 @@ class Fee(models.Model):
 
     class Meta:
         unique_together = ('description', 'amount')
+
+
+class Transaction(models.Model):
+    active = models.BooleanField(default=True)
+    start_date = models.DateTimeField(null=True, auto_now_add=True)
+    room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
+    add_ons = models.ManyToManyField(Fee, blank=True)
+
+    def __str__(self):
+        if self.active:
+            return f'Active - {self.room_id}'
+        else:
+            return f'Inactive - {self.room_id}'
 
 
 class Billing(models.Model):
@@ -136,6 +137,7 @@ class Message(models.Model):
     body = models.TextField(blank=True, null=True)
     time_stamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     sent = models.BooleanField(default=False)
+    read = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.user_id.username} - {self.title} - {self.sent}'
