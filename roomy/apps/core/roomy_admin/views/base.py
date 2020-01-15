@@ -11,6 +11,7 @@ def index(request):
     return render(request, "", context)
 
 
+
 def demo(request, place):
     if place == "luneta":
         context['place'] = "luneta.jpg"
@@ -21,6 +22,7 @@ def demo(request, place):
     else:
         context['place'] = "alma.jpg"
     return render(request, "demo.html", context)
+
 
 # home
 

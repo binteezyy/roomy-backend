@@ -26,6 +26,7 @@ DATABASES = {
     #     'HOST': config('DB_HOST'),   # Or an IP Address that your DB is hosted on
     #     'PORT': config('PORT'),
     # }
+
 }
 
 MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
@@ -64,6 +65,7 @@ DEBUG_TOOLBAR_PANELS = [
 DEBUG_TOOLBAR_CONFIG = {
     'JQUERY_URL': '',
 }
+
 
 # STATIC_URL = '/static/'
 # STATICFILES_DIRS = [
