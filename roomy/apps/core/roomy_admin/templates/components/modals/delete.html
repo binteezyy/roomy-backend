@@ -9,6 +9,7 @@
             {% elif transaction %} Transaction
             {% elif expense %} Expense
             {% elif expense %} Guest
+            {% elif expense %} Request
             {% endif %}</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -24,6 +25,7 @@
             {% elif transaction %} <strong> {{transaction}}</strong>
             {% elif expense %} <strong> {{expense}}</strong>
             {% elif guest %} <strong> {{guest}}</strong>
+            {% elif request %} <strong> {{request}}</strong>
             {% endif %}
             ?</p>
     </div>

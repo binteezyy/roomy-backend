@@ -200,3 +200,21 @@ class GuestUpdateModal(BSModalUpdateView):
     form_class = GuestModalForm
     sucess_message = "Success: Guest updated"
     success_url = reverse_lazy('guest')
+
+
+class RequestDeleteModal(BSModalDeleteView):
+    model = Request
+    context_object_name = 'request'
+    template_name = 'components/modals/delete.html'
+    success_message = 'Success: Request deleted'
+    success_url = reverse_lazy('request')
+    # def test_func(self):
+    #     return self.request.user.is_superuser
+
+
+class RequestUpdateModal(BSModalUpdateView):
+    model = Request
+    template_name = 'components/modals/update.html'
+    form_class = RequestModalForm
+    sucess_message = "Success: Request updated"
+    success_url = reverse_lazy('request')

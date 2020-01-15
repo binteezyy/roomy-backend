@@ -122,3 +122,26 @@ def guest_table(request):
     data = json.dumps(data)
     pprint(data)
     return HttpResponse(data, content_type='application/json')
+
+
+def request_table(request):
+    tenant_requests = Request.objects.all()
+
+    data = []
+    for tenant_request in tenant_requests:
+        date = tenant_request.time_stamp.strftime("%Y, %B %d")
+        if tenant_request.status:
+            status = "Done"
+        else:
+            status = "Not Done"
+        x = {"fields": {"id": tenant_request.pk,
+                        "subject": tenant_request.subject,
+                        "description": tenant_request.description,
+                        "date": date,
+                        "room": f'Room: Floor-{tenant_request.transaction_id.room_id.floor} Number-{tenant_request.transaction_id.room_id.number}',
+                        "status": status,
+                        }}
+        data.append(x)
+    data = json.dumps(data)
+    pprint(data)
+    return HttpResponse(data, content_type='application/json')

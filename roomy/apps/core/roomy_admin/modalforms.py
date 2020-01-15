@@ -31,3 +31,9 @@ class GuestModalForm(BSModalForm):
     class Meta:
         model = Guest
         exclude = ['']
+
+
+class RequestModalForm(BSModalForm):
+    class Meta:
+        model = Request
+        exclude = ['']

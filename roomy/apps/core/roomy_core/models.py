@@ -95,10 +95,12 @@ class Billing(models.Model):
 class Request(models.Model):
     subject = models.CharField(max_length=56)
     description = models.TextField(blank=True, null=True)
+    time_stamp = models.DateTimeField(null=True, blank=True)
+    status = models.BooleanField(default=False)
     transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.subject}, {self.transaction_id}'
+        return f'{self.subject}, {self.transaction_id}, {self.status}'
 
 
 class UserAccount(models.Model):

@@ -142,3 +142,8 @@ def admin_management(request):
 def guest(request):
 
     return render(request, "components/guest.html", context)
+
+
+def tenant_request(request):
+
+    return render(request, "components/request.html", context)
