@@ -17,15 +17,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'development.sqlite3'),
-    }
-#    'mysql': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'roomy-test',
-#        'USER': config('DB_USERNAME'),
-#        'PASSWORD': config('DB_PASSWORD'),
-#        'HOST': config('DB_HOST'),   # Or an IP Address that your DB is hosted on
-#        'PORT': config('DB_PORT'),
-#    }
+    },
+    # 'mysql': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'roomy-test',
+    #     'USER': config('DB_USERNAME'),
+    #     'PASSWORD': config('DB_PASSWORD'),
+    #     'HOST': config('DB_HOST'),   # Or an IP Address that your DB is hosted on
+    #     'PORT': config('PORT'),
+    # }
+
 }
 
 MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
@@ -65,4 +66,14 @@ DEBUG_TOOLBAR_CONFIG = {
     'JQUERY_URL': '',
 }
 
-ROOT_URLCONF = 'apps.core.roomy_admin.urls'
+
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static/'),
+
+# ]
+# PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+# STATIC_ROOT = os.path.join(BASE_DIR, '../apps/core/static')
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, '../apps/core/media')
