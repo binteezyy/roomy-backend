@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+Tenant Notifications
+{% endblock %}
+
+{% block extra_css %}
+<!-- SELECT2 -->
+<link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include "_modal.html" %}
+<div class="content container">
+    <div class="card-content">
+        <div class="container-fluid">
+            <h2>Tenant Notifications</h2>
+            <div class="row p-3">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table id="notif-table" class="table table-bordered table-hover" width="100%" cellspacing="0"
+                            role="grid" aria-describedby="dataTable_info">
+                            <thead>
+                                <tr role="row">
+                                    <th style="width:10%">Id</th>
+                                    <th style="width:10%">Tenant</th>
+                                    <th style="width:10%">Title</th>
+                                    <th style="width:10%">Body</th>
+                                    <th style="width:10%">Date</th>
+                                    <th style="width:10%">Status</th>
+                                    <th style="width:10%">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block header %}
+Tenants
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#notif-table').DataTable({
+            "dataType": 'json',
+            "ajax": {
+                "processing": true,
+                "dataSrc": '',
+                "url": "{% url 'admin-notif-table'%}",
+            },
+            "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-notif'>>>>" +
+                "<'row'<'col-md-6'><'col-md-6'>>" +
+                "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
+            "initComplete": function (settings, json) {
+                $("div.create-notif").html('<button type="button" id="create-notif" class="float-right btn btn-s btn-success btn-raised" name="button">Add Notif <i class="fas fa-plus"></i></button>');
+                $(".create-notif").modalForm({ formURL: "{% url 'create-notif' %}" });
+            },
+            "drawCallback": function (settings) {
+                $(".update-notif").each(function () {
+                    $(this).modalForm({ formURL: $(this).data('id') });
+                });
+                $(".delete-notif").each(function () {
+                    $(this).modalForm({ formURL: $(this).data('id') });
+                });
+            },
+            "columnDefs": [
+                {
+                    "className": 'col-notif-id text-center',
+                    "targets": 0,
+                    "data": "fields.id",
+                },
+                {
+                    "className": 'col-notif-user text-center',
+                    "targets": 1,
+                    "data": "fields.user",
+                },
+                {
+                    "className": 'col-notif-title text-center',
+                    "targets": 2,
+                    "data": "fields.title",
+                },
+                {
+                    "className": 'col-notif-body text-center',
+                    "targets": 3,
+                    "data": "fields.body",
+                },
+                {
+                    "className": 'col-notif-date text-center',
+                    "targets": 4,
+                    "data": "fields.date",
+                },
+                {
+                    "className": 'col-notif-status text-center',
+                    "targets": 5,
+                    "data": "fields.status",
+                },
+                {
+                    "className": 'col-details text-center',
+                    "targets": -1,
+                    "data": 'fields.id',
+                    render: function (data, type, row) {
+                        let render =
+                            '<button type="button" class="delete-notif btn btn-sm btn-raised btn-warning m-1" data-id="/delete/notif/' + data + '">' +
+                            '<span class="fa fa-trash"></span></button>' +
+                            '<button type="button" class="update-notif btn btn-sm btn-raised btn-success m-1" data-id="/update/notif/' + data + '">' +
+                            '<span class="fa fa-edit"></span></button>';
+                        return render
+                    }
+                },
+            ]
+        })
+    });
+</script>
+{% endblock %}

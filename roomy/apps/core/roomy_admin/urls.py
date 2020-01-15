@@ -39,6 +39,7 @@ urlpatterns = [
          name='admin_management'),
     path('guest/', base.guest, name='guest'),
     path('request/', base.tenant_request, name='request'),
+    path('notif/', base.notif, name='notif'),
 
     # Data Table Paths
     # Billing Table
@@ -98,4 +99,12 @@ urlpatterns = [
          modalviews.RequestDeleteModal.as_view(), name='delete-request'),
     path('update/request/<int:pk>',
          modalviews.RequestUpdateModal.as_view(), name='update-request'),
+
+    # Tenant Notifs
+    path('notif/table', datatableviews.notif_table, name='admin-notif-table'),
+    path('delete/notif/<int:pk>',
+         modalviews.NotifDeleteModal.as_view(), name='delete-notif'),
+    path('update/notif/<int:pk>',
+         modalviews.NotifUpdateModal.as_view(), name='update-notif'),
+    path('create/notif', modalviews.NotifCreateModal.as_view(), name='create-notif'),
 ]

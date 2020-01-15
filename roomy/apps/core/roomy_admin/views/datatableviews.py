@@ -145,3 +145,26 @@ def request_table(request):
     data = json.dumps(data)
     pprint(data)
     return HttpResponse(data, content_type='application/json')
+
+
+def notif_table(request):
+    notifs = Message.objects.all()
+
+    data = []
+    for notif in notifs:
+        date = notif.time_stamp.strftime("%Y, %B %d")
+        if notif.sent:
+            status = "Sent"
+        else:
+            status = "Not Sent"
+        x = {"fields": {"id": notif.pk,
+                        "user": f'{notif.user_id.username} - {notif.user_id.first_name} {notif.user_id.last_name}',
+                        "title": notif.title,
+                        "body": notif.body,
+                        "date": date,
+                        "status": status,
+                        }}
+        data.append(x)
+    data = json.dumps(data)
+    pprint(data)
+    return HttpResponse(data, content_type='application/json')

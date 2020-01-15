@@ -204,7 +204,7 @@ class GuestUpdateModal(BSModalUpdateView):
 
 class RequestDeleteModal(BSModalDeleteView):
     model = Request
-    context_object_name = 'request'
+    context_object_name = 'trequest'
     template_name = 'components/modals/delete.html'
     success_message = 'Success: Request deleted'
     success_url = reverse_lazy('request')
@@ -218,3 +218,33 @@ class RequestUpdateModal(BSModalUpdateView):
     form_class = RequestModalForm
     sucess_message = "Success: Request updated"
     success_url = reverse_lazy('request')
+
+
+class NotifDeleteModal(BSModalDeleteView):
+    model = Message
+    context_object_name = 'notif'
+    template_name = 'components/modals/delete.html'
+    success_message = 'Success: Notif deleted'
+    success_url = reverse_lazy('notif')
+    # def test_func(self):
+    #     return self.notif.user.is_superuser
+
+
+class NotifUpdateModal(BSModalUpdateView):
+    model = Message
+    template_name = 'components/modals/update.html'
+    form_class = NotifModalForm
+    sucess_message = "Success: Notif updated"
+    success_url = reverse_lazy('notif')
+
+
+class NotifCreateModal(BSModalCreateView):
+    model = Message
+    model_type = 'notif'
+    template_name = 'components/modals/create.html'
+    form_class = NotifCreateModalForm
+    success_message = 'Success: Notif created.'
+    success_url = reverse_lazy('notif')
+
+    # def test_func(self):
+    #     return self.request.user.is_superuser

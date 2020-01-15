@@ -147,3 +147,8 @@ def guest(request):
 def tenant_request(request):
 
     return render(request, "components/request.html", context)
+
+
+def notif(request):
+
+    return render(request, "components/notifs.html", context)

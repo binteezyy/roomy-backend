@@ -37,3 +37,16 @@ class RequestModalForm(BSModalForm):
     class Meta:
         model = Request
         exclude = ['']
+
+
+class NotifModalForm(BSModalForm):
+    class Meta:
+        model = Message
+        exclude = ['']
+
+
+class NotifCreateModalForm(BSModalForm):
+
+    class Meta:
+        model = Message
+        exclude = ['sent']

@@ -134,9 +134,11 @@ class Message(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=32)
     body = models.TextField(blank=True, null=True)
+    time_stamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    sent = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.user_id.username} - {self.title}'
+        return f'{self.user_id.username} - {self.title} - {self.sent}'
 
 
 class Document(models.Model):
@@ -167,7 +169,7 @@ class Guest(models.Model):
     inside = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'Guest: {self.name}, {self.transaction_id}, In: {self.inside}'
+        return f'Guest: {self.name}, {self.transaction_id}, In: {self.inside} - {self.time_stamp}'
 
 
 class Expense(models.Model):
