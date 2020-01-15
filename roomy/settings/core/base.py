@@ -17,6 +17,9 @@ INSTALLED_APPS = [
     # APPS
     'apps.core.roomy_admin',
     'apps.core.roomy_core',
+    'bootstrap_modal_forms',
+    'widget_tweaks',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -67,3 +70,7 @@ USE_L10N = True
 USE_TZ = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+ROOT_URLCONF = 'config.core.urls'

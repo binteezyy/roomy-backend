@@ -28,7 +28,7 @@ class PostFee(admin.ModelAdmin):
 
 
 class PostRequest(admin.ModelAdmin):
-    list_display = ('subject', 'transaction_id')
+    list_display = ('subject', 'transaction_id', 'time_stamp')
 
 
 class PostImageFile(admin.ModelAdmin):
@@ -36,7 +36,7 @@ class PostImageFile(admin.ModelAdmin):
 
 
 class PostMessage(admin.ModelAdmin):
-    list_display = ('user_id', 'title')
+    list_display = ('user_id', 'title', 'sent', 'time_stamp')
 
 
 class PostBooking(admin.ModelAdmin):
@@ -44,7 +44,7 @@ class PostBooking(admin.ModelAdmin):
 
 
 class PostGuest(admin.ModelAdmin):
-    list_display = ('name', 'transaction_id', 'inside')
+    list_display = ('name', 'transaction_id', 'inside', 'time_stamp')
 
 
 class PostExpense(admin.ModelAdmin):

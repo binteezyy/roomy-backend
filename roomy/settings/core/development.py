@@ -75,5 +75,3 @@ DEBUG_TOOLBAR_CONFIG = {
 
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, '../apps/core/media')
-
-ROOT_URLCONF = 'config.core.urls'

@@ -3,20 +3,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class Property(models.Model):
-    name = models.CharField(max_length=56, unique=True)
-    street = models.CharField(max_length=56)
-    brgy = models.CharField(max_length=56)
-    city = models.CharField(max_length=56)
-
-    def __str__(self):
-        return f'{self.name}'
-
-    class Meta:
-        unique_together = ('name', 'street', 'brgy', 'city')
-        verbose_name_plural = 'Properties'
-
-
 class ImageFile(models.Model):
     title = models.CharField(max_length=32)
     img_path = models.ImageField(
@@ -27,6 +13,23 @@ class ImageFile(models.Model):
 
     class Meta:
         unique_together = ('title', 'img_path')
+
+
+class Property(models.Model):
+    name = models.CharField(max_length=56, unique=True)
+    description = models.TextField(blank=True, null=True)
+    street = models.CharField(max_length=56)
+    brgy = models.CharField(max_length=56)
+    city = models.CharField(max_length=56)
+    property_image = models.ManyToManyField(
+        ImageFile, blank=True, related_name='property_image')
+
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta:
+        unique_together = ('name', 'street', 'brgy', 'city')
+        verbose_name_plural = 'Properties'
 
 
 class Room(models.Model):
@@ -45,7 +48,7 @@ class Room(models.Model):
         ImageFile, blank=True, related_name='images_2d')
 
     def __str__(self):
-        return f'{self.property_id}, Floor {self.floor}, Room {self.number}'
+        return f'{self.property_id}: Floor {self.floor} - Room {self.number}'
 
     class Meta:
         unique_together = ('property_id', 'floor', 'number')
@@ -57,12 +60,20 @@ class Transaction(models.Model):
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.active}, {self.room_id}'
+        if self.active:
+            return f'Active - {self.room_id}'
+        else:
+            return f'Inactive - {self.room_id}'
 
 
 class Fee(models.Model):
+    fee_type_enum = [
+        (0, 'Misc Fees'),
+        (1, 'Add-ons'),
+    ]
     description = models.CharField(max_length=56)
     amount = models.DecimalField(max_digits=9, decimal_places=2)
+    fee_type = models.IntegerField(choices=fee_type_enum, default=0)
 
     def __str__(self):
         return f'{self.description}, {self.amount}'
@@ -84,10 +95,12 @@ class Billing(models.Model):
 class Request(models.Model):
     subject = models.CharField(max_length=56)
     description = models.TextField(blank=True, null=True)
+    time_stamp = models.DateTimeField(null=True, blank=True)
+    status = models.BooleanField(default=False)
     transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.subject}, {self.transaction_id}'
+        return f'{self.subject}, {self.transaction_id}, {self.status}'
 
 
 class UserAccount(models.Model):
@@ -121,9 +134,11 @@ class Message(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=32)
     body = models.TextField(blank=True, null=True)
+    time_stamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    sent = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.user_id.username} - {self.title}'
+        return f'{self.user_id.username} - {self.title} - {self.sent}'
 
 
 class Document(models.Model):
@@ -154,12 +169,12 @@ class Guest(models.Model):
     inside = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'Guest: {self.name}, {self.transaction_id}, In: {self.inside}'
+        return f'Guest: {self.name}, {self.transaction_id}, In: {self.inside} - {self.time_stamp}'
 
 
 class Expense(models.Model):
     property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
-    time_stamp = models.DateTimeField(auto_now_add=True)
+    time_stamp = models.DateTimeField()
     description = models.CharField(max_length=56)
     amount = models.DecimalField(max_digits=9, decimal_places=2)
 
