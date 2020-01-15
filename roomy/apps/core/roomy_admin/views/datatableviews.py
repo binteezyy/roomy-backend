@@ -83,3 +83,20 @@ def tenant_table(request):
     data = json.dumps(data)
     pprint(data)
     return HttpResponse(data, content_type='application/json')
+
+
+def expense_table(request):
+    expenses = Expense.objects.all()
+
+    data = []
+    for expense in expenses:
+        time = expense.time_stamp.strftime("%Y, %B %d")
+        x = {"fields": {"id": expense.pk,
+                        "time": time,
+                        "description": expense.description,
+                        "amount": str(expense.amount),
+                        }}
+        data.append(x)
+    data = json.dumps(data)
+    pprint(data)
+    return HttpResponse(data, content_type='application/json')

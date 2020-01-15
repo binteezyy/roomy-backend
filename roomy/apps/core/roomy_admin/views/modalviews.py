@@ -127,12 +127,12 @@ class RentalUpdateModal(BSModalUpdateView):
 
 class TenantReadModal(BSModalReadView):
     model = UserAccount
-    context_object_name = 'tenant'
+    context_object_name = 'tenants'
     template_name = 'components/modals/read.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['viewtype'] = 'tenant'
+        context['viewtype'] = 'tenants'
         context['tenant'] = kwargs['object']
         context['transaction'] = kwargs['object'].transaction_id
         context['room'] = f"Floor-{kwargs['object']} Number-{kwargs['object'].transaction_id.room_id.number}"
@@ -140,3 +140,33 @@ class TenantReadModal(BSModalReadView):
         return context
     # def test_func(self):
     #     return self.request.user.is_superuser
+
+
+class ExpenseCreateModal(BSModalCreateView):
+    model = Expense
+    model_type = 'expense'
+    template_name = 'components/modals/create.html'
+    form_class = ExpenseModalForm
+    success_message = 'Success: Expense created.'
+    success_url = reverse_lazy('expense')
+
+    # def test_func(self):
+    #     return self.request.user.is_superuser
+
+
+class ExpenseDeleteModal(BSModalDeleteView):
+    model = Expense
+    context_object_name = 'expense'
+    template_name = 'components/modals/delete.html'
+    success_message = 'Success: Expense deleted'
+    success_url = reverse_lazy('expense')
+    # def test_func(self):
+    #     return self.request.user.is_superuser
+
+
+class ExpenseUpdateModal(BSModalUpdateView):
+    model = Expense
+    template_name = 'components/modals/update.html'
+    form_class = ExpenseModalForm
+    sucess_message = "Success: Expense updated"
+    success_url = reverse_lazy('expense')

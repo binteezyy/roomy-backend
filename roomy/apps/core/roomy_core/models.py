@@ -170,7 +170,7 @@ class Guest(models.Model):
 
 class Expense(models.Model):
     property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
-    time_stamp = models.DateTimeField(auto_now_add=True)
+    time_stamp = models.DateTimeField()
     description = models.CharField(max_length=56)
     amount = models.DecimalField(max_digits=9, decimal_places=2)
 

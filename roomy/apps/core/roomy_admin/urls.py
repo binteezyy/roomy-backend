@@ -70,4 +70,14 @@ urlpatterns = [
     path('tenant/table', datatableviews.tenant_table, name='admin-tenant-table'),
     path('read/tenant/<int:pk>',
          modalviews.TenantReadModal.as_view(), name='read-tenant'),
+
+    # Expense Table
+    path('expense/table', datatableviews.expense_table,
+         name='admin-expense-table'),
+    path('create/expense', modalviews.ExpenseCreateModal.as_view(),
+         name='create-expense'),
+    path('delete/expense/<int:pk>',
+         modalviews.ExpenseDeleteModal.as_view(), name='delete-expense'),
+    path('update/expense/<int:pk>',
+         modalviews.ExpenseUpdateModal.as_view(), name='update-expense'),
 ]
