@@ -37,6 +37,7 @@ urlpatterns = [
          name='room_management'),
     path('admin_management/',      base.admin_management,
          name='admin_management'),
+    path('guest/', base.guest, name='guest'),
 
     # Data Table Paths
     # Billing Table
@@ -80,4 +81,12 @@ urlpatterns = [
          modalviews.ExpenseDeleteModal.as_view(), name='delete-expense'),
     path('update/expense/<int:pk>',
          modalviews.ExpenseUpdateModal.as_view(), name='update-expense'),
+
+    # Guest Table
+    path('guest/table', datatableviews.guest_table, name='admin-guest-table'),
+    path('create/guest', modalviews.GuestCreateModal.as_view(), name='create-guest'),
+    path('delete/guest/<int:pk>',
+         modalviews.GuestDeleteModal.as_view(), name='delete-guest'),
+    path('update/guest/<int:pk>',
+         modalviews.GuestUpdateModal.as_view(), name='update-guest'),
 ]

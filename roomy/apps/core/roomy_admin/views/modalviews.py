@@ -170,3 +170,33 @@ class ExpenseUpdateModal(BSModalUpdateView):
     form_class = ExpenseModalForm
     sucess_message = "Success: Expense updated"
     success_url = reverse_lazy('expense')
+
+
+class GuestCreateModal(BSModalCreateView):
+    model = Guest
+    model_type = 'guest'
+    template_name = 'components/modals/create.html'
+    form_class = GuestModalForm
+    success_message = 'Success: Guest created.'
+    success_url = reverse_lazy('guest')
+
+    # def test_func(self):
+    #     return self.request.user.is_superuser
+
+
+class GuestDeleteModal(BSModalDeleteView):
+    model = Guest
+    context_object_name = 'guest'
+    template_name = 'components/modals/delete.html'
+    success_message = 'Success: Guest deleted'
+    success_url = reverse_lazy('guest')
+    # def test_func(self):
+    #     return self.request.user.is_superuser
+
+
+class GuestUpdateModal(BSModalUpdateView):
+    model = Guest
+    template_name = 'components/modals/update.html'
+    form_class = GuestModalForm
+    sucess_message = "Success: Guest updated"
+    success_url = reverse_lazy('guest')

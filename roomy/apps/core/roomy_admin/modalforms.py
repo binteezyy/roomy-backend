@@ -25,3 +25,9 @@ class ExpenseModalForm(BSModalForm):
     class Meta:
         model = Expense
         exclude = ['']
+
+
+class GuestModalForm(BSModalForm):
+    class Meta:
+        model = Guest
+        exclude = ['']

@@ -61,7 +61,7 @@ Fee
         "<'row'<'col-md-6'><'col-md-6'>>" +
         "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
       "initComplete": function (settings, json) {
-        $("div.create-expense").html('<button type="button" id="create-expense" class="float-right btn btn-s btn-success btn-raised" name="button">Create <i class="fas fa-plus"></i></button>');
+        $("div.create-expense").html('<button type="button" id="create-expense" class="float-right btn btn-s btn-success btn-raised" name="button">Add Expense <i class="fas fa-plus"></i></button>');
         $(".create-expense").modalForm({ formURL: "{% url 'create-expense' %}" });
       },
       "drawCallback": function (settings) {

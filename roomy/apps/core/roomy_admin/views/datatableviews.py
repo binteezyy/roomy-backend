@@ -100,3 +100,25 @@ def expense_table(request):
     data = json.dumps(data)
     pprint(data)
     return HttpResponse(data, content_type='application/json')
+
+
+def guest_table(request):
+    guests = Guest.objects.all()
+
+    data = []
+    for guest in guests:
+        date = guest.time_stamp.strftime("%Y, %B %d")
+        if guest.inside:
+            status = "In"
+        else:
+            status = "Out"
+        x = {"fields": {"id": guest.pk,
+                        "name": guest.name,
+                        "date": date,
+                        "room": f'Room: Floor-{guest.transaction_id.room_id.floor} Number-{guest.transaction_id.room_id.number}',
+                        "status": status,
+                        }}
+        data.append(x)
+    data = json.dumps(data)
+    pprint(data)
+    return HttpResponse(data, content_type='application/json')

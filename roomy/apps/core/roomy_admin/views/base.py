@@ -137,3 +137,8 @@ def room_management(request):
 def admin_management(request):
 
     return render(request, "components/admin_management.html", context)
+
+
+def guest(request):
+
+    return render(request, "components/guest.html", context)
