@@ -25,6 +25,7 @@ Properties
                 <tr role="row">
                   <th style="width:10%">Id</th>
                   <th style="width:10%">Name</th>
+                  <th style="width:10%">Type</th>
                   <th style="width:10%">Description</th>
                   <th style="width:10%">Images</th>
                   <th style="width:10%">Actions</th>
@@ -82,18 +83,23 @@ Properties
           "data": "fields.id",
         },
         {
-          "className": 'col-property-type text-center',
+          "className": 'col-property-name text-center',
           "targets": 1,
           "data": "fields.name",
         },
         {
-          "className": 'col-property-description text-center',
+          "className": 'col-property-type text-center',
           "targets": 2,
+          "data": "fields.type",
+        },
+        {
+          "className": 'col-property-description text-center',
+          "targets": 3,
           "data": "fields.description",
         },
         {
           "className": 'col-property-images text-center',
-          "targets": 3,
+          "targets": 4,
           "data": "fields.images",
         },
         {
