@@ -1,5 +1,9 @@
-from django.http import HttpResponse
-from django.shortcuts import render  # get_object_or_404, redirect, reverse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, reverse  # get_object_or_404
+
+from apps.core.roomy_admin.forms import UserLoginForm, UserRegisterForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 context = {
     "title": "Roomy",
@@ -7,8 +11,33 @@ context = {
 
 
 def index(request):
+    next = request.GET.get('next')
 
-    return render(request, "", context)
+    if request.user.is_authenticated:
+        return render(request, "components/dashboard.html")
+    else:
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
+
+
+def admin_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('admin-index'))
 
 
 def demo(request, place):
@@ -25,56 +54,17 @@ def demo(request, place):
 
 # home
 
-
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def dashboard(request):
 
     return render(request, "components/dashboard.html", context)
 
-# add_property
-
-
-def add_property(request):
-
-    return render(request, "components/add_property.html", context)
-
-# add_room
-
-
-def add_room(request):
-
-    return render(request, "components/add_room.html", context)
-
-# add_rental
-
-
-def add_rental(request):
-
-    return render(request, "components/add_rental.html", context)
-
-# add_billing
-
-
-def add_billing(request):
-
-    return render(request, "components/add_billing.html", context)
-
-# add_expense
-
-
-def add_expense(request):
-
-    return render(request, "components/add_expense.html", context)
-
-# add_admin
-
-
-def add_admin(request):
-
-    return render(request, "components/add_admin.html", context)
-
 # rental
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def rental(request):
 
     return render(request, "components/rental.html", context)
@@ -82,6 +72,8 @@ def rental(request):
 # tenant
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def tenant(request):
 
     return render(request, "components/tenant.html", context)
@@ -89,17 +81,23 @@ def tenant(request):
 # billing
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def billing(request):
 
     return render(request, "components/billing.html", context)
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def fee(request):
 
     return render(request, "components/fee.html", context)
 # expense
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def expense(request):
 
     return render(request, "components/expense.html", context)
@@ -107,6 +105,8 @@ def expense(request):
 # cashflow
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def cashflow(request):
 
     return render(request, "components/cashflow.html", context)
@@ -114,6 +114,8 @@ def cashflow(request):
 # report
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def report(request):
 
     return render(request, "components/report.html", context)
@@ -121,51 +123,71 @@ def report(request):
 # property_management
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def property_management(request):
 
     return render(request, "components/property_management.html", context)
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def property_upload(request):
     return render(request, "components/property_image_upload.html", context)
 
 # room_management
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def room_management(request):
 
     return render(request, "components/room_management.html", context)
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def room_upload2d(request):
 
     return render(request, "components/room2d_upload.html", context)
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def room_upload3d(request):
     return render(request, "components/room3d_upload.html", context)
 # admin_management
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def admin_management(request):
 
     return render(request, "components/admin_management.html", context)
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def guest(request):
     return render(request, "components/guest.html", context)
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def tenant_request(request):
 
     return render(request, "components/request.html", context)
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def notif(request):
 
     return render(request, "components/notifs.html", context)
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def booking(request):
 
     return render(request, "components/booking.html", context)

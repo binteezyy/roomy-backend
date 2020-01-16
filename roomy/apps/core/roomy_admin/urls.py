@@ -2,21 +2,13 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from .views import base, datatableviews, modalviews
 urlpatterns = [
+    path('', base.index, name='admin-index'),
+    path('logout/', base.admin_logout, name='admin-logout'),
+
+
     path('demo/<str:place>', base.demo, name='demo'),
     path('dashboard/',      base.dashboard,
          name='dashboard'),
-    path('transaction/add_property/',      base.add_property,
-         name='add_property'),
-    path('transaction/add_room/',      base.add_room,
-         name='add_room'),
-    path('transaction/add_rental/',      base.add_rental,
-         name='add_rental'),
-    path('transaction/add_billing/',      base.add_billing,
-         name='add_billing'),
-    path('transaction/add_expense/',      base.add_expense,
-         name='add_expense'),
-    path('transaction/add_admin/',      base.add_admin,
-         name='add_admin'),
     path('rental/',      base.rental,
          name='rental'),
     path('tenant/',      base.tenant,
