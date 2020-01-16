@@ -38,6 +38,7 @@ class Room(models.Model):
         (1, 'Submetered'),
     ]
     property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
+    description = models.TextField(blank=True, null=True)
     floor = models.PositiveIntegerField(default=1)
     number = models.PositiveIntegerField(default=1)
     rate = models.DecimalField(max_digits=9, decimal_places=2)

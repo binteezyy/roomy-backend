@@ -31,13 +31,12 @@ MIDDLEWARE = [
 ]
 
 
-
 WSGI_APPLICATION = 'config.client.wsgi.application'
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'static'
+STATIC_ROOT = os.path.join(BASE_DIR, '../apps/client/static/')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '../apps/client/media/')
 MEDIA_URL = '/media/'
 
 TEMPLATES = [
@@ -69,3 +68,5 @@ USE_L10N = True
 USE_TZ = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ROOT_URLCONF = 'config.client.urls'
