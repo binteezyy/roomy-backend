@@ -11,7 +11,6 @@ def index(request):
     return render(request, "", context)
 
 
-
 def demo(request, place):
     if place == "luneta":
         context['place'] = "luneta.jpg"
@@ -126,6 +125,10 @@ def property_management(request):
 
     return render(request, "components/property_management.html", context)
 
+
+def property_upload(request):
+    return render(request, "components/property_image_upload.html", context)
+
 # room_management
 
 
@@ -133,6 +136,14 @@ def room_management(request):
 
     return render(request, "components/room_management.html", context)
 
+
+def room_upload2d(request):
+
+    return render(request, "components/room2d_upload.html", context)
+
+
+def room_upload3d(request):
+    return render(request, "components/room3d_upload.html", context)
 # admin_management
 
 
@@ -142,7 +153,6 @@ def admin_management(request):
 
 
 def guest(request):
-
     return render(request, "components/guest.html", context)
 
 
@@ -154,3 +164,8 @@ def tenant_request(request):
 def notif(request):
 
     return render(request, "components/notifs.html", context)
+
+
+def booking(request):
+
+    return render(request, "components/booking.html", context)

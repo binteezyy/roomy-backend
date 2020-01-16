@@ -36,9 +36,9 @@ MIDDLEWARE = [
 WSGI_APPLICATION = 'config.core.wsgi.application'
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'static'
+STATIC_ROOT = os.path.join(BASE_DIR, '../apps/core/static/')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '../apps/core/media/')
 MEDIA_URL = '/media/'
 
 TEMPLATES = [

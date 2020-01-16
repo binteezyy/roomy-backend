@@ -1,60 +1,118 @@
 {% extends "layout.html" %}
+{% load static %}
 
 {% block title %}
-  Property Management
+Properties
+{% endblock %}
+
+{% block extra_css %}
+<!-- SELECT2 -->
+<link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="content">
-
-  <table cellpadding="10">
-    <tbody>
-      <tr>
-        <td>
-          <label class="col-form-label">Property</label> <br>
-          <select class="form-control" name="property">
-            <option value="">All</option>
-          </select>
-        </td>
-        <td>
-          <label class="col-form-label">Keyword</label> <br>
-          <input class="form-control" type="text" name="" value="">
-        </td>
-      </tr>
-    </tbody>
-    <div class="text-left" style="float: right;">
-      Result(s): <br> <br>
-      <a class="btn btn-primary" href="{% url 'add_property' %}">Add property</a> <button class="btn btn-primary" type="button" name="button">Download Excel File</button>
+{% include "_modal.html" %}
+<div class="content container">
+  <div class="card-content">
+    <div class="container-fluid">
+      <h2>Properties</h2>
+      <div class="row p-3">
+        <div class="col">
+          <div class="table-responsive">
+            <table id="property-table" class="table table-bordered table-hover" width="100%" cellspacing="0" role="grid"
+              aria-describedby="dataTable_info">
+              <thead>
+                <tr role="row">
+                  <th style="width:10%">Id</th>
+                  <th style="width:10%">Name</th>
+                  <th style="width:10%">Description</th>
+                  <th style="width:10%">Images</th>
+                  <th style="width:10%">Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-  </table>
-
-  <br>
-
-  <table class="table table-bordered">
-    <thead>
-      <th>Id</th>
-      <th>Property</th>
-      <th>Street</th>
-      <th>Barangay</th>
-      <th>City</th>
-      <th>Action</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  </div>
 
 </div>
 
 {% endblock %}
 
 {% block header %}
-  Property Management
+Properties
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#property-table').DataTable({
+      "dataType": 'json',
+      "ajax": {
+        "processing": true,
+        "dataSrc": '',
+        "url": "{% url 'admin-property-table'%}",
+      },
+      "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-property'>>>>" +
+        "<'row'<'col-md-6'><'col-md-6'>>" +
+        "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
+      "initComplete": function (settings, json) {
+        $("div.create-property").html('<button type="button" id="create-property" class="float-right btn btn-s btn-success btn-raised" name="button">Add Property <i class="fas fa-plus"></i></button>');
+        $(".create-property").modalForm({ formURL: "{% url 'create-property' %}" });
+      },
+      "drawCallback": function (settings) {
+        $("#upload-property").modalForm({
+          formURL: "{% url 'admin-property-upload' %}"
+        });
+        $(".delete-property").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+        $(".update-property").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+      },
+      "columnDefs": [
+        {
+          "className": 'col-property-id text-center',
+          "targets": 0,
+          "data": "fields.id",
+        },
+        {
+          "className": 'col-property-type text-center',
+          "targets": 1,
+          "data": "fields.name",
+        },
+        {
+          "className": 'col-property-description text-center',
+          "targets": 2,
+          "data": "fields.description",
+        },
+        {
+          "className": 'col-property-images text-center',
+          "targets": 3,
+          "data": "fields.images",
+        },
+        {
+          "className": 'col-details text-center',
+          "targets": -1,
+          "data": 'fields.id',
+          render: function (data, type, row) {
+            let render =
+              '<button type="button" class="upload-property btn btn-raised btn-sm btn-primary m-1" data-id="/upload/property">' +
+              '<span class="fa fa-file-upload"></span></button>' +
+              '<button type="button" class="delete-property btn btn-sm btn-raised btn-warning m-1" data-id="/delete/property/' + data + '">' +
+              '<span class="fa fa-trash"></span></button>' +
+              '<button type="button" class="update-property btn btn-sm btn-raised btn-success m-1" data-id="/update/property/' + data + '">' +
+              '<span class="fa fa-edit"></span></button>';
+            return render
+          }
+        },
+      ]
+    })
+  });
+</script>
 {% endblock %}

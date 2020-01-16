@@ -40,6 +40,7 @@ urlpatterns = [
     path('guest/', base.guest, name='guest'),
     path('request/', base.tenant_request, name='request'),
     path('notif/', base.notif, name='notif'),
+    path('booking/', base.booking, name='booking'),
 
     # Data Table Paths
     # Billing Table
@@ -107,4 +108,45 @@ urlpatterns = [
     path('update/notif/<int:pk>',
          modalviews.NotifUpdateModal.as_view(), name='update-notif'),
     path('create/notif', modalviews.NotifCreateModal.as_view(), name='create-notif'),
+
+    # Booking
+    path('booking/table', datatableviews.booking_table,
+         name='admin-booking-table'),
+    path('read/booking/<int:pk>',
+         modalviews.BookingReadModal.as_view(), name='read-booking'),
+    path('delete/booking/<int:pk>',
+         modalviews.BookingDeleteModal.as_view(), name='delete-booking'),
+    path('update/booking/<int:pk>',
+         modalviews.BookingUpdateModal.as_view(), name='update-booking'),
+
+    # Property
+    path('property/table', datatableviews.property_table,
+         name='admin-property-table'),
+    path('create/property', modalviews.PropertyCreateModal.as_view(),
+         name='create-property'),
+    path('delete/property/<int:pk>',
+         modalviews.PropertyDeleteModal.as_view(), name='delete-property'),
+    path('update/property/<int:pk>',
+         modalviews.PropertyUpdateModal.as_view(), name='update-property'),
+    path('upload/property', base.property_upload, name='admin-property-upload'),
+
+    # Room
+    path('room/table', datatableviews.room_table, name='admin-room-table'),
+    path('create/room', modalviews.RoomCreateModal.as_view(), name='create-room'),
+    path('delete/room/<int:pk>',
+         modalviews.RoomDeleteModal.as_view(), name='delete-room'),
+    path('update/room/<int:pk>',
+         modalviews.RoomUpdateModal.as_view(), name='update-room'),
+    path('upload/room2d', base.room_upload2d, name='admin-room2d-upload'),
+    path('upload/room3d', base.room_upload3d, name='admin-room3d-upload'),
+
+    # Admin Accounts
+    path('admin_management/table',
+         datatableviews.admin_acc_table,  name='admin-acc-table'),
+    path('read/admin_acc/<int:pk>', modalviews.AdminAccReadModal.as_view(),
+         name='read-admin-acc'),
+    path('delete/admin_acc/<int:pk>',
+         modalviews.AdminAccDeleteModal.as_view(), name='delete-admin-acc'),
+    path('update/admin_acc/<int:pk>',
+         modalviews.AdminAccUpdateModal.as_view(), name='update-admin-acc'),
 ]
