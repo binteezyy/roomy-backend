@@ -77,6 +77,20 @@
                         </ol>
                     </h5>
                 </li>
+                <li>
+                    <h5> Total Amount:
+                        {{total}}
+                    </h5>
+                    <h5>
+                        <ol>
+                            <h5> Fees: </h5>
+                            {% for add_on in add_ons %}
+                            <li>{{add_on}}</li>
+                            {% endfor %}
+                            <li> Room rate: {{rate}}</li>
+                        </ol>
+                    </h5>
+                </li>
             </ul>
         </div>
         {% elif viewtype == 'tenants' %}

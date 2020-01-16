@@ -5,6 +5,8 @@ from apps.core.roomy_admin.forms import UserLoginForm, UserRegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 
+from apps.core.roomy_core.models import *
+
 context = {
     "title": "Roomy",
 }

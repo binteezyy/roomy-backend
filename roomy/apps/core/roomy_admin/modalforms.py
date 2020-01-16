@@ -36,7 +36,7 @@ class GuestModalForm(BSModalForm):
 class RequestModalForm(BSModalForm):
     class Meta:
         model = Request
-        exclude = ['']
+        exclude = ['transaction_id']
 
 
 class NotifModalForm(BSModalForm):
@@ -72,5 +72,5 @@ class RoomModalForm(BSModalForm):
 
 class AdminAccModalForm(BSModalForm):
     class Meta:
-        model = UserAccount
+        model = OwnerAccount
         exclude = ['transaction_id', 'user_id']
