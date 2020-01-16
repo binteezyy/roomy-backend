@@ -17,7 +17,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'sslserver',
     # APPS
-    'apps.client',
+    'apps.client.apps.ClientConfig',
 ]
 
 MIDDLEWARE = [

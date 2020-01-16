@@ -5,7 +5,7 @@ from .views import property
 
 urlpatterns = [
     #navigation
-    path('home/', landing.home, name='home'),
+    path('', landing.home, name='home'),
     path('explore/', landing.explore, name='explore'),
     path('booking_guide/', landing.booking_guide, name='booking_guide'),
     path('partner_with_us/', landing.partner_with_us, name='partner_with_us'),
