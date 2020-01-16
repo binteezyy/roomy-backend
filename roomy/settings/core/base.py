@@ -74,3 +74,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 ROOT_URLCONF = 'config.core.urls'
+
+LOGIN_REDIRECT_URL = 'admin-index'
+LOGIN_URL = 'admin-index'

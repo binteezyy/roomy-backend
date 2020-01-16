@@ -26,17 +26,6 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
       </li>
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color: black;" href="#" id="navbarDropdownMenuLink"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Add transaction &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left: 100px;">
-          <a class="dropdown-item" href="{% url 'add_rental' %}">Add rental transaction</a>
-          <a class="dropdown-item" href="{% url 'add_billing' %}">Add billing transaction</a>
-          <a class="dropdown-item" href="{% url 'add_expense' %}">Add expense transaction</a>
-        </div>
-      </li> -->
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'booking' %}">Booking</a>
       </li>
@@ -86,7 +75,17 @@
       </li>
 
     </ul>
-
+    <div class="row">
+      <div class="col center-block text-center">
+        <h4 class="profile" style="color:blueviolet">{{ request.user.username }}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col center-block text-center">
+        <a href="{% url 'admin-logout' %}" style="text-decoration:none"><button type="button"
+            class="btn btn-block btn-raised btn-danger" name="button">Logout</button></a>
+      </div>
+    </div>
   </nav>
   <!-- end of navigation -->
 

@@ -8,9 +8,11 @@ import json
 from pprint import pprint
 
 # @login_required
-# @user_passes_test(lambda u: u.is_superuser)
+# @user_passes_test(lambda u: u.is_staff)
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def billing_table(request):
     billings = Billing.objects.all()
 
@@ -37,6 +39,8 @@ def billing_table(request):
     return HttpResponse(data, content_type='application/json')
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def fee_table(request):
     fees = Fee.objects.all()
 
@@ -53,6 +57,8 @@ def fee_table(request):
     return HttpResponse(data, content_type='application/json')
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def rental_table(request):
     transactions = Transaction.objects.filter(active=True)
 
@@ -70,6 +76,8 @@ def rental_table(request):
     return HttpResponse(data, content_type='application/json')
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def tenant_table(request):
     tenants = UserAccount.objects.filter(user_type=1)
 
@@ -85,6 +93,8 @@ def tenant_table(request):
     return HttpResponse(data, content_type='application/json')
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def expense_table(request):
     expenses = Expense.objects.all()
 
@@ -102,6 +112,8 @@ def expense_table(request):
     return HttpResponse(data, content_type='application/json')
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def guest_table(request):
     guests = Guest.objects.all()
 
@@ -124,6 +136,8 @@ def guest_table(request):
     return HttpResponse(data, content_type='application/json')
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def request_table(request):
     tenant_requests = Request.objects.all()
 
@@ -147,6 +161,8 @@ def request_table(request):
     return HttpResponse(data, content_type='application/json')
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def notif_table(request):
     notifs = Message.objects.all()
 
@@ -170,6 +186,8 @@ def notif_table(request):
     return HttpResponse(data, content_type='application/json')
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def booking_table(request):
     bookings = Booking.objects.all()
 
@@ -190,6 +208,8 @@ def booking_table(request):
     return HttpResponse(data, content_type='application/json')
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def property_table(request):
     propertys = Property.objects.all()
 
@@ -211,6 +231,8 @@ def property_table(request):
     return HttpResponse(data, content_type='application/json')
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def room_table(request):
     rooms = Room.objects.all()
 
@@ -245,6 +267,8 @@ def room_table(request):
     return HttpResponse(data, content_type='application/json')
 
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def admin_acc_table(request):
     admin_accs = UserAccount.objects.all()
 
