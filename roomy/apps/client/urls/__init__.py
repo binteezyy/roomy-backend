@@ -1,11 +1,17 @@
+from os.path import dirname, basename, isfile, join
+import glob
+modules = glob.glob(join(dirname(__file__), "*.py"))
+__all__ = [ basename(f)[:-3] for f in modules if isfile(f) and not f.endswith('__init__.py')]
+
 from django.urls import path,include
 from django.conf.urls.static import static
-from .views import landing
-from .views import property
+from ..views import *
 
 urlpatterns = [
     #navigation
     path('', landing.home, name='home'),
+    path('login/',auth.login, name='login'),
+    path('logout/', auth.logout, name='logout'),
     path('explore/', landing.explore, name='explore'),
     path('booking_guide/', landing.booking_guide, name='booking_guide'),
     path('partner_with_us/', landing.partner_with_us, name='partner_with_us'),
