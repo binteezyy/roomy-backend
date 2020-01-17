@@ -114,11 +114,11 @@ urlpatterns = [
     # Property
     path('property/table', datatableviews.property_table,
          name='admin-property-table'),
-    path('create/property', modalviews.PropertyCreateModal.as_view(),
+    path('create/property/', modalviews.PropertyCreateModal.as_view(),
          name='create-property'),
     path('delete/property/<int:pk>',
          modalviews.PropertyDeleteModal.as_view(), name='delete-property'),
-    path('update/property/<int:pk>',
+    path('update/property/<int:pk>/',
          modalviews.PropertyUpdateModal.as_view(), name='update-property'),
     path('upload/property', base.property_upload, name='admin-property-upload'),
 

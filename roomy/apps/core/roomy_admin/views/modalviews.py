@@ -320,10 +320,10 @@ class BookingUpdateModal(BSModalUpdateView):
 class PropertyCreateModal(BSModalCreateView):
     model = Property
     model_type = 'property'
-    template_name = 'components/modals/create.html'
+    template_name = 'components/modals/create-property.html'
     form_class = PropertyModalForm
     success_message = 'Success: Property created.'
-    success_url = reverse_lazy('property')
+    success_url = reverse_lazy('property_management')
 
     def test_func(self):
         return self.request.user.is_staff
@@ -334,17 +334,17 @@ class PropertyDeleteModal(BSModalDeleteView):
     context_object_name = 'propertyo'
     template_name = 'components/modals/delete.html'
     success_message = 'Success: Property deleted'
-    success_url = reverse_lazy('property')
+    success_url = reverse_lazy('property_management')
     # def test_func(self):
     #     return self.notif.user.is_superuser
 
 
 class PropertyUpdateModal(BSModalUpdateView):
     model = Property
-    template_name = 'components/modals/update.html'
+    template_name = 'components/modals/update-property.html'
     form_class = PropertyModalForm
     sucess_message = "Success: Property updated"
-    success_url = reverse_lazy('property')
+    success_url = reverse_lazy('property_management')
 
 
 class RoomCreateModal(BSModalCreateView):
