@@ -11,7 +11,7 @@
     </div>
 
     <div class="modal-body">
-
+        {{form.media}}
         <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
             {% for error in form.non_field_errors %}
             {{ error }}
