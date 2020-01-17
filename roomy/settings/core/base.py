@@ -19,8 +19,14 @@ INSTALLED_APPS = [
     'apps.core.roomy_core',
     'bootstrap_modal_forms',
     'widget_tweaks',
-    'crispy_forms'
+    'crispy_forms',
+    'places',
 ]
+
+PLACES_MAPS_API_KEY='AIzaSyAE_aLNQaPj0viIzm1lnTsvsf0Pq4b14IE'
+PLACES_MAP_WIDGET_HEIGHT=480
+PLACES_MAP_OPTIONS='{"center": { "lat": 38.971584, "lng": -95.235072 }, "zoom": 10}'
+PLACES_MARKER_OPTIONS='{"draggable": true}'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

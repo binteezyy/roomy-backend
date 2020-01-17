@@ -4,7 +4,7 @@ from .models import *
 
 
 class PostProperty(admin.ModelAdmin):
-    list_display = ('name', 'street', 'brgy', 'city')
+    list_display = ('owner_id', 'name')
 
 
 class PostRoom(admin.ModelAdmin):
@@ -12,7 +12,7 @@ class PostRoom(admin.ModelAdmin):
 
 
 class PostTransaction(admin.ModelAdmin):
-    list_display = ('active', 'room_id', 'start_date')
+    list_display = ('active', 'room_id', 'start_date', 'rating')
 
 
 class PostTenantAccount(admin.ModelAdmin):

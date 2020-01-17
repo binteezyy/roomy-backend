@@ -1,11 +1,15 @@
 asgiref==3.2.3
+dj-places==3.1.0
 Django==3.0.1
+django-bootstrap-modal-forms==1.5.0
+django-crispy-forms==1.8.1
 django-debug-toolbar==2.1
 django-rest-framework==0.1.0
 django-sslserver==0.22
+django-widget-tweaks==1.4.5
 djangorestframework==3.11.0
-mysqlclient==1.4.6
 Pillow==7.0.0
 python-decouple==3.3
 pytz==2019.3
+six==1.14.0
 sqlparse==0.3.0
