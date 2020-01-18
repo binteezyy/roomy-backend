@@ -100,6 +100,7 @@ class Transaction(models.Model):
                                                  MinValueValidator(1)
                                              ], null=True, blank=True)
     rating_description = models.TextField(blank=True, null=True)
+    rated = models.BooleanField(default=False)
     add_ons = models.ManyToManyField(Fee, blank=True)
 
     def __str__(self):

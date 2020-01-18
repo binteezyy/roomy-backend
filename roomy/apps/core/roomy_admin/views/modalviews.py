@@ -353,7 +353,7 @@ class RoomCreateModal(BSModalCreateView):
     template_name = 'components/modals/create.html'
     form_class = RoomModalForm
     success_message = 'Success: Room created.'
-    success_url = reverse_lazy('room')
+    success_url = reverse_lazy('room_management')
 
     def test_func(self):
         return self.request.user.is_staff
@@ -364,7 +364,7 @@ class RoomDeleteModal(BSModalDeleteView):
     context_object_name = 'room'
     template_name = 'components/modals/delete.html'
     success_message = 'Success: Room deleted'
-    success_url = reverse_lazy('room')
+    success_url = reverse_lazy('room_management')
     # def test_func(self):
     #     return self.notif.user.is_superuser
 
@@ -374,7 +374,7 @@ class RoomUpdateModal(BSModalUpdateView):
     template_name = 'components/modals/update.html'
     form_class = RoomModalForm
     sucess_message = "Success: Room updated"
-    success_url = reverse_lazy('room')
+    success_url = reverse_lazy('room_management')
 
 
 class AdminAccReadModal(BSModalReadView):
