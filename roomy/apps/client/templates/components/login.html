@@ -1,19 +1,37 @@
 {% extends "layout/layout.html" %}
 
+{% block extra_css %}
+  <style media="screen">
+
+  </style>
+{% endblock %}
 {% block content %}
-  <form class="" action="index.html" method="post">
-    {% for field in form %}
+  <div class="container">
+    <div class="row">
+      <div class="col-7">
+        {% for field in form %}
         <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }} {{ field }}
-            {% if field.help_text %}
-            <p class="help">{{ field.help_text|safe }}</p>
-            {% endif %}
+          {{ field.errors }}
+        <div class="form-group">
+          <label for="exampleInputEmail1">{{ field.label_tag }}</label>
+          <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}}" class="form-control" placeholder="{{field.label}}" value= "{{field.value|default_if_none:''}}">
         </div>
-    {% endfor %}
-    <button type="submit" name="button"></button>
-    <a class="btn btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">
-       Login with google
-     </a>
-  </form>
+          {% if field.help_text %}
+          <p class="help">{{ field.help_text|safe }}</p>
+          {% endif %}
+        </div>
+        {% endfor %}
+        <button class="btn btn-block btn-success" type="submit" name="button">Login</button><br>
+      </div>
+      <div class="col-5">
+        <a class="btn btn-block btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">
+          Login with google
+        </a>
+      </div>
+    </div>
+    <form class="" action="index.html" method="post">
+
+
+    </form>
+  </div>
 {% endblock %}
