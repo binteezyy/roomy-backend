@@ -5,6 +5,9 @@ context = {
     'AUTHORS': 'PPTT',
 }
 
+def property(request):
+    return render(request,"components/property/property.html", context)
+
 def room(request):
     return render(request,"components/property/room.html", context)
 

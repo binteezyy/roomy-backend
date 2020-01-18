@@ -1,0 +1,35 @@
+{% extends "layout/layout_2.html" %}
+{% load static %}
+
+{% block title %}
+Property
+{% endblock %}
+
+{% block content %}
+
+
+<!-- main content -->
+<div class="container-fluid">
+  <div class="container">
+    <div class="row d-flex flex-wrap justify-content-center align-items-center" style="margin-bottom: 50px;">
+
+      <!-- room container -->
+      <div class="container-room" style="width: 350px; height: auto; margin: 10px; padding: 0;">
+        <div class="wrapper-image" style="width: 100%; height: 200px; margin: 0; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: contain;">
+          <a class="btn btn-sm btn-dark" style="float: right;" href="{% url 'room' %}">VIEW</a>
+        </div>
+        <div class="wrapper-description">
+          <span style="font-size: 14px; float: right;"><b>Php 4000</b> per month</span>
+          <h5>Room B20</h5>
+          <h5>Pureza Mansion</h5>
+          <h6>#455 San Jose II Street Barangay 425 - Sampaloc Manila, Metro Manila</h6>
+        </div>
+      </div>
+      <!-- end of room container -->
+
+    </div>
+  </div>
+</div>
+<!-- end of main content -->
+
+{% endblock %}
