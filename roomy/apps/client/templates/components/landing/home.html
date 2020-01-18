@@ -29,7 +29,7 @@ Home
         <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
       </div>
 
-      <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 100px; padding: 50px; background-color: darkgrey;">
+      <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 10border: 1px solid grey; 0px; padding: 50px;">
         <h3 class="text-center">Lorem Ipsum</h3>
         <p class="text-center" style="width: 100%; margin: 0 auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae metus bibendum, suscipit dolor non, ultrices metus. Integer nec libero risus.</p>
         <div class="d-flex flex-wrap justify-content-center" style="margin-top: 20px;">
@@ -59,13 +59,12 @@ Home
       <!-- condominium -->
       <div class="wrapper" id="condominium" style="padding: 40px;">
         <div class="d-flex flex-wrap" style="width: 100%; height: auto; min-height: 400px; margin-bottom: 20px;">
-          <div class="col-md-3 d-flex flex-column justify-content-center align-items-center" style="padding: 40px 20px;">
+          <div class="col-md-3 d-flex flex-column justify-content-center align-items-center" style="padding: 20px;">
             <h5>Condominium</h5>
             <img class="img-fluid" src="{% static "img\placeholder_200x200.png" %}" alt="" style="width: 200px height: 200px;"> <br>
             <span>Pellentesque id tempus odio, vitae semper felis. Aenean luctus ullamcorper ligula, eget aliquam justo. Sed eget massa in diam suscipit suscipit.</span>
           </div>
-          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center" style="padding: 20px; border-radius: 10px; background-color: darkgrey;">
-
+          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center shadow p-3 mb-5 bg-white rounded" style="padding: 40px; border-radius: 5px;">
 
 
 
@@ -77,12 +76,12 @@ Home
       <!-- dormitory -->
       <div class="wrapper" id="dormitory" style="padding: 40px;">
         <div class="d-flex flex-wrap" style="width: 100%; height: auto; min-height: 400px; margin-bottom: 20px;">
-          <div class="col-md-3 d-flex flex-column justify-content-start align-items-center" style="padding: 40px 20px;">
+          <div class="col-md-3 d-flex flex-column justify-content-start align-items-center" style="padding: 20px;">
             <h5>Dormitory</h5>
             <img class="img-fluid" src="{% static "img\placeholder_200x200.png" %}" alt=""> <br>
             <span>Vivamus ac tellus placerat, facilisis risus nec, scelerisque tortor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</span>
           </div>
-          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center" style="padding: 20px; border-radius: 10px; background-color: darkgrey;">
+          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center shadow p-3 mb-5 bg-white rounded" style="padding: 40px; border-radius: 5px;">
 
 
 
@@ -95,13 +94,37 @@ Home
       <!-- apartment -->
       <div class="wrapper" id="apartment" style="padding: 40px;">
         <div class="d-flex flex-wrap" style="width: 100%; height: auto; min-height: 400px; margin-bottom: 20px;">
-          <div class="col-md-3 d-flex flex-column justify-content-start align-items-center" style="padding: 40px 20px;">
+          <div class="col-md-3 d-flex flex-column justify-content-start align-items-center" style="padding: 20px;">
             <h5>Apartment</h5>
             <img class="img-fluid" src="{% static "img\placeholder_200x200.png" %}" alt=""> <br>
             <span>In at mauris tincidunt, commodo arcu ut, tempor justo. Nullam accumsan commodo neque. Cras congue ultricies elit. Etiam venenatis efficitur rhoncus.</span>
           </div>
-          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center" style="padding: 20px; border-radius: 10px; background-color: darkgrey;">
+          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center shadow p-3 mb-5 bg-white rounded" style="padding: 40px; border-radius: 5px;">
 
+            <!-- room container -->
+            <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+              <a href="{% url 'room' %}">
+                <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+              </a>
+              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                <div class="">
+                  <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+                  <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+                </div>
+                <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span style="font-size: 20px;">Room B20</span>
+                <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+              </div>
+              <div class="d-flex justify-content-start" >
+                <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+              </div>
+            </div>
+            <!-- end of room container -->
 
 
 
@@ -109,11 +132,11 @@ Home
         </div>
       </div>
       <!-- end of apartment -->
+
     </div>
   </div>
 </div>
 
-1
 
 <!-- end of main content -->
 

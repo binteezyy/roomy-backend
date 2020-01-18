@@ -19,3 +19,6 @@ def photos(request):
 
 def rates(request):
     return render(request,"components/property/rates.html", context)
+
+def booking(request):
+    return render(request,"components/property/booking.html", context)

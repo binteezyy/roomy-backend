@@ -14,18 +14,31 @@ Property
     <div class="row d-flex flex-wrap justify-content-center align-items-center" style="margin-bottom: 50px;">
 
       <!-- room container -->
-      <div class="container-room" style="width: 350px; height: auto; margin: 10px; padding: 0;">
-        <div class="wrapper-image" style="width: 100%; height: 200px; margin: 0; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: contain;">
-          <a class="btn btn-sm btn-dark" style="float: right;" href="{% url 'room' %}">VIEW</a>
+      <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+        <a href="{% url 'room' %}">
+          <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+        </a>
+        <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+          <div class="">
+            <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+            <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+          </div>
+          <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
         </div>
-        <div class="wrapper-description">
-          <span style="font-size: 14px; float: right;"><b>Php 4000</b> per month</span>
-          <h5>Room B20</h5>
-          <h5>Pureza Mansion</h5>
-          <h6>#455 San Jose II Street Barangay 425 - Sampaloc Manila, Metro Manila</h6>
+        <div class="d-flex justify-content-between align-items-center">
+          <span style="font-size: 20px;">Room B20</span>
+          <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+        </div>
+        <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+          <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+        </div><hr>
+        <div class="d-flex justify-content-start" >
+          <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
         </div>
       </div>
       <!-- end of room container -->
+
+
 
     </div>
   </div>
