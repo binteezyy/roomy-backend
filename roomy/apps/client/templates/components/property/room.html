@@ -98,24 +98,27 @@ Room
       <div class="col-md-6 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
         <h5>Photos</h5>
         <div class="d-flex flex-wrap justify-content-center align-items-center" style="min-height: 300px;">
-          <a style="width: 220px; margin: 10px;" href="#">
+          <a style="width: 220px; margin: 10px;" data-toggle="modal" data-target="#photoModal">
             <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
           </a>
-          <a style="width: 220px; margin: 10px;" href="#">
+          <a style="width: 220px; margin: 10px;" data-toggle="modal" data-target="#photoModal">
             <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
           </a>
-          <a style="width: 220px; margin: 10px;" href="#">
+          <a style="width: 220px; margin: 10px;" data-toggle="modal" data-target="#photoModal">
             <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
           </a>
-          <a style="width: 220px; margin: 10px;" href="#">
+          <a style="width: 220px; margin: 10px;" data-toggle="modal" data-target="#photoModal">
             <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
           </a>
         </div>
+
       </div>
       <div class="col-md-5 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
         <h5>360 view</h5>
         <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
-          <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
+          <a style="margin: 10px;" data-toggle="modal" data-target="#photoModal">
+            <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
+          </a>
         </div>
       </div>
     </div>
@@ -189,11 +192,23 @@ Room
 </div>
 <!-- end of main content -->
 
-<style media="screen">
-  .column {
-    flex-grow: 1;
-  }
-</style>
+<!-- picture modal -->
+<div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <!-- modal content -->
+    <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
+      <!-- modal body -->
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row d-flex justify-content-center" style="padding-right: 10px; padding-left: 10px;">
+            <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of picture modal -->
 
 
 {% endblock %}
