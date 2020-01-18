@@ -62,7 +62,7 @@ Properties
         "<'row'<'col-md-6'><'col-md-6'>>" +
         "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
       "initComplete": function (settings, json) {
-        $("div.create-property").html('<button type="button" id="create-property" class="float-right btn btn-s btn-success btn-raised" name="button"><a href="/roomy-admin/create/property">Add Property</a> <i class="fas fa-plus"></i></button>');
+        $("div.create-property").html('<button type="button" id="create-property" class="float-right btn btn-s btn-success btn-raised" name="button"><a href="/roomy-admin/create/property/" style="text-decoration:none; color:white;">Add Property</a><i class="fas fa-plus"></i></button>');
         // $(".create-property").modalForm({ formURL: "{% url 'create-property' %}" });
       },
       "drawCallback": function (settings) {

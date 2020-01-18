@@ -1,8 +1,8 @@
 {% load widget_tweaks %}
 
 <form method="post" action="">
+    {{ form.media }}
     {% csrf_token %}
-
     <div class="modal-header">
         <h3 class="modal-title">Create</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -11,7 +11,6 @@
     </div>
 
     <div class="modal-body">
-        {{form.media}}
         <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
             {% for error in form.non_field_errors %}
             {{ error }}
