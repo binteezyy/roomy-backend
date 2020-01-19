@@ -7,12 +7,16 @@ class PropertyApiView(viewsets.ModelViewSet):
     queryset = Property.objects.all()
     serializer_class = PropertySerializer
 
+class RoomsByPropertyApiView(viewsets.ModelViewSet):
+    queryset = Property.objects.all()
+    serializer_class = RoomsByPropertySerializer
+
 class RoomApiView(viewsets.ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 
 class FeeApiView(viewsets.ModelViewSet):
-    queryset = Fee.objects.filter(fee_type=1)
+    queryset = Fee.objects.all()
     serializer_class = FeeSerializer
 
 class BillingApiView(viewsets.ModelViewSet):
@@ -34,3 +38,19 @@ class GuestApiView(viewsets.ModelViewSet):
 class ImageFileApiView(viewsets.ModelViewSet):
     queryset = ImageFile.objects.all()
     serializer_class = ImageFileSerializer
+
+class TransactionApiView(viewsets.ModelViewSet):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
+
+class RequestApiView(viewsets.ModelViewSet):
+    queryset = Request.objects.all()
+    serializer_class = RequestSerializer
+
+class OwnerAccountApiView(viewsets.ModelViewSet):
+    queryset = OwnerAccount.objects.all()
+    serializer_class = OwnerAccountSerializer
+
+class UserApiView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
