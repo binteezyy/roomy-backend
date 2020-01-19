@@ -2,77 +2,143 @@
 {% load static %}
 
 {% block title %}
-Explore
+Home
 {% endblock %}
 
 {% block content %}
 
 <!-- main content -->
-<div class="container-fluid" style="margin-bottom: 50px;">
+<div class="container-fluid">
   <div class="container">
-    <div class="row">
+    <div class="row d-flex flex-row justify-content-center" style="margin-top: 50px; margin-bottom: 20px;">
+
       <!-- search bar -->
-      <form class="form-inline mr-auto mb-4 d-flex justify-content-center" _lpchecked="1" style="width: 100%;" action="#">
-        <div class="input-group mb-3" style="width: 80%;">
-          <input type="text" class="form-control" placeholder="Search keyword" aria-label="Search" aria-describedby="button-addon2" style="width: 100%;">
-          <div class="input-group-append">
-            <button class="btn btn-elegant btn-rounded btn-sm my-0 waves-effect waves-light" type="button" id="button-addon2">Search</button>
-          </div>
-        </div>
-      </form>
-      <!-- end of search bar -->
-    </div>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-8">
-        <!-- listings -->
-        <div class="d-flex flex-wrap justify-content-center" style="margin: 0 auto;">
-
-          <!-- main property container -->
-          <div class="" style="width: 100%; margin: 10px 0 50px 0;">
-            <div class="img-container">
-              <div class="wrapper d-flex justify-content-center">
-                <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
-              </div>
-              <div class="btn-over d-flex">
-                <a class="btn btn-sm btn-dark" href="#">View</a>
-                <style>
-                  .img-container {
-                    position: relative;
-                  }
-
-                  .btn-over {
-                    position: absolute;
-                    top: 88%;
-                    left: 90%;
-                    transform: translate(-50%, -50%);
-                    -ms-transform: translate(-50%, -50%);
-                  }
-                </style>
-              </div>
-            </div>
-            <div class="d-flex flex-row justify-content-between">
-              <div class="wrapper" style="width: 100%;">
-                <div class="text-wrapper" style="padding: 15px 0 10px 0;">
-                  <h5 style="padding-bottom: 15px; border-bottom: 1px solid lightgrey;">Property Name</h5>
-                  <h6 style="margin-bottom: 12px;">insert address here</h6>
-                  <p class="bg-light" style="width: 100%; padding: 10px 10px 30px 10px; border-radius: 5px;">
-                    insert description here
-                  </p>
-                </div>
-              </div>
+      <div class="d-flex justify-content-center align-items-center" style="width: 100%; margin-bottom: 10px;">
+        <form class="form-inline mr-auto mb-4 d-flex justify-content-center" _lpchecked="1" style="width: 100%; margin-bottom: 50px;" action="#">
+          <div class="input-group mb-3" style="width: 80%;">
+            <input type="text" class="form-control" placeholder="What are you looking for?" aria-label="Search" aria-describedby="button-addon2" style="width: 100%;">
+            <div class="input-group-append">
+              <button class="btn btn-elegant btn-rounded btn-sm my-0 waves-effect waves-light" type="button" id="button-addon2">Search</button>
             </div>
           </div>
-          <!-- end of main property container -->
-
-          
-        </div>
-        <!-- end of listings -->
+        </form>
       </div>
-      <div class="col-md-2"></div>
+      <!-- end of search bar -->
+
+      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; margin-bottom: 80px;">
+        <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
+      </div>
+
+      <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 100px; padding: 50px; background-color: lightgrey;">
+        <h3 class="text-center">Lorem Ipsum</h3>
+        <p class="text-center" style="width: 100%; margin: 0 auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae metus bibendum, suscipit dolor non, ultrices metus. Integer nec libero risus.</p>
+        <div class="d-flex flex-wrap justify-content-center" style="margin-top: 20px;">
+          <button class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+          <button class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#getInTouchModal">GET IN TOUCH</button>
+        </div>
+      </div>
+
+      <!-- category -->
+      <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 50px;">
+        <h3>Categories</h3>
+        <div class="d-flex flex-wrap justify-content-center align-items-center">
+          <a class="btn btn-lg btn-dark text-center" style="width: 300px; margin: 10px; padding: 10px; border-radius: 25px;" href="#condominium">
+            Condominium
+          </a>
+          <a class="btn btn-lg btn-dark text-center" style="width: 300px; margin: 10px; padding: 10px; border-radius: 25px;" href="#dormitory">
+            Dormitory
+          </a>
+          <a class="btn btn-lg btn-dark text-center" style="width: 300px; margin: 10px; padding: 10px; border-radius: 25px;" href="#apartment">
+            Apartment
+          </a>
+        </div>
+      </div>
+      <!-- end of category -->
+
+
+      <!-- condominium -->
+      <div class="wrapper" id="condominium" style="padding: 40px;">
+        <div class="d-flex flex-wrap" style="width: 100%; height: auto; min-height: 400px; margin-bottom: 20px;">
+          <div class="col-md-3 d-flex flex-column justify-content-center align-items-center" style="padding: 20px;">
+            <h5>Condominium</h5>
+            <img class="img-fluid" src="{% static "img\placeholder_200x200.png" %}" alt="" style="width: 200px height: 200px;"> <br>
+            <span>Pellentesque id tempus odio, vitae semper felis. Aenean luctus ullamcorper ligula, eget aliquam justo. Sed eget massa in diam suscipit suscipit.</span>
+          </div>
+          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center shadow p-3 mb-5 bg-white rounded" style="padding: 20px; border-radius: 5px;">
+
+
+
+          </div>
+        </div>
+      </div>
+      <!-- end of condominium -->
+
+      <!-- dormitory -->
+      <div class="wrapper" id="dormitory" style="padding: 40px;">
+        <div class="d-flex flex-wrap" style="width: 100%; height: auto; min-height: 400px; margin-bottom: 20px;">
+          <div class="col-md-3 d-flex flex-column justify-content-start align-items-center" style="padding: 20px;">
+            <h5>Dormitory</h5>
+            <img class="img-fluid" src="{% static "img\placeholder_200x200.png" %}" alt=""> <br>
+            <span>Vivamus ac tellus placerat, facilisis risus nec, scelerisque tortor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</span>
+          </div>
+          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center shadow p-3 mb-5 bg-white rounded" style="padding: 20px; border-radius: 5px;">
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <!-- end of dormitory -->
+
+      <!-- apartment -->
+      <div class="wrapper" id="apartment" style="padding: 40px;">
+        <div class="d-flex flex-wrap" style="width: 100%; height: auto; min-height: 400px; margin-bottom: 20px;">
+          <div class="col-md-3 d-flex flex-column justify-content-start align-items-center" style="padding: 20px;">
+            <h5>Apartment</h5>
+            <img class="img-fluid" src="{% static "img\placeholder_200x200.png" %}" alt=""> <br>
+            <span>In at mauris tincidunt, commodo arcu ut, tempor justo. Nullam accumsan commodo neque. Cras congue ultricies elit. Etiam venenatis efficitur rhoncus.</span>
+          </div>
+          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center shadow p-3 mb-5 bg-white rounded" style="padding: 20px; border-radius: 5px;">
+
+            <!-- room container -->
+            <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+              <a href="{% url 'room' %}">
+                <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+              </a>
+              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                <div class="">
+                  <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+                  <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+                </div>
+                <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span style="font-size: 20px;">Room B20</span>
+                <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+              </div>
+              <div class="d-flex justify-content-start" >
+                <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+              </div>
+            </div>
+            <!-- end of room container -->
+
+
+
+          </div>
+        </div>
+      </div>
+      <!-- end of apartment -->
+
     </div>
   </div>
 </div>
+
+
 <!-- end of main content -->
+
 
 {% endblock %}

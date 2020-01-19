@@ -26,7 +26,7 @@ Room
         </div>
         <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 10px;">
           <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
-          <span style="font-size: 14px;"><i class="fas fa-star"></i> 4.5 <span style="color: grey;">(1 review)</span></span>
+          <a style="font-size: 14px; color: black;" href="#reviews"><i class="fas fa-star"></i> 4.5 <span style="color: grey;">(1 review)</span></a>
         </div>
         <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 5px; padding: 0;">
           <span style="margin: 0 15px 0 0; font-size: 15px;">4 occupants</span>
@@ -86,7 +86,7 @@ Room
 
         <!-- booking button -->
         <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 30px;">
-          <button class="btn btn-dark" type="button" name="button">Proceed to booking</button>
+          <a class="btn btn-dark" href="{% url 'booking' %}">BOOK NOW</a>
         </div>
         <!-- end of booking button -->
       </div>
@@ -150,7 +150,7 @@ Room
 
       <div class="col-md-7 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
 
-        <div class="wrapper" style="padding-bottom: 50px;">
+        <div class="wrapper" id="reviews" style="padding-bottom: 50px;">
           <h5 style="margin-bottom: 20px;">Reviews</h5>
 
           <!-- tenant review -->
@@ -160,7 +160,7 @@ Room
                 <div class=""
                   style="width: 50px; height: 50px; margin-right: 10px; border-radius: 25px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
                 <div class="d-flex flex-column">
-                  <span style="font-size: 15px; font-weight: bold;">Almer</span>
+                  <span style="font-size: 15px; font-weight: bold;">Geralt</span>
                   <span style="font-size: 14px; color: grey;">November 2019</span>
                 </div>
               </div>
