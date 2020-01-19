@@ -55,6 +55,7 @@ class Room(models.Model):
         (1, 'Submetered'),
     ]
     property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
+    name = models.CharField(max_length=56, blank=True, null=True, unique=True)
     description = models.TextField(blank=True, null=True)
     floor = models.PositiveIntegerField(default=1)
     number = models.PositiveIntegerField(default=1)
@@ -69,7 +70,7 @@ class Room(models.Model):
         return f'{self.property_id}: Floor {self.floor} - Room {self.number}'
 
     class Meta:
-        unique_together = ('property_id', 'floor', 'number')
+        unique_together = ('property_id', 'name', 'floor', 'number')
 
 
 class Fee(models.Model):

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from ..models import *
 from ..serializers import *
+from django.db.models import Q
 
 class PropertyApiView(viewsets.ModelViewSet):
     queryset = Property.objects.all()
@@ -12,7 +13,7 @@ class RoomApiView(viewsets.ModelViewSet):
     serializer_class = RoomSerializer
 
 class FeeApiView(viewsets.ModelViewSet):
-    queryset = Fee.objects.filter(fee_type=1)
+    queryset = Fee.objects.filter()
     serializer_class = FeeSerializer
 
 class BillingApiView(viewsets.ModelViewSet):
@@ -34,3 +35,69 @@ class GuestApiView(viewsets.ModelViewSet):
 class ImageFileApiView(viewsets.ModelViewSet):
     queryset = ImageFile.objects.all()
     serializer_class = ImageFileSerializer
+
+class OwnerAccountApiView(viewsets.ModelViewSet):
+    queryset = OwnerAccount.objects.all()
+    serializer_class = OwnerAccountSerializer
+
+class UserApiView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class TransactionApiView(viewsets.ModelViewSet):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerliazer
+
+class RequestApiView(viewsets.ModelViewSet):
+    queryset = Request.objects.all()
+    serializer_class = RequestSerializer
+
+class MessageApiView(viewsets.ModelViewSet):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+
+
+## filtered api view
+class RoomInPropertyApiView(viewsets.ModelViewSet):
+    serializer_class = RoomSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        rooms = None
+        
+        rooms = Room.objects.filter(property_id=self.kwargs['property_id'])
+
+        return rooms
+
+class RoomInLocationApiView(viewsets.ModelViewSet):
+    serializer_class = RoomSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        rooms = None
+        rooms = Room.objects.filter(property_id__property_address__icontains=self.kwargs['location'])
+
+        return rooms
+
+class RoomFilterApiView(viewsets.ModelViewSet):
+    serializer_class = RoomSerializer
+    
+
+    def get_queryset(self):
+        property_type_enum = (
+            (0, 'Condomenium'),
+            (1, 'Dormitory'),
+            (2, 'Apartment'),
+        )
+        property_type_reverse = dict((v,k) for k,v in property_type_enum if self.kwargs['search_query'] in v)
+        # print(property_type_reverse)
+        try:
+            pkey = property_type_reverse.values()
+            # print(pkey)
+        except:
+            print("except")
+        user = self.request.user
+
+        rooms = Room.objects.filter(Q(property_id__name__icontains=self.kwargs['search_query']) | Q(property_id__property_address__icontains=self.kwargs['search_query']) | Q(property_id__property_type__in=pkey))
+
+        return rooms

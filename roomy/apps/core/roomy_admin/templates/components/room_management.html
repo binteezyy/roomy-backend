@@ -25,6 +25,7 @@ Rooms
                 <tr role="row">
                   <th style="width:10%">Id</th>
                   <th style="width:10%">Property Under</th>
+                  <th style="width:10%">Name</th>
                   <th style="width:10%">Floor & Number</th>
                   <th style="width:10%">Status</th>
                   <th style="width:10%">Actions</th>
@@ -93,13 +94,18 @@ Rooms
           "data": "fields.property",
         },
         {
-          "className": 'col-room-floorno text-center',
+          "className": 'col-room-name text-center',
           "targets": 2,
+          "data": "fields.name",
+        },
+        {
+          "className": 'col-room-floorno text-center',
+          "targets": 3,
           "data": "fields.floorno",
         },
         {
           "className": 'col-room-status text-center',
-          "targets": 3,
+          "targets": 4,
           "data": "fields.status",
         },
         {
