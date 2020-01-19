@@ -19,6 +19,26 @@
         </div>
 
         {% for field in form %}
+        {% if field.label == 'Property address' %}
+        <script>
+            var searchInput = 'id_property_address'
+
+            $(document).ready(function () {
+                var autocomplete;
+                autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+                    types: ['geocode']
+                })
+            }); 
+        </script>
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <input type="text" name="property_address" maxlength="256" placeholder="{{field.label}}" class="form-control"
+            id="{{field.id_for_label}}">
+        <div class="{% if field.errors %} invalid{% endif %}">
+            {% for error in field.errors %}
+            <p class="help-block">{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% else %}
         <div class="form-group">
             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
             {% render_field field class="form-control" placeholder=field.label %}
@@ -28,6 +48,7 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 

@@ -18,7 +18,7 @@ class FeeModalForm(BSModalForm):
 class TransactionModalForm(BSModalForm):
     class Meta:
         model = Transaction
-        exclude = ['room_id']
+        exclude = ['room_id', 'rating', 'rating_description']
 
 
 class ExpenseModalForm(BSModalForm):
@@ -61,7 +61,7 @@ class BookingModalForm(BSModalForm):
 class PropertyModalForm(BSModalForm):
     class Meta:
         model = Property
-        exclude = ['property_image']
+        exclude = ['', ]
 
 
 class RoomModalForm(BSModalForm):

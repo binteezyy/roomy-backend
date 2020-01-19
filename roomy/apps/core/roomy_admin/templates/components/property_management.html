@@ -26,8 +26,6 @@ Properties
                   <th style="width:10%">Id</th>
                   <th style="width:10%">Name</th>
                   <th style="width:10%">Type</th>
-                  <th style="width:10%">Description</th>
-                  <th style="width:10%">Images</th>
                   <th style="width:10%">Actions</th>
                 </tr>
               </thead>
@@ -62,12 +60,15 @@ Properties
         "<'row'<'col-md-6'><'col-md-6'>>" +
         "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
       "initComplete": function (settings, json) {
-        $("div.create-property").html('<button type="button" id="create-property" class="float-right btn btn-s btn-success btn-raised" name="button">Add Property <i class="fas fa-plus"></i></button>');
+        $("div.create-property").html('<button type="button" id="create-property" class="float-right btn btn-s btn-success btn-raised" name="button">Add Property<i class="fas fa-plus"></i></button>');
         $(".create-property").modalForm({ formURL: "{% url 'create-property' %}" });
       },
       "drawCallback": function (settings) {
-        $("#upload-property").modalForm({
-          formURL: "{% url 'admin-property-upload' %}"
+        $(".upload-property").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+        $(".read-property").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
         });
         $(".delete-property").each(function () {
           $(this).modalForm({ formURL: $(this).data('id') });
@@ -93,26 +94,18 @@ Properties
           "data": "fields.type",
         },
         {
-          "className": 'col-property-description text-center',
-          "targets": 3,
-          "data": "fields.description",
-        },
-        {
-          "className": 'col-property-images text-center',
-          "targets": 4,
-          "data": "fields.images",
-        },
-        {
           "className": 'col-details text-center',
           "targets": -1,
           "data": 'fields.id',
           render: function (data, type, row) {
             let render =
-              '<button type="button" class="upload-property btn btn-raised btn-sm btn-primary m-1" data-id="/upload/property">' +
+              '<button type="button" class="upload-property btn btn-raised btn-sm btn-info m-1" data-id="/roomy-admin/upload/property/' + data + '">' +
               '<span class="fa fa-file-upload"></span></button>' +
-              '<button type="button" class="delete-property btn btn-sm btn-raised btn-warning m-1" data-id="/delete/property/' + data + '">' +
+              '<button type="button" class="read-property btn btn-raised btn-sm btn-primary m-1" data-id="/roomy-admin/read/property/' + data + '">' +
+              '<span class="fa fa-eye"></span></button>' +
+              '<button type="button" class="delete-property btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/property/' + data + '">' +
               '<span class="fa fa-trash"></span></button>' +
-              '<button type="button" class="update-property btn btn-sm btn-raised btn-success m-1" data-id="/update/property/' + data + '">' +
+              '<button type="button" class="update-property btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/up/property/' + data + '">' +
               '<span class="fa fa-edit"></span></button>';
             return render
           }

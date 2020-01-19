@@ -89,11 +89,11 @@ Rental
           "data": 'fields.id',
           render: function (data, type, row) {
             let render =
-              '<button type="button" class="read-rental btn btn-raised btn-sm btn-primary m-1" data-id="/read/rental/' + data + '">' +
+              '<button type="button" class="read-rental btn btn-raised btn-sm btn-primary m-1" data-id="/roomy-admin/read/rental/' + data + '">' +
               '<span class="fa fa-eye"></span></button>' +
-              '<button type="button" class="delete-rental btn btn-sm btn-raised btn-warning m-1" data-id="/delete/rental/' + data + '">' +
+              '<button type="button" class="delete-rental btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/rental/' + data + '">' +
               '<span class="fa fa-trash"></span></button>' +
-              '<button type="button" class="update-rental btn btn-sm btn-raised btn-success m-1" data-id="/update/rental/' + data + '">' +
+              '<button type="button" class="update-rental btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/rental/' + data + '">' +
               '<span class="fa fa-edit"></span></button>';
             return render
           }

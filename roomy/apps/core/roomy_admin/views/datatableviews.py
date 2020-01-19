@@ -40,8 +40,8 @@ def billing_table(request):
     return HttpResponse(data, content_type='application/json')
 
 
-@login_required
-@user_passes_test(lambda u: u.is_staff)
+# @login_required
+# @user_passes_test(lambda u: u.is_staff)
 def fee_table(request):
     fees = Fee.objects.filter(property_id__owner_id__user_id=request.user)
 
@@ -235,8 +235,6 @@ def property_table(request):
         x = {"fields": {"id": property_obj.pk,
                         "name": property_obj.name,
                         "type": property_obj.get_property_type_display(),
-                        "description": property_obj.description,
-                        "images": images,
                         }}
         data.append(x)
     data = json.dumps(data)

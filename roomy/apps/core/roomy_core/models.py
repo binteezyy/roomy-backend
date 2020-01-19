@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 
@@ -37,9 +38,7 @@ class Property(models.Model):
     property_type = models.IntegerField(choices=property_type_enum, default=0)
     name = models.CharField(max_length=56, unique=True)
     description = models.TextField(blank=True, null=True)
-    street = models.CharField(max_length=56)
-    brgy = models.CharField(max_length=56)
-    city = models.CharField(max_length=56)
+    property_address = models.CharField(max_length=256, null=True, blank=True)
     property_image = models.ManyToManyField(
         ImageFile, blank=True, related_name='property_image')
 
@@ -95,6 +94,12 @@ class Transaction(models.Model):
     active = models.BooleanField(default=True)
     start_date = models.DateTimeField(null=True, auto_now_add=True)
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
+    rating = models.PositiveIntegerField(default=1, validators=[
+        MaxValueValidator(5),
+        MinValueValidator(1)
+    ], null=True, blank=True)
+    rating_description = models.TextField(blank=True, null=True)
+    rated = models.BooleanField(default=False)
     add_ons = models.ManyToManyField(Fee, blank=True)
 
     def __str__(self):

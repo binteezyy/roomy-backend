@@ -19,8 +19,9 @@ INSTALLED_APPS = [
     'apps.core.roomy_core',
     'bootstrap_modal_forms',
     'widget_tweaks',
-    'crispy_forms'
+    'crispy_forms',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,3 +78,5 @@ ROOT_URLCONF = 'config.core.urls'
 
 LOGIN_REDIRECT_URL = 'admin-index'
 LOGIN_URL = 'admin-index'
+
+APPEND_SLASH = False
