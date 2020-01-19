@@ -1,4 +1,5 @@
 from decouple import config
+from ..common import *
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -15,12 +16,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'sslserver',
     # APPS
-    'apps.core.roomy_admin',
-    'apps.core.roomy_core',
-    'bootstrap_modal_forms',
+
     'widget_tweaks',
     'crispy_forms',
-]
+] + GLOBAL_APPS
 
 
 MIDDLEWARE = [

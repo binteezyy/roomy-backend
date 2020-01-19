@@ -16,5 +16,5 @@ router.register('guests', api_views.GuestApiView)
 router.register('images', api_views.ImageFileApiView)
 urlpatterns = [
     path('index/',      base.index,                                        name='api-index'),
-    path('', include(router.urls))
+    path('', include(router.urls)),
 ]

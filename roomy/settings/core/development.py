@@ -2,11 +2,6 @@ from .base import *
 import os
 
 ALLOWED_HOSTS = ['*', ]
-
-INTERNAL_IPS = [
-    '*',
-    '192.168.1.14'
-]
 DEBUG = True
 
 INSTALLED_APPS += [
@@ -29,7 +24,6 @@ DATABASES = {
 
 }
 
-MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -46,6 +40,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# DEBUG TOOLBAR
+INTERNAL_IPS = ['127.0.0.1',]
+MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
 DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.versions.VersionsPanel',
     'debug_toolbar.panels.timer.TimerPanel',
@@ -65,15 +62,3 @@ DEBUG_TOOLBAR_PANELS = [
 DEBUG_TOOLBAR_CONFIG = {
     'JQUERY_URL': '',
 }
-
-
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static/'),
-
-# ]
-# PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-# STATIC_ROOT = os.path.join(BASE_DIR, '../apps/core/static')
-
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, '../apps/core/media')
