@@ -12,7 +12,8 @@ urlpatterns = [
     path('', landing.home, name='home'),
     path('login/',auth.login, name='login'),
     path('logout/', auth.logout, name='logout'),
-    path('explore/', landing.explore, name='explore'),
+    path('explore/', explore.index, name='explore'),
+>>>>>>> client-explore:roomy/apps/client/urls.py
     path('booking_guide/', landing.booking_guide, name='booking_guide'),
     path('partner_with_us/', landing.partner_with_us, name='partner_with_us'),
     path('about/', landing.about, name='about'),
