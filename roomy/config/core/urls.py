@@ -7,3 +7,6 @@ urlpatterns +=  [
     path('api/', include('apps.core.roomy_core.urls')),
     path('', include('apps.core.roomy_admin.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [path('admin/', admin.site.urls),]
