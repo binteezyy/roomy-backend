@@ -61,7 +61,7 @@ class BookingModalForm(BSModalForm):
 class PropertyModalForm(BSModalForm):
     class Meta:
         model = Property
-        exclude = ['property_image',]
+        exclude = ['', ]
 
 
 class RoomModalForm(BSModalForm):

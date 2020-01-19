@@ -122,7 +122,8 @@ urlpatterns = [
          modalviews.PropertyDeleteModal.as_view(), name='delete-property'),
     path('up/property/<int:pk>',
          modalviews.PropertyUpdateModal.as_view(), name='update-property'),
-    path('upload/property', base.property_upload, name='admin-property-upload'),
+    path('upload/property/<int:pk>', base.property_upload,
+         name='admin-property-upload'),
 
     # Room
     path('room/table/', datatableviews.room_table, name='admin-room-table'),

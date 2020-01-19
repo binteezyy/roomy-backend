@@ -64,8 +64,8 @@ Properties
         $(".create-property").modalForm({ formURL: "{% url 'create-property' %}" });
       },
       "drawCallback": function (settings) {
-        $("#upload-property").modalForm({
-          formURL: "{% url 'admin-property-upload' %}"
+        $(".upload-property").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
         });
         $(".read-property").each(function () {
           $(this).modalForm({ formURL: $(this).data('id') });
@@ -99,7 +99,7 @@ Properties
           "data": 'fields.id',
           render: function (data, type, row) {
             let render =
-              '<button type="button" class="upload-property btn btn-raised btn-sm btn-info m-1" data-id="/roomy-admin/upload/property">' +
+              '<button type="button" class="upload-property btn btn-raised btn-sm btn-info m-1" data-id="/roomy-admin/upload/property/' + data + '">' +
               '<span class="fa fa-file-upload"></span></button>' +
               '<button type="button" class="read-property btn btn-raised btn-sm btn-primary m-1" data-id="/roomy-admin/read/property/' + data + '">' +
               '<span class="fa fa-eye"></span></button>' +

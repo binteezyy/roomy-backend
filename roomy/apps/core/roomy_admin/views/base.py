@@ -134,11 +134,27 @@ def property_management(request):
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def property_upload(request):
-    return render(request, "components/property_image_upload.html", context)
+def property_upload(request, pk):
+
+    property_object = Property.objects.get(pk=pk)
+    if request.method == 'GET':
+        context = {
+            'property': property_object,
+        }
+        return render(request, "components/upload_template/property-upload.html", context)
+
+    elif request.method == 'POST' and request.FILES['myfile'] and request.POST.get('filetitle'):
+        upload_image = ImageFile(title=request.POST.get(
+            'filetitle'), img_path=request.FILES['myfile'])
+        upload_image.save()
+
+        upload_to_property = property_object.property_image.add(upload_image)
+        return HttpResponse("ok")
+    else:
+        return HttpResponse("not ok")
+
 
 # room_management
-
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)

@@ -327,6 +327,7 @@ class PropertyReadModal(BSModalReadView):
         context['viewtype'] = 'property'
         context['property'] = kwargs['object']
         context['type'] = kwargs['object'].get_property_type_display()
+        context['images'] = kwargs['object'].property_image.all()
         return context
 
     def test_func(self):
