@@ -105,9 +105,9 @@ Tenants
                     "data": 'fields.id',
                     render: function (data, type, row) {
                         let render =
-                            '<button type="button" class="delete-guest btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/guest/' + data + '">' +
+                            '<button type="button" class="delete-guest btn btn-sm btn-raised btn-warning m-1" data-id="/delete/guest/' + data + '">' +
                             '<span class="fa fa-trash"></span></button>' +
-                            '<button type="button" class="update-guest btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/guest/' + data + '">' +
+                            '<button type="button" class="update-guest btn btn-sm btn-raised btn-success m-1" data-id="/update/guest/' + data + '">' +
                             '<span class="fa fa-edit"></span></button>';
                         return render
                     }

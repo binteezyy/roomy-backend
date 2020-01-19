@@ -16,7 +16,7 @@ def index(request):
     next = request.GET.get('next')
 
     if request.user.is_authenticated:
-        return render(request, "components/dashboard.html")
+        return render(request, "components/billing.html")
     else:
         form = UserLoginForm(request.POST or None)
         if form.is_valid():

@@ -114,15 +114,15 @@ Rooms
           "data": 'fields.id',
           render: function (data, type, row) {
             let render =
-              '<button type="button" class="upload-room-2d btn btn-raised btn-sm btn-info m-1" data-id="/roomy-admin/upload/room2d/' + data + '">' +
+              '<button type="button" class="upload-room-2d btn btn-raised btn-sm btn-info m-1" data-id="/upload/room2d/' + data + '">' +
               '<span class="fa fa-file-upload">Upload 2d</span></button>' +
-              '<button type="button" class="upload-room-3d btn btn-raised btn-sm btn-dark m-1" data-id="/roomy-admin/upload/room3d/' + data + '">' +
+              '<button type="button" class="upload-room-3d btn btn-raised btn-sm btn-dark m-1" data-id="/upload/room3d/' + data + '">' +
               '<span class="fa fa-file-upload"> Upload 3d</span></button>' +
-              '<button type="button" class="read-room btn btn-raised btn-sm btn-primary m-1" data-id="/roomy-admin/read/room/' + data + '">' +
+              '<button type="button" class="read-room btn btn-raised btn-sm btn-primary m-1" data-id="/read/room/' + data + '">' +
               '<span class="fa fa-eye"></span></button>' +
-              '<button type="button" class="delete-room btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/room/' + data + '">' +
+              '<button type="button" class="delete-room btn btn-sm btn-raised btn-warning m-1" data-id="/delete/room/' + data + '">' +
               '<span class="fa fa-trash"></span></button>' +
-              '<button type="button" class="update-room btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/room/' + data + '">' +
+              '<button type="button" class="update-room btn btn-sm btn-raised btn-success m-1" data-id="/update/room/' + data + '">' +
               '<span class="fa fa-edit"></span></button>';
             return render
           }

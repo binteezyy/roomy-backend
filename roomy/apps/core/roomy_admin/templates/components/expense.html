@@ -99,9 +99,9 @@ Fee
           "data": 'fields.id',
           render: function (data, type, row) {
             let render =
-              '<button type="button" class="delete-expense btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/expense/' + data + '">' +
+              '<button type="button" class="delete-expense btn btn-sm btn-raised btn-warning m-1" data-id="/delete/expense/' + data + '">' +
               '<span class="fa fa-trash"></span></button>' +
-              '<button type="button" class="update-expense btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/expense/' + data + '">' +
+              '<button type="button" class="update-expense btn btn-sm btn-raised btn-success m-1" data-id="/update/expense/' + data + '">' +
               '<span class="fa fa-edit"></span></button>';
             return render
           }
