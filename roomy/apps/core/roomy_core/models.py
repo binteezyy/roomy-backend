@@ -156,9 +156,9 @@ class Booking(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
     document1_id = models.ForeignKey(
-        Document, on_delete=models.CASCADE, related_name="document1")
+        Document, on_delete=models.CASCADE, null=True, blank=True, related_name="document1")
     document2_id = models.ForeignKey(
-        Document, on_delete=models.CASCADE, related_name="document2")
+        Document, on_delete=models.CASCADE, null=True, blank=True, related_name="document2")
     add_ons = models.ManyToManyField(Fee, blank=True)
     approved = models.BooleanField(default=False)
 

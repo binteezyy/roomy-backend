@@ -23,13 +23,13 @@ Tenant Notifications
                             role="grid" aria-describedby="dataTable_info">
                             <thead>
                                 <tr role="row">
-                                    <th style="width:10%">Id</th>
-                                    <th style="width:10%">Tenant</th>
-                                    <th style="width:10%">Title</th>
-                                    <th style="width:10%">Body</th>
-                                    <th style="width:10%">Date</th>
-                                    <th style="width:10%">Status</th>
-                                    <th style="width:10%">Actions</th>
+                                    <th>Id</th>
+                                    <th>Tenant</th>
+                                    <th>Title</th>
+                                    <th>Body</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -111,7 +111,7 @@ Tenants
                     "data": 'fields.id',
                     render: function (data, type, row) {
                         let render =
-                            '<button type="button" class="delete-notif btn btn-sm btn-raised btn-warning m-1" data-id="delete/notif/' + data + '">' +
+                            '<button type="button" class="delete-notif btn btn-sm btn-raised btn-warning m-1" data-id="/delete/notif/' + data + '">' +
                             '<span class="fa fa-trash"></span></button>' +
                             '<button type="button" class="update-notif btn btn-sm btn-raised btn-success m-1" data-id="/update/notif/' + data + '">' +
                             '<span class="fa fa-edit"></span></button>';
