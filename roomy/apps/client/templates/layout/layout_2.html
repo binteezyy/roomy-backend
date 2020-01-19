@@ -5,24 +5,21 @@
 <div class="container-fluid">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded" style="margin-bottom: 20px;">
-      <span style="color: white; font-size: 18px; ">Property name</span>
+      <span style="color: white; font-size: 18px; ">Pureza Mansion</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <i class="fas fa-ellipsis-h"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarsExample10">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'room' %}">Room</a>
+              <a class="nav-link" href="{% url 'property' %}">Listing</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'amenities' %}">Amenities</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'photos' %}">Photos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'rates' %}">Rates</a>
             </li>
           </ul>
         </div>
