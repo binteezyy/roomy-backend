@@ -1,163 +1,466 @@
-{% extends "layout/layout.html" %}
+{% extends "layout/layout_landing.html" %}
 {% load static %}
 
 {% block title %}
-Home
+Roomy
 {% endblock %}
 
 {% block content %}
 
+<div class="d-flex flex-column flex-wrap justify-content-center align-items-center"
+  style="width: 100%; height: 100vh; margin-bottom: 100px; background-image: url('/static/img/placeholder_1200x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+
+  <!-- search bar -->
+  <div class="d-flex justify-content-center align-items-center" style="width: 100%; margin-bottom: 10px;">
+    <form class="form-inline mr-auto mb-4 d-flex justify-content-center" _lpchecked="1" style="width: 100%; margin-bottom: 50px;" action="#">
+      <div class="input-group mb-3 d-flex justify-content-center align-items-center" style="width: 80%;">
+        <input type="text" class="form-control form-control-lg" placeholder="Search for property or location" aria-label="Search" aria-describedby="button-addon2" style="width: 100%;">
+        <div class="input-group-append">
+          <button class="btn btn-elegant btn-rounded my-0 waves-effect waves-light" type="button" id="button-addon2">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- end of search bar -->
+
+  <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 100px; padding: 60px; background-color: transparent;">
+    <h3 class="text-center">Lorem Ipsum</h3>
+    <p class="text-center" style="width: 100%; margin: 0 auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae metus bibendum, suscipit dolor non, ultrices metus. Integer nec libero risus.</p>
+    <div class="d-flex flex-wrap justify-content-center" style="margin-top: 20px;">
+      <button class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
+      <button class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#getInTouchModal">GET IN TOUCH</button>
+    </div>
+  </div>
+
+</div>
+
 <!-- main content -->
 <div class="container-fluid">
   <div class="container">
-    <div class="row d-flex flex-row justify-content-center" style="margin-top: 50px; margin-bottom: 20px;">
 
-      <!-- search bar -->
-      <div class="d-flex justify-content-center align-items-center" style="width: 100%; margin-bottom: 10px;">
-        <form class="form-inline mr-auto mb-4 d-flex justify-content-center" _lpchecked="1" style="width: 100%; margin-bottom: 50px;" action="#">
-          <div class="input-group mb-3" style="width: 80%;">
-            <input type="text" class="form-control" placeholder="What are you looking for?" aria-label="Search" aria-describedby="button-addon2" style="width: 100%;">
-            <div class="input-group-append">
-              <button class="btn btn-elegant btn-rounded btn-sm my-0 waves-effect waves-light" type="button" id="button-addon2">Search</button>
-            </div>
-          </div>
-        </form>
+    <!-- places -->
+    <div class="row d-flex flex-column flex-wrap justify-content-center align-items-center" style="margin-bottom: 30px;">
+      <h3>Places</h3>
+      <span style="margin:0 80px 0 80px; text-align: center;">Donec nisi nibh, pretium condimentum interdum at, faucibus in purus. Proin volutpat nunc at libero interdum mollis.</span>
+    </div>
+    <div class="row d-flex flex-wrap justify-content-center align-items-center" style="margin-bottom: 100px;">
+
+      <div class="col-md-2" style="height: 250px; margin: 5px; padding: 0; background-color: red; background-image: url('/static/img/placeholder_500x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <a href="#" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Manila</a>
       </div>
-      <!-- end of search bar -->
-
-      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; margin-bottom: 80px;">
-        <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
+      <div class="col-md-2" style="height: 250px; margin: 5px; background-color: purple;  background-image: url('/static/img/placeholder_500x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <a href="#" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Taguig</a>
       </div>
-
-      <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 100px; padding: 50px; background-color: lightgrey;">
-        <h3 class="text-center">Lorem Ipsum</h3>
-        <p class="text-center" style="width: 100%; margin: 0 auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae metus bibendum, suscipit dolor non, ultrices metus. Integer nec libero risus.</p>
-        <div class="d-flex flex-wrap justify-content-center" style="margin-top: 20px;">
-          <button class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
-          <button class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#getInTouchModal">GET IN TOUCH</button>
-        </div>
+      <div class="col-md-2" style="height: 250px; margin: 5px; background-color: green;  background-image: url('/static/img/placeholder_500x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <a href="#" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Makati</a>
       </div>
-
-      <!-- category -->
-      <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 50px;">
-        <h3>Categories</h3>
-        <div class="d-flex flex-wrap justify-content-center align-items-center">
-          <a class="btn btn-lg btn-dark text-center" style="width: 300px; margin: 10px; padding: 10px; border-radius: 25px;" href="#condominium">
-            Condominium
-          </a>
-          <a class="btn btn-lg btn-dark text-center" style="width: 300px; margin: 10px; padding: 10px; border-radius: 25px;" href="#dormitory">
-            Dormitory
-          </a>
-          <a class="btn btn-lg btn-dark text-center" style="width: 300px; margin: 10px; padding: 10px; border-radius: 25px;" href="#apartment">
-            Apartment
-          </a>
-        </div>
+      <div class="col-md-2" style="height: 250px; margin: 5px; background-color: yellow;  background-image: url('/static/img/placeholder_500x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <a href="#" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Pasay</a>
       </div>
-      <!-- end of category -->
-
-
-      <!-- condominium -->
-      <div class="wrapper" id="condominium" style="padding: 40px;">
-        <div class="d-flex flex-wrap" style="width: 100%; height: auto; min-height: 400px; margin-bottom: 20px;">
-          <div class="col-md-3 d-flex flex-column justify-content-center align-items-center" style="padding: 20px;">
-            <h5>Condominium</h5>
-            <img class="img-fluid" src="{% static "img\placeholder_200x200.png" %}" alt="" style="width: 200px height: 200px;"> <br>
-            <span>Pellentesque id tempus odio, vitae semper felis. Aenean luctus ullamcorper ligula, eget aliquam justo. Sed eget massa in diam suscipit suscipit.</span>
-          </div>
-          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center shadow p-3 mb-5 bg-white rounded" style="padding: 20px; border-radius: 5px;">
-
-
-
-          </div>
-        </div>
+      <div class="col-md-2" style="height: 250px; margin: 5px; background-color: orange;  background-image: url('/static/img/placeholder_500x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <a href="#" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Quezon City</a>
       </div>
-      <!-- end of condominium -->
-
-      <!-- dormitory -->
-      <div class="wrapper" id="dormitory" style="padding: 40px;">
-        <div class="d-flex flex-wrap" style="width: 100%; height: auto; min-height: 400px; margin-bottom: 20px;">
-          <div class="col-md-3 d-flex flex-column justify-content-start align-items-center" style="padding: 20px;">
-            <h5>Dormitory</h5>
-            <img class="img-fluid" src="{% static "img\placeholder_200x200.png" %}" alt=""> <br>
-            <span>Vivamus ac tellus placerat, facilisis risus nec, scelerisque tortor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</span>
-          </div>
-          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center shadow p-3 mb-5 bg-white rounded" style="padding: 20px; border-radius: 5px;">
-
-
-
-
-          </div>
-        </div>
-      </div>
-      <!-- end of dormitory -->
-
-      <!-- apartment -->
-      <div class="wrapper" id="apartment" style="padding: 40px;">
-        <div class="d-flex flex-wrap" style="width: 100%; height: auto; min-height: 400px; margin-bottom: 20px;">
-          <div class="col-md-3 d-flex flex-column justify-content-start align-items-center" style="padding: 20px;">
-            <h5>Apartment</h5>
-            <img class="img-fluid" src="{% static "img\placeholder_200x200.png" %}" alt=""> <br>
-            <span>In at mauris tincidunt, commodo arcu ut, tempor justo. Nullam accumsan commodo neque. Cras congue ultricies elit. Etiam venenatis efficitur rhoncus.</span>
-          </div>
-          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center shadow p-3 mb-5 bg-white rounded" style="padding: 20px; border-radius: 5px;">
-
-            <!-- room container -->
-            <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-              <a href="{% url 'room' %}">
-                <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
-              </a>
-              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-                <div class="">
-                  <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
-                  <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
-                </div>
-                <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
-              </div>
-              <div class="d-flex justify-content-between align-items-center">
-                <span style="font-size: 20px;">Room B20</span>
-                <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
-              </div>
-              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-                <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
-              </div><hr>
-              <div class="d-flex justify-content-start" >
-                <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
-              </div>
-            </div>
-            <!-- end of room container -->
-
-            <!-- room container -->
-            <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-              <a href="{% url 'room' %}">
-                <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
-              </a>
-              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-                <div class="">
-                  <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
-                  <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
-                </div>
-                <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
-              </div>
-              <div class="d-flex justify-content-between align-items-center">
-                <span style="font-size: 20px;">Room B20</span>
-                <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
-              </div>
-              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-                <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
-              </div><hr>
-              <div class="d-flex justify-content-start" >
-                <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
-              </div>
-            </div>
-            <!-- end of room container -->
-
-
-          </div>
-        </div>
-      </div>
-      <!-- end of apartment -->
 
     </div>
+    <!-- end of places -->
+
+    <!-- catergories -->
+    <div class="row d-flex flex-column flex-wrap justify-content-center align-items-center" style="margin-bottom: 30px;">
+      <h3>Categories</h3>
+      <span style="margin:0 80px 0 80px; text-align: center;">Donec nisi nibh, pretium condimentum interdum at, faucibus in purus. Proin volutpat nunc at libero interdum mollis.</span>
+    </div>
+    <div class="row d-flex flex-wrap justify-content-center align-items-center" style="margin-bottom: 100px;">
+
+      <div class="col-md-3" style="height: 250px; margin: 5px; padding: 0; background-image: url('/static/img/placeholder_200x200.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <a href="#" class="d-flex justify-content-center align-items-center btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px; font-size: 22px;">Condominium</a>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-3" style="height: 250px; margin: 5px; background-image: url('/static/img/placeholder_200x200.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <a href="#" class="d-flex justify-content-center align-items-center btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px; font-size: 22px;">Apartment</a>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-3" style="height: 250px; margin: 5px; background-image: url('/static/img/placeholder_200x200.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <a href="#" class="d-flex justify-content-center align-items-center btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px; font-size: 22px;">Dormitory</a>
+      </div>
+    </div>
+    <!-- condominium -->
+    <div class="row d-flex flex-column justify-content-start align-items-start" style="margin-bottom: 100px;">
+      <h3 style="margin-bottom: 10px;">Condominium</h3>
+        <span style="margin-bottom: 10px; font-size: 14px;">Sed vulputate interdum dolor, at eleifend lacus finibus vitae.</span>
+      <div class="d-flex flex-wrap justify-content-center align-items-center z-depth-1 rounded" style="width: 100%; min-height: 500px; margin-right: auto; margin-left: auto; padding: 10px;">
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+      </div>
+    </div>
+    <!-- end of condominium -->
+    <!-- apartment -->
+    <div class="row d-flex flex-column justify-content-start align-items-start" style="margin-bottom: 100px;">
+      <h3 style="margin-bottom: 10px;">Apartment</h3>
+      <span style="margin-bottom: 10px; font-size: 14px;">Phasellus et nibh maximus lectus sagittis dapibus ac in odio.</span>
+      <div class="d-flex flex-wrap justify-content-center align-items-center z-depth-1 rounded" style="width: 100%; min-height: 500px; margin-right: auto; margin-left: auto; padding: 10px;">
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+      </div>
+    </div>
+    <!-- end of apartment -->
+    <!-- dormitory -->
+    <div class="row d-flex flex-column justify-content-start align-items-start" style="margin-bottom: 100px;">
+      <h3 style="margin-bottom: 10px;">Dormitory</h3>
+      <span style="margin-bottom: 10px; font-size: 14px;">Sed sodales tortor eu urna ullamcorper consequat. Curabitur vestibulum non leo at gravida. Duis id lacus dui.</span>
+      <div class="d-flex flex-wrap justify-content-center align-items-center z-depth-1 rounded" style="width: 100%; min-height: 500px; margin-right: auto; margin-left: auto; padding: 10px;">
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+        <!-- room container -->
+        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+          <a href="{% url 'room' %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          </a>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+            </div>
+            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span style="font-size: 20px;">Room B20</span>
+            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          </div><hr>
+          <div class="d-flex justify-content-start" >
+            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+          </div>
+        </div>
+        <!-- end of room container -->
+
+      </div>
+    </div>
+    <!-- end of dormitory -->
+    <!-- end of catergories -->
   </div>
 </div>
 
