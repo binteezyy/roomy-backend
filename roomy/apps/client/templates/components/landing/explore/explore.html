@@ -1,0 +1,44 @@
+{% extends "layout/layout.html" %}
+{% load static %}
+
+{% block title %}
+Explore
+{% endblock %}
+
+{% block content %}
+
+<!-- main content -->
+<div class="container-fluid" style="">
+  <div class="container">
+    <div id="app">
+      <% message %>
+      
+      <ul>
+      <li v-for="person in people">
+        <a v-bind:href="person.url">[[ person.name ]]</a> <button v-on:click="greet(person.name)">hey</button>
+      </li>
+    </ul>
+    </div>
+  </div>
+</div>
+<!-- end of main content -->
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var app = new Vue({
+      delimiters: ['<<', '>>'],
+      el: '#app',
+      data: {
+          message: 'Hello Vue!',
+      },
+      methods: {
+          greet: function(name) {
+              console.log('Hello from ' + name + '!')
+          }
+      }
+    });
+</script>
+{% endblock %}

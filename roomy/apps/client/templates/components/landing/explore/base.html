@@ -1,0 +1,85 @@
+{% extends "layout/layout.html" %}
+{% load static %}
+
+{% block title %}
+Explore
+{% endblock %}
+
+{% block content %}
+  <div class="search_area form-inline mr-auto mb-4 d-flex justify-content-center">
+    <form _lpchecked="1" style="width: 100%;" method="GET">
+        <div class="bar">
+          <div class="bar_wrapper">
+            <input name="search" type="text" class="form-control" placeholder="Enter a location or property" aria-label="Search" aria-describedby="search">
+            <button class="btn waves-effect waves-light" value="submit" id="search-icn">SEARCH</button>
+          </div>
+        </div>
+      </div>
+  </form>
+  </div>
+  <div class="container-fluid" style="margin-bottom: 50px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          {% if message and search != "" %}
+          <h2>{{ message }}{{ specific_brand }}{{ text }}{{ cat }}.</h2>
+          {% endif %}
+          <div class="d-flex flex-wrap justify-content-center" style="margin: 0 auto;">
+
+            <!-- main property container -->
+            <div class="" style="width: 100%; margin: 10px 0 50px 0;">
+              <div class="img-container">
+                <div class="wrapper d-flex justify-content-center">
+                  <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
+                </div>
+                <div class="btn-over d-flex">
+                  <a class="btn btn-sm btn-dark" href="{% url 'room' %}">View</a>
+                  <style>
+                    .img-container {
+                      position: relative;
+                    }
+
+                    .btn-over {
+                      position: absolute;
+                      top: 88%;
+                      left: 90%;
+                      transform: translate(-50%, -50%);
+                      -ms-transform: translate(-50%, -50%);
+                    }
+                  </style>
+                </div>
+              </div>
+              <div class="d-flex flex-row justify-content-between">
+                <div class="wrapper" style="width: 100%;">
+                  <div class="text-wrapper" style="padding: 15px 0 10px 0;">
+                    <h5 style="padding-bottom: 15px; border-bottom: 1px solid lightgrey;">Property Name</h5>
+                    <h6 style="margin-bottom: 12px;">insert address here</h6>
+                    <p class="bg-light" style="width: 100%; padding: 10px 10px 30px 10px; border-radius: 5px;">
+                      insert description here
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end of main property container -->
+
+          </div>
+          <!-- end of listings -->
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+  </div>
+  <!-- end of main content -->
+
+{% endblock content %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static "css/search-bar.css" %}">
+  <link rel="stylesheet" href="{% static "vendor/animate.css" %}">
+{% endblock %}
+
+{% block extra_js %}
+  <script type="text/javascript" src="{% static "js/search-bar.js" %}"></script>
+{% endblock %}

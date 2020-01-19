@@ -1,16 +1,10 @@
 from django.shortcuts import render
 
-# GLOBAL CONTEXT
 context = {
-    'AUTHORS': 'PPTT',
+    "TITLE": "Roomy"
 }
-
 def home(request):
     return render(request,"components/landing/home.html",context)
-
-def explore(request):
-    return render(request,"components/landing/explore.html",context)
-
 def booking_guide(request):
     return render(request,"components/landing/booking_guide.html",context)
 
