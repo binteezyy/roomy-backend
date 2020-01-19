@@ -4,14 +4,10 @@
 {% block layout %}
 
 <!-- navbar -->
-<<<<<<< HEAD
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-=======
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark mb-4" id="navbar">
->>>>>>> origin/client-room
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark" id="navbar">
   <div class="container">
     <!-- logo -->
-    <a href="{% url 'explore' %}" style="margin-right: 20px;">
+    <a href="{% url 'home' %}" style="margin-right: 20px;">
       <img src="{% static "img\logo_white.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
     </a>
 
@@ -23,6 +19,9 @@
 
       <!-- links -->
       <ul class="navbar-nav mr-auto">
+        <li class="nav-item nav-item-custom">
+          <a class="nav-link" style="" href="{% url 'explore' %}">Explore</a>
+        </li>
         <li class="nav-item nav-item-custom">
           <a class="nav-link" style="" href="{% url 'booking_guide' %}">Booking Guide</a>
         </li>
@@ -306,13 +305,10 @@
 <!-- end of get in touch modal -->
 <!-- end of modals -->
 
+
+{% block content %}{% endblock content %}
+
 {% endblock %}
-
-<div id="main-container" class="container-fluid">
-  {% block content %}
-
-  {% endblock %}
-</div>
 {% block footer %}
   <!-- footer -->
   <footer class="page-footer font-small black pt-4" style="padding-bottom: 100px;">

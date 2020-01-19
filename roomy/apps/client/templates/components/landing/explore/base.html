@@ -5,14 +5,6 @@
 Explore
 {% endblock %}
 
-{% block extra_css %}
-  <link rel="stylesheet" href="{% static "css/search-bar.css" %}">
-  <link rel="stylesheet" href="{% static "vendor/animate.css" %}">
-{% endblock %}
-
-{% block extra_js %}
-  <script type="text/javascript" src="{% static "js/search-bar.js" %}"></script>
-{% endblock %}
 {% block content %}
   <div class="search_area form-inline mr-auto mb-4 d-flex justify-content-center">
     <form _lpchecked="1" style="width: 100%;" method="GET">
@@ -81,4 +73,13 @@ Explore
   </div>
   <!-- end of main content -->
 
+{% endblock content %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static "css/search-bar.css" %}">
+  <link rel="stylesheet" href="{% static "vendor/animate.css" %}">
+{% endblock %}
+
+{% block extra_js %}
+  <script type="text/javascript" src="{% static "js/search-bar.js" %}"></script>
 {% endblock %}
