@@ -4,24 +4,25 @@
 {% block layout %}
 
 <!-- navbar -->
+<<<<<<< HEAD
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+=======
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark mb-4" id="navbar">
+>>>>>>> origin/client-room
   <div class="container">
     <!-- logo -->
-    <a href="{% url 'home' %}" style="margin-right: 20px;">
+    <a href="{% url 'explore' %}" style="margin-right: 20px;">
       <img src="{% static "img\logo_white.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
     </a>
 
     <!-- expand button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-ellipsis-h"></i></button>
 
     <!-- navigation -->
     <div class="navbar-collapse collapse" id="navbarsExample04">
 
       <!-- links -->
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item nav-item-custom">
-          <a class="nav-link" style="" href="{% url 'explore' %}">Explore</a>
-        </li>
         <li class="nav-item nav-item-custom">
           <a class="nav-link" style="" href="{% url 'booking_guide' %}">Booking Guide</a>
         </li>
@@ -66,7 +67,7 @@
     <div class="modal-dialog" role="document">
 
       <!-- modal content -->
-      <div class="modal-content" style="width: 400px; height: auto; margin: 0 auto; border-radius: 15px;">
+      <div class="modal-content" style="width: 350px; height: auto; margin: 0 auto; border-radius: 15px;">
 
         <!-- modal body -->
         <div class="modal-body">
@@ -127,7 +128,7 @@
     <div class="modal-dialog" role="document">
 
       <!-- modal content -->
-      <div class="modal-content" style="width: 400px; height: auto; margin: 0 auto; border-radius: 15px;">
+      <div class="modal-content" style="width: 350px; height: auto; margin: 0 auto; border-radius: 15px;">
 
         <!-- modal body -->
         <div class="modal-body">
@@ -195,7 +196,7 @@
     <div class="modal-dialog" role="document">
 
       <!-- modal content -->
-      <div class="modal-content" style="width: 400px; height: auto; margin: 0 auto; border-radius: 15px;">
+      <div class="modal-content" style="width: 350px; height: auto; margin: 0 auto; border-radius: 15px;">
 
         <!-- modal body -->
         <div class="modal-body">
@@ -239,6 +240,70 @@
 
 </form>
 <!-- end of forgot password modal -->
+<!-- get in touch modal -->
+<form class="" action="#" method="post">
+
+  <!-- modal -->
+  <div class="modal fade" id="getInTouchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <!-- modal content -->
+      <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
+
+        <!-- modal body -->
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row d-flex justify-content-center" style="padding-right: 10px; padding-left: 10px;">
+              <div class="d-flex flex-column justify-content-center" style="margin-bottom: 20px;">
+                <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px;">
+                <h4 class="text-center" style="margin-top: 30px;">Partner With Us</h4>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Full Name</span>
+                  </div>
+                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Company</span>
+                  </div>
+                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Mobile</span>
+                  </div>
+                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Email</span>
+                  </div>
+                  <input type="email" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Message</span>
+                  </div>
+                  <textarea class="form-control" name="name" rows="5" cols="50"></textarea>
+                </div>
+                <div class="d-flex justify-content-center" style="margin-top: 40px;">
+                  <button type="button" class="btn btn-sm btn-dark">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</form>
+<!-- end of get in touch modal -->
 <!-- end of modals -->
 
 {% endblock %}

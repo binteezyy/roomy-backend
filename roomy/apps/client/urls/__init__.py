@@ -9,11 +9,15 @@ from ..views import *
 
 urlpatterns = [
     #navigation
+<<<<<<< HEAD:roomy/apps/client/urls/__init__.py
     path('', landing.home, name='home'),
     path('login/',auth.login, name='login'),
     path('logout/', auth.logout, name='logout'),
     path('explore/', explore.index, name='explore'),
 >>>>>>> client-explore:roomy/apps/client/urls.py
+=======
+    path('', landing.explore, name='explore'),
+>>>>>>> origin/client-room:roomy/apps/client/urls.py
     path('booking_guide/', landing.booking_guide, name='booking_guide'),
     path('partner_with_us/', landing.partner_with_us, name='partner_with_us'),
     path('about/', landing.about, name='about'),
@@ -23,8 +27,9 @@ urlpatterns = [
     path('privacy/', landing.privacy, name='privacy'),
     path('help_center/', landing.help_center, name='help_center'),
     #property
+    path('explore/property/', property.property, name='property'),
     path('explore/property/room', property.room, name='room'),
     path('explore/property/amenities', property.amenities, name='amenities'),
     path('explore/property/photos', property.photos, name='photos'),
-    path('explore/property/rates', property.rates, name='rates'),
+    path('explore/property/room/booking', property.booking, name='booking'),
 ]
