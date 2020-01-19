@@ -20,13 +20,8 @@ INSTALLED_APPS = [
     'bootstrap_modal_forms',
     'widget_tweaks',
     'crispy_forms',
-    'places',
 ]
 
-PLACES_MAPS_API_KEY = config('API_KEY')
-PLACES_MAP_WIDGET_HEIGHT = 480
-PLACES_MAP_OPTIONS = '{"center": { "lat": 38.971584, "lng": -95.235072 }, "zoom": 10}'
-PLACES_MARKER_OPTIONS = '{"draggable": true}'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
