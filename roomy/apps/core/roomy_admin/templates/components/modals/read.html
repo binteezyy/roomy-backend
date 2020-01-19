@@ -14,6 +14,7 @@
         {% elif viewtype == 'tenants' %} Tenant Info
         {% elif viewtype == 'booking' %} Booking Info
         {% elif viewtype == 'adminacc' %} Admin Account
+        {% elif viewtype == 'property' %} Property Info
         {% endif %}</h3>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -177,6 +178,36 @@
                 <li>
                     <h5> Provincial Address:
                         {{adminacc.provincial_address}}
+                    </h5>
+                </li>
+            </ul>
+        </div>
+        {% elif viewtype == 'property' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> Property Type:
+                        {{type}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Name:
+                        {{property.name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Description:
+                        {{property.description}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Address:
+                        {{property.address}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Image:
+                        {{property.image}}
                     </h5>
                 </li>
             </ul>

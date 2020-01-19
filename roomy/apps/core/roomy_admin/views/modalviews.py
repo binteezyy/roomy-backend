@@ -317,6 +317,22 @@ class BookingUpdateModal(BSModalUpdateView):
     success_url = reverse_lazy('booking')
 
 
+class PropertyReadModal(BSModalReadView):
+    model = Property
+    context_object_name = 'property'
+    template_name = 'components/modals/read.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['viewtype'] = 'property'
+        context['property'] = kwargs['object']
+        context['type'] = kwargs['object'].get_property_type_display()
+        return context
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
 class PropertyCreateModal(BSModalCreateView):
     model = Property
     model_type = 'property'
@@ -341,7 +357,7 @@ class PropertyDeleteModal(BSModalDeleteView):
 
 class PropertyUpdateModal(BSModalUpdateView):
     model = Property
-    template_name = 'components/modals/creat.html'
+    template_name = 'components/modals/update.html'
     form_class = PropertyModalForm
     sucess_message = "Success: Property updated"
     success_url = reverse_lazy('property_management')

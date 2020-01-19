@@ -235,8 +235,6 @@ def property_table(request):
         x = {"fields": {"id": property_obj.pk,
                         "name": property_obj.name,
                         "type": property_obj.get_property_type_display(),
-                        "description": property_obj.description,
-                        "images": images,
                         }}
         data.append(x)
     data = json.dumps(data)
