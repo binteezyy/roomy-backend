@@ -15,5 +15,5 @@ router.register('tenants', api_views.TenantAccountApiView)
 router.register('guests', api_views.GuestApiView)
 urlpatterns = [
     path('index/',      base.index,                                        name='api-index'),
-    path('', include(router.urls))
+    path('', include(router.urls)),
 ]

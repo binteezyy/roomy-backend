@@ -1,4 +1,5 @@
 from decouple import config
+from ..common import *
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -18,8 +19,7 @@ INSTALLED_APPS = [
     'sslserver',
     'social_django',
     # APPS
-    'apps.client.apps.ClientConfig',
-]
+] + GLOBAL_APPS
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
@@ -63,8 +63,6 @@ TEMPLATES = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LOGIN_URL = '/auth/login/google-oauth2/'
 
