@@ -19,6 +19,5 @@ urlpatterns = [
     path('explore/property/room', property.room, name='room'),
     path('explore/property/amenities', property.amenities, name='amenities'),
     path('explore/property/photos', property.photos, name='photos'),
-    path('explore/property/rates', property.rates, name='rates'),
     path('explore/property/room/booking', property.booking, name='booking'),
 ]

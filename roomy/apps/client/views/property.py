@@ -17,8 +17,5 @@ def amenities(request):
 def photos(request):
     return render(request,"components/property/photos.html", context)
 
-def rates(request):
-    return render(request,"components/property/rates.html", context)
-
 def booking(request):
     return render(request,"components/property/booking.html", context)
