@@ -4,24 +4,25 @@
 {% block layout %}
 
 <!-- navbar -->
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark mb-4">
+<<<<<<< HEAD
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+=======
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark mb-4" id="navbar">
+>>>>>>> origin/client-room
   <div class="container">
     <!-- logo -->
-    <a href="{% url 'home' %}" style="margin-right: 20px;">
+    <a href="{% url 'explore' %}" style="margin-right: 20px;">
       <img src="{% static "img\logo_white.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
     </a>
 
     <!-- expand button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-ellipsis-h"></i></button>
 
     <!-- navigation -->
     <div class="navbar-collapse collapse" id="navbarsExample04">
 
       <!-- links -->
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item nav-item-custom">
-          <a class="nav-link" style="" href="{% url 'explore' %}">Explore</a>
-        </li>
         <li class="nav-item nav-item-custom">
           <a class="nav-link" style="" href="{% url 'booking_guide' %}">Booking Guide</a>
         </li>
@@ -43,7 +44,12 @@
 
       <!-- login/signup -->
       <div class="wrapper">
-        <button class="btn btn-sm btn-light" style="margin-left: 10px;" data-toggle="modal" data-target="#loginModal">Log in</button>
+        {% if user.is_authenticated %}
+        <span style="color:white">Logged in as {{user.username}}</span>
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'login' %}" style="text-decoration:none"><button class="btn btn-sm btn-light" style="margin-left: 10px;">Log in</button></a>
+        {% endif %}
       </div>
 
     </div>
@@ -61,7 +67,7 @@
     <div class="modal-dialog" role="document">
 
       <!-- modal content -->
-      <div class="modal-content" style="width: 400px; height: auto; margin: 0 auto; border-radius: 15px;">
+      <div class="modal-content" style="width: 350px; height: auto; margin: 0 auto; border-radius: 15px;">
 
         <!-- modal body -->
         <div class="modal-body">
@@ -122,7 +128,7 @@
     <div class="modal-dialog" role="document">
 
       <!-- modal content -->
-      <div class="modal-content" style="width: 400px; height: auto; margin: 0 auto; border-radius: 15px;">
+      <div class="modal-content" style="width: 350px; height: auto; margin: 0 auto; border-radius: 15px;">
 
         <!-- modal body -->
         <div class="modal-body">
@@ -190,7 +196,7 @@
     <div class="modal-dialog" role="document">
 
       <!-- modal content -->
-      <div class="modal-content" style="width: 400px; height: auto; margin: 0 auto; border-radius: 15px;">
+      <div class="modal-content" style="width: 350px; height: auto; margin: 0 auto; border-radius: 15px;">
 
         <!-- modal body -->
         <div class="modal-body">
@@ -234,113 +240,180 @@
 
 </form>
 <!-- end of forgot password modal -->
-<!-- end of modals -->
+<!-- get in touch modal -->
+<form class="" action="#" method="post">
 
-{% endblock %}
+  <!-- modal -->
+  <div class="modal fade" id="getInTouchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
 
-{% block footer %}
+      <!-- modal content -->
+      <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
 
-<!-- footer -->
-<footer class="page-footer font-small black pt-4" style="padding-bottom: 100px;">
-  <div class="container-fluid">
-    <div class="container">
-      <div class="row">
-
-        <!-- Company -->
-        <div class="col-md-3 mb-md-0 mb-3">
-
-          <!-- Links -->
-          <h5 class="text-uppercase">Roomy</h5>
-
-          <ul class="navbar-nav d-flex flex-column justify-content-start text-left">
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'about' %}">About Us</a>
+        <!-- modal body -->
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row d-flex justify-content-center" style="padding-right: 10px; padding-left: 10px;">
+              <div class="d-flex flex-column justify-content-center" style="margin-bottom: 20px;">
+                <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px;">
+                <h4 class="text-center" style="margin-top: 30px;">Partner With Us</h4>
               </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'faq' %}">FAQs</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'contact' %}">Contact Us</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'terms_of_use' %}">Terms of use</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'privacy' %}">Privacy</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'help_center' %}">Help Center</a>
-              </div>
-            </li>
-          </ul>
-          </ul>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Full Name</span>
+                  </div>
+                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Company</span>
+                  </div>
+                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Mobile</span>
+                  </div>
+                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Email</span>
+                  </div>
+                  <input type="email" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                </div>
 
-        </div>
-
-        <!-- Follow Social Links -->
-        <div class="col-md-3 mb-md-0 mb-3">
-
-          <!-- links -->
-          <h5 class="text-uppercase">FOLLOW</h5>
-
-          <ul class="navbar-nav d-flex flex-column justify-content-start text-left">
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <img src="{% static "img\facebook.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
-                <span>&nbsp</span>
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="#">Facebook</a>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Message</span>
+                  </div>
+                  <textarea class="form-control" name="name" rows="5" cols="50"></textarea>
+                </div>
+                <div class="d-flex justify-content-center" style="margin-top: 40px;">
+                  <button type="button" class="btn btn-sm btn-dark">Submit</button>
+                </div>
               </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <img src="{% static "img\twitter.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
-                <span>&nbsp</span>
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="#">Twitter</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <img src="{% static "img\instagram.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
-                <span>&nbsp</span>
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="#">Instagram</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <img src="{% static "img\youtube.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
-                <span>&nbsp</span>
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="#">Youtube</a>
-              </div>
-            </li>
-          </ul>
-          <!-- end of links -->
-
-        </div>
-
-        <hr class="clearfix w-100 d-md-none pb-3">
-
-        <div class="col-md-6 mt-md-0 mt-3">
-          <div class="d-flex flex-column justify-content-center align-items-center">
-            <h5 style=" margin-bottom: 10px;">DOWNLOAD OUR APP NOW</h5>
-            <img src="{% static "img\svg_playstore.svg" %}" alt="">
+            </div>
           </div>
         </div>
 
       </div>
     </div>
   </div>
-</footer>
-<!-- end of footer -->
 
+</form>
+<!-- end of get in touch modal -->
+<!-- end of modals -->
+
+{% endblock %}
+
+<div id="main-container" class="container-fluid">
+  {% block content %}
+
+  {% endblock %}
+</div>
+{% block footer %}
+  <!-- footer -->
+  <footer class="page-footer font-small black pt-4" style="padding-bottom: 100px;">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="row">
+
+          <!-- Company -->
+          <div class="col-md-3 mb-md-0 mb-3">
+
+            <!-- Links -->
+            <h5 class="text-uppercase">Roomy</h5>
+
+            <ul class="navbar-nav d-flex flex-column justify-content-start text-left">
+              <li class="nav-item">
+                <div class="d-flex justify-content-start align-items-center">
+                  <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'about' %}">About Us</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="d-flex justify-content-start align-items-center">
+                  <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'faq' %}">FAQs</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="d-flex justify-content-start align-items-center">
+                  <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'contact' %}">Contact Us</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="d-flex justify-content-start align-items-center">
+                  <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'terms_of_use' %}">Terms of use</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="d-flex justify-content-start align-items-center">
+                  <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'privacy' %}">Privacy</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="d-flex justify-content-start align-items-center">
+                  <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'help_center' %}">Help Center</a>
+                </div>
+              </li>
+            </ul>
+            </ul>
+
+          </div>
+
+          <!-- Follow Social Links -->
+          <div class="col-md-3 mb-md-0 mb-3">
+
+            <!-- links -->
+            <h5 class="text-uppercase">FOLLOW</h5>
+
+            <ul class="navbar-nav d-flex flex-column justify-content-start text-left">
+              <li class="nav-item">
+                <div class="d-flex justify-content-start align-items-center">
+                  <img src="{% static "img\facebook.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+                  <span>&nbsp</span>
+                  <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="#">Facebook</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="d-flex justify-content-start align-items-center">
+                  <img src="{% static "img\twitter.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+                  <span>&nbsp</span>
+                  <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="#">Twitter</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="d-flex justify-content-start align-items-center">
+                  <img src="{% static "img\instagram.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+                  <span>&nbsp</span>
+                  <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="#">Instagram</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="d-flex justify-content-start align-items-center">
+                  <img src="{% static "img\youtube.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+                  <span>&nbsp</span>
+                  <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="#">Youtube</a>
+                </div>
+              </li>
+            </ul>
+            <!-- end of links -->
+
+          </div>
+
+          <hr class="clearfix w-100 d-md-none pb-3">
+
+          <div class="col-md-6 mt-md-0 mt-3">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+              <h5 style=" margin-bottom: 10px;">DOWNLOAD OUR APP NOW</h5>
+              <img src="{% static "img\svg_playstore.svg" %}" alt="">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- end of footer -->
 {% endblock %}
