@@ -1,0 +1,132 @@
+{% extends "index.html" %}
+
+{% block layout %}
+<!-- page wrapper -->
+<div class="wrapper">
+
+
+  <!-- navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex flex-column justify-content-start"
+    style="width: 250px; height: 100%; position:fixed; margin: 0; padding: 0;">
+
+    <a class="navbar-brand" href="#">roomy</a>
+
+    <ul class="navbar-nav d-flex flex-column justify-content-start">
+
+      <!-- navbar divider-->
+      <li class="">
+        <hr>
+      </li>
+
+      <!-- navbar header -->
+      <li class="nav-header">
+        <h5>Business</h5>
+      </li>
+
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'booking' %}">Booking</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'rental' %}">Rental</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'tenant' %}">Tenant</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'notif' %}">Tenant Notifications</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'request' %}">Tenant Request</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'guest' %}">Guest</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'billing' %}">Billing</a>
+      </li>
+
+
+      <!-- navbar divider-->
+      <li class="">
+        &nbsp
+      </li>
+
+      <!-- navbar header -->
+      <li class="nav-header">
+        <h5>Management</h5>
+      </li>
+
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'property_management' %}">Property Management</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'expense' %}">Property Expenses</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'room_management' %}">Room Management</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'fee' %}">Fee</a>
+      </li>
+
+      <!-- <li class="nav-item active">
+        <a class="nav-link" href="{% url 'admin_management' %}">Admin Management</a>
+      </li> -->
+
+    </ul>
+    <div class="row">
+      <div class="col center-block text-center">
+        <h4 class="profile" style="color:blueviolet">{{ request.user.username }}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col center-block text-center">
+        <a href="{% url 'admin-logout' %}" style="text-decoration:none"><button type="button"
+            class="btn btn-block btn-raised btn-danger" name="button">Logout</button></a>
+      </div>
+    </div>
+  </nav>
+  <!-- end of navigation -->
+
+  <!-- content wrapper -->
+  <div class="content-wrapper d-flex flex-column">
+
+    <!-- topbar -->
+    <div class="topbar d-flex flex-row justify-content-between">
+
+      <div class="navbar-text" style="color: white; font-size: 16px; margin: auto 10px auto 10px;">
+        {% block header %}
+
+        {% endblock %}
+      </div>
+
+      <div class="dropdown" style="color: white; font-size: 14px; margin: auto 10px auto 10px;">
+        <span class="header-text dropdown-toggle" type="dropdown-toggle" name="button" data-toggle="dropdown"
+          style="color: white; font-size: 14px; margin: auto 10px auto 10px;">
+          username
+        </span>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Profile</a>
+          <a class="dropdown-item" href="#">Log out</a>
+        </div>
+      </div>
+
+    </div>
+    <!-- end of topbar -->
+
+    <!-- content -->
+    {% block content %}
+
+    {% endblock %}
+    <!-- end of content -->
+
+  </div>
+  <!-- end of content wrapper -->
+
+</div>
+<!-- end of page wrapper-->
+
+{% endblock %}

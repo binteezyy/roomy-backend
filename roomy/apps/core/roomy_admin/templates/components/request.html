@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+Tenant Requests
+{% endblock %}
+
+{% block extra_css %}
+<!-- SELECT2 -->
+<link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include "_modal.html" %}
+<div class="content container">
+    <div class="card-content">
+        <div class="container-fluid">
+            <h2>Tenant Requests</h2>
+            <div class="row p-3">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table id="request-table" class="table table-bordered table-hover" width="100%" cellspacing="0"
+                            role="grid" aria-describedby="dataTable_info">
+                            <thead>
+                                <tr role="row">
+                                    <th style="width:10%">Id</th>
+                                    <th style="width:10%">Date</th>
+                                    <th style="width:10%">Subject</th>
+                                    <th style="width:10%">Description</th>
+                                    <th style="width:10%">Room</th>
+                                    <th style="width:10%">Status</th>
+                                    <th style="width:10%">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block header %}
+Tenants
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#request-table').DataTable({
+            "dataType": 'json',
+            "ajax": {
+                "processing": true,
+                "dataSrc": '',
+                "url": "{% url 'admin-request-table'%}",
+            },
+            "drawCallback": function (settings) {
+                $(".update-request").each(function () {
+                    $(this).modalForm({ formURL: $(this).data('id') });
+                });
+                $(".delete-request").each(function () {
+                    $(this).modalForm({ formURL: $(this).data('id') });
+                });
+            },
+            "columnDefs": [
+                {
+                    "className": 'col-request-id text-center',
+                    "targets": 0,
+                    "data": "fields.id",
+                },
+                {
+                    "className": 'col-request-date text-center',
+                    "targets": 1,
+                    "data": "fields.date",
+                },
+                {
+                    "className": 'col-request-subject text-center',
+                    "targets": 2,
+                    "data": "fields.subject",
+                },
+                {
+                    "className": 'col-request-description text-center',
+                    "targets": 3,
+                    "data": "fields.description",
+                },
+                {
+                    "className": 'col-request-room text-center',
+                    "targets": 4,
+                    "data": "fields.room",
+                },
+                {
+                    "className": 'col-request-status text-center',
+                    "targets": 5,
+                    "data": "fields.status",
+                },
+                {
+                    "className": 'col-details text-center',
+                    "targets": -1,
+                    "data": 'fields.id',
+                    render: function (data, type, row) {
+                        let render =
+                            '<button type="button" class="delete-request btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/request/' + data + '">' +
+                            '<span class="fa fa-trash"></span></button>' +
+                            '<button type="button" class="update-request btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/request/' + data + '">' +
+                            '<span class="fa fa-edit"></span></button>';
+                        return render
+                    }
+                },
+            ]
+        })
+    });
+</script>
+{% endblock %}

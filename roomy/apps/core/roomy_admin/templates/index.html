@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="author" content="">
+  <title>
+    {{ title }}
+  </title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static "vendor/bootstrap-material-design/css/bootstrap-material-design.min.css" %}">
+  <link rel="stylesheet" href="{% static "vendor/animate/animate.css" %}">
+  <link rel="stylesheet" href="{% static "css/style.css" %}">
+  <!-- CSS -->
+  {% block extra_css %}
+  {% endblock extra_css %}
+</head>
+
+<body>
+  {% block layout %}
+  {% endblock layout %}
+</body>
+<!-- SCRIPTS -->
+<script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
+<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+  integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+<script src="{% static 'vendor/bootstrap-material-design/js/bootstrap-material-design.min.js' %}"></script>
+<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script>$(document).ready(function () { $('body').bootstrapMaterialDesign(); });</script>
+<script type="text/javascript"
+  src="//maps.googleapis.com/maps/api/js?key=AIzaSyAE_aLNQaPj0viIzm1lnTsvsf0Pq4b14IE&amp;libraries=places"></script>
+<script type="text/javascript" charset="UTF-8"
+  src="http://maps.googleapis.com/maps-api-v3/api/js/39/6/common.js"></script>
+<script type="text/javascript" charset="UTF-8"
+  src="http://maps.googleapis.com/maps-api-v3/api/js/39/6/util.js"></script>
+<script type="text/javascript" charset="UTF-8"
+  src="http://maps.googleapis.com/maps-api-v3/api/js/39/6/controls.js"></script>
+<script type="text/javascript" charset="UTF-8"
+  src="http://maps.googleapis.com/maps-api-v3/api/js/39/6/places_impl.js"></script>
+<script type="text/javascript" charset="UTF-8" src="http://maps.googleapis.com/maps-api-v3/api/js/39/6/map.js"></script>
+<script type="text/javascript" charset="UTF-8"
+  src="http://maps.googleapis.com/maps-api-v3/api/js/39/6/marker.js"></script>
+<script type="text/javascript" charset="UTF-8"
+  src="http://maps.googleapis.com/maps-api-v3/api/js/39/6/onion.js"></script>
+
+{% block extra_js %}
+
+{% endblock extra_js %}
+
+</html>

@@ -1,0 +1,274 @@
+{% load widget_tweaks %}
+<style media="screen">
+    .section p {
+        font-size: 0.75rem !important;
+    }
+</style>
+<div class="modal-header">
+    <h3 class="modal-title">{% if viewtype == 'billing' %} Billing Info {% if billing.paid %}
+        <button type="button" class="btn btn-success btn-rounded">Paid</button>
+        {% else %}
+        <button type="button" class="btn btn-warning btn-rounded">Unpaid</button>
+        {% endif %}
+        {% elif viewtype == 'transaction' %} Transaction Info
+        {% elif viewtype == 'tenants' %} Tenant Info
+        {% elif viewtype == 'booking' %} Booking Info
+        {% elif viewtype == 'adminacc' %} Admin Account
+        {% elif viewtype == 'property' %} Property Info
+        {% elif viewtype == 'room' %} Room Info
+        {% endif %}</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+
+    <div class="container-fluid">
+
+        {% if viewtype == 'billing' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> Property:
+                        {{billing.transaction_id.room_id.property_id}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Tenant/s:
+                        {% for tenant in tenants %}
+                        {{tenant.user_id.username}},
+                        {% endfor %}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Date:
+                        {{billing.time_stamp}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Fees: </h5>
+                    <h5>
+                        <ol>
+                            {% for fee in fees %}
+                            <li>{{fee}}</li>
+                            {% endfor %}
+                        </ol>
+                    </h5>
+                </li>
+                <li>
+                    <h5> Total Amount Due:
+                        {{total}}
+                    </h5>
+                </li>
+            </ul>
+        </div>
+        {% elif viewtype == 'transaction' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> Room:
+                        {{room}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Tenant/s:
+                        <ol>{% for tenant in tenants %}
+                            <li>{{tenant.user_id.username}}</li>
+                            {% endfor %}
+                        </ol>
+                    </h5>
+                </li>
+                <li>
+                    <h5> Total Amount:
+                        {{total}}
+                    </h5>
+                    <h5>
+                        <ol>
+                            <h5> Fees: </h5>
+                            {% for add_on in add_ons %}
+                            <li>{{add_on}}</li>
+                            {% endfor %}
+                            <li> Room rate: {{rate}}</li>
+                        </ol>
+                    </h5>
+                </li>
+            </ul>
+        </div>
+        {% elif viewtype == 'tenants' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> Tenant Name:
+                        {{tenant.user_id.first_name}} {{tenant.user_id.last_name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Birthday:
+                        {{birthday}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Contact Number:
+                        {{tenant.cell_number}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Provincial Address:
+                        {{tenant.provincial_address}}
+                    </h5>
+                </li>
+            </ul>
+        </div>
+        {% elif viewtype == 'booking' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> User: {{user.username}} - {{user.first_name}} {{user.last_name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Room: {{room}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Room type: {{type}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Total Amount:
+                        {{total}}
+                    </h5>
+                    <h5>
+                        <ol>
+                            <h5> Fees: </h5>
+                            {% for fee in fees %}
+                            <li>{{fee}}</li>
+                            {% endfor %}
+                            <li> Room rate: {{rate}}</li>
+                        </ol>
+                    </h5>
+                </li>
+                <li>
+                    <h5> Status: {{status}}
+                    </h5>
+                </li>
+            </ul>
+        </div>
+        {% elif viewtype == 'adminacc' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> Property Handle:
+                        {{adminacc.property_id.name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Name:
+                        {{name}}
+                <li>
+                    <h5> Birthday:
+                        {{birthday}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Contact Number:
+                        {{adminacc.cell_number}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Provincial Address:
+                        {{adminacc.provincial_address}}
+                    </h5>
+                </li>
+            </ul>
+        </div>
+        {% elif viewtype == 'property' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> Property Type:
+                        {{type}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Name:
+                        {{property.name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Description:
+                        {{property.description}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Address:
+                        {{property.property_address}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Property Images: </h5>
+                    <ol>
+
+                        {% for image in images %}
+                        <li>{{image.title}} - media/{{image.img_path}}</li>
+                        {% endfor %}
+                    </ol>
+
+                </li>
+            </ul>
+        </div>
+        {% elif viewtype == 'room' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> Room Type:
+                        {{type}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Property:
+                        {{room.property_id.name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Description:
+                        {{room.description}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Floor and Number:
+                        {{room.floor}}, {{room.number}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Rate:
+                        {{room.rate}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Room 2D Images: </h5>
+                    <ol>
+                        {% for image in images_2d %}
+                        <li>{{image.title}} - media/{{image.img_path}}</li>
+                        {% endfor %}
+                    </ol>
+                </li>
+                <li>
+                    <h5> Room 3D Images: </h5>
+                    <ol>
+                        {% for image in images_3d %}
+                        <li>{{image.title}} - media/{{image.img_path}}</li>
+                        {% endfor %}
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>

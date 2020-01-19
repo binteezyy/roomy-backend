@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+Rental
+{% endblock %}
+
+{% block extra_css %}
+<!-- SELECT2 -->
+<link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include "_modal.html" %}
+<div class="content container">
+  <div class="card-content">
+    <div class="container-fluid">
+      <h2>Occupied Rooms </h2>
+      <div class="row p-3">
+        <div class="col">
+          <div class="table-responsive">
+            <table id="rental-table" class="table table-bordered table-hover" width="100%" cellspacing="0" role="grid"
+              aria-describedby="dataTable_info">
+              <thead>
+                <tr role="row">
+                  <th style="width:10%">Id</th>
+                  <th style="width:10%">Room</th>
+                  <th style="width:10%">Start Date</th>
+                  <th style="width:10%">Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block header %}
+Rental
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#rental-table').DataTable({
+      "dataType": 'json',
+      "ajax": {
+        "processing": true,
+        "dataSrc": '',
+        "url": "{% url 'admin-rental-table'%}",
+      },
+      "drawCallback": function (settings) {
+        $(".read-rental").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+        $(".delete-rental").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+        $(".update-rental").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+      },
+      "columnDefs": [
+        {
+          "className": 'col-rental-id text-center',
+          "targets": 0,
+          "data": "fields.id",
+        },
+        {
+          "className": 'col-rental-room text-center',
+          "targets": 1,
+          "data": "fields.room",
+        },
+        {
+          "className": 'col-rental-date text-center',
+          "targets": 2,
+          "data": "fields.date",
+        },
+        {
+          "className": 'col-details text-center',
+          "targets": -1,
+          "data": 'fields.id',
+          render: function (data, type, row) {
+            let render =
+              '<button type="button" class="read-rental btn btn-raised btn-sm btn-primary m-1" data-id="/roomy-admin/read/rental/' + data + '">' +
+              '<span class="fa fa-eye"></span></button>' +
+              '<button type="button" class="delete-rental btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/rental/' + data + '">' +
+              '<span class="fa fa-trash"></span></button>' +
+              '<button type="button" class="update-rental btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/rental/' + data + '">' +
+              '<span class="fa fa-edit"></span></button>';
+            return render
+          }
+        },
+      ]
+    })
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+Property Expenses
+{% endblock %}
+
+{% block extra_css %}
+<!-- SELECT2 -->
+<link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include "_modal.html" %}
+<div class="content container">
+  <div class="card-content">
+    <div class="container-fluid">
+      <h2>Property Expenses</h2>
+      <div class="row p-3">
+        <div class="col">
+          <div class="table-responsive">
+            <table id="expense-table" class="table table-bordered table-hover" width="100%" cellspacing="0" role="grid"
+              aria-describedby="dataTable_info">
+              <thead>
+                <tr role="row">
+                  <th style="width:10%">Id</th>
+                  <th style="width:10%">Date</th>
+                  <th style="width:10%">Description</th>
+                  <th style="width:10%">Amount</th>
+                  <th style="width:10%">Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block header %}
+Fee
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#expense-table').DataTable({
+      "dataType": 'json',
+      "ajax": {
+        "processing": true,
+        "dataSrc": '',
+        "url": "{% url 'admin-expense-table'%}",
+      },
+      "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-expense'>>>>" +
+        "<'row'<'col-md-6'><'col-md-6'>>" +
+        "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
+      "initComplete": function (settings, json) {
+        $("div.create-expense").html('<button type="button" id="create-expense" class="float-right btn btn-s btn-success btn-raised" name="button">Add Expense <i class="fas fa-plus"></i></button>');
+        $(".create-expense").modalForm({ formURL: "{% url 'create-expense' %}" });
+      },
+      "drawCallback": function (settings) {
+        $(".delete-expense").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+        $(".update-expense").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+      },
+      "columnDefs": [
+        {
+          "className": 'col-expense-id text-center',
+          "targets": 0,
+          "data": "fields.id",
+        },
+        {
+          "className": 'col-expense-date text-center',
+          "targets": 1,
+          "data": "fields.time",
+        },
+        {
+          "className": 'col-expense-description text-center',
+          "targets": 2,
+          "data": "fields.description",
+        },
+        {
+          "className": 'col-expense-amount text-center',
+          "targets": 3,
+          "data": "fields.amount",
+        },
+        {
+          "className": 'col-details text-center',
+          "targets": -1,
+          "data": 'fields.id',
+          render: function (data, type, row) {
+            let render =
+              '<button type="button" class="delete-expense btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/expense/' + data + '">' +
+              '<span class="fa fa-trash"></span></button>' +
+              '<button type="button" class="update-expense btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/expense/' + data + '">' +
+              '<span class="fa fa-edit"></span></button>';
+            return render
+          }
+        },
+      ]
+    })
+  });
+</script>
+{% endblock %}
