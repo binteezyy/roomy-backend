@@ -13,6 +13,7 @@ router.register('billings', api_views.BillingApiView)
 router.register('messages', api_views.MessageApiView)
 router.register('tenants', api_views.TenantAccountApiView)
 router.register('guests', api_views.GuestApiView)
+router.register('images', api_views.ImageFileApiView)
 urlpatterns = [
     path('index/',      base.index,                                        name='api-index'),
     path('', include(router.urls))
