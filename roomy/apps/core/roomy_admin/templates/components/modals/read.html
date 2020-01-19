@@ -15,6 +15,7 @@
         {% elif viewtype == 'booking' %} Booking Info
         {% elif viewtype == 'adminacc' %} Admin Account
         {% elif viewtype == 'property' %} Property Info
+        {% elif viewtype == 'room' %} Room Info
         {% endif %}</h3>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -214,6 +215,52 @@
                         {% endfor %}
                     </ol>
 
+                </li>
+            </ul>
+        </div>
+        {% elif viewtype == 'room' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> Room Type:
+                        {{type}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Property:
+                        {{room.property_id.name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Description:
+                        {{room.description}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Floor and Number:
+                        {{room.floor}}, {{room.number}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Rate:
+                        {{room.rate}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Room 2D Images: </h5>
+                    <ol>
+                        {% for image in images_2d %}
+                        <li>{{image.title}} - media/{{image.img_path}}</li>
+                        {% endfor %}
+                    </ol>
+                </li>
+                <li>
+                    <h5> Room 3D Images: </h5>
+                    <ol>
+                        {% for image in images_3d %}
+                        <li>{{image.title}} - media/{{image.img_path}}</li>
+                        {% endfor %}
+                    </ol>
                 </li>
             </ul>
         </div>

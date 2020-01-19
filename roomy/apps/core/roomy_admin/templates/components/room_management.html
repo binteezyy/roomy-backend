@@ -26,10 +26,6 @@ Rooms
                   <th style="width:10%">Id</th>
                   <th style="width:10%">Property Under</th>
                   <th style="width:10%">Floor & Number</th>
-                  <th style="width:10%">Rate</th>
-                  <th style="width:10%">Type</th>
-                  <th style="width:10%">2d Images</th>
-                  <th style="width:10%">3d Images</th>
                   <th style="width:10%">Status</th>
                   <th style="width:10%">Actions</th>
                 </tr>
@@ -69,6 +65,15 @@ Rooms
         $(".create-room").modalForm({ formURL: "{% url 'create-room' %}" });
       },
       "drawCallback": function (settings) {
+        $(".upload-room-2d").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+        $(".upload-room-3d").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+        $(".read-room").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
         $(".delete-room").each(function () {
           $(this).modalForm({ formURL: $(this).data('id') });
         });
@@ -93,28 +98,8 @@ Rooms
           "data": "fields.floorno",
         },
         {
-          "className": 'col-room-rate text-center',
+          "className": 'col-room-status text-center',
           "targets": 3,
-          "data": "fields.rate",
-        },
-        {
-          "className": 'col-room-type text-center',
-          "targets": 4,
-          "data": "fields.type",
-        },
-        {
-          "className": 'col-room-image2d text-center',
-          "targets": 5,
-          "data": "fields.images2d",
-        },
-        {
-          "className": 'col-room-image3d text-center',
-          "targets": 6,
-          "data": "fields.images3d",
-        },
-        {
-          "className": 'col-room-image3d text-center',
-          "targets": 7,
           "data": "fields.status",
         },
         {
@@ -123,10 +108,12 @@ Rooms
           "data": 'fields.id',
           render: function (data, type, row) {
             let render =
-              '<button type="button" class="upload-room-2d btn btn-raised btn-sm btn-primary m-1" data-id="/roomy-admin/upload/room2d">' +
-              '<span class="fa fa-file-upload"></span></button>' +
-              '<button type="button" class="upload-room-3d btn btn-raised btn-sm btn-secondary m-1" data-id="/roomy-admin/upload/room3d">' +
-              '<span class="fa fa-file-upload"></span></button>' +
+              '<button type="button" class="upload-room-2d btn btn-raised btn-sm btn-info m-1" data-id="/roomy-admin/upload/room2d/' + data + '">' +
+              '<span class="fa fa-file-upload">Upload 2d</span></button>' +
+              '<button type="button" class="upload-room-3d btn btn-raised btn-sm btn-dark m-1" data-id="/roomy-admin/upload/room3d/' + data + '">' +
+              '<span class="fa fa-file-upload"> Upload 3d</span></button>' +
+              '<button type="button" class="read-room btn btn-raised btn-sm btn-primary m-1" data-id="/roomy-admin/read/room/' + data + '">' +
+              '<span class="fa fa-eye"></span></button>' +
               '<button type="button" class="delete-room btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/room/' + data + '">' +
               '<span class="fa fa-trash"></span></button>' +
               '<button type="button" class="update-room btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/room/' + data + '">' +

@@ -128,12 +128,16 @@ urlpatterns = [
     # Room
     path('room/table/', datatableviews.room_table, name='admin-room-table'),
     path('create/room', modalviews.RoomCreateModal.as_view(), name='create-room'),
+    path('read/room/<int:pk>',
+         modalviews.RoomReadModal.as_view(), name='read-room'),
     path('delete/room/<int:pk>',
          modalviews.RoomDeleteModal.as_view(), name='delete-room'),
     path('update/room/<int:pk>',
          modalviews.RoomUpdateModal.as_view(), name='update-room'),
-    path('upload/room2d', base.room_upload2d, name='admin-room2d-upload'),
-    path('upload/room3d', base.room_upload3d, name='admin-room3d-upload'),
+    path('upload/room2d/<int:pk>', base.room_upload2d,
+         name='admin-room2d-upload'),
+    path('upload/room3d/<int:pk>', base.room_upload3d,
+         name='admin-room3d-upload'),
 
     # Admin Accounts
     path('admin_management/table/',

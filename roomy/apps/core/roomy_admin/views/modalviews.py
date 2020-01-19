@@ -364,6 +364,24 @@ class PropertyUpdateModal(BSModalUpdateView):
     success_url = reverse_lazy('property_management')
 
 
+class RoomReadModal(BSModalReadView):
+    model = Room
+    context_object_name = 'room'
+    template_name = 'components/modals/read.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['viewtype'] = 'room'
+        context['room'] = kwargs['object']
+        context['type'] = kwargs['object'].get_room_type_display()
+        context['images_3d'] = kwargs['object'].image_3d.all()
+        context['images_2d'] = kwargs['object'].image_2d.all()
+        return context
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
 class RoomCreateModal(BSModalCreateView):
     model = Room
     model_type = 'room'
