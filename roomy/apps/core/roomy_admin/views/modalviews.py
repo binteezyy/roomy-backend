@@ -320,7 +320,7 @@ class BookingUpdateModal(BSModalUpdateView):
 class PropertyCreateModal(BSModalCreateView):
     model = Property
     model_type = 'property'
-    template_name = 'components/modals/create-property.html'
+    template_name = 'components/modals/create.html'
     form_class = PropertyModalForm
     success_message = 'Success: Property created.'
     success_url = reverse_lazy('property_management')
@@ -341,7 +341,7 @@ class PropertyDeleteModal(BSModalDeleteView):
 
 class PropertyUpdateModal(BSModalUpdateView):
     model = Property
-    template_name = 'components/modals/update-property.html'
+    template_name = 'components/modals/creat.html'
     form_class = PropertyModalForm
     sucess_message = "Success: Property updated"
     success_url = reverse_lazy('property_management')

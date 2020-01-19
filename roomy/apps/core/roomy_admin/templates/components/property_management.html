@@ -62,8 +62,8 @@ Properties
         "<'row'<'col-md-6'><'col-md-6'>>" +
         "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
       "initComplete": function (settings, json) {
-        $("div.create-property").html('<button type="button" id="create-property" class="float-right btn btn-s btn-success btn-raised" name="button"><a href="/roomy-admin/create/property/" style="text-decoration:none; color:white;">Add Property</a><i class="fas fa-plus"></i></button>');
-        // $(".create-property").modalForm({ formURL: "{% url 'create-property' %}" });
+        $("div.create-property").html('<button type="button" id="create-property" class="float-right btn btn-s btn-success btn-raised" name="button">Add Property<i class="fas fa-plus"></i></button>');
+        $(".create-property").modalForm({ formURL: "{% url 'create-property' %}" });
       },
       "drawCallback": function (settings) {
         $("#upload-property").modalForm({
@@ -72,9 +72,9 @@ Properties
         $(".delete-property").each(function () {
           $(this).modalForm({ formURL: $(this).data('id') });
         });
-        // $(".update-property").each(function () {
-        //   $(this).modalForm({ formURL: $(this).data('id') });
-        // });
+        $(".update-property").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
       },
       "columnDefs": [
         {
@@ -113,7 +113,7 @@ Properties
               '<button type="button" class="delete-property btn btn-sm btn-raised btn-warning m-1" data-id="/delete/property/' + data + '">' +
               '<span class="fa fa-trash"></span></button>' +
               '<button type="button" class="update-property btn btn-sm btn-raised btn-success m-1" data-id="/update/property/' + data + '">' +
-              '<a href="/roomy-admin/update/property/' + data + '">a </a><span class="fa fa-edit"></span></button>';
+              '<span class="fa fa-edit"></span></button>';
             return render
           }
         },
