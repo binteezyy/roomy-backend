@@ -23,11 +23,11 @@ Bookings
                             role="grid" aria-describedby="dataTable_info">
                             <thead>
                                 <tr role="row">
-                                    <th style="width:10%">Id</th>
-                                    <th style="width:10%">User</th>
-                                    <th style="width:10%">Room</th>
-                                    <th style="width:10%">Status</th>
-                                    <th style="width:10%">Actions</th>
+                                    <th>Id</th>
+                                    <th>User</th>
+                                    <th>Room</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -95,11 +95,11 @@ Bookings
                     "data": 'fields.id',
                     render: function (data, type, row) {
                         let render =
-                            '<button type="button" class="read-booking btn btn-raised btn-sm btn-primary m-1" data-id="/roomy-admin/read/booking/' + data + '">' +
+                            '<button type="button" class="read-booking btn btn-raised btn-sm btn-primary m-1" data-id="/read/booking/' + data + '">' +
                             '<span class="fa fa-eye"></span></button>' +
-                            '<button type="button" class="delete-booking btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/booking/' + data + '">' +
+                            '<button type="button" class="delete-booking btn btn-sm btn-raised btn-warning m-1" data-id="/delete/booking/' + data + '">' +
                             '<span class="fa fa-trash"></span></button>' +
-                            '<button type="button" class="update-booking btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/booking/' + data + '">' +
+                            '<button type="button" class="update-booking btn btn-sm btn-raised btn-success m-1" data-id="/update/booking/' + data + '">' +
                             '<span class="fa fa-edit"></span></button>';
                         return render
                     }

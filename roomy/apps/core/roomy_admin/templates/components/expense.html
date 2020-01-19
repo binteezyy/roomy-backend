@@ -23,11 +23,11 @@ Property Expenses
               aria-describedby="dataTable_info">
               <thead>
                 <tr role="row">
-                  <th style="width:10%">Id</th>
-                  <th style="width:10%">Date</th>
-                  <th style="width:10%">Description</th>
-                  <th style="width:10%">Amount</th>
-                  <th style="width:10%">Actions</th>
+                  <th>Id</th>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Amount</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -99,9 +99,9 @@ Fee
           "data": 'fields.id',
           render: function (data, type, row) {
             let render =
-              '<button type="button" class="delete-expense btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/expense/' + data + '">' +
+              '<button type="button" class="delete-expense btn btn-sm btn-raised btn-warning m-1" data-id="/delete/expense/' + data + '">' +
               '<span class="fa fa-trash"></span></button>' +
-              '<button type="button" class="update-expense btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/expense/' + data + '">' +
+              '<button type="button" class="update-expense btn btn-sm btn-raised btn-success m-1" data-id="/update/expense/' + data + '">' +
               '<span class="fa fa-edit"></span></button>';
             return render
           }

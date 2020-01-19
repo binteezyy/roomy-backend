@@ -23,11 +23,11 @@ Billing
               aria-describedby="dataTable_info">
               <thead>
                 <tr role="row">
-                  <th style="width:10%">Id</th>
-                  <th style="width:10%">Date</th>
-                  <th style="width:10%">Room</th>
-                  <th style="width:10%">Paid</th>
-                  <th style="width:10%">Actions</th>
+                  <th>Id</th>
+                  <th>Date</th>
+                  <th>Room</th>
+                  <th>Paid</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -99,11 +99,11 @@ Billing
           "targets": -1,
           "data": 'fields.id',
           render: function (data, type, row) {
-            let render = '<button type="button" class="read-billing btn btn-raised btn-sm btn-primary m-1" data-id="/roomy-admin/read/billing/' + data + '">' +
+            let render = '<button type="button" class="read-billing btn btn-raised btn-sm btn-primary m-1" data-id="/read/billing/' + data + '">' +
               '<span class="fa fa-eye"></span></button>' +
-              '<button type="button" class="delete-billing btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/billing/' + data + '">' +
+              '<button type="button" class="delete-billing btn btn-sm btn-raised btn-warning m-1" data-id="/delete/billing/' + data + '">' +
               '<span class="fa fa-trash"></span></button>' +
-              '<button type="button" class="update-billing btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/billing/' + data + '">' +
+              '<button type="button" class="update-billing btn btn-sm btn-raised btn-success m-1" data-id="/update/billing/' + data + '">' +
               '<span class="fa fa-edit"></span></button>';
             return render
           }
