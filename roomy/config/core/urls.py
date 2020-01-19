@@ -5,5 +5,5 @@ from ..common import urlpatterns
 
 urlpatterns +=  [
     path('api/', include('apps.core.roomy_core.urls')),
-    path('roomy-owners/', include('apps.core.roomy_admin.urls')),
+    path('', include('apps.core.roomy_admin.urls')),
 ]
