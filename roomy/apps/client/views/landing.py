@@ -3,15 +3,8 @@ from django.shortcuts import render
 context = {
     "TITLE": "Roomy"
 }
-<<<<<<< HEAD
 def home(request):
     return render(request,"components/landing/home.html",context)
-=======
-
-def explore(request):
-    return render(request,"components/landing/explore.html",context)
->>>>>>> origin/client-room
-
 def booking_guide(request):
     return render(request,"components/landing/booking_guide.html",context)
 
