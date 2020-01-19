@@ -10,167 +10,159 @@ Home
 <!-- main content -->
 <div class="container-fluid">
   <div class="container">
-    <div class="row d-flex flex-row justify-content-center" style="margin-top: 50px; margin-bottom: 80px;">
+    <div class="row d-flex flex-row justify-content-center" style="margin-top: 50px; margin-bottom: 20px;">
 
-      <div class="d-flex flex-column justify-content-center" style="width: 100%; margin: 0; padding: 150px; background-image: url('/static/img/placeholder_1200x500.png')">
-        <h1 class="text-center">Lorem Ipsum</h1>
+      <!-- search bar -->
+      <div class="d-flex justify-content-center align-items-center" style="width: 100%; margin-bottom: 10px;">
+        <form class="form-inline mr-auto mb-4 d-flex justify-content-center" _lpchecked="1" style="width: 100%; margin-bottom: 50px;" action="#">
+          <div class="input-group mb-3" style="width: 80%;">
+            <input type="text" class="form-control" placeholder="What are you looking for?" aria-label="Search" aria-describedby="button-addon2" style="width: 100%;">
+            <div class="input-group-append">
+              <button class="btn btn-elegant btn-rounded btn-sm my-0 waves-effect waves-light" type="button" id="button-addon2">Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- end of search bar -->
+
+      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; margin-bottom: 80px;">
+        <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
+      </div>
+
+      <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 100px; padding: 50px; background-color: lightgrey;">
+        <h3 class="text-center">Lorem Ipsum</h3>
         <p class="text-center" style="width: 100%; margin: 0 auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae metus bibendum, suscipit dolor non, ultrices metus. Integer nec libero risus.</p>
         <div class="d-flex flex-wrap justify-content-center" style="margin-top: 20px;">
           <button class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
           <button class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#getInTouchModal">GET IN TOUCH</button>
         </div>
-
-
-        <!-- modals -->
-        <!-- signup modal -->
-        <form class="" action="#" method="post">
-
-          <!-- modal -->
-          <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-
-            <div class="modal-dialog" role="document">
-
-              <!-- modal content -->
-              <div class="modal-content" style="width: 400px; height: auto; margin: 0 auto; border-radius: 15px;">
-
-                <!-- modal body -->
-                <div class="modal-body">
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <div class="d-flex justify-content-center" style="margin-bottom: 50px;">
-                            <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px;">
-                          </div>
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="basic-addon3" style="width: 100px;">username</span>
-                            </div>
-                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                          </div>
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="basic-addon3" style="width: 100px;">email</span>
-                            </div>
-                            <input type="email" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                          </div>
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="basic-addon3" style="width: 100px;">password</span>
-                            </div>
-                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                          </div>
-                          <div class="d-flex justify-content-center" style="margin-top: 40px;">
-                            <button type="button" class="btn btn-sm btn-dark">Sign Up</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12 text-center">
-                        <span class="text-center" style="font-size: 12px;">By signing up, you agree to our <a href="{% url 'terms_of_use' %}" target="_blank">Terms of Use</a> and <a href="{% url 'privacy' %}" target="_blank">Privacy
-                            Policy</a>.</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- modal footer -->
-                <div class="modal-footer">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-md-12 text-center" style="font-size: 14px;">
-                        <span>Already have an account?</span>
-                        <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Log in</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-        <!-- end of signup modal -->
-
-        <!-- get in touch modal -->
-        <form class="" action="#" method="post">
-
-          <!-- modal -->
-          <div class="modal fade" id="getInTouchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-
-              <!-- modal content -->
-              <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
-
-                <!-- modal header -->
-
-
-                <!-- modal body -->
-                <div class="modal-body">
-                  <div class="container-fluid">
-                    <div class="row d-flex justify-content-center" style="padding-right: 10px; padding-left: 10px;">
-                      <div class="d-flex flex-column justify-content-center" style="margin-bottom: 20px;">
-                        <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px;">
-                        <h4 class="text-center" style="margin-top: 30px;">Partner With Us</h4>
-                      </div>
-                      <div class="form-group">
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon3" style="width: 100px;">Full Name</span>
-                          </div>
-                          <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                        </div>
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon3" style="width: 100px;">Company</span>
-                          </div>
-                          <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                        </div>
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon3" style="width: 100px;">Mobile</span>
-                          </div>
-                          <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                        </div>
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon3" style="width: 100px;">Email</span>
-                          </div>
-                          <input type="email" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                        </div>
-
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon3" style="width: 100px;">Message</span>
-                          </div>
-                          <textarea class="form-control" name="name" rows="5" cols="50"></textarea>
-                        </div>
-                        <div class="d-flex justify-content-center" style="margin-top: 40px;">
-                          <button type="button" class="btn btn-sm btn-dark">Sign Up</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-        </form>
-        <!-- end of get in touch modal -->
-        <!-- end of modals -->
-
       </div>
+
+      <!-- category -->
+      <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 50px;">
+        <h3>Categories</h3>
+        <div class="d-flex flex-wrap justify-content-center align-items-center">
+          <a class="btn btn-lg btn-dark text-center" style="width: 300px; margin: 10px; padding: 10px; border-radius: 25px;" href="#condominium">
+            Condominium
+          </a>
+          <a class="btn btn-lg btn-dark text-center" style="width: 300px; margin: 10px; padding: 10px; border-radius: 25px;" href="#dormitory">
+            Dormitory
+          </a>
+          <a class="btn btn-lg btn-dark text-center" style="width: 300px; margin: 10px; padding: 10px; border-radius: 25px;" href="#apartment">
+            Apartment
+          </a>
+        </div>
+      </div>
+      <!-- end of category -->
+
+
+      <!-- condominium -->
+      <div class="wrapper" id="condominium" style="padding: 40px;">
+        <div class="d-flex flex-wrap" style="width: 100%; height: auto; min-height: 400px; margin-bottom: 20px;">
+          <div class="col-md-3 d-flex flex-column justify-content-center align-items-center" style="padding: 20px;">
+            <h5>Condominium</h5>
+            <img class="img-fluid" src="{% static "img\placeholder_200x200.png" %}" alt="" style="width: 200px height: 200px;"> <br>
+            <span>Pellentesque id tempus odio, vitae semper felis. Aenean luctus ullamcorper ligula, eget aliquam justo. Sed eget massa in diam suscipit suscipit.</span>
+          </div>
+          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center shadow p-3 mb-5 bg-white rounded" style="padding: 20px; border-radius: 5px;">
+
+
+
+          </div>
+        </div>
+      </div>
+      <!-- end of condominium -->
+
+      <!-- dormitory -->
+      <div class="wrapper" id="dormitory" style="padding: 40px;">
+        <div class="d-flex flex-wrap" style="width: 100%; height: auto; min-height: 400px; margin-bottom: 20px;">
+          <div class="col-md-3 d-flex flex-column justify-content-start align-items-center" style="padding: 20px;">
+            <h5>Dormitory</h5>
+            <img class="img-fluid" src="{% static "img\placeholder_200x200.png" %}" alt=""> <br>
+            <span>Vivamus ac tellus placerat, facilisis risus nec, scelerisque tortor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</span>
+          </div>
+          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center shadow p-3 mb-5 bg-white rounded" style="padding: 20px; border-radius: 5px;">
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <!-- end of dormitory -->
+
+      <!-- apartment -->
+      <div class="wrapper" id="apartment" style="padding: 40px;">
+        <div class="d-flex flex-wrap" style="width: 100%; height: auto; min-height: 400px; margin-bottom: 20px;">
+          <div class="col-md-3 d-flex flex-column justify-content-start align-items-center" style="padding: 20px;">
+            <h5>Apartment</h5>
+            <img class="img-fluid" src="{% static "img\placeholder_200x200.png" %}" alt=""> <br>
+            <span>In at mauris tincidunt, commodo arcu ut, tempor justo. Nullam accumsan commodo neque. Cras congue ultricies elit. Etiam venenatis efficitur rhoncus.</span>
+          </div>
+          <div class="col-md-9 d-flex flex-wrap justify-content-center align-items-center shadow p-3 mb-5 bg-white rounded" style="padding: 20px; border-radius: 5px;">
+
+            <!-- room container -->
+            <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+              <a href="{% url 'room' %}">
+                <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+              </a>
+              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                <div class="">
+                  <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+                  <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+                </div>
+                <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span style="font-size: 20px;">Room B20</span>
+                <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+              </div><hr>
+              <div class="d-flex justify-content-start" >
+                <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+              </div>
+            </div>
+            <!-- end of room container -->
+
+            <!-- room container -->
+            <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
+              <a href="{% url 'room' %}">
+                <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+              </a>
+              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                <div class="">
+                  <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+                  <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+                </div>
+                <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span style="font-size: 20px;">Room B20</span>
+                <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+              </div><hr>
+              <div class="d-flex justify-content-start" >
+                <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+              </div>
+            </div>
+            <!-- end of room container -->
+
+
+          </div>
+        </div>
+      </div>
+      <!-- end of apartment -->
+
     </div>
   </div>
 </div>
 
 
-
 <!-- end of main content -->
-
-
 
 
 {% endblock %}
