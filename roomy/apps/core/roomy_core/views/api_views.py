@@ -30,3 +30,7 @@ class TenantAccountApiView(viewsets.ModelViewSet):
 class GuestApiView(viewsets.ModelViewSet):
     queryset = Guest.objects.all()
     serializer_class = GuestSerializer
+
+class ImageFileApiView(viewsets.ModelViewSet):
+    queryset = ImageFile.objects.all()
+    serializer_class = ImageFileSerializer
