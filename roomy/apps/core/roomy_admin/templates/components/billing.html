@@ -99,11 +99,11 @@ Billing
           "targets": -1,
           "data": 'fields.id',
           render: function (data, type, row) {
-            let render = '<button type="button" class="read-billing btn btn-raised btn-sm btn-primary m-1" data-id="/read/billing/' + data + '">' +
+            let render = '<button type="button" class="read-billing btn btn-raised btn-sm btn-primary m-1" data-id="/roomy-admin/read/billing/' + data + '">' +
               '<span class="fa fa-eye"></span></button>' +
-              '<button type="button" class="delete-billing btn btn-sm btn-raised btn-warning m-1" data-id="/delete/billing/' + data + '">' +
+              '<button type="button" class="delete-billing btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/billing/' + data + '">' +
               '<span class="fa fa-trash"></span></button>' +
-              '<button type="button" class="update-billing btn btn-sm btn-raised btn-success m-1" data-id="/update/billing/' + data + '">' +
+              '<button type="button" class="update-billing btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/billing/' + data + '">' +
               '<span class="fa fa-edit"></span></button>';
             return render
           }

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 
@@ -15,20 +16,36 @@ class ImageFile(models.Model):
         unique_together = ('title', 'img_path')
 
 
+class OwnerAccount(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    birthday = models.DateTimeField(null=True, blank=True)
+    cell_number = models.PositiveIntegerField(null=True, blank=True)
+    provincial_address = models.CharField(
+        max_length=128, null=True, blank=True)
+
+    def __str__(self):
+        return f'Owner: {self.user_id.username} - {self.user_id.first_name} {self.user_id.last_name}'
+
+
 class Property(models.Model):
+    property_type_enum = [
+        (0, 'Condomenium'),
+        (1, 'Dormitory'),
+        (2, 'Apartment'),
+    ]
+    owner_id = models.ForeignKey(
+        OwnerAccount, on_delete=models.CASCADE, blank=True, null=True)
+    property_type = models.IntegerField(choices=property_type_enum, default=0)
     name = models.CharField(max_length=56, unique=True)
     description = models.TextField(blank=True, null=True)
-    street = models.CharField(max_length=56)
-    brgy = models.CharField(max_length=56)
-    city = models.CharField(max_length=56)
+    property_address = models.CharField(max_length=256, null=True, blank=True)
     property_image = models.ManyToManyField(
         ImageFile, blank=True, related_name='property_image')
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name}, Owner: {self.owner_id.user_id.username} - {self.owner_id.user_id.first_name} {self.owner_id.user_id.last_name}'
 
     class Meta:
-        unique_together = ('name', 'street', 'brgy', 'city')
         verbose_name_plural = 'Properties'
 
 
@@ -60,6 +77,8 @@ class Fee(models.Model):
         (0, 'Misc Fees'),
         (1, 'Add-ons'),
     ]
+    property_id = models.ForeignKey(
+        Property, on_delete=models.CASCADE, null=True, blank=True)
     description = models.CharField(max_length=56)
     amount = models.DecimalField(max_digits=9, decimal_places=2)
     fee_type = models.IntegerField(choices=fee_type_enum, default=0)
@@ -75,6 +94,12 @@ class Transaction(models.Model):
     active = models.BooleanField(default=True)
     start_date = models.DateTimeField(null=True, auto_now_add=True)
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
+    rating = models.PositiveIntegerField(default=1, validators=[
+        MaxValueValidator(5),
+        MinValueValidator(1)
+    ], null=True, blank=True)
+    rating_description = models.TextField(blank=True, null=True)
+    rated = models.BooleanField(default=False)
     add_ons = models.ManyToManyField(Fee, blank=True)
 
     def __str__(self):
@@ -105,35 +130,10 @@ class Request(models.Model):
         return f'{self.subject}, {self.transaction_id}, {self.status}'
 
 
-class UserAccount(models.Model):
-    user_type_enum = [
-        (0, 'Unknown'),
-        (1, 'Tenant'),
-        (2, 'Manager'),
-        (3, 'Owner'),
-    ]
-    user_type = models.IntegerField(choices=user_type_enum, default=0)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    birthday = models.DateTimeField(null=True, blank=True)
-    cell_number = models.PositiveIntegerField(null=True, blank=True)
-    provincial_address = models.CharField(
-        max_length=128, null=True, blank=True)
-    transaction_id = models.ForeignKey(
-        Transaction, on_delete=models.CASCADE, blank=True, null=True)
-    property_id = models.ForeignKey(
-        Property, on_delete=models.CASCADE, blank=True, null=True)
-
-    def __str__(self):
-        if self.user_type == 1:
-            return f'{self.get_user_type_display()} {self.user_id.username}, {self.transaction_id}'
-        elif self.user_type == 2:
-            return f'{self.get_user_type_display()} {self.user_id.username}, {self.property_id}'
-        else:
-            return f'{self.get_user_type_display()} {self.user_id.username}'
-
-
 class Message(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    transaction_id = models.ForeignKey(
+        Transaction, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=32)
     body = models.TextField(blank=True, null=True)
     time_stamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
@@ -163,6 +163,19 @@ class Booking(models.Model):
 
     def __str__(self):
         return f'Booking: {self.user_id.username} - {self.room_id}'
+
+
+class TenantAccount(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    birthday = models.DateTimeField(null=True, blank=True)
+    cell_number = models.PositiveIntegerField(null=True, blank=True)
+    provincial_address = models.CharField(
+        max_length=128, null=True, blank=True)
+    transaction_id = models.ForeignKey(
+        Transaction, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return f'Tenant: {self.user_id.username} - {self.user_id.first_name} {self.user_id.last_name}'
 
 
 class Guest(models.Model):

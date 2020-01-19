@@ -14,7 +14,8 @@ from pprint import pprint
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def billing_table(request):
-    billings = Billing.objects.all()
+    billings = Billing.objects.filter(
+        transaction_id__room_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for billing in billings:
@@ -39,10 +40,10 @@ def billing_table(request):
     return HttpResponse(data, content_type='application/json')
 
 
-@login_required
-@user_passes_test(lambda u: u.is_staff)
+# @login_required
+# @user_passes_test(lambda u: u.is_staff)
 def fee_table(request):
-    fees = Fee.objects.all()
+    fees = Fee.objects.filter(property_id__owner_id__user_id=request.user)
 
     data = []
     for fee in fees:
@@ -60,7 +61,8 @@ def fee_table(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def rental_table(request):
-    transactions = Transaction.objects.filter(active=True)
+    transactions = Transaction.objects.filter(
+        active=True, room_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for transaction in transactions:
@@ -79,13 +81,18 @@ def rental_table(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def tenant_table(request):
-    tenants = UserAccount.objects.filter(user_type=1)
+    tenants = TenantAccount.objects.filter(
+        transaction_id__room_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for tenant in tenants:
+        if tenant.transaction_id.active:
+            room = f'Room: Floor-{tenant.transaction_id.room_id.floor} Number-{tenant.transaction_id.room_id.number}'
+        else:
+            room = "Inacitve"
         x = {"fields": {"id": tenant.pk,
                         "name": f'{tenant.user_id.username} - {tenant.user_id.first_name} {tenant.user_id.last_name}',
-                        "room": f'Room: Floor-{tenant.transaction_id.room_id.floor} Number-{tenant.transaction_id.room_id.number}',
+                        "room": room,
                         }}
         data.append(x)
     data = json.dumps(data)
@@ -96,7 +103,8 @@ def tenant_table(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def expense_table(request):
-    expenses = Expense.objects.all()
+    expenses = Expense.objects.filter(
+        property_id__owner_id__user_id=request.user)
 
     data = []
     for expense in expenses:
@@ -115,7 +123,8 @@ def expense_table(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def guest_table(request):
-    guests = Guest.objects.all()
+    guests = Guest.objects.filter(
+        transaction_id__room_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for guest in guests:
@@ -139,7 +148,8 @@ def guest_table(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def request_table(request):
-    tenant_requests = Request.objects.all()
+    tenant_requests = Request.objects.filter(
+        transaction_id__room_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for tenant_request in tenant_requests:
@@ -164,7 +174,8 @@ def request_table(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def notif_table(request):
-    notifs = Message.objects.all()
+    notifs = Message.objects.filter(
+        transaction_id__room_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for notif in notifs:
@@ -189,7 +200,8 @@ def notif_table(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def booking_table(request):
-    bookings = Booking.objects.all()
+    bookings = Booking.objects.filter(
+        room_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for booking in bookings:
@@ -211,7 +223,7 @@ def booking_table(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def property_table(request):
-    propertys = Property.objects.all()
+    propertys = Property.objects.filter(owner_id__user_id=request.user)
 
     data = []
     for property_obj in propertys:
@@ -222,8 +234,7 @@ def property_table(request):
             images = "Empty"
         x = {"fields": {"id": property_obj.pk,
                         "name": property_obj.name,
-                        "description": property_obj.description,
-                        "images": images,
+                        "type": property_obj.get_property_type_display(),
                         }}
         data.append(x)
     data = json.dumps(data)
@@ -234,11 +245,11 @@ def property_table(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def room_table(request):
-    rooms = Room.objects.all()
+    rooms = Room.objects.filter(property_id__owner_id__user_id=request.user)
 
     data = []
     for room in rooms:
-        if UserAccount.objects.filter(transaction_id__room_id=room):
+        if TenantAccount.objects.filter(transaction_id__room_id=room):
             status = "Occupied"
         else:
             status = "Vacant"
@@ -270,18 +281,18 @@ def room_table(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def admin_acc_table(request):
-    admin_accs = UserAccount.objects.all()
+    admin_accs = OwnerAccount.objects.all()
 
     data = []
     for admin_acc in admin_accs:
-        if admin_acc.property_id:
-            property_name = admin_acc.property_id.name
-        else:
-            property_name = 'None. Tenant/Guest'
+        # if admin_acc.property_id:
+        #     property_name = admin_acc.property_id.name
+        # else:
+        #     property_name = 'None. Tenant/Guest'
         x = {"fields": {"id": admin_acc.pk,
                         "type": admin_acc.get_user_type_display(),
                         "name": f'{admin_acc.user_id.username} - {admin_acc.user_id.first_name} {admin_acc.user_id.last_name}',
-                        "property": property_name,
+                        "property": "property_name",
                         }}
         data.append(x)
     data = json.dumps(data)

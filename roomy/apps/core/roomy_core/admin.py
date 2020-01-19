@@ -4,7 +4,7 @@ from .models import *
 
 
 class PostProperty(admin.ModelAdmin):
-    list_display = ('name', 'street', 'brgy', 'city')
+    list_display = ('owner_id', 'name')
 
 
 class PostRoom(admin.ModelAdmin):
@@ -12,11 +12,15 @@ class PostRoom(admin.ModelAdmin):
 
 
 class PostTransaction(admin.ModelAdmin):
-    list_display = ('active', 'room_id', 'start_date')
+    list_display = ('active', 'room_id', 'start_date', 'rating')
 
 
-class PostUserAccount(admin.ModelAdmin):
-    list_display = ('user_type', 'user_id', 'transaction_id')
+class PostTenantAccount(admin.ModelAdmin):
+    list_display = ('user_id', 'transaction_id')
+
+
+class PostOwnerAccount(admin.ModelAdmin):
+    list_display = ('user_id', )
 
 
 class PostBilling(admin.ModelAdmin):
@@ -36,7 +40,7 @@ class PostImageFile(admin.ModelAdmin):
 
 
 class PostMessage(admin.ModelAdmin):
-    list_display = ('user_id', 'title', 'sent', 'time_stamp')
+    list_display = ('user_id', 'transaction_id', 'title', 'sent', 'time_stamp')
 
 
 class PostBooking(admin.ModelAdmin):
@@ -57,7 +61,8 @@ admin.site.register(Transaction, PostTransaction)
 admin.site.register(Fee, PostFee)
 admin.site.register(Billing, PostBilling)
 admin.site.register(Request, PostRequest)
-admin.site.register(UserAccount, PostUserAccount)
+admin.site.register(TenantAccount, PostTenantAccount)
+admin.site.register(OwnerAccount, PostOwnerAccount)
 admin.site.register(ImageFile, PostImageFile)
 admin.site.register(Message, PostMessage)
 admin.site.register(Document)

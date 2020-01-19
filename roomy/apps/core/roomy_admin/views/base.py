@@ -5,6 +5,8 @@ from apps.core.roomy_admin.forms import UserLoginForm, UserRegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 
+from apps.core.roomy_core.models import *
+
 context = {
     "title": "Roomy",
 }
@@ -132,10 +134,71 @@ def property_management(request):
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def property_upload(request):
-    return render(request, "components/property_image_upload.html", context)
+def property_upload(request, pk):
+
+    property_object = Property.objects.get(pk=pk)
+    if request.method == 'GET':
+        context = {
+            'property': property_object,
+        }
+        return render(request, "components/upload_template/property-upload.html", context)
+
+    elif request.method == 'POST' and request.FILES['myfile'] and request.POST.get('filetitle'):
+        upload_image = ImageFile(title=request.POST.get(
+            'filetitle'), img_path=request.FILES['myfile'])
+        upload_image.save()
+
+        property_object.property_image.add(upload_image)
+        return HttpResponse("ok")
+    else:
+        return HttpResponse("not ok")
+
 
 # room_management
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def room_upload2d(request, pk):
+
+    room_object = Room.objects.get(pk=pk)
+    if request.method == 'GET':
+        context = {
+            'room': room_object,
+            '2d': True,
+        }
+        return render(request, "components/upload_template/room-upload.html", context)
+
+    elif request.method == 'POST' and request.FILES['myfile'] and request.POST.get('filetitle'):
+        upload_image = ImageFile(title=request.POST.get(
+            'filetitle'), img_path=request.FILES['myfile'])
+        upload_image.save()
+
+        room_object.image_2d.add(upload_image)
+        return HttpResponse("ok")
+    else:
+        return HttpResponse("not ok")
+
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def room_upload3d(request, pk):
+
+    room_object = Room.objects.get(pk=pk)
+    if request.method == 'GET':
+        context = {
+            'room': room_object,
+            '2d': False,
+        }
+        return render(request, "components/upload_template/room-upload.html", context)
+
+    elif request.method == 'POST' and request.FILES['myfile'] and request.POST.get('filetitle'):
+        upload_image = ImageFile(title=request.POST.get(
+            'filetitle'), img_path=request.FILES['myfile'])
+        upload_image.save()
+
+        room_object.image_3d.add(upload_image)
+        return HttpResponse("ok")
+    else:
+        return HttpResponse("not ok")
 
 
 @login_required
@@ -144,18 +207,6 @@ def room_management(request):
 
     return render(request, "components/room_management.html", context)
 
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def room_upload2d(request):
-
-    return render(request, "components/room2d_upload.html", context)
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def room_upload3d(request):
-    return render(request, "components/room3d_upload.html", context)
 # admin_management
 
 

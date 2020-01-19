@@ -20,7 +20,7 @@
 
       <!-- navbar header -->
       <li class="nav-header">
-        <h5>Menu</h5>
+        <h5>Business</h5>
       </li>
 
       <li class="nav-item active">
@@ -36,10 +36,10 @@
         <a class="nav-link" href="{% url 'tenant' %}">Tenant</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'request' %}">Tenant Request</a>
+        <a class="nav-link" href="{% url 'notif' %}">Tenant Notifications</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'notif' %}">Tenant Notifications</a>
+        <a class="nav-link" href="{% url 'request' %}">Tenant Request</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'guest' %}">Guest</a>
@@ -47,12 +47,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'billing' %}">Billing</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'fee' %}">Fee</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'expense' %}">Property Expenses</a>
-      </li>
+
 
       <!-- navbar divider-->
       <li class="">
@@ -61,18 +56,25 @@
 
       <!-- navbar header -->
       <li class="nav-header">
-        <h5>Client Content</h5>
+        <h5>Management</h5>
       </li>
 
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'property_management' %}">Property Management</a>
       </li>
       <li class="nav-item active">
+        <a class="nav-link" href="{% url 'expense' %}">Property Expenses</a>
+      </li>
+      <li class="nav-item active">
         <a class="nav-link" href="{% url 'room_management' %}">Room Management</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'admin_management' %}">Admin Management</a>
+        <a class="nav-link" href="{% url 'fee' %}">Fee</a>
       </li>
+
+      <!-- <li class="nav-item active">
+        <a class="nav-link" href="{% url 'admin_management' %}">Admin Management</a>
+      </li> -->
 
     </ul>
     <div class="row">
