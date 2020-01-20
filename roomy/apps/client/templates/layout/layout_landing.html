@@ -4,11 +4,11 @@
 {% block layout_landing %}
 
 <!-- navbar -->
-<nav class="navbar navbar-expand-xl navbar-light" id="navbar" style="width: 100%; position: absolute; background-color: transparent; box-shadow: none;">
+<nav class="navbar navbar-expand-xl navbar-light" id="navbar" style="width: 100%; position: absolute; background-color: rgba(255, 255, 255, 0.25); box-shadow: none;">
   <div class="container">
     <!-- logo -->
     <a href="{% url 'home' %}" style="margin-right: 20px;">
-      <img src="{% static "img\logo_white.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+      <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
     </a>
 
     <!-- expand button -->
@@ -18,7 +18,7 @@
     <div class="navbar-collapse collapse" id="navbarsExample04">
 
       <!-- links -->
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto font-weight-bold">
         <li class="nav-item nav-item-custom">
           <a class="nav-link" style="" href="{% url 'explore' %}">Explore</a>
         </li>
@@ -44,7 +44,7 @@
       <!-- login/signup -->
       <div class="wrapper">
         {% if user.is_authenticated %}
-        <span style="color:white">Logged in as {{user.username}}</span>
+        <span style="color:black">Logged in as {{user.username}}</span>
         <a href="{% url 'logout' %}">Logout</a>
         {% else %}
         <a href="{% url 'login' %}" style="text-decoration:none"><button class="btn btn-sm btn-light" style="margin-left: 10px;">Log in</button></a>

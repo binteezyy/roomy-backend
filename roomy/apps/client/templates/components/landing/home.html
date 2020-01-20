@@ -8,29 +8,20 @@ Roomy
 {% block content %}
 
 <div class="d-flex flex-column flex-wrap justify-content-center align-items-center"
-  style="width: 100%; height: 100vh; margin-bottom: 100px; background-image: url('/static/img/placeholder_1200x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+  style="width: 100%; height: 100vh; margin-bottom: 100px; background-image: url({% static "img/banner.jpg" %}); background-repeat: no-repeat; background-size: cover; background-position: center;">
 
   <!-- search bar -->
   <div class="d-flex justify-content-center align-items-center" style="width: 100%; margin-bottom: 10px;">
-    <form class="form-inline mr-auto mb-4 d-flex justify-content-center" _lpchecked="1" style="width: 100%; margin-bottom: 50px;" action="#">
+    <form class="form-inline mr-auto mb-4 d-flex justify-content-center" _lpchecked="1" style="width: 100%; margin-bottom: 50px;" action="/explore/?search=q" method="GET">
       <div class="input-group mb-3 d-flex justify-content-center align-items-center" style="width: 80%;">
-        <input type="text" class="form-control form-control-lg" placeholder="Search for property or location" aria-label="Search" aria-describedby="button-addon2" style="width: 100%;">
+        <input type="search" name="q" class="form-control form-control-lg" placeholder="Search for property or location" aria-label="Search" aria-describedby="button-addon2" style="width: 100%;">
         <div class="input-group-append">
           <button class="btn btn-elegant btn-rounded my-0 waves-effect waves-light" type="button" id="button-addon2">Search</button>
         </div>
       </div>
     </form>
   </div>
-  <!-- end of search bar -->
 
-  <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 100px; padding: 60px; background-color: transparent;">
-    <h3 class="text-center">Lorem Ipsum</h3>
-    <p class="text-center" style="width: 100%; margin: 0 auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae metus bibendum, suscipit dolor non, ultrices metus. Integer nec libero risus.</p>
-    <div class="d-flex flex-wrap justify-content-center" style="margin-top: 20px;">
-      <button class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px;" type="button" name="button" data-toggle="modal" data-target="#signupModal">SIGN UP</button>
-      <a class="btn btn-dark" style="margin-top: 10px; margin-bottom: 10px;" href="{% url 'get_in_touch' %}">GET IN TOUCH</a>
-    </div>
-  </div>
 
 </div>
 
@@ -46,19 +37,19 @@ Roomy
     <div class="row d-flex flex-wrap justify-content-center align-items-center" style="margin-bottom: 100px;">
 
       <div class="col-md-2" style="height: 250px; margin: 5px; padding: 0; background-color: red; background-image: url('/static/img/placeholder_500x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
-        <a href="#" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Manila</a>
+        <a href="/explore/?search=manila" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Manila</a>
       </div>
       <div class="col-md-2" style="height: 250px; margin: 5px; background-color: purple;  background-image: url('/static/img/placeholder_500x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
-        <a href="#" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Taguig</a>
+        <a href="/explore/?search=taguig" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Taguig</a>
       </div>
       <div class="col-md-2" style="height: 250px; margin: 5px; background-color: green;  background-image: url('/static/img/placeholder_500x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
-        <a href="#" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Makati</a>
+        <a href="/explore/?search=makati" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Makati</a>
       </div>
       <div class="col-md-2" style="height: 250px; margin: 5px; background-color: yellow;  background-image: url('/static/img/placeholder_500x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
-        <a href="#" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Pasay</a>
+        <a href="/explore/?search=pasay" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Pasay</a>
       </div>
       <div class="col-md-2" style="height: 250px; margin: 5px; background-color: orange;  background-image: url('/static/img/placeholder_500x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
-        <a href="#" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Quezon City</a>
+        <a href="/explore/?search=quezon" class="d-flex justify-content-center align-items-end btn btn-link" style="min-width: 100%; min-height: 100%; margin: 0; padding: 10px 10px 30px 10px; font-size: 22px;">Quezon City</a>
       </div>
 
     </div>
@@ -91,7 +82,7 @@ Roomy
 
         <!-- room container -->
         <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
+          <a href="">
             <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
           </a>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
@@ -116,7 +107,7 @@ Roomy
 
         <!-- room container -->
         <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
+          <a href="">
             <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
           </a>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
@@ -141,7 +132,7 @@ Roomy
 
         <!-- room container -->
         <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
+          <a href="">
             <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
           </a>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
@@ -175,7 +166,7 @@ Roomy
 
         <!-- room container -->
         <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
+          <a href="">
             <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
           </a>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
@@ -200,7 +191,7 @@ Roomy
 
         <!-- room container -->
         <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
+          <a href="">
             <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
           </a>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
@@ -225,7 +216,7 @@ Roomy
 
         <!-- room container -->
         <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
+          <a href="">
             <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
           </a>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
@@ -250,7 +241,7 @@ Roomy
 
         <!-- room container -->
         <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
+          <a href="">
             <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
           </a>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
@@ -275,7 +266,7 @@ Roomy
 
         <!-- room container -->
         <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
+          <a href="">
             <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
           </a>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
@@ -300,7 +291,7 @@ Roomy
 
         <!-- room container -->
         <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
+          <a href="">
             <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
           </a>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
@@ -331,131 +322,35 @@ Roomy
       <h3 style="margin-bottom: 10px;">Dormitory</h3>
       <span style="margin-bottom: 10px; font-size: 14px;">Sed sodales tortor eu urna ullamcorper consequat. Curabitur vestibulum non leo at gravida. Duis id lacus dui.</span>
       <div class="d-flex flex-wrap justify-content-center align-items-center z-depth-1 rounded" style="width: 100%; min-height: 500px; margin-right: auto; margin-left: auto; padding: 10px;">
-
-        <!-- room container -->
+        {% for dorm in dorms %}
+          <!-- room container -->
         <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
-            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+          <a href="{% url 'room' dorm.pk %}">
+            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px;
+                                        background-image:url({% if dorm.image_2d.all %}/media/{{ dorm.image_2d.all.0 }}{% else %}{% static "img\placeholder_900x500.png" %}{% endif %});
+                                        background-repeat: no-repeat; background-size: cover;
+                                        background-position: center; background-color: red;"></div>
           </a>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
             <div class="">
-              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">{{ dorm.property_id.get_property_type_display}}</span>
               <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
             </div>
             <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
           </div>
           <div class="d-flex justify-content-between align-items-center">
-            <span style="font-size: 20px;">Room B20</span>
-            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
+            <span style="font-size: 20px;">{{ dorm.name }}</span>
+            <span style="font-size: 15px;"><b>Php {{ dorm.rate }}</b>/month</span>
           </div>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+            <span style="font-size: 15px; font-style: italic;">by {{ dorm.property_id.name }}</span>
           </div><hr>
           <div class="d-flex justify-content-start" >
-            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+            <span style="font-size: 16px;">{{ dorm.description }}</span>
           </div>
         </div>
         <!-- end of room container -->
-
-        <!-- room container -->
-        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
-            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
-          </a>
-          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-            <div class="">
-              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
-              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
-            </div>
-            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center">
-            <span style="font-size: 20px;">Room B20</span>
-            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
-          </div><hr>
-          <div class="d-flex justify-content-start" >
-            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
-          </div>
-        </div>
-        <!-- end of room container -->
-
-        <!-- room container -->
-        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
-            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
-          </a>
-          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-            <div class="">
-              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
-              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
-            </div>
-            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center">
-            <span style="font-size: 20px;">Room B20</span>
-            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
-          </div><hr>
-          <div class="d-flex justify-content-start" >
-            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
-          </div>
-        </div>
-        <!-- end of room container -->
-
-        <!-- room container -->
-        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
-            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
-          </a>
-          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-            <div class="">
-              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
-              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
-            </div>
-            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center">
-            <span style="font-size: 20px;">Room B20</span>
-            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
-          </div><hr>
-          <div class="d-flex justify-content-start" >
-            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
-          </div>
-        </div>
-        <!-- end of room container -->
-
-        <!-- room container -->
-        <div class="wrapper-room" style="width: 350px; margin: 10px; padding: 20px; border-radius: 5px;">
-          <a href="{% url 'room' %}">
-            <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto; border-radius: 10px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
-          </a>
-          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-            <div class="">
-              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">Apartment</span>
-              <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
-            </div>
-            <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center">
-            <span style="font-size: 20px;">Room B20</span>
-            <span style="font-size: 15px;"><b>Php 4000</b>/month</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-            <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
-          </div><hr>
-          <div class="d-flex justify-content-start" >
-            <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
-          </div>
-        </div>
-        <!-- end of room container -->
+        {% endfor %}
 
       </div>
     </div>
