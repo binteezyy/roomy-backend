@@ -8,9 +8,6 @@ context = {
 def property(request):
     return render(request,"components/property/property.html", context)
 
-def room(request):
-    return render(request,"components/property/room.html", context)
-
 def amenities(request):
     return render(request,"components/property/amenities.html", context)
 

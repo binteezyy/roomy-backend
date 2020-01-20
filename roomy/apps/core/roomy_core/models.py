@@ -10,7 +10,7 @@ class ImageFile(models.Model):
         upload_to='images', null=True, blank=True)
 
     def __str__(self):
-        return f'{self.title} - {self.img_path}'
+        return f'{self.img_path}'
 
     class Meta:
         unique_together = ('title', 'img_path')
@@ -54,6 +54,8 @@ class Room(models.Model):
         (0, 'Fixed Rate'),
         (1, 'Submetered'),
     ]
+
+    name = models.CharField(max_length=56)
     property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
     name = models.CharField(max_length=56, blank=True, null=True, unique=True)
     description = models.TextField(blank=True, null=True)
