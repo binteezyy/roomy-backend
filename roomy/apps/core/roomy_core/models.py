@@ -55,7 +55,6 @@ class Room(models.Model):
         (1, 'Submetered'),
     ]
 
-    name = models.CharField(max_length=56)
     property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
     name = models.CharField(max_length=56, blank=True, null=True, unique=True)
     description = models.TextField(blank=True, null=True)
