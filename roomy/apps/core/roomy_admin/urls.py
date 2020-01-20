@@ -27,8 +27,8 @@ urlpatterns = [
          name='property_management'),
     path('room_management/',      base.room_management,
          name='room_management'),
-    path('admin_management/',      base.admin_management,
-         name='admin_management'),
+    path('account_management/',      base.account_management,
+         name='account_management'),
     path('guest/', base.guest, name='guest'),
     path('request/', base.tenant_request, name='request'),
     path('notif/', base.notif, name='notif'),
@@ -139,13 +139,13 @@ urlpatterns = [
     path('upload/room3d/<int:pk>', base.room_upload3d,
          name='admin-room3d-upload'),
 
-    # Admin Accounts
-    path('admin_management/table/',
-         datatableviews.admin_acc_table,  name='admin-acc-table'),
-    path('read/admin_acc/<int:pk>', modalviews.AdminAccReadModal.as_view(),
-         name='read-admin-acc'),
-    path('delete/admin_acc/<int:pk>',
-         modalviews.AdminAccDeleteModal.as_view(), name='delete-admin-acc'),
-    path('update/admin_acc/<int:pk>',
-         modalviews.AdminAccUpdateModal.as_view(), name='update-admin-acc'),
+    # Account
+#     path('account_management/table/',
+#          datatableviews.admin_acc_table,  name='admin-acc-table'),
+#     path('read/admin_acc/<int:pk>', modalviews.AdminAccReadModal.as_view(),
+#          name='read-admin-acc'),
+#     path('delete/admin_acc/<int:pk>',
+#          modalviews.AdminAccDeleteModal.as_view(), name='delete-admin-acc'),
+#     path('update/admin_acc/<int:pk>',
+#          modalviews.AdminAccUpdateModal.as_view(), name='update-admin-acc'),
 ]

@@ -71,7 +71,7 @@ class Room(models.Model):
         return f'{self.property_id}: Floor {self.floor} - Room {self.number}'
 
     class Meta:
-        unique_together = ('property_id', 'name', 'floor', 'number')
+        unique_together = ('property_id', 'floor', 'number')
 
 
 class Fee(models.Model):

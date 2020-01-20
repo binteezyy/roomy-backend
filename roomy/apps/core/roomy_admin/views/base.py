@@ -15,9 +15,10 @@ context = {
 def index(request):
     next = request.GET.get('next')
 
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         return render(request, "components/billing.html")
     else:
+        logout(request)
         form = UserLoginForm(request.POST or None)
         if form.is_valid():
             username = form.cleaned_data.get('username')
@@ -60,7 +61,27 @@ def demo(request, place):
 @user_passes_test(lambda u: u.is_staff)
 def dashboard(request):
 
-    return render(request, "components/dashboard.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/dashboard.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 # rental
 
@@ -69,7 +90,27 @@ def dashboard(request):
 @user_passes_test(lambda u: u.is_staff)
 def rental(request):
 
-    return render(request, "components/rental.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/rental.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 # tenant
 
@@ -78,7 +119,27 @@ def rental(request):
 @user_passes_test(lambda u: u.is_staff)
 def tenant(request):
 
-    return render(request, "components/tenant.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/tenant.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 # billing
 
@@ -87,14 +148,54 @@ def tenant(request):
 @user_passes_test(lambda u: u.is_staff)
 def billing(request):
 
-    return render(request, "components/billing.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/billing.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def fee(request):
 
-    return render(request, "components/fee.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/fee.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 # expense
 
 
@@ -102,7 +203,27 @@ def fee(request):
 @user_passes_test(lambda u: u.is_staff)
 def expense(request):
 
-    return render(request, "components/expense.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/expense.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 # cashflow
 
@@ -111,7 +232,27 @@ def expense(request):
 @user_passes_test(lambda u: u.is_staff)
 def cashflow(request):
 
-    return render(request, "components/cashflow.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/cashflow.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 # report
 
@@ -120,7 +261,27 @@ def cashflow(request):
 @user_passes_test(lambda u: u.is_staff)
 def report(request):
 
-    return render(request, "components/report.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/report.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 # property_management
 
@@ -129,116 +290,315 @@ def report(request):
 @user_passes_test(lambda u: u.is_staff)
 def property_management(request):
 
-    return render(request, "components/property_management.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/property_management.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def property_upload(request, pk):
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        property_object = Property.objects.get(pk=pk)
+        if request.method == 'GET':
+            context = {
+                'property': property_object,
+            }
+            return render(request, "components/upload_template/property-upload.html", context)
 
-    property_object = Property.objects.get(pk=pk)
-    if request.method == 'GET':
-        context = {
-            'property': property_object,
-        }
-        return render(request, "components/upload_template/property-upload.html", context)
+        elif request.method == 'POST' and request.FILES['myfile'] and request.POST.get('filetitle'):
+            upload_image = ImageFile(title=request.POST.get(
+                'filetitle'), img_path=request.FILES['myfile'])
+            upload_image.save()
 
-    elif request.method == 'POST' and request.FILES['myfile'] and request.POST.get('filetitle'):
-        upload_image = ImageFile(title=request.POST.get(
-            'filetitle'), img_path=request.FILES['myfile'])
-        upload_image.save()
-
-        property_object.property_image.add(upload_image)
-        return HttpResponse("ok")
+            property_object.property_image.add(upload_image)
+            return HttpResponseRedirect(reverse('property-management'))
+        else:
+            return HttpResponseRedirect(reverse('property-management'))
     else:
-        return HttpResponse("not ok")
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
+    
 
 
 # room_management
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def room_upload2d(request, pk):
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        room_object = Room.objects.get(pk=pk)
+        if request.method == 'GET':
+            context = {
+                'room': room_object,
+                '2d': True,
+            }
+            return render(request, "components/upload_template/room-upload.html", context)
 
-    room_object = Room.objects.get(pk=pk)
-    if request.method == 'GET':
-        context = {
-            'room': room_object,
-            '2d': True,
-        }
-        return render(request, "components/upload_template/room-upload.html", context)
+        elif request.method == 'POST' and request.FILES['myfile'] and request.POST.get('filetitle'):
+            upload_image = ImageFile(title=request.POST.get(
+                'filetitle'), img_path=request.FILES['myfile'])
+            upload_image.save()
 
-    elif request.method == 'POST' and request.FILES['myfile'] and request.POST.get('filetitle'):
-        upload_image = ImageFile(title=request.POST.get(
-            'filetitle'), img_path=request.FILES['myfile'])
-        upload_image.save()
-
-        room_object.image_2d.add(upload_image)
-        return HttpResponse("ok")
+            room_object.image_2d.add(upload_image)
+            return HttpResponseRedirect(reverse('room-management'))
+        else:
+            return HttpResponseRedirect(reverse('room-management'))
     else:
-        return HttpResponse("not ok")
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def room_upload3d(request, pk):
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        room_object = Room.objects.get(pk=pk)
+        if request.method == 'GET':
+            context = {
+                'room': room_object,
+                '2d': False,
+            }
+            return render(request, "components/upload_template/room-upload.html", context)
 
-    room_object = Room.objects.get(pk=pk)
-    if request.method == 'GET':
-        context = {
-            'room': room_object,
-            '2d': False,
-        }
-        return render(request, "components/upload_template/room-upload.html", context)
+        elif request.method == 'POST' and request.FILES['myfile'] and request.POST.get('filetitle'):
+            upload_image = ImageFile(title=request.POST.get(
+                'filetitle'), img_path=request.FILES['myfile'])
+            upload_image.save()
 
-    elif request.method == 'POST' and request.FILES['myfile'] and request.POST.get('filetitle'):
-        upload_image = ImageFile(title=request.POST.get(
-            'filetitle'), img_path=request.FILES['myfile'])
-        upload_image.save()
-
-        room_object.image_3d.add(upload_image)
-        return HttpResponse("ok")
+            room_object.image_3d.add(upload_image)
+            return HttpResponseRedirect(reverse('room-management'))
+        else:
+            return HttpResponseRedirect(reverse('room-management'))
     else:
-        return HttpResponse("not ok")
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
+    
 
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def room_management(request):
 
-    return render(request, "components/room_management.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/room_management.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 # admin_management
 
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def admin_management(request):
+def account_management(request):
 
-    return render(request, "components/admin_management.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/account_management.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def guest(request):
-    return render(request, "components/guest.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/guest.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def tenant_request(request):
 
-    return render(request, "components/request.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/request.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def notif(request):
 
-    return render(request, "components/notifs.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/notifs.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def booking(request):
 
-    return render(request, "components/booking.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/booking.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
