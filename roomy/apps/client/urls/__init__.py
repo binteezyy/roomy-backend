@@ -25,8 +25,9 @@ urlpatterns = [
     path('privacy/', landing.privacy, name='privacy'),
     path('help_center/', landing.help_center, name='help_center'),
     #property
+    path('explore/', explore.index, name='explore'),
     path('explore/property/', property.property, name='property'),
-    path('explore/property/room', property.room, name='room'),
+    path('explore/property/room/<int:pk>', explore.room_view, name='room'),
     path('explore/property/amenities', property.amenities, name='amenities'),
     path('explore/property/photos', property.photos, name='photos'),
     path('explore/property/room/booking', property.booking, name='booking'),
