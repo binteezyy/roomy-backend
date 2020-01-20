@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block layout %}
+{% block layout_landing %}
 
 <!-- navbar -->
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark" id="navbar">
+<nav class="navbar navbar-expand-xl navbar-light" id="navbar" style="width: 100%; position: absolute; background-color: transparent; box-shadow: none;">
   <div class="container">
     <!-- logo -->
     <a href="{% url 'home' %}" style="margin-right: 20px;">
@@ -58,6 +58,65 @@
 <!-- end of navbar -->
 
 <!-- modals -->
+<!-- login modal -->
+<form class="" action="#" method="post">
+
+  <!-- modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <!-- modal content -->
+      <div class="modal-content" style="width: 350px; height: auto; margin: 0 auto; border-radius: 15px;">
+
+        <!-- modal body -->
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="d-flex justify-content-center" style="margin-bottom: 50px;">
+                    <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px;">
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3" style="width: 100px;">Username</span>
+                    </div>
+                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3" style="width: 100px;">Password</span>
+                    </div>
+                    <input type="password" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                  </div>
+                  <div class="d-flex justify-content-center" style="margin-top: 40px;">
+                    <button type="button" class="btn btn-sm btn-dark">Log in</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- modal footer -->
+        <div class="modal-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 text-center" style="font-size: 14px;">
+                <a href="#" data-toggle="modal" data-target="#forgotPasswordModal" data-dismiss="modal">Forgot password?</a> <br>
+                <span>Don't have an account yet?</span>
+                <a href="#" type="button" name="button" data-toggle="modal" data-target="#signupModal" data-dismiss="modal">Sign up</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</form>
+<!-- end of login modal -->
 
 <!-- signup modal -->
 <form class="" action="#" method="post">
@@ -246,12 +305,12 @@
 <!-- end of get in touch modal -->
 <!-- end of modals -->
 
-
-  {% block content %}{% endblock content %}
+{% block content %}{% endblock content %}
 
 {% endblock %}
+
 {% block footer %}
-<!-- footer -->
+
 <footer class="page-footer font-small black pt-4" style="padding-bottom: 100px;">
   <div class="container-fluid">
     <div class="container">
@@ -352,5 +411,4 @@
     </div>
   </div>
 </footer>
-<!-- end of footer -->
 {% endblock %}
