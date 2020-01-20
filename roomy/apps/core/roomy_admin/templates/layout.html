@@ -79,7 +79,8 @@
     </ul>
     <div class="row">
       <div class="col center-block text-center">
-        <h4 class="profile" style="color:blueviolet">{{ request.user.username }}</h4>
+        <h4>Logged in as
+          <span class="profile" style="color:blueviolet">{{ request.user.username }} </span></h4>
       </div>
     </div>
     <div class="row">
@@ -103,16 +104,7 @@
         {% endblock %}
       </div>
 
-      <div class="dropdown" style="color: white; font-size: 14px; margin: auto 10px auto 10px;">
-        <span class="header-text dropdown-toggle" type="dropdown-toggle" name="button" data-toggle="dropdown"
-          style="color: white; font-size: 14px; margin: auto 10px auto 10px;">
-          username
-        </span>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Profile</a>
-          <a class="dropdown-item" href="#">Log out</a>
-        </div>
-      </div>
+
 
     </div>
     <!-- end of topbar -->

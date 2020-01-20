@@ -263,8 +263,13 @@ def room_table(request):
                                    for i in room.image_3d.all()])
         else:
             images3d = 'Empty'
+        if room.name:
+            name = room.name
+        else:
+            name = "None"
         x = {"fields": {"id": room.pk,
                         "property": room.property_id.name,
+                        "name": name,
                         "floorno": f'Room: Floor-{room.floor} Number-{room.number}',
                         "rate": int(room.rate),
                         "type": room.get_room_type_display(),

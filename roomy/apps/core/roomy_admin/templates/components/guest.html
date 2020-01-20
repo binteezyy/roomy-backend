@@ -23,12 +23,12 @@ Guest List
                             role="grid" aria-describedby="dataTable_info">
                             <thead>
                                 <tr role="row">
-                                    <th style="width:10%">Id</th>
-                                    <th style="width:10%">Name</th>
-                                    <th style="width:10%">Date</th>
-                                    <th style="width:10%">Room</th>
-                                    <th style="width:10%">Status</th>
-                                    <th style="width:10%">Actions</th>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Room</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -105,9 +105,9 @@ Tenants
                     "data": 'fields.id',
                     render: function (data, type, row) {
                         let render =
-                            '<button type="button" class="delete-guest btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/guest/' + data + '">' +
+                            '<button type="button" class="delete-guest btn btn-sm btn-raised btn-warning m-1" data-id="/delete/guest/' + data + '">' +
                             '<span class="fa fa-trash"></span></button>' +
-                            '<button type="button" class="update-guest btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/guest/' + data + '">' +
+                            '<button type="button" class="update-guest btn btn-sm btn-raised btn-success m-1" data-id="/update/guest/' + data + '">' +
                             '<span class="fa fa-edit"></span></button>';
                         return render
                     }

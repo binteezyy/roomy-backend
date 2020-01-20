@@ -10,7 +10,7 @@ class ImageFile(models.Model):
         upload_to='images', null=True, blank=True)
 
     def __str__(self):
-        return f'{self.title} - {self.img_path}'
+        return f'{self.img_path}'
 
     class Meta:
         unique_together = ('title', 'img_path')
@@ -54,7 +54,10 @@ class Room(models.Model):
         (0, 'Fixed Rate'),
         (1, 'Submetered'),
     ]
+
+    name = models.CharField(max_length=56)
     property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
+    name = models.CharField(max_length=56, blank=True, null=True, unique=True)
     description = models.TextField(blank=True, null=True)
     floor = models.PositiveIntegerField(default=1)
     number = models.PositiveIntegerField(default=1)
@@ -69,7 +72,7 @@ class Room(models.Model):
         return f'{self.property_id}: Floor {self.floor} - Room {self.number}'
 
     class Meta:
-        unique_together = ('property_id', 'floor', 'number')
+        unique_together = ('property_id', 'name', 'floor', 'number')
 
 
 class Fee(models.Model):
@@ -155,9 +158,9 @@ class Booking(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
     document1_id = models.ForeignKey(
-        Document, on_delete=models.CASCADE, related_name="document1")
+        Document, on_delete=models.CASCADE, null=True, blank=True, related_name="document1")
     document2_id = models.ForeignKey(
-        Document, on_delete=models.CASCADE, related_name="document2")
+        Document, on_delete=models.CASCADE, null=True, blank=True, related_name="document2")
     add_ons = models.ManyToManyField(Fee, blank=True)
     approved = models.BooleanField(default=False)
 

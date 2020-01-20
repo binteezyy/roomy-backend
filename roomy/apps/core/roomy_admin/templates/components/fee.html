@@ -23,11 +23,11 @@ Fee
                             role="grid" aria-describedby="dataTable_info">
                             <thead>
                                 <tr role="row">
-                                    <th style="width:10%">Id</th>
-                                    <th style="width:10%">Type</th>
-                                    <th style="width:10%">Description</th>
-                                    <th style="width:10%">Amount</th>
-                                    <th style="width:10%">Actions</th>
+                                    <th>Id</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -99,9 +99,9 @@ Fee
                     "data": 'fields.id',
                     render: function (data, type, row) {
                         let render =
-                            '<button type="button" class="delete-fee btn btn-sm btn-raised btn-warning m-1" data-id="/roomy-admin/delete/fee/' + data + '">' +
+                            '<button type="button" class="delete-fee btn btn-sm btn-raised btn-warning m-1" data-id="/delete/fee/' + data + '">' +
                             '<span class="fa fa-trash"></span></button>' +
-                            '<button type="button" class="update-fee btn btn-sm btn-raised btn-success m-1" data-id="/roomy-admin/update/fee/' + data + '">' +
+                            '<button type="button" class="update-fee btn btn-sm btn-raised btn-success m-1" data-id="/update/fee/' + data + '">' +
                             '<span class="fa fa-edit"></span></button>';
                         return render
                     }

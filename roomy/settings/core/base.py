@@ -78,4 +78,3 @@ ROOT_URLCONF = 'config.core.urls'
 LOGIN_REDIRECT_URL = 'admin-index'
 LOGIN_URL = 'admin-index'
 
-APPEND_SLASH = False
