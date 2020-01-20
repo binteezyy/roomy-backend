@@ -19,7 +19,7 @@ DATABASES = {
         'USER': config('DB_USERNAME'),
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),   # Or an IP Address that your DB is hosted on
-        'PORT': config('DB_PORT'),
+        'PORT': config('PORT'),
     }
 
 }
