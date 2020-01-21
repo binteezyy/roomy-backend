@@ -29,7 +29,7 @@ def index(request):
 
             if next:
                 return redirect(next)
-            return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(reverse('admin-index'))
 
         context = {
             'form': form,

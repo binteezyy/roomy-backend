@@ -14,8 +14,6 @@ context = {
 # home
 
 
-@login_required
-@user_passes_test(lambda u: u.is_staff)
 def home(request):
 
     next = request.GET.get('next')
@@ -34,7 +32,7 @@ def home(request):
 
             if next:
                 return redirect(next)
-            return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(reverse('admin-index'))
 
         context = {
             'form': form,
