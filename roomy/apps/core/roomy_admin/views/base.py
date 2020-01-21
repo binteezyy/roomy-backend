@@ -29,7 +29,7 @@ def index(request):
 
             if next:
                 return redirect(next)
-            return HttpResponseRedirect(reverse('admin-index'))
+            return HttpResponseRedirect(reverse('home'))
 
         context = {
             'form': form,
@@ -53,7 +53,6 @@ def demo(request, place):
     else:
         context['place'] = "alma.jpg"
     return render(request, "demo.html", context)
-
 
 # home
 
@@ -306,13 +305,7 @@ def property_management(request):
                 return redirect(next)
             return HttpResponseRedirect(reverse('admin-index'))
 
-        context = {
-            'form': form,
-            'title': 'Login',
-        }
-        return render(request, 'components/admin_login/login.html', context)
-
-
+          
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def property_upload(request, pk):
@@ -354,8 +347,6 @@ def property_upload(request, pk):
         return render(request, 'components/admin_login/login.html', context)
     
 
-
-# room_management
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def room_upload2d(request, pk):
@@ -397,7 +388,6 @@ def room_upload2d(request, pk):
         }
         return render(request, 'components/admin_login/login.html', context)
 
-
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def room_upload3d(request, pk):
@@ -432,14 +422,6 @@ def room_upload3d(request, pk):
             if next:
                 return redirect(next)
             return HttpResponseRedirect(reverse('admin-index'))
-
-        context = {
-            'form': form,
-            'title': 'Login',
-        }
-        return render(request, 'components/admin_login/login.html', context)
-    
-
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
@@ -602,3 +584,4 @@ def booking(request):
             'title': 'Login',
         }
         return render(request, 'components/admin_login/login.html', context)
+
