@@ -19,7 +19,7 @@ from apps.core.roomy_admin.modalforms import *
 
 
 # LoginRequiredMixin, UserPassesTestMixin,
-class BillingReadModal(BSModalReadView):
+class BillingReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = Billing
     context_object_name = 'billing'
     template_name = 'components/modals/read.html'
@@ -42,7 +42,7 @@ class BillingReadModal(BSModalReadView):
         return self.request.user.is_staff
 
 
-class BillingDeleteModal(BSModalDeleteView):
+class BillingDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
     model = Billing
     context_object_name = 'billing'
     template_name = 'components/modals/delete.html'
@@ -53,15 +53,17 @@ class BillingDeleteModal(BSModalDeleteView):
         return self.request.user.is_staff
 
 
-class BillingUpdateModal(BSModalUpdateView):
+class BillingUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
     model = Billing
     template_name = 'components/modals/update.html'
     form_class = BillingModalForm
     sucess_message = "Success: Billing updated"
     success_url = reverse_lazy('billing')
 
+    def test_func(self):
+        return self.request.user.is_staff
 
-class FeeDeleteModal(BSModalDeleteView):
+class FeeDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
     model = Fee
     context_object_name = 'fee'
     template_name = 'components/modals/delete.html'
@@ -72,15 +74,17 @@ class FeeDeleteModal(BSModalDeleteView):
         return self.request.user.is_staff
 
 
-class FeeUpdateModal(BSModalUpdateView):
+class FeeUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
     model = Fee
     template_name = 'components/modals/update.html'
     form_class = FeeModalForm
     sucess_message = "Success: Fee updated"
     success_url = reverse_lazy('fee')
 
+    def test_func(self):
+        return self.request.user.is_staff
 
-class FeeCreateModal(BSModalCreateView):
+class FeeCreateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalCreateView):
     model = Fee
     model_type = 'fee'
     template_name = 'components/modals/create.html'
@@ -92,7 +96,7 @@ class FeeCreateModal(BSModalCreateView):
         return self.request.user.is_staff
 
 
-class RentalReadModal(BSModalReadView):
+class RentalReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = Transaction
     context_object_name = 'transaction'
     template_name = 'components/modals/read.html'
@@ -118,7 +122,7 @@ class RentalReadModal(BSModalReadView):
         return self.request.user.is_staff
 
 
-class RentalDeleteModal(BSModalDeleteView):
+class RentalDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
     model = Transaction
     context_object_name = 'transaction'
     template_name = 'components/modals/delete.html'
@@ -129,15 +133,17 @@ class RentalDeleteModal(BSModalDeleteView):
         return self.request.user.is_staff
 
 
-class RentalUpdateModal(BSModalUpdateView):
+class RentalUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
     model = Transaction
     template_name = 'components/modals/update.html'
     form_class = TransactionModalForm
     sucess_message = "Success: Transaction updated"
     success_url = reverse_lazy('rental')
 
+    def test_func(self):
+        return self.request.user.is_staff
 
-class TenantReadModal(BSModalReadView):
+class TenantReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = TenantAccount
     context_object_name = 'tenants'
     template_name = 'components/modals/read.html'
@@ -155,7 +161,7 @@ class TenantReadModal(BSModalReadView):
         return self.request.user.is_staff
 
 
-class ExpenseCreateModal(BSModalCreateView):
+class ExpenseCreateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalCreateView):
     model = Expense
     model_type = 'expense'
     template_name = 'components/modals/create.html'
@@ -167,7 +173,7 @@ class ExpenseCreateModal(BSModalCreateView):
         return self.request.user.is_staff
 
 
-class ExpenseDeleteModal(BSModalDeleteView):
+class ExpenseDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
     model = Expense
     context_object_name = 'expense'
     template_name = 'components/modals/delete.html'
@@ -178,15 +184,17 @@ class ExpenseDeleteModal(BSModalDeleteView):
         return self.request.user.is_staff
 
 
-class ExpenseUpdateModal(BSModalUpdateView):
+class ExpenseUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
     model = Expense
     template_name = 'components/modals/update.html'
     form_class = ExpenseModalForm
     sucess_message = "Success: Expense updated"
     success_url = reverse_lazy('expense')
 
+    def test_func(self):
+        return self.request.user.is_staff
 
-class GuestCreateModal(BSModalCreateView):
+class GuestCreateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalCreateView):
     model = Guest
     model_type = 'guest'
     template_name = 'components/modals/create.html'
@@ -198,7 +206,7 @@ class GuestCreateModal(BSModalCreateView):
         return self.request.user.is_staff
 
 
-class GuestDeleteModal(BSModalDeleteView):
+class GuestDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
     model = Guest
     context_object_name = 'guest'
     template_name = 'components/modals/delete.html'
@@ -209,15 +217,17 @@ class GuestDeleteModal(BSModalDeleteView):
         return self.request.user.is_staff
 
 
-class GuestUpdateModal(BSModalUpdateView):
+class GuestUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
     model = Guest
     template_name = 'components/modals/update.html'
     form_class = GuestModalForm
     sucess_message = "Success: Guest updated"
     success_url = reverse_lazy('guest')
 
+    def test_func(self):
+        return self.request.user.is_staff
 
-class RequestDeleteModal(BSModalDeleteView):
+class RequestDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
     model = Request
     context_object_name = 'trequest'
     template_name = 'components/modals/delete.html'
@@ -228,33 +238,38 @@ class RequestDeleteModal(BSModalDeleteView):
         return self.request.user.is_staff
 
 
-class RequestUpdateModal(BSModalUpdateView):
+class RequestUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
     model = Request
     template_name = 'components/modals/update.html'
     form_class = RequestModalForm
     sucess_message = "Success: Request updated"
     success_url = reverse_lazy('request')
 
+    def test_func(self):
+        return self.request.user.is_staff
 
-class NotifDeleteModal(BSModalDeleteView):
+class NotifDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
     model = Message
     context_object_name = 'notif'
     template_name = 'components/modals/delete.html'
     success_message = 'Success: Notif deleted'
     success_url = reverse_lazy('notif')
-    # def test_func(self):
-    #     return self.notif.user.is_superuser
+
+    def test_func(self):
+        return self.request.user.is_staff
 
 
-class NotifUpdateModal(BSModalUpdateView):
+class NotifUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
     model = Message
     template_name = 'components/modals/update.html'
     form_class = NotifModalForm
     sucess_message = "Success: Notif updated"
     success_url = reverse_lazy('notif')
 
+    def test_func(self):
+        return self.request.user.is_staff
 
-class NotifCreateModal(BSModalCreateView):
+class NotifCreateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalCreateView):
     model = Message
     model_type = 'notif'
     template_name = 'components/modals/create.html'
@@ -266,7 +281,7 @@ class NotifCreateModal(BSModalCreateView):
         return self.request.user.is_staff
 
 
-class BookingReadModal(BSModalReadView):
+class BookingReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = Booking
     context_object_name = 'booking'
     template_name = 'components/modals/read.html'
@@ -298,7 +313,7 @@ class BookingReadModal(BSModalReadView):
         return self.request.user.is_staff
 
 
-class BookingDeleteModal(BSModalDeleteView):
+class BookingDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
     model = Booking
     context_object_name = 'booking'
     template_name = 'components/modals/delete.html'
@@ -306,18 +321,20 @@ class BookingDeleteModal(BSModalDeleteView):
     success_url = reverse_lazy('booking')
 
     def test_func(self):
-        return self.notif.user.is_staff
+        return self.request.user.is_staff
 
 
-class BookingUpdateModal(BSModalUpdateView):
+class BookingUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
     model = Booking
     template_name = 'components/modals/update.html'
     form_class = BookingModalForm
     sucess_message = "Success: Booking updated"
     success_url = reverse_lazy('booking')
 
+    def test_func(self):
+        return self.request.user.is_staff
 
-class PropertyReadModal(BSModalReadView):
+class PropertyReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = Property
     context_object_name = 'property'
     template_name = 'components/modals/read.html'
@@ -334,7 +351,7 @@ class PropertyReadModal(BSModalReadView):
         return self.request.user.is_staff
 
 
-class PropertyCreateModal(BSModalCreateView):
+class PropertyCreateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalCreateView):
     model = Property
     model_type = 'property'
     template_name = 'components/modals/create.html'
@@ -346,25 +363,27 @@ class PropertyCreateModal(BSModalCreateView):
         return self.request.user.is_staff
 
 
-class PropertyDeleteModal(BSModalDeleteView):
+class PropertyDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
     model = Property
     context_object_name = 'propertyo'
     template_name = 'components/modals/delete.html'
     success_message = 'Success: Property deleted'
     success_url = reverse_lazy('property_management')
-    # def test_func(self):
-    #     return self.notif.user.is_superuser
+    def test_func(self):
+        return self.request.user.is_staff
 
 
-class PropertyUpdateModal(BSModalUpdateView):
+class PropertyUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
     model = Property
     template_name = 'components/modals/update.html'
     form_class = PropertyModalForm
     sucess_message = "Success: Property updated"
     success_url = reverse_lazy('property_management')
 
+    def test_func(self):
+        return self.request.user.is_staff
 
-class RoomReadModal(BSModalReadView):
+class RoomReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = Room
     context_object_name = 'room'
     template_name = 'components/modals/read.html'
@@ -382,7 +401,7 @@ class RoomReadModal(BSModalReadView):
         return self.request.user.is_staff
 
 
-class RoomCreateModal(BSModalCreateView):
+class RoomCreateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalCreateView):
     model = Room
     model_type = 'room'
     template_name = 'components/modals/create.html'
@@ -394,25 +413,27 @@ class RoomCreateModal(BSModalCreateView):
         return self.request.user.is_staff
 
 
-class RoomDeleteModal(BSModalDeleteView):
+class RoomDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
     model = Room
     context_object_name = 'room'
     template_name = 'components/modals/delete.html'
     success_message = 'Success: Room deleted'
     success_url = reverse_lazy('room_management')
-    # def test_func(self):
-    #     return self.notif.user.is_superuser
+    def test_func(self):
+        return self.request.user.is_staff
 
 
-class RoomUpdateModal(BSModalUpdateView):
+class RoomUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
     model = Room
     template_name = 'components/modals/update.html'
     form_class = RoomModalForm
     sucess_message = "Success: Room updated"
     success_url = reverse_lazy('room_management')
 
+    def test_func(self):
+        return self.request.user.is_staff
 
-class AdminAccReadModal(BSModalReadView):
+class AdminAccReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = OwnerAccount
     context_object_name = 'adminacc'
     template_name = 'components/modals/read.html'
@@ -431,19 +452,23 @@ class AdminAccReadModal(BSModalReadView):
         return self.request.user.is_staff
 
 
-class AdminAccDeleteModal(BSModalDeleteView):
+class AdminAccDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
     model = OwnerAccount
     context_object_name = 'adminacc'
     template_name = 'components/modals/delete.html'
     success_message = 'Success: Admin Account deleted'
     success_url = reverse_lazy('admin_management')
-    # def test_func(self):
-    #     return self.notif.user.is_superuser
+    
+    def test_func(self):
+        return self.request.user.is_staff
 
 
-class AdminAccUpdateModal(BSModalUpdateView):
+class AdminAccUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
     model = OwnerAccount
     template_name = 'components/modals/update.html'
     form_class = AdminAccModalForm
     sucess_message = "Success: Admin Account updated"
     success_url = reverse_lazy('admin_management')
+
+    def test_func(self):
+        return self.request.user.is_staff

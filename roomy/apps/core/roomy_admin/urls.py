@@ -126,13 +126,14 @@ urlpatterns = [
     path('upload/room3d/<int:pk>', base.room_upload3d,
          name='admin-room3d-upload'),
 
-    #Admin Accounts
-    path('admin_management/table/',
-         datatableviews.admin_acc_table,  name='admin-acc-table'),
-    path('read/admin_acc/<int:pk>', modalviews.AdminAccReadModal.as_view(),
-         name='read-admin-acc'),
-    path('delete/admin_acc/<int:pk>',
-         modalviews.AdminAccDeleteModal.as_view(), name='delete-admin-acc'),
-    path('update/admin_acc/<int:pk>',
-         modalviews.AdminAccUpdateModal.as_view(), name='update-admin-acc'),
+    # Account
+#     path('account_management/table/',
+#          datatableviews.admin_acc_table,  name='admin-acc-table'),
+#     path('read/admin_acc/<int:pk>', modalviews.AdminAccReadModal.as_view(),
+#          name='read-admin-acc'),
+#     path('delete/admin_acc/<int:pk>',
+#          modalviews.AdminAccDeleteModal.as_view(), name='delete-admin-acc'),
+#     path('update/admin_acc/<int:pk>',
+#          modalviews.AdminAccUpdateModal.as_view(), name='update-admin-acc'),
+
 ]
