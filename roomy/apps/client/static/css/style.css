@@ -1,3 +1,10 @@
+body {
+  background-color: #f8f7f9;
+}
+
+footer a{
+  color: #5b5b5b;
+}
 /* Style the tab */
 .tab {
   overflow: hidden;
