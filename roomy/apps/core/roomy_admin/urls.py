@@ -1,6 +1,6 @@
 from django.urls import path, include
 from django.conf.urls.static import static
-from .views import base, dashboard, management, datatableviews, modalviews
+from .views import base, dashboard, cashflow, management, datatableviews, modalviews
 urlpatterns = [
     path('', base.index, name='admin-index'),
     path('logout/', base.admin_logout, name='admin-logout'),
@@ -11,19 +11,19 @@ urlpatterns = [
     path('dashboard/booking/', dashboard.booking, name='booking'),
     path('dashboard/rental/',      dashboard.rental,    name='rental'),
     path('dashboard/tenant/',      dashboard.tenant,    name='tenant'),
-    path('dashboard/billing/',      dashboard.billing,  name='billing'),
     path('dashboard/notification/',    dashboard.notif,    name='notif'),
     path('dashboard/request/',  dashboard.tenant_request, name='request'),
     path('dashboard/guest/',    dashboard.guest, name='guest'),
 
+    #cashflow
+    path('cashflow/expense/',      cashflow.expense,  name='expense'),
+    path('cashflow/billing/',      cashflow.billing,  name='billing'),
+    path('cashflow/fee/',      cashflow.fee,name='fee'),
+
     #management
     path('management/property/',      management.property_management, name='property_management'),
     path('management/room/',      management.room_management, name='room_management'),
-    path('management/admin/',      management.admin_management, name='admin_management'),
-    path('management/expense/',      management.expense,  name='expense'),
-    path('management/fee/',      management.fee,name='fee'),
-    path('management/cashflow/',      management.cashflow,    name='cashflow'),
-
+    path('management/account/',      management.admin_management, name='admin_management'),
 
     #Data Table Paths
     #Billing Table

@@ -11,23 +11,23 @@ context = {
     "title": "Roomy",
 }
 
-#property management
+# billing
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def property_management(request):
+def billing(request):
 
-    return render(request, "components/management/property_management.html", context)
+    return render(request, "components/cashflow/billing.html", context)
 
-#room management
+#expense
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def room_management(request):
+def expense(request):
 
-    return render(request, "components/management/room_management.html", context)
+    return render(request, "components/cashflow/expense.html", context)
 
-#admin management
+#fee
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def admin_management(request):
+def fee(request):
 
-    return render(request, "components/management/admin_management.html", context)
+    return render(request, "components/cashflow/fee.html", context)
