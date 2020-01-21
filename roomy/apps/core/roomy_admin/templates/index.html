@@ -11,27 +11,47 @@
     {{ title }}
   </title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="{% static "vendor/bootstrap-material-design/css/bootstrap-material-design.min.css" %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static "vendor\mdbootstrap\css\bootstrap.min.css" %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static "vendor\mdbootstrap\css\mdb.min.css" %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="{% static "css\style.css" %}">
+  <!-- Animate Css -->
   <link rel="stylesheet" href="{% static "vendor/animate/animate.css" %}">
-  <link rel="stylesheet" href="{% static "css/style.css" %}">
+
   <!-- CSS -->
   {% block extra_css %}
   {% endblock extra_css %}
 </head>
 
-<body>
+<body style="background-color:{% block custom_color %}{% endblock %};">
+
   {% block layout %}
   {% endblock layout %}
 </body>
-<!-- SCRIPTS -->
-<script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
-<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
-  integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-<script src="{% static 'vendor/bootstrap-material-design/js/bootstrap-material-design.min.js' %}"></script>
+
+<!-- JQuery -->
+<script type="text/javascript" src="{% static "vendor\mdbootstrap\js\jquery.min.js" %}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{% static "vendor\mdbootstrap\js\popper.min.js" %}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{% static "vendor\mdbootstrap\js\bootstrap.min.js" %}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{% static "vendor\mdbootstrap\js\mdb.min.js" %}"></script>
+
+<!-- Bootstrap Modal Forms Scripts -->
 <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+<!-- Font Awesome Scripts -->
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
 <script>$(document).ready(function () { $('body').bootstrapMaterialDesign(); });</script>
+
+<!-- Google Maps API Scripts -->
 <script type="text/javascript"
   src="//maps.googleapis.com/maps/api/js?key=AIzaSyAE_aLNQaPj0viIzm1lnTsvsf0Pq4b14IE&amp;libraries=places"></script>
 <script type="text/javascript" charset="UTF-8"

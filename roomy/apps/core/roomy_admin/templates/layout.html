@@ -1,124 +1,125 @@
 {% extends "index.html" %}
+{% load static %}
 
 {% block layout %}
-<!-- page wrapper -->
-<div class="wrapper">
 
+<!-- topbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between" id="navbar" style="border-top: 2px solid #F53D3D;">
 
-  <!-- navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex flex-column justify-content-start"
-    style="width: 250px; height: 100%; position:fixed; margin: 0; padding: 0;">
+  <!-- logo -->
+  <a href="{% url 'home' %}" style="margin-right: 20px;">
+    <img src="{% static "img\logo_white.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+  </a>
+  <!-- end of logo -->
 
-    <a class="navbar-brand" href="#">roomy</a>
+  <!-- expand button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-ellipsis-h" style="color: #F53D3D;"></i></button>
 
-    <ul class="navbar-nav d-flex flex-column justify-content-start">
+</nav>
+<!-- end of topbar -->
 
-      <!-- navbar divider-->
-      <li class="">
-        <hr>
-      </li>
+<!-- sidebar & content -->
+<div class="container-fluid">
+  <div class="row">
 
-      <!-- navbar header -->
-      <li class="nav-header">
-        <h5>Business</h5>
-      </li>
+    <!-- sidebar -->
+    <nav class="bg-dark d-flex flex-column justify-content-start align-items-start" style="width: 250px; height: 100%; margin: 0; padding: 10px; position: fixed;">
 
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'booking' %}">Booking</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'rental' %}">Rental</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'tenant' %}">Tenant</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'notif' %}">Tenant Notifications</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'request' %}">Tenant Request</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'guest' %}">Guest</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'billing' %}">Billing</a>
-      </li>
+      <!-- account -->
+      <div class="d-flex flex-column justify-content-center align-items-center" style="width: 100%; margin: 0 auto 10px auto;">
 
+        <!-- profile picture -->
+        <div class="profile-picture"
+          style="width: 70px; height: 70px; margin-bottom: 10px; border-radius: 35px; background-image: url('/static/img/profile_default.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+        <!-- end of profile picture -->
 
-      <!-- navbar divider-->
-      <li class="">
-        &nbsp
-      </li>
+        <!-- profile info -->
+        <div class="dropdown dropright d-flex justify-content-center align-items-center" style="width: 100%;">
+          <button class="btn btn-sm dropdown-toggle" style="margin: 0 0 0 10px; border-radius: 20px; background-color: #F53D3D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span style="margin: 0 20px 0 20px; font-size: 12px;">{{ request.user.username }}</span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="height: 100px; background-color: #F53D3D; border-radius: none;">
+            <style media="screen">
+              .account-link {
+                margin: 10px;
+                color: black;
+                font-size: 13px;
+              }
+              .account-link:hover {
+                color: black;
+                font-weight: 400;
+              }
+            </style>
+            <div class="d-flex flex-column justify-content-start">
+              <div class="d-flex justify-content-start align-items-center" style="margin: 0 0 0 15px;">
 
-      <!-- navbar header -->
-      <li class="nav-header">
-        <h5>Management</h5>
-      </li>
+                <a class="account-link" href="#"><span style="margin: 0 5px 0 10px;"><i class="fas fa-user"></i></span>Profile</a>
+              </div>
+              <div class="d-flex justify-content-start align-items-center" style="margin: 0 0 0 15px;">
 
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'property_management' %}">Property Management</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'expense' %}">Property Expenses</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'room_management' %}">Room Management</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'fee' %}">Fee</a>
-      </li>
-
-      <!-- <li class="nav-item active">
-        <a class="nav-link" href="{% url 'admin_management' %}">Admin Management</a>
-      </li> -->
-
-    </ul>
-    <div class="row">
-      <div class="col center-block text-center">
-        <h4>Logged in as
-          <span class="profile" style="color:blueviolet">{{ request.user.username }} </span></h4>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col center-block text-center">
-        <a href="{% url 'admin-logout' %}" style="text-decoration:none"><button type="button"
-            class="btn btn-block btn-raised btn-danger" name="button">Logout</button></a>
-      </div>
-    </div>
-  </nav>
-  <!-- end of navigation -->
-
-  <!-- content wrapper -->
-  <div class="content-wrapper d-flex flex-column">
-
-    <!-- topbar -->
-    <div class="topbar d-flex flex-row justify-content-between">
-
-      <div class="navbar-text" style="color: white; font-size: 16px; margin: auto 10px auto 10px;">
-        {% block header %}
-
-        {% endblock %}
+                <a class="account-link" href="{% url 'admin-logout' %}"><span style="margin: 0 5px 0 10px;"><i class="fas fa-sign-out-alt"></i></span>Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of profile info -->
       </div>
 
+      <!-- navigation links -->
+      <div class="d-flex flex-column justify-content-start align-items-start" style="width: 100%;">
+        <style media="screen">
+          .nav-link-custom {
+            width: 100%;
+            margin: 0;
+            padding: 5px 0;
+            border-radius: 20px;
+            font-size: 15px;
+            color: white;
+          }
+          .nav-link-custom:hover {
+            color: black;
+            font-weight: 400;
+            background-color: #F53D3D;
+          }
+        </style>
+        <!-- dashboard -->
+        <span style="font-size: 18px; color: white;">Dashboard</span>
+        <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 15px;" href="{% url 'booking' %}">Booking</a>
+        <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 15px;" href="{% url 'rental' %}">Rental</a>
+        <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 15px;" href="{% url 'tenant' %}">Tenant</a>
+        <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 15px;" href="{% url 'notif' %}">Tenant Notifications</a>
+        <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 15px;" href="{% url 'request' %}">Tenant Request</a>
+        <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 15px;" href="{% url 'guest' %}">Guest</a>
+        <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 15px;" href="{% url 'billing' %}">Billing</a>
+        <!-- end of dashboard-->
 
+        <!-- divider -->
+        <span style="font-size: 10px; color: white;">&nbsp;</span>
+        <!-- divider -->
 
-    </div>
-    <!-- end of topbar -->
+        <!-- management-->
+        <span style="font-size: 18px; color: white;">Management</span>
+        <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 15px;" href="{% url 'property_management' %}">Property</a>
+        <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 15px;" href="{% url 'room_management' %}">Room</a>
+        <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 15px;" href="{% url 'expense' %}">Expenses</a>
+        <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 15px;" href="{% url 'fee' %}">Fees</a>
+        <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 15px;" href="{% url 'cashflow' %}">Cashflow</a>
+        <!-- end of management-->
+      </div>
+      <!-- end of navigation links -->
+
+    </nav>
+    <!-- end of sidebar -->
 
     <!-- content -->
-    {% block content %}
 
-    {% endblock %}
+
+
     <!-- end of content -->
 
   </div>
-  <!-- end of content wrapper -->
-
 </div>
-<!-- end of page wrapper-->
+
 
 {% endblock %}
+<!-- end of sidebar & content -->
