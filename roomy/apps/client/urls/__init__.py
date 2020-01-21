@@ -4,8 +4,8 @@ modules = glob.glob(join(dirname(__file__), "*.py"))
 __all__ = [ basename(f)[:-3] for f in modules if isfile(f) and not f.endswith('__init__.py')]
 
 from django.urls import path,include
-from django.conf.urls.static import static
 from ..views import *
+from . import account
 
 urlpatterns = [
     #navigation
@@ -31,4 +31,9 @@ urlpatterns = [
     path('explore/property/amenities', property.amenities, name='amenities'),
     path('explore/property/photos', property.photos, name='photos'),
     path('explore/property/room/booking', property.booking, name='booking'),
+
+    path('account/bookings', account.bookings, name='bookings'),
+    path('account/saved', account.saved, name='saved'),
+    path('account/messages', account.messages, name='messages'),
+    path('account/profile', account.profile, name='profile'),
 ]
