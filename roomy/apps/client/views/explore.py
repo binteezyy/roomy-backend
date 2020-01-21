@@ -3,7 +3,7 @@ from django.core.paginator                          import Paginator
 from django.db.models                               import Q
 from apps.core.roomy_core.models import *
 context = {
-    "TITLE": "Roomy — Explore",
+    "TITLE": "Explore",
     "viewtype": "explore"
 }
 
