@@ -28,7 +28,7 @@ def index(request):
 
             if next:
                 return redirect(next)
-            return HttpResponseRedirect(reverse('admin-index'))
+            return HttpResponseRedirect(reverse('home'))
 
         context = {
             'form': form,
@@ -53,85 +53,6 @@ def demo(request, place):
         context['place'] = "alma.jpg"
     return render(request, "demo.html", context)
 
-
-# home
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def dashboard(request):
-
-    return render(request, "components/dashboard.html", context)
-
-# rental
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def rental(request):
-
-    return render(request, "components/rental.html", context)
-
-# tenant
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def tenant(request):
-
-    return render(request, "components/tenant.html", context)
-
-# billing
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def billing(request):
-
-    return render(request, "components/billing.html", context)
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def fee(request):
-
-    return render(request, "components/fee.html", context)
-# expense
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def expense(request):
-
-    return render(request, "components/expense.html", context)
-
-# cashflow
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def cashflow(request):
-
-    return render(request, "components/cashflow.html", context)
-
-# report
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def report(request):
-
-    return render(request, "components/report.html", context)
-
-# property_management
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def property_management(request):
-
-    return render(request, "components/property_management.html", context)
-
-
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def property_upload(request, pk):
@@ -153,8 +74,6 @@ def property_upload(request, pk):
     else:
         return HttpResponse("not ok")
 
-
-# room_management
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def room_upload2d(request, pk):
@@ -177,7 +96,6 @@ def room_upload2d(request, pk):
     else:
         return HttpResponse("not ok")
 
-
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def room_upload3d(request, pk):
@@ -199,46 +117,3 @@ def room_upload3d(request, pk):
         return HttpResponse("ok")
     else:
         return HttpResponse("not ok")
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def room_management(request):
-
-    return render(request, "components/room_management.html", context)
-
-# admin_management
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def admin_management(request):
-
-    return render(request, "components/admin_management.html", context)
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def guest(request):
-    return render(request, "components/guest.html", context)
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def tenant_request(request):
-
-    return render(request, "components/request.html", context)
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def notif(request):
-
-    return render(request, "components/notifs.html", context)
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def booking(request):
-
-    return render(request, "components/booking.html", context)

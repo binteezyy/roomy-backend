@@ -1,124 +1,162 @@
 {% extends "index.html" %}
+{% load static %}
 
 {% block layout %}
-<!-- page wrapper -->
-<div class="wrapper">
+<style media="screen">
+  .sidebar {
+    height: 100%;
+    margin: 0;
+    padding: 10px 20px 10px 20px;
+    flex-basis: 250px;
+    flex-grow: 1;
+  }
+
+  .content-bar {
+    margin: 0;
+    padding: 0;
+    flex-basis: 0;
+    flex-grow: 999;
+  }
+</style>
+
+<!-- container -->
+<div class="container-fluid d-flex flex-wrap align-items-stretch" style="height: 100%; position: fixed; top: 0; margin: 0; padding: 0; border-top: 2px solid #F53D3D;">
+
+  <!-- sidebar -->
+  <div class="sidebar bg-dark d-flex flex-column justify-content-start align-items-start" style="margin: 0;">
+
+    <!-- logo -->
+    <a href="{% url 'home' %}" style="margin: 0 auto 20px auto;">
+      <img src="{% static "img\logo_white.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+    </a>
+    <!-- end of logo -->
+
+    <!-- navigation links -->
+    <div class="d-flex flex-column justify-content-start align-items-start" style="width: 100%; height: 100%;">
+      <style media="screen">
+        .nav-link-custom {
+          width: 100%;
+          margin: 0;
+          padding: 2px 0 2px 18px;
+          border-radius: 20px;
+          font-size: 12px;
+          color: white;
+        }
+
+        .nav-link-custom:hover {
+          color: black;
+          font-weight: 400;
+          background-color: #F53D3D;
+        }
+      </style>
+      <!-- dashboard -->
+      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 14px; color: white; border-bottom: 1px solid #F53D3D;"><span style="margin-right: 5px;"><i class="fas fa-tachometer-alt"></i></span>Dashboard</span>
+      <a class="nav-link-custom" href="{% url 'booking' %}"><i class="fas fa-book" style="margin-right: 10px;"></i>Booking</a>
+      <a class="nav-link-custom" href="{% url 'rental' %}"><i class="fas fa-address-book" style="margin-right: 10px;"></i>Rental</a>
+      <a class="nav-link-custom" href="{% url 'tenant' %}"><i class="fas fa-user" style="margin-right: 10px;"></i>Tenant</a>
+      <a class="nav-link-custom" href="{% url 'guest' %}"><i class="fas fa-user-friends" style="margin-right: 10px;"></i>Guest</a>
+      <a class="nav-link-custom" href="{% url 'notif' %}"><i class="fas fa-bell" style="margin-right: 10px;"></i>Tenant Notifications</a>
+      <a class="nav-link-custom" href="{% url 'request' %}"><i class="far fa-comment" style="margin-right: 10px;"></i>Tenant Request</a>
 
 
-  <!-- navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex flex-column justify-content-start"
-    style="width: 250px; height: 100%; position:fixed; margin: 0; padding: 0;">
+      <!-- end of dashboard-->
 
-    <a class="navbar-brand" href="#">roomy</a>
+      <!-- divider -->
+      <span style="font-size: 10px; color: white;">&nbsp;</span>
+      <!-- divider -->
 
-    <ul class="navbar-nav d-flex flex-column justify-content-start">
+      <!-- cashflow -->
+      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 14px; color: white; border-bottom: 1px solid #F53D3D;"><span style="margin-right: 5px;"><i class="fas fa-dollar-sign"></i></span>Cashflow</span>
+      <a class="nav-link-custom" href="{% url 'billing' %}"><i class="fas fa-hand-holding-usd" style="margin-right: 10px;"></i></i>Billing</a>
+      <a class="nav-link-custom" href="{% url 'expense' %}"><i class="fas fa-credit-card" style="margin-right: 10px;"></i>Expenses</a>
+      <a class="nav-link-custom" href="{% url 'fee' %}"><i class="fas fa-file-invoice-dollar" style="margin-right: 10px;"></i></i>Fees</a>
+      <!-- end of management-->
 
-      <!-- navbar divider-->
-      <li class="">
-        <hr>
-      </li>
+      <!-- divider -->
+      <span style="font-size: 10px; color: white;">&nbsp;</span>
+      <!-- divider -->
 
-      <!-- navbar header -->
-      <li class="nav-header">
-        <h5>Business</h5>
-      </li>
+      <!-- cashflow -->
+      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 14px; color: white; border-bottom: 1px solid #F53D3D;"><span style="margin-right: 5px;"><i class="fas fa-cogs"></i></span>Management</span>
+      <a class="nav-link-custom" href="{% url 'property_management' %}"><i class="far fa-building" style="margin-right: 10px;"></i>Property</a>
+      <a class="nav-link-custom" href="{% url 'room_management' %}"><i class="fas fa-bed" style="margin-right: 10px;"></i>Room</a>
+      <a class="nav-link-custom" href="{% url 'admin_management' %}"><i class="fas fa-user-circle" style="margin-right: 10px;"></i>Account</a>
+      <!-- end of management-->
 
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'booking' %}">Booking</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'rental' %}">Rental</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'tenant' %}">Tenant</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'notif' %}">Tenant Notifications</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'request' %}">Tenant Request</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'guest' %}">Guest</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'billing' %}">Billing</a>
-      </li>
+      <!-- divider -->
+      <span style="font-size: 10px; color: white;">&nbsp;</span>
+      <!-- divider -->
+
+      <!-- catalog -->
+      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 14px; color: white; border-bottom: 1px solid #F53D3D;"><span style="margin-right: 5px;"><i class="fas fa-book-open"></i></span>Catalog</span>
+      <a class="nav-link-custom" href="#"><i class="fas fa-bed" style="margin-right: 10px;"></i>Enum1</a>
+      <a class="nav-link-custom" href="#"><i class="fas fa-bed" style="margin-right: 10px;"></i>Enum2</a>
+      <a class="nav-link-custom" href="#"><i class="fas fa-bed" style="margin-right: 10px;"></i>Enum3</a>
 
 
-      <!-- navbar divider-->
-      <li class="">
-        &nbsp
-      </li>
-
-      <!-- navbar header -->
-      <li class="nav-header">
-        <h5>Management</h5>
-      </li>
-
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'property_management' %}">Property Management</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'expense' %}">Property Expenses</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'room_management' %}">Room Management</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'fee' %}">Fee</a>
-      </li>
-
-      <!-- <li class="nav-item active">
-        <a class="nav-link" href="{% url 'admin_management' %}">Admin Management</a>
-      </li> -->
-
-    </ul>
-    <div class="row">
-      <div class="col center-block text-center">
-        <h4>Logged in as
-          <span class="profile" style="color:blueviolet">{{ request.user.username }} </span></h4>
-      </div>
     </div>
-    <div class="row">
-      <div class="col center-block text-center">
-        <a href="{% url 'admin-logout' %}" style="text-decoration:none"><button type="button"
-            class="btn btn-block btn-raised btn-danger" name="button">Logout</button></a>
-      </div>
-    </div>
-  </nav>
-  <!-- end of navigation -->
+    <!-- end of navigation links -->
+    <!-- divider -->
+    <span style="font-size: 10px; color: white;">&nbsp;</span>
+    <!-- divider -->
 
-  <!-- content wrapper -->
-  <div class="content-wrapper d-flex flex-column">
+  </div>
+  <!-- end of sidebar -->
 
+  <div class="content-bar">
     <!-- topbar -->
-    <div class="topbar d-flex flex-row justify-content-between">
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-end align-items-center" id="navbar" style="width: 100%;">
 
-      <div class="navbar-text" style="color: white; font-size: 16px; margin: auto 10px auto 10px;">
-        {% block header %}
+      <!-- account -->
+      <div class="d-flex justify-content-center align-items-center">
 
-        {% endblock %}
+        <!-- profile picture -->
+
+        <div class="profile-picture" style="width: 40px; height: 40px; border-radius: 20px; background-image: url('/static/img/profile_default.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        </div <!-- end of profile picture -->
+
+        <!-- profile info -->
+        <div class="dropdown d-flex justify-content-center align-items-center">
+          <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; background-color: #f53d3d; ">
+            <span style="margin: 0 20px 0 20px; color: black;">{{ request.user.username }}</span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="height: 150px; background-color: #F53D3D; border-radius: none;">
+            <style media="screen">
+              .account-link {
+                margin: 5px 5px 0 5px;
+                color: black;
+                font-size: 12px;
+              }
+
+              .account-link:hover {
+                color: black;
+                font-weight: bold;
+              }
+            </style>
+            <div class="d-flex flex-column justify-content-start align-items-start">
+              <div class="d-flex justify-content-start align-items-start">
+                <a class="account-link" href="#"><span style="margin: 0 5px 0 5px;"><i class="far fa-user"></i></span>Profile</a>
+              </div>
+              <div class="d-flex justify-content-start align-items-start">
+                <a class="account-link" href="{% url 'admin-logout' %}"><span style="margin: 0 5px 0 5px;"><i class="fas fa-sign-out-alt"></i></span>Log out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of profile info -->
       </div>
-
-
+      <!-- end of account -->
 
     </div>
     <!-- end of topbar -->
 
-    <!-- content -->
     {% block content %}
 
     {% endblock %}
-    <!-- end of content -->
 
   </div>
-  <!-- end of content wrapper -->
-
 </div>
-<!-- end of page wrapper-->
+
 
 {% endblock %}
+<!-- end of sidebar & content -->

@@ -6,8 +6,8 @@ from bootstrap_modal_forms.forms import BSModalForm
 
 
 class UserLoginForm(forms.Form):
-    username = forms.CharField(label='Username')
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(label='username')
+    password = forms.CharField(label='password', widget=forms.PasswordInput)
 
     def clean(self, *args, **kwargs):
         username = self.cleaned_data.get('username')

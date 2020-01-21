@@ -31,4 +31,127 @@
     });
 
   </script>
+
+  <!-- sidebar -->
+  <nav class="sidebar bg-dark d-flex flex-column justify-content-start align-items-start">
+
+    <!-- logo -->
+    <a href="{% url 'home' %}" style="margin: 0 auto 20px auto;">
+      <img src="{% static "img\logo_white.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+    </a>
+    <!-- end of logo -->
+
+    <!-- account -->
+    <div class="d-flex flex-column justify-content-center align-items-center" style="width: 100%; margin: 0 auto 30px auto;">
+
+      <!-- profile picture -->
+      <div class="profile-picture"
+        style="width: 70px; height: 70px; margin-bottom: 10px; border-radius: 35px; background-image: url('/static/img/profile_default.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+      <!-- end of profile picture -->
+
+      <!-- profile info -->
+      <div class="dropdown dropright d-flex justify-content-center align-items-center" style="width: 100%;">
+        <button class="btn btn-sm dropdown-toggle" style="margin: 0 0 0 10px; border-radius: 20px; background-color: #F53D3D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span style="margin: 0 20px 0 20px; font-size: 12px;">{{ request.user.username }}</span>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="height: 100px; background-color: #F53D3D; border-radius: none;">
+          <style media="screen">
+            .account-link {
+              margin: 10px;
+              color: black;
+              font-size: 13px;
+            }
+
+            .account-link:hover {
+              color: black;
+              font-weight: 400;
+            }
+          </style>
+          <div class="d-flex flex-column justify-content-start">
+            <div class="d-flex justify-content-start align-items-center" style="margin: 0 0 0 15px;">
+
+              <a class="account-link" href="#"><span style="margin: 0 5px 0 10px;"><i class="fas fa-user"></i></span>Profile</a>
+            </div>
+            <div class="d-flex justify-content-start align-items-center" style="margin: 0 0 0 15px;">
+
+              <a class="account-link" href="{% url 'admin-logout' %}"><span style="margin: 0 5px 0 10px;"><i class="fas fa-sign-out-alt"></i></span>Log out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of profile info -->
+    </div>
+
+    <!-- navigation links -->
+    <div class="d-flex flex-column justify-content-start align-items-start" style="width: 100%;">
+      <style media="screen">
+        .nav-link-custom {
+          width: 100%;
+          margin: 0;
+          padding: 5px 0;
+          border-radius: 20px;
+          font-size: 15px;
+          color: white;
+        }
+
+        .nav-link-custom:hover {
+          color: black;
+          font-weight: 400;
+          background-color: #F53D3D;
+        }
+      </style>
+      <!-- dashboard -->
+      <span style="font-size: 15px; color: white;">Dashboard</span>
+      <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 14px;" href="{% url 'booking' %}">Booking</a>
+      <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 14px;" href="{% url 'rental' %}">Rental</a>
+      <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 14px;" href="{% url 'tenant' %}">Tenant</a>
+      <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 14px;" href="{% url 'notif' %}">Tenant Notifications</a>
+      <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 14px;" href="{% url 'request' %}">Tenant Request</a>
+      <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 14px;" href="{% url 'guest' %}">Guest</a>
+      <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 14px;" href="{% url 'billing' %}">Billing</a>
+      <!-- end of dashboard-->
+
+      <!-- divider -->
+      <span style="font-size: 10px; color: white;">&nbsp;</span>
+      <!-- divider -->
+
+      <!-- management-->
+      <span style="font-size: 15px; color: white;">Management</span>
+      <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 14px;" href="{% url 'property_management' %}">Property</a>
+      <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 14px;" href="{% url 'room_management' %}">Room</a>
+      <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 14px;" href="{% url 'expense' %}">Expenses</a>
+      <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 14px;" href="{% url 'fee' %}">Fees</a>
+      <a class="nav-link-custom" style="width: 100%; margin: 0; padding: 5px 0 5px 20px; border-radius: 20px; font-size: 14px;" href="{% url 'cashflow' %}">Cashflow</a>
+      <!-- end of management-->
+    </div>
+    <!-- end of navigation links -->
+
+  </nav>
+  <!-- end of sidebar -->
+
+  <!-- content -->
+  <div class="container-fluid" style="width: 80%; height: 100%; margin: 0; padding: 0; background-color: red;">
+
+    <!-- topbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-end" id="navbar" style="width: 100%; height: 50px; border-top: 2px solid #F53D3D;">
+
+      <!-- expand button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-ellipsis-h" style="color: #F53D3D;"></i></button>
+
+    </nav>
+    <!-- end of topbar -->
+
+    <!-- main content -->
+    {% block content %}
+    <div id="content-wrapper-custom" style="margin: 50px;">
+      <div id="content-custom">
+
+      </div>
+    </div>
+    {% endblock %}
+    <!-- main content -->
+
+
+  </div>
+  <!-- end of content -->
 {% endblock %}
