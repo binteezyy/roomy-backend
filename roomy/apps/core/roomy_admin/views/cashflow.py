@@ -12,22 +12,88 @@ context = {
 }
 
 # billing
+
+
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def billing(request):
 
-    return render(request, "components/cashflow/billing.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/cashflow/billing.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
 
-#expense
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
+
+# expense
+
+
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def expense(request):
 
-    return render(request, "components/cashflow/expense.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/cashflow/expense.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
 
-#fee
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
+
+# fee
+
+
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def fee(request):
 
-    return render(request, "components/cashflow/fee.html", context)
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        return render(request, "components/cashflow/fee.html")
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)

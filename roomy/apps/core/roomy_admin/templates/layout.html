@@ -21,7 +21,8 @@
 </style>
 
 <!-- container -->
-<div class="container-fluid d-flex flex-wrap align-items-stretch" style="height: 100%; position: fixed; top: 0; margin: 0; padding: 0; border-top: 2px solid #F53D3D;">
+<div class="container-fluid d-flex flex-wrap align-items-stretch"
+  style="height: 100%; position: fixed; top: 0; margin: 0; padding: 0; border-top: 2px solid #F53D3D;">
 
   <!-- sidebar -->
   <div class="sidebar bg-dark d-flex flex-column justify-content-start align-items-start" style="margin: 0;">
@@ -51,13 +52,21 @@
         }
       </style>
       <!-- dashboard -->
-      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 14px; color: white; border-bottom: 1px solid #F53D3D;"><span style="margin-right: 5px;"><i class="fas fa-tachometer-alt"></i></span>Dashboard</span>
-      <a class="nav-link-custom" href="{% url 'booking' %}"><i class="fas fa-book" style="margin-right: 10px;"></i>Booking</a>
-      <a class="nav-link-custom" href="{% url 'rental' %}"><i class="fas fa-address-book" style="margin-right: 10px;"></i>Rental</a>
-      <a class="nav-link-custom" href="{% url 'tenant' %}"><i class="fas fa-user" style="margin-right: 10px;"></i>Tenant</a>
-      <a class="nav-link-custom" href="{% url 'guest' %}"><i class="fas fa-user-friends" style="margin-right: 10px;"></i>Guest</a>
-      <a class="nav-link-custom" href="{% url 'notif' %}"><i class="fas fa-bell" style="margin-right: 10px;"></i>Tenant Notifications</a>
-      <a class="nav-link-custom" href="{% url 'request' %}"><i class="far fa-comment" style="margin-right: 10px;"></i>Tenant Request</a>
+      <span
+        style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 14px; color: white; border-bottom: 1px solid #F53D3D;"><span
+          style="margin-right: 5px;"><i class="fas fa-tachometer-alt"></i></span>Dashboard</span>
+      <a class="nav-link-custom" href="{% url 'booking' %}"><i class="fas fa-book"
+          style="margin-right: 10px;"></i>Booking</a>
+      <a class="nav-link-custom" href="{% url 'rental' %}"><i class="fas fa-address-book"
+          style="margin-right: 10px;"></i>Rental</a>
+      <a class="nav-link-custom" href="{% url 'tenant' %}"><i class="fas fa-user"
+          style="margin-right: 10px;"></i>Tenant</a>
+      <a class="nav-link-custom" href="{% url 'guest' %}"><i class="fas fa-user-friends"
+          style="margin-right: 10px;"></i>Guest</a>
+      <a class="nav-link-custom" href="{% url 'notif' %}"><i class="fas fa-bell" style="margin-right: 10px;"></i>Tenant
+        Notifications</a>
+      <a class="nav-link-custom" href="{% url 'request' %}"><i class="far fa-comment"
+          style="margin-right: 10px;"></i>Tenant Request</a>
 
 
       <!-- end of dashboard-->
@@ -67,10 +76,15 @@
       <!-- divider -->
 
       <!-- cashflow -->
-      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 14px; color: white; border-bottom: 1px solid #F53D3D;"><span style="margin-right: 5px;"><i class="fas fa-dollar-sign"></i></span>Cashflow</span>
-      <a class="nav-link-custom" href="{% url 'billing' %}"><i class="fas fa-hand-holding-usd" style="margin-right: 10px;"></i></i>Billing</a>
-      <a class="nav-link-custom" href="{% url 'expense' %}"><i class="fas fa-credit-card" style="margin-right: 10px;"></i>Expenses</a>
-      <a class="nav-link-custom" href="{% url 'fee' %}"><i class="fas fa-file-invoice-dollar" style="margin-right: 10px;"></i></i>Fees</a>
+      <span
+        style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 14px; color: white; border-bottom: 1px solid #F53D3D;"><span
+          style="margin-right: 5px;"><i class="fas fa-dollar-sign"></i></span>Cashflow</span>
+      <a class="nav-link-custom" href="{% url 'billing' %}"><i class="fas fa-hand-holding-usd"
+          style="margin-right: 10px;"></i></i>Billing</a>
+      <a class="nav-link-custom" href="{% url 'expense' %}"><i class="fas fa-credit-card"
+          style="margin-right: 10px;"></i>Expenses</a>
+      <a class="nav-link-custom" href="{% url 'fee' %}"><i class="fas fa-file-invoice-dollar"
+          style="margin-right: 10px;"></i></i>Fees</a>
       <!-- end of management-->
 
       <!-- divider -->
@@ -78,10 +92,14 @@
       <!-- divider -->
 
       <!-- cashflow -->
-      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 14px; color: white; border-bottom: 1px solid #F53D3D;"><span style="margin-right: 5px;"><i class="fas fa-cogs"></i></span>Management</span>
-      <a class="nav-link-custom" href="{% url 'property_management' %}"><i class="far fa-building" style="margin-right: 10px;"></i>Property</a>
-      <a class="nav-link-custom" href="{% url 'room_management' %}"><i class="fas fa-bed" style="margin-right: 10px;"></i>Room</a>
-      <a class="nav-link-custom" href="{% url 'admin_management' %}"><i class="fas fa-user-circle" style="margin-right: 10px;"></i>Account</a>
+      <span
+        style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 14px; color: white; border-bottom: 1px solid #F53D3D;"><span
+          style="margin-right: 5px;"><i class="fas fa-cogs"></i></span>Management</span>
+      <a class="nav-link-custom" href="{% url 'property_management' %}"><i class="far fa-building"
+          style="margin-right: 10px;"></i>Property</a>
+      <a class="nav-link-custom" href="{% url 'room_management' %}"><i class="fas fa-bed"
+          style="margin-right: 10px;"></i>Room</a>
+      <a class="nav-link-custom" href="#"><i class="fas fa-user-circle" style="margin-right: 10px;"></i>Account</a>
       <!-- end of management-->
 
       <!-- divider -->
@@ -89,7 +107,9 @@
       <!-- divider -->
 
       <!-- catalog -->
-      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 14px; color: white; border-bottom: 1px solid #F53D3D;"><span style="margin-right: 5px;"><i class="fas fa-book-open"></i></span>Catalog</span>
+      <span
+        style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 14px; color: white; border-bottom: 1px solid #F53D3D;"><span
+          style="margin-right: 5px;"><i class="fas fa-book-open"></i></span>Catalog</span>
       <a class="nav-link-custom" href="#"><i class="fas fa-bed" style="margin-right: 10px;"></i>Enum1</a>
       <a class="nav-link-custom" href="#"><i class="fas fa-bed" style="margin-right: 10px;"></i>Enum2</a>
       <a class="nav-link-custom" href="#"><i class="fas fa-bed" style="margin-right: 10px;"></i>Enum3</a>
@@ -106,22 +126,26 @@
 
   <div class="content-bar">
     <!-- topbar -->
-    <div class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-end align-items-center" id="navbar" style="width: 100%;">
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-end align-items-center" id="navbar"
+      style="width: 100%;">
 
       <!-- account -->
       <div class="d-flex justify-content-center align-items-center">
 
         <!-- profile picture -->
 
-        <div class="profile-picture" style="width: 40px; height: 40px; border-radius: 20px; background-image: url('/static/img/profile_default.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <div class="profile-picture"
+          style="width: 40px; height: 40px; border-radius: 20px; background-image: url('/static/img/profile_default.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
         </div <!-- end of profile picture -->
 
         <!-- profile info -->
         <div class="dropdown d-flex justify-content-center align-items-center">
-          <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; background-color: #f53d3d; ">
+          <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" style="color: black; background-color: #f53d3d; ">
             <span style="margin: 0 20px 0 20px; color: black;">{{ request.user.username }}</span>
           </button>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="height: 150px; background-color: #F53D3D; border-radius: none;">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"
+            style="height: 150px; background-color: #F53D3D; border-radius: none;">
             <style media="screen">
               .account-link {
                 margin: 5px 5px 0 5px;
@@ -136,10 +160,12 @@
             </style>
             <div class="d-flex flex-column justify-content-start align-items-start">
               <div class="d-flex justify-content-start align-items-start">
-                <a class="account-link" href="#"><span style="margin: 0 5px 0 5px;"><i class="far fa-user"></i></span>Profile</a>
+                <a class="account-link" href="#"><span style="margin: 0 5px 0 5px;"><i
+                      class="far fa-user"></i></span>Profile</a>
               </div>
               <div class="d-flex justify-content-start align-items-start">
-                <a class="account-link" href="{% url 'admin-logout' %}"><span style="margin: 0 5px 0 5px;"><i class="fas fa-sign-out-alt"></i></span>Log out</a>
+                <a class="account-link" href="{% url 'admin-logout' %}"><span style="margin: 0 5px 0 5px;"><i
+                      class="fas fa-sign-out-alt"></i></span>Log out</a>
               </div>
             </div>
           </div>
