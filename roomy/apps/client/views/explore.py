@@ -38,5 +38,21 @@ def index(request):
 
 def room_view(request,pk):
     room = Room.objects.get(pk=pk)
-    print(room)
+
+    try: booking = Booking.objects.get(room_id=room,user_id=request.user)
+    except Exception as e:
+        booking = None
+
+    if request.method == 'POST' and request.user.is_authenticated and not booking: #BOOK ONCE
+        book = Booking.objects.create(
+            user_id=request.user,
+            room_id = room,
+        )
+        book.save()
+    else:
+        pass
+    context.update({
+        "room":room,
+        "booking":booking,
+    })
     return render(request,"components/property/room.html", context)
