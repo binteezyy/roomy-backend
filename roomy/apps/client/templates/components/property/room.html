@@ -5,9 +5,28 @@
 Room
 {% endblock %}
 
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static "vendor/pannellum/pannellum.css" %}">
+  <style>
+    #panorama {
+        width: 600px;
+        height: 400px;
+    }
+    </style>
+{% endblock %}
+{% block extra_js %}
+  <script src="{% static "vendor/pannellum/pannellum.js" %}"></script>
+  <script type="text/javascript">
+
+  viewer = pannellum.viewer('panorama', {
+      "type": "equirectangular",
+      "panorama": "/media/{{ room.img_3d.all.0}}",
+      "autoLoad": true,
+    });
+
+  </script>
+{% endblock %}
 {% block content %}
-
-
 <!-- main content -->
 <div class="container-fluid">
   <div class="container">
@@ -16,7 +35,7 @@ Room
       <!-- room information -->
       <div class="col-md-7 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
         <div class="d-flex justify-content-between align-items-center">
-          <span style="font-size: 22px; font-weight: bold;">Room B20</span>
+          <span style="font-size: 22px; font-weight: bold;">{{ room.name }}</span>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
             <div class="">
               <span style="margin-right: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
@@ -25,7 +44,7 @@ Room
           </div>
         </div>
         <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 10px;">
-          <span style="font-size: 15px; font-style: italic;">by Pureza Mansion</span>
+          <span style="font-size: 15px; font-style: italic;">by {{ room.property_id.name}}</span>
           <a style="font-size: 14px; color: black;" href="#reviews"><i class="fas fa-star"></i> 4.5 <span style="color: grey;">(1 review)</span></a>
         </div>
         <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 5px; padding: 0;">
@@ -35,21 +54,7 @@ Room
         </div>
         <hr>
         <div class="wrapper">
-          <h5>The Space</h5>
-          <p>
-            Curabitur sed sapien gravida, porta tellus id, semper ante. In volutpat leo id dolor lacinia, in finibus urna mattis. Mauris imperdiet dolor tellus, sed sodales lorem tincidunt eu. Mauris congue metus at lacus pulvinar, eget posuere odio
-            porta. Donec et metus ipsum. Vestibulum aliquet eros sed gravida luctus. Cras eget lectus blandit, auctor lacus in, pulvinar mauris. Praesent eget accumsan nunc, sit amet fermentum sapien. Cras sodales id neque non auctor.
-          </p>
-          <h5>Amenities</h5>
-          <p>
-            Aliquam commodo elit eu lorem cursus, sed laoreet lacus aliquam. Donec posuere velit ac dapibus dictum. Morbi iaculis felis in diam lobortis, nec tempus felis dignissim. Sed ullamcorper urna turpis, eget mollis libero ullamcorper non.
-            Pellentesque ut est lorem. Aliquam posuere imperdiet lorem ut scelerisque. Integer interdum maximus sem, nec tempus felis consequat nec.
-          </p>
-          <h5>House Rules</h5>
-          <p>
-            Aliquam commodo elit eu lorem cursus, sed laoreet lacus aliquam. Donec posuere velit ac dapibus dictum. Morbi iaculis felis in diam lobortis, nec tempus felis dignissim. Sed ullamcorper urna turpis, eget mollis libero ullamcorper non.
-            Pellentesque ut est lorem. Aliquam posuere imperdiet lorem ut scelerisque. Integer interdum maximus sem, nec tempus felis consequat nec.
-          </p>
+          <span>{{room.description|linebreaksbr}}</span>
         </div>
 
       </div>
@@ -62,7 +67,7 @@ Room
         <div class="" style="margin-bottom: 20px;">
           <h5>Rates</h5>
           <hr>
-          <span style="font-size: 18px;"><b>Php 4000</b>/month</span> <br>
+          <span style="font-size: 18px;"><b>Php {{ room.rate }}</b>/month</span> <br>
           <span style="font-size: 14px;"><b>1 month advance, 1 month deposit</span>
         </div>
 
@@ -105,33 +110,30 @@ Room
     </div>
 
     <!-- photos -->
+    {% if room.img_2d.all %}
     <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 20px;">
-      <div class="col-md-6 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+      <div class="col shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
         <h5>Photos</h5>
+        {% for foto in room.img_2d.all %}
         <div class="d-flex flex-wrap justify-content-center align-items-center" style="min-height: 300px;">
           <a style="width: 220px; margin: 10px;" data-toggle="modal" data-target="#photoModal">
-            <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
-          </a>
-          <a style="width: 220px; margin: 10px;" data-toggle="modal" data-target="#photoModal">
-            <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
-          </a>
-          <a style="width: 220px; margin: 10px;" data-toggle="modal" data-target="#photoModal">
-            <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
-          </a>
-          <a style="width: 220px; margin: 10px;" data-toggle="modal" data-target="#photoModal">
-            <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
+            <img class="img-fluid" src="/media/{{ foto.img_path}}" alt="">
           </a>
         </div>
-
+        {% endfor %}
       </div>
-      <div class="col-md-5 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+    {% endif %}
+      {% if room.img_3d.all %}
+      <div class="col shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
         <h5>360 view</h5>
         <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
-          <a style="margin: 10px;" data-toggle="modal" data-target="#photoModal">
-            <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
+          <a style="margin: 10px;">
+            <!--img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt=""-->
+            <div id="panorama"></div>
           </a>
         </div>
       </div>
+      {% endif %}
     </div>
     <!-- end of photos -->
 
