@@ -59,6 +59,7 @@ class RoomCatalog(models.Model):
     description = models.TextField(blank=True, null=True)
     floor = models.PositiveIntegerField(default=1)
     rate = models.DecimalField(max_digits=9, decimal_places=2)
+    room_type = models.IntegerField(choices=room_type_enum, default=0)
     img_3d = models.ManyToManyField(
         ImageFile, blank=True, related_name='img_3d')
     img_2d = models.ManyToManyField(

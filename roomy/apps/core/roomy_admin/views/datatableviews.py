@@ -201,7 +201,7 @@ def notif_table(request):
 @user_passes_test(lambda u: u.is_staff)
 def booking_table(request):
     bookings = Booking.objects.filter(
-        room_id__property_id__owner_id__user_id=request.user)
+        room_id__property_id__owner_id__user_id=request.user,approved=False)
 
     data = []
     for booking in bookings:
@@ -211,7 +211,7 @@ def booking_table(request):
             status = "No Action Yet"
         x = {"fields": {"id": booking.pk,
                         "user": f'{booking.user_id.username} - {booking.user_id.first_name} {booking.user_id.last_name}',
-                        "room": f'Room: Floor-{booking.room_id.floor} Number-{booking.room_id.number}',
+                        "room": f'Room: Floor-{booking.room_id.floor}',
                         "status": status,
                         }}
         data.append(x)
