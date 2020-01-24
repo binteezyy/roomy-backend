@@ -106,6 +106,10 @@ class RentalReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
         fees = int(kwargs['object'].room_id.catalog_id.rate)
         for fee_object in fee_objects:
             fees += int(fee_object.amount)
+        if kwargs['object'].rated:
+            rating = str(kwargs['object'].rating) + kwargs['object'].rating_description
+        else:
+            rating = 'Unrated'
         context = super().get_context_data(**kwargs)
         context['viewtype'] = 'transaction'
         context['transaction'] = kwargs['object']
@@ -115,6 +119,7 @@ class RentalReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
         context['add_ons'] = kwargs['object'].add_ons.all()
         context['total'] = fees
         context['rate'] = int(kwargs['object'].room_id.catalog_id.rate)
+        context['rating'] = rating
 
         return context
 

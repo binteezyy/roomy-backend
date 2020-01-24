@@ -60,9 +60,9 @@ def fee_table(request):
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def rental_table(request):
+def rental_table(request,pk):
     transactions = Transaction.objects.filter(
-        active=True, room_id__catalog_id__property_id__owner_id__user_id=request.user)
+        active=True, room_id__catalog_id__property_id__owner_id__user_id=request.user, room_id__catalog_id__property_id__pk=pk)
 
     data = []
     for transaction in transactions:
@@ -199,9 +199,9 @@ def notif_table(request):
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def booking_table(request):
+def booking_table(request,pk):
     bookings = Booking.objects.filter(
-        catalog_id__property_id__owner_id__user_id=request.user,approved=False)
+        catalog_id__property_id__owner_id__user_id=request.user,approved=False, catalog_id__property_id__pk=pk)
 
     data = []
     for booking in bookings:

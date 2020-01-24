@@ -12,15 +12,16 @@ Rental
 
 {% block content %}
 {% include "_modal.html" %}
+{% for property in properties %}
 <div class="content container">
   <div class="card-content">
     <div class="container-fluid">
-      <h2>Occupied Rooms </h2>
+      <h2>Occupied Rooms in {{property.name}}</h2>
       <div class="row p-3">
         <div class="col">
           <div class="table-responsive">
-            <table id="rental-table" class="table table-bordered table-hover" width="100%" cellspacing="0" role="grid"
-              aria-describedby="dataTable_info">
+            <table id="rental-table-{{property.pk}}" class="table table-bordered table-hover" width="100%"
+              cellspacing="0" role="grid" aria-describedby="dataTable_info">
               <thead>
                 <tr role="row">
                   <th>Id</th>
@@ -36,9 +37,8 @@ Rental
       </div>
     </div>
   </div>
-
 </div>
-
+{% endfor %}
 {% endblock %}
 
 {% block header %}
@@ -49,12 +49,13 @@ Rental
 <script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
 <script type="text/javascript">
   $(document).ready(function () {
-    $('#rental-table').DataTable({
+    {% for property in properties %}
+    $('#rental-table-{{property.pk}}').DataTable({
       "dataType": 'json',
       "ajax": {
         "processing": true,
         "dataSrc": '',
-        "url": "{% url 'admin-rental-table'%}",
+        "url": "{% url 'admin-rental-table' property.pk %}",
       },
       "drawCallback": function (settings) {
         $(".read-rental").each(function () {
@@ -100,6 +101,7 @@ Rental
         },
       ]
     })
+    {% endfor %}
   });
 </script>
 {% endblock %}

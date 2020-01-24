@@ -93,6 +93,11 @@
                         </ol>
                     </h5>
                 </li>
+                <li>
+                    <h5> Rating:
+                        {{rating}}
+                    </h5>
+                </li>
             </ul>
         </div>
         {% elif viewtype == 'tenants' %}
@@ -124,7 +129,15 @@
         <div class="container">
             <ul>
                 <li>
-                    <h5> User: {{user.username}} - {{user.first_name}} {{user.last_name}}
+                    <h5> Applicant: {{user.username}} - {{user.first_name}} {{user.last_name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Applicant message: {{booking.message}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Property: {{booking.catalog_id.property_id}}
                     </h5>
                 </li>
                 <li>
@@ -146,6 +159,19 @@
                             <li>{{fee}}</li>
                             {% endfor %}
                             <li> Room rate: {{rate}}</li>
+                        </ol>
+                    </h5>
+                </li>
+                <li>
+                    <h5> Documents submitted:
+                        <ol>
+                            <li>
+                                {{booking.document1_id}}
+                            </li>
+                            <li>
+                                {{booking.document2_id}}
+                            </li>
+
                         </ol>
                     </h5>
                 </li>

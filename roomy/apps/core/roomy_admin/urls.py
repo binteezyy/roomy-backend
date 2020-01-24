@@ -47,7 +47,7 @@ urlpatterns = [
     path('create/fee', modalviews.FeeCreateModal.as_view(), name='create-fee'),
 
     # Rental Table
-    path('rental/table/', datatableviews.rental_table, name='admin-rental-table'),
+    path('rental/table/<int:pk>', datatableviews.rental_table, name='admin-rental-table'),
     path('read/rental/<int:pk>',
          modalviews.RentalReadModal.as_view(), name='read-rental'),
     path('delete/rental/<int:pk>',
@@ -95,7 +95,7 @@ urlpatterns = [
     path('create/notif', modalviews.NotifCreateModal.as_view(), name='create-notif'),
 
     # Booking
-    path('booking/table/', datatableviews.booking_table,
+    path('booking/table/<int:pk>', datatableviews.booking_table,
          name='admin-booking-table'),
     path('read/booking/<int:pk>',
          modalviews.BookingReadModal.as_view(), name='read-booking'),
