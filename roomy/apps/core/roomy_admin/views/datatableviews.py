@@ -15,7 +15,7 @@ from pprint import pprint
 @user_passes_test(lambda u: u.is_staff)
 def billing_table(request):
     billings = Billing.objects.filter(
-        transaction_id__room_id__property_id__owner_id__user_id=request.user)
+        transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for billing in billings:
@@ -26,7 +26,7 @@ def billing_table(request):
 
         time = billing.time_stamp.strftime("%Y, %B %d")
         fees = ' | '.join([str(i) for i in billing.billing_fee.all()])
-        room = f'Property: {billing.transaction_id.room_id.property_id.name} \n Room: Floor-{billing.transaction_id.room_id.floor} Number-{billing.transaction_id.room_id.number}'
+        room = f'Property: {billing.transaction_id.room_id.catalog_id.property_id.name} \n Room: Floor-{billing.transaction_id.room_id.catalog_id.floor} Number-{billing.transaction_id.room_id.number}'
 
         x = {"fields": {"id": billing.pk,
                         "time": time,
@@ -62,11 +62,11 @@ def fee_table(request):
 @user_passes_test(lambda u: u.is_staff)
 def rental_table(request):
     transactions = Transaction.objects.filter(
-        active=True, room_id__property_id__owner_id__user_id=request.user)
+        active=True, room_id__catalog_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for transaction in transactions:
-        room = f'Room: Floor-{transaction.room_id.floor} Number-{transaction.room_id.number}'
+        room = f'Room: Floor-{transaction.room_id.catalog_id.floor} Number-{transaction.room_id.number}'
         date = transaction.start_date.strftime("%Y, %B %d")
         x = {"fields": {"id": transaction.pk,
                         "room": room,
@@ -82,12 +82,12 @@ def rental_table(request):
 @user_passes_test(lambda u: u.is_staff)
 def tenant_table(request):
     tenants = TenantAccount.objects.filter(
-        transaction_id__room_id__property_id__owner_id__user_id=request.user)
+        transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for tenant in tenants:
         if tenant.transaction_id.active:
-            room = f'Room: Floor-{tenant.transaction_id.room_id.floor} Number-{tenant.transaction_id.room_id.number}'
+            room = f'Room: Floor-{tenant.transaction_id.room_id.catalog_id.floor} Number-{tenant.transaction_id.room_id.number}'
         else:
             room = "Inacitve"
         x = {"fields": {"id": tenant.pk,
@@ -124,7 +124,7 @@ def expense_table(request):
 @user_passes_test(lambda u: u.is_staff)
 def guest_table(request):
     guests = Guest.objects.filter(
-        transaction_id__room_id__property_id__owner_id__user_id=request.user)
+        transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for guest in guests:
@@ -136,7 +136,7 @@ def guest_table(request):
         x = {"fields": {"id": guest.pk,
                         "name": guest.name,
                         "date": date,
-                        "room": f'Room: Floor-{guest.transaction_id.room_id.floor} Number-{guest.transaction_id.room_id.number}',
+                        "room": f'Room: Floor-{guest.transaction_id.room_id.catalog_id.floor} Number-{guest.transaction_id.room_id.number}',
                         "status": status,
                         }}
         data.append(x)
@@ -149,7 +149,7 @@ def guest_table(request):
 @user_passes_test(lambda u: u.is_staff)
 def request_table(request):
     tenant_requests = Request.objects.filter(
-        transaction_id__room_id__property_id__owner_id__user_id=request.user)
+        transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for tenant_request in tenant_requests:
@@ -162,7 +162,7 @@ def request_table(request):
                         "subject": tenant_request.subject,
                         "description": tenant_request.description,
                         "date": date,
-                        "room": f'Room: Floor-{tenant_request.transaction_id.room_id.floor} Number-{tenant_request.transaction_id.room_id.number}',
+                        "room": f'Room: Floor-{tenant_request.transaction_id.room_id.catalog_id.floor} Number-{tenant_request.transaction_id.room_id.number}',
                         "status": status,
                         }}
         data.append(x)
@@ -175,7 +175,7 @@ def request_table(request):
 @user_passes_test(lambda u: u.is_staff)
 def notif_table(request):
     notifs = Message.objects.filter(
-        tenant_id__transaction_id__room_id__property_id__owner_id__user_id=request.user)
+        tenant_id__transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for notif in notifs:
@@ -201,7 +201,7 @@ def notif_table(request):
 @user_passes_test(lambda u: u.is_staff)
 def booking_table(request):
     bookings = Booking.objects.filter(
-        room_id__property_id__owner_id__user_id=request.user,approved=False)
+        catalog_id__property_id__owner_id__user_id=request.user,approved=False)
 
     data = []
     for booking in bookings:
@@ -211,7 +211,7 @@ def booking_table(request):
             status = "No Action Yet"
         x = {"fields": {"id": booking.pk,
                         "user": f'{booking.user_id.username} - {booking.user_id.first_name} {booking.user_id.last_name}',
-                        "room": f'Room: Floor-{booking.room_id.floor}',
+                        "room": f'Room: Floor-{booking.catalog_id.floor}',
                         "status": status,
                         }}
         data.append(x)
@@ -245,7 +245,7 @@ def property_table(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def room_table(request):
-    rooms = Room.objects.filter(property_id__owner_id__user_id=request.user)
+    rooms = Room.objects.filter(catalog_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for room in rooms:
@@ -253,26 +253,28 @@ def room_table(request):
             status = "Occupied"
         else:
             status = "Vacant"
-        if room.image_2d.all():
+        if room.catalog_id.img_2d.all():
             images2d = ' | '.join([str(i)
-                                   for i in room.image_2d.all()])
+                                   for i in room.catalog_id.img_2d.all()])
         else:
             images2d = 'Empty'
-        if room.image_3d.all():
+        if room.catalog_id.img_3d.all():
             images3d = ' | '.join([str(i)
-                                   for i in room.image_3d.all()])
+                                   for i in room.catalog_id.img_3d.all()])
         else:
             images3d = 'Empty'
-        if room.name:
-            name = room.name
+        if room.catalog_id.name:
+            name = room.catalog_id.name
         else:
             name = "None"
         x = {"fields": {"id": room.pk,
-                        "property": room.property_id.name,
+                        "catalog": room.catalog_id.name,
+                        "number": f'Number-{room.number}',
+                        "property": room.catalog_id.property_id.name,
                         "name": name,
-                        "floorno": f'Room: Floor-{room.floor} Number-{room.number}',
-                        "rate": int(room.rate),
-                        "type": room.get_room_type_display(),
+                        "floorno": f'Room: Floor-{room.catalog_id.floor} Number-{room.number}',
+                        "rate": int(room.catalog_id.rate),
+                        "type": room.catalog_id.get_room_type_display(),
                         "images2d": images2d,
                         "images3d": images3d,
                         "status": status,

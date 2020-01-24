@@ -103,18 +103,18 @@ class RentalReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
 
     def get_context_data(self, **kwargs):
         fee_objects = kwargs['object'].add_ons.all()
-        fees = int(kwargs['object'].room_id.rate)
+        fees = int(kwargs['object'].room_id.catalog_id.rate)
         for fee_object in fee_objects:
             fees += int(fee_object.amount)
         context = super().get_context_data(**kwargs)
         context['viewtype'] = 'transaction'
         context['transaction'] = kwargs['object']
-        context['room'] = f"Floor-{kwargs['object'].room_id.floor} Number-{kwargs['object'].room_id.number}"
+        context['room'] = f"Floor-{kwargs['object'].room_id.catalog_id.floor} Number-{kwargs['object'].room_id.number}"
         context['tenants'] = TenantAccount.objects.filter(
             transaction_id=kwargs['object'])
         context['add_ons'] = kwargs['object'].add_ons.all()
         context['total'] = fees
-        context['rate'] = int(kwargs['object'].room_id.rate)
+        context['rate'] = int(kwargs['object'].room_id.catalog_id.rate)
 
         return context
 
@@ -149,11 +149,15 @@ class TenantReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     template_name = 'components/modals/read.html'
 
     def get_context_data(self, **kwargs):
+        try:
+            bday = kwargs['object'].birthday.strftime("%B %d, %Y")
+        except e:
+            bday = "None"
         context = super().get_context_data(**kwargs)
         context['viewtype'] = 'tenants'
         context['tenant'] = kwargs['object']
         context['transaction'] = kwargs['object'].transaction_id
-        context['birthday'] = kwargs['object'].birthday.strftime("%B %d, %Y")
+        context['birthday'] = bday
 
         return context
 
@@ -293,7 +297,7 @@ class BookingReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView)
         else:
             status = "No action"
         total = 0
-        rate = int(kwargs['object'].room_id.rate)
+        rate = int(kwargs['object'].catalog_id.rate)
         total += rate
         for fee_object in fee_objects:
             total += int(fee_object.amount)
@@ -301,8 +305,8 @@ class BookingReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView)
         context['viewtype'] = 'booking'
         context['booking'] = kwargs['object']
         context['user'] = kwargs['object'].user_id
-        context['room'] = f"Floor-{kwargs['object'].room_id.floor} "
-        context['type'] = kwargs['object'].room_id.get_room_type_display()
+        context['room'] = f"Floor-{kwargs['object'].catalog_id.floor} "
+        context['type'] = kwargs['object'].catalog_id.get_room_type_display()
         context['rate'] = rate
         context['fees'] = kwargs['object'].add_ons.all()
         context['total'] = total
@@ -392,9 +396,9 @@ class RoomReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
         context = super().get_context_data(**kwargs)
         context['viewtype'] = 'room'
         context['room'] = kwargs['object']
-        context['type'] = kwargs['object'].get_room_type_display()
-        context['images_3d'] = kwargs['object'].image_3d.all()
-        context['images_2d'] = kwargs['object'].image_2d.all()
+        # context['type'] = kwargs['object'].get_room_type_display()
+        # context['images_3d'] = kwargs['object'].image_3d.all()
+        # context['images_2d'] = kwargs['object'].image_2d.all()
         return context
 
     def test_func(self):
@@ -439,10 +443,14 @@ class AdminAccReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView
     template_name = 'components/modals/read.html'
 
     def get_context_data(self, **kwargs):
+        try:
+            bday = kwargs['object'].birthday.strftime("%B %d, %Y")
+        except e:
+            bday = "None"
         context = super().get_context_data(**kwargs)
         context['viewtype'] = 'adminacc'
         context['adminacc'] = kwargs['object']
-        context['birthday'] = kwargs['object'].birthday.strftime("%B %d, %Y")
+        context['birthday'] = bday
         context['name'] = f"{kwargs['object'].user_id.first_name} {kwargs['object'].user_id.last_name}"
         context['type'] = kwargs['object'].get_user_type_display()
 

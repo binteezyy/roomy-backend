@@ -24,9 +24,8 @@ Rooms
               <thead>
                 <tr role="row">
                   <th>Id</th>
-                  <th>Property Under</th>
-                  <th>Name</th>
-                  <th>Floor & Number</th>
+                  <th>Catalog Under</th>
+                  <th>Number</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
@@ -72,9 +71,9 @@ Rooms
         $(".upload-room-3d").each(function () {
           $(this).modalForm({ formURL: $(this).data('id') });
         });
-        $(".read-room").each(function () {
-          $(this).modalForm({ formURL: $(this).data('id') });
-        });
+        // $(".read-room").each(function () {
+        //   $(this).modalForm({ formURL: $(this).data('id') });
+        // });
         $(".delete-room").each(function () {
           $(this).modalForm({ formURL: $(this).data('id') });
         });
@@ -89,23 +88,18 @@ Rooms
           "data": "fields.id",
         },
         {
-          "className": 'col-room-property text-center',
+          "className": 'col-room-catalog text-center',
           "targets": 1,
-          "data": "fields.property",
+          "data": "fields.catalog",
         },
         {
-          "className": 'col-room-name text-center',
+          "className": 'col-room-number text-center',
           "targets": 2,
-          "data": "fields.name",
-        },
-        {
-          "className": 'col-room-floorno text-center',
-          "targets": 3,
-          "data": "fields.floorno",
+          "data": "fields.number",
         },
         {
           "className": 'col-room-status text-center',
-          "targets": 4,
+          "targets": 3,
           "data": "fields.status",
         },
         {
@@ -118,8 +112,8 @@ Rooms
               '<span class="fa fa-file-upload">Upload 2d</span></button>' +
               '<button type="button" class="upload-room-3d btn btn-raised btn-sm btn-dark m-1" data-id="/upload/room3d/' + data + '">' +
               '<span class="fa fa-file-upload"> Upload 3d</span></button>' +
-              '<button type="button" class="read-room btn btn-raised btn-sm btn-primary m-1" data-id="/read/room/' + data + '">' +
-              '<span class="fa fa-eye"></span></button>' +
+              // '<button type="button" class="read-room btn btn-raised btn-sm btn-primary m-1" data-id="/read/room/' + data + '">' +
+              // '<span class="fa fa-eye"></span></button>' +
               '<button type="button" class="delete-room btn btn-sm btn-raised btn-warning m-1" data-id="/delete/room/' + data + '">' +
               '<span class="fa fa-trash"></span></button>' +
               '<button type="button" class="update-room btn btn-sm btn-raised btn-success m-1" data-id="/update/room/' + data + '">' +

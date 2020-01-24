@@ -64,37 +64,23 @@ class RoomCatalog(models.Model):
         ImageFile, blank=True, related_name='img_3d')
     img_2d = models.ManyToManyField(
         ImageFile, blank=True, related_name='img_2d')
+
     def __str__(self):
-        return f'{self.property_id}: Floor {self.floor}'
+        return f'{self.property_id}: {self.name} Floor {self.floor}'
 
     class Meta:
         unique_together = ('property_id', 'name')
 
 
 class Room(models.Model):
-    room_type_enum = [
-        (0, 'Fixed Rate'),
-        (1, 'Submetered'),
-    ]
-
-    property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
-    catalog = models.ForeignKey(RoomCatalog, on_delete=models.CASCADE)
-    name = models.CharField(max_length=56, blank=True, null=True, unique=True)
-    description = models.TextField(blank=True, null=True)
-    floor = models.PositiveIntegerField(default=1)
+    catalog_id = models.ForeignKey(RoomCatalog, on_delete=models.CASCADE, null=True, blank=True)
     number = models.PositiveIntegerField(default=1)
-    rate = models.DecimalField(max_digits=9, decimal_places=2)
-    room_type = models.IntegerField(choices=room_type_enum, default=0)
-    image_3d = models.ManyToManyField(
-        ImageFile, blank=True, related_name='images_3d')
-    image_2d = models.ManyToManyField(
-        ImageFile, blank=True, related_name='images_2d')
 
     def __str__(self):
-        return f'{self.property_id}: Floor {self.floor} - Room {self.number}'
+        return f'{self.catalog_id} - Room {self.number}'
 
     class Meta:
-        unique_together = ('property_id', 'floor', 'number')
+        unique_together = ('catalog_id', 'number')
 
 
 
@@ -165,7 +151,8 @@ class Document(models.Model):
 
 class Booking(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    room_id = models.ForeignKey(RoomCatalog, on_delete=models.CASCADE)
+    message = models.CharField(max_length=56, blank=True, null=True)
+    catalog_id = models.ForeignKey(RoomCatalog, on_delete=models.CASCADE)
     document1_id = models.ForeignKey(
         Document, on_delete=models.CASCADE, null=True, blank=True, related_name="document1")
     document2_id = models.ForeignKey(
@@ -174,7 +161,7 @@ class Booking(models.Model):
     approved = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Booking: {self.user_id.username} - {self.room_id}'
+        return f'Booking: {self.user_id.username} - {self.catalog_id}'
 
 
 class TenantAccount(models.Model):

@@ -9,6 +9,7 @@ router = routers.DefaultRouter()
 router.register('properties', api_views.PropertyApiView)
 router.register('fees', api_views.FeeApiView)
 router.register('billings', api_views.BillingApiView)
+router.register('catalogs', api_views.RoomCatalogApiView)
 router.register('rooms', api_views.RoomApiView)
 router.register('messages', api_views.MessageApiView)
 router.register('tenants', api_views.TenantAccountApiView)
@@ -20,9 +21,9 @@ router.register('transactions', api_views.TransactionApiView)
 router.register('requests', api_views.RequestApiView)
 router.register('messages', api_views.MessageApiView)
 # filtered routers
-router.register(r'rooms-in-property/(?P<property_id>[0-9]+)', api_views.RoomInPropertyApiView, basename='rooms-in-property')
-router.register(r'rooms-in-location/(?P<location>.+)', api_views.RoomInLocationApiView, basename='rooms-in-location')
-router.register(r'rooms-filter/(?P<search_query>.+)', api_views.RoomFilterApiView, basename='rooms-filter')
+router.register(r'rooms-in-property/(?P<property_id>[0-9]+)', api_views.RoomCatalogInPropertyApiView, basename='rooms-in-property')
+router.register(r'rooms-in-location/(?P<location>.+)', api_views.RoomCatalogInLocationApiView, basename='rooms-in-location')
+router.register(r'rooms-filter/(?P<search_query>.+)', api_views.RoomCatalogFilterApiView, basename='rooms-filter')
 
 urlpatterns = [
     path('index/',      base.index,                                        name='api-index'),
