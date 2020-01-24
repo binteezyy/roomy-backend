@@ -148,22 +148,6 @@ class Document(models.Model):
     def __str__(self):
         return f'{self.file_path}'
 
-
-class Booking(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.CharField(max_length=56, blank=True, null=True)
-    catalog_id = models.ForeignKey(RoomCatalog, on_delete=models.CASCADE)
-    document1_id = models.ForeignKey(
-        Document, on_delete=models.CASCADE, null=True, blank=True, related_name="document1")
-    document2_id = models.ForeignKey(
-        Document, on_delete=models.CASCADE, null=True, blank=True, related_name="document2")
-    add_ons = models.ManyToManyField(Fee, blank=True)
-    approved = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f'Booking: {self.user_id.username} - {self.catalog_id}'
-
-
 class TenantAccount(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     birthday = models.DateTimeField(null=True, blank=True)
@@ -182,6 +166,46 @@ class TenantAccount(models.Model):
             trans.active = True
             trans.save()
         super(TenantAccount, self).save(*args, **kwargs)
+
+class Booking(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.CharField(max_length=56, blank=True, null=True)
+    catalog_id = models.ForeignKey(RoomCatalog, on_delete=models.CASCADE)
+    document1_id = models.ForeignKey(
+        Document, on_delete=models.CASCADE, null=True, blank=True, related_name="document1")
+    document2_id = models.ForeignKey(
+        Document, on_delete=models.CASCADE, null=True, blank=True, related_name="document2")
+    add_ons = models.ManyToManyField(Fee, blank=True)
+    approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'Booking: {self.user_id.username} - {self.catalog_id}'
+
+    def save(self, *args, **kwargs):
+        if self.approved:
+            active_transactions = Transaction.objects.filter(active=True, room_id__catalog_id=self.catalog_id)
+            occupied_rooms_list = []
+            for active_transaction in active_transactions:
+                occupied_rooms_list.append(active_transaction.room_id.pk)
+            avail_room = Room.objects.filter(catalog_id=self.catalog_id).exclude( pk__in=occupied_rooms_list).first()
+            
+            try: 
+                new_transaction = Transaction.objects.get(active=True, room_id=avail_room)
+            except Transaction.DoesNotExist: 
+                new_transaction = Transaction(room_id=avail_room)
+                new_transaction.save()     
+                new_transaction.add_ons.set(self.add_ons.all())
+            print(new_transaction) 
+
+            try:
+                new_tenant = TenantAccount.objects.get(user_id=self.user_id, transaction_id=new_transaction)
+            except TenantAccount.DoesNotExist:
+                new_tenant = TenantAccount(user_id=self.user_id, transaction_id=new_transaction)
+                new_tenant.save()
+            print(new_tenant)
+        super(Booking, self).save(*args, **kwargs)
+
+
 
 class Message(models.Model):
     tenant_id = models.ForeignKey(TenantAccount, on_delete=models.CASCADE)
