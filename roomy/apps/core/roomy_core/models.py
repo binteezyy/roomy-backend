@@ -176,6 +176,12 @@ class TenantAccount(models.Model):
     def __str__(self):
         return f'Tenant: {self.user_id.username} - {self.user_id.first_name} {self.user_id.last_name}'
 
+    def save(self, *args, **kwargs):
+        if self.transaction_id:
+            trans = Transaction.objects.get(pk=self.transaction_id.pk)
+            trans.active = True
+            trans.save()
+        super(TenantAccount, self).save(*args, **kwargs)
 
 class Message(models.Model):
     tenant_id = models.ForeignKey(TenantAccount, on_delete=models.CASCADE)

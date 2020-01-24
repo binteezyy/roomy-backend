@@ -95,6 +95,75 @@ class FeeCreateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalCreateView)
     def test_func(self):
         return self.request.user.is_staff
 
+def ManageTenantsModal(request, pk):
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        context = {
+            'viewtype': 'manage_tenants',
+            'transaction': Transaction.objects.get(pk=pk),
+            'tenants': TenantAccount.objects.filter(transaction_id__pk=pk),
+        }
+        return render(request, "components/modals/read.html", context)
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
+
+def RemoveTenantModal(request, pk, idk):
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        if request.method == 'GET':
+            context = {
+                'viewtype': 'manage_tenants',
+                'transaction': Transaction.objects.get(pk=pk),
+                'tenant': TenantAccount.objects.get(pk=idk),
+            }
+            return render(request, "components/modals/delete.html", context)
+        elif request.method == 'POST':
+            tenant = TenantAccount.objects.get(pk=idk)
+            tenant.transaction_id = None
+            tenant.save()
+
+            tenants = TenantAccount.objects.filter(transaction_id__pk=pk)
+            if not tenants:
+                transaction = Transaction.objects.get(pk=pk)
+                transaction.active = False
+                print(transaction)
+                transaction.save()
+            
+            return HttpResponseRedirect(reverse('rental'))
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 class RentalReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = Transaction

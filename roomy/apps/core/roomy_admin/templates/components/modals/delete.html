@@ -4,8 +4,11 @@
     {% csrf_token %}
 
     <div class="modal-header">
-        <h3 class="modal-title">Delete {% if billing %}Billing
+        <h3 class="modal-title">{% if viewtype == 'manage_tenants' %} Remove {%else%} Delete
+            {%endif%}
+            {% if billing %}Billing
             {% elif fee %} Fee
+            {% elif viewtype == 'manage_tenants' %} Tenant
             {% elif transaction %} Transaction
             {% elif expense %} Expense
             {% elif guest %} Guest
@@ -23,10 +26,12 @@
 
     <div class="modal-body">
 
-        <p>Are you sure you want to delete <strong>
+        <p>Are you sure you want to {% if viewtype == 'manage_tenants' %} remove {% else %}delete {%endif%} <strong>
                 {% if billing %}
                 {{ billing }}</strong>
             {% elif fee %} <strong> {{fee}}</strong>
+            {% elif viewtype == 'manage_tenants' %} <strong> {{tenant}} from {{transaction.room_id.catalog_id.name}},
+                F{{transaction.room_id.catalog_id.floor}} R{{transaction.room_id.number}}</strong>
             {% elif transaction %} <strong> {{transaction}}</strong>
             {% elif expense %} <strong> {{expense}}</strong>
             {% elif guest %} <strong> {{guest}}</strong>

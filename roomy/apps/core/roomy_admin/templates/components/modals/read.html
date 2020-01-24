@@ -1,3 +1,4 @@
+{% load static %}
 {% load widget_tweaks %}
 <style media="screen">
     .section p {
@@ -16,6 +17,7 @@
         {% elif viewtype == 'adminacc' %} Admin Account
         {% elif viewtype == 'property' %} Property Info
         {% elif viewtype == 'room' %} Room Info
+        {% elif viewtype == 'manage_tenants' %} Manage Tenants
         {% endif %}</h3>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -295,6 +297,42 @@
                 </li>
             </ul>
         </div>
+        {% elif viewtype == 'manage_tenants' %}
+        <div class="content container">
+            <div class="card-content">
+                <div class="container-fluid">
+                    <h2>Tenants in
+                        {{transaction.room_id.catalog_id.property_id.name}}
+                        Fl. {{transaction.room_id.catalog_id.floor}}
+                        No. {{transaction.room_id.number}}
+                    </h2>
+                    <div class="row p-3">
+                        <div class="col">
+                            <div class="table-responsive">
+                                <table id="manage-tenants-table" class="table table-bordered table-hover text-center"
+                                    width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>Tenant</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for tenant in tenants %}
+                                        <td> {{ tenant.user_id.username }}</td>
+                                        <td style="width: 30%"> <button type="button"
+                                                class="remove-tenant btn btn-sm btn-raised btn-warning m-1"
+                                                data-id="/remove-tenant/{{transaction.id}}/{{tenant.id}}">
+                                                <span class="fa fa-trash"></span></button></td>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         {% endif %}
     </div>
 
@@ -303,3 +341,13 @@
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
+
+{% if viewtype == 'manage_tenants' %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".remove-tenant").each(function () {
+            $(this).modalForm({ formURL: $(this).data('id') });
+        });
+    });
+</script>
+{% endif %}

@@ -47,6 +47,8 @@ urlpatterns = [
     path('create/fee', modalviews.FeeCreateModal.as_view(), name='create-fee'),
 
     # Rental Table
+    path('manage-tenants/<int:pk>', modalviews.ManageTenantsModal, name='admin-manage-tenants'),
+    path('remove-tenant/<int:pk>/<int:idk>', modalviews.RemoveTenantModal, name='admin-remove-tenant'),
     path('rental/table/<int:pk>', datatableviews.rental_table, name='admin-rental-table'),
     path('read/rental/<int:pk>',
          modalviews.RentalReadModal.as_view(), name='read-rental'),
