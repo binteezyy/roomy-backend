@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Guest List
+Catalogs
 {% endblock %}
 
 {% block extra_css %}
@@ -16,19 +16,18 @@ Guest List
 <div class="content container">
     <div class="card-content">
         <div class="container-fluid">
-            <h2>Guest List in {{property.name}}</h2>
+            <h2>Catalogs in {{property.name}}</h2>
             <div class="row p-3">
                 <div class="col">
                     <div class="table-responsive">
-                        <table id="guest-table-{{property.pk}}" class="table table-bordered table-hover" width="100%"
+                        <table id="catalog-table-{{property.pk}}" class="table table-bordered table-hover" width="100%"
                             cellspacing="0" role="grid" aria-describedby="dataTable_info">
                             <thead>
                                 <tr role="row">
                                     <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Date</th>
-                                    <th>Room</th>
-                                    <th>Status</th>
+                                    <th>Catalog Name</th>
+                                    <th>Floor</th>
+                                    <th>Rate</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -44,7 +43,7 @@ Guest List
 {% endblock %}
 
 {% block header %}
-Tenants
+Catalogs
 {% endblock %}
 
 {% block extra_js %}
@@ -52,53 +51,57 @@ Tenants
 <script type="text/javascript">
     $(document).ready(function () {
         {% for property in properties %}
-        $('#guest-table-{{property.pk}}').DataTable({
+        $('#catalog-table-{{property.pk}}').DataTable({
             "dataType": 'json',
             "ajax": {
                 "processing": true,
                 "dataSrc": '',
-                "url": "{% url 'admin-guest-table' property.pk %}",
+                "url": "{% url 'admin-catalog-table' property.pk %}",
             },
-            "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-guest'>>>>" +
+            "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-catalog'>>>>" +
                 "<'row'<'col-md-6'><'col-md-6'>>" +
                 "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
             "initComplete": function (settings, json) {
-                $("div.create-guest").html('<button type="button" id="create-guest" class="float-right btn btn-s btn-success btn-raised" name="button">Add Guest <i class="fas fa-plus"></i></button>');
-                $(".create-guest").modalForm({ formURL: "{% url 'create-guest'%}" });
+                $("div.create-catalog").html('<button type="button" id="create-catalog" class="float-right btn btn-s btn-success btn-raised" name="button">Add Catalog <i class="fas fa-plus"></i></button>');
+                $(".create-catalog").modalForm({ formURL: "{% url 'create-catalog' %}" });
             },
             "drawCallback": function (settings) {
-                $(".update-guest").each(function () {
+                $(".upload-catalog-2d").each(function () {
                     $(this).modalForm({ formURL: $(this).data('id') });
                 });
-                // $(".delete-guest").each(function () {
+                $(".upload-catalog-3d").each(function () {
+                    $(this).modalForm({ formURL: $(this).data('id') });
+                });
+                $(".read-catalog").each(function () {
+                    $(this).modalForm({ formURL: $(this).data('id') });
+                });
+                // $(".delete-catalog").each(function () {
                 //     $(this).modalForm({ formURL: $(this).data('id') });
                 // });
+                $(".update-catalog").each(function () {
+                    $(this).modalForm({ formURL: $(this).data('id') });
+                });
             },
             "columnDefs": [
                 {
-                    "className": 'col-fee-id text-center',
+                    "className": 'col-catalog-id text-center',
                     "targets": 0,
                     "data": "fields.id",
                 },
                 {
-                    "className": 'col-fee-type text-center',
+                    "className": 'col-catalog-name text-center',
                     "targets": 1,
                     "data": "fields.name",
                 },
                 {
-                    "className": 'col-fee-type text-center',
+                    "className": 'col-catalog-floor text-center',
                     "targets": 2,
-                    "data": "fields.date",
+                    "data": "fields.floor",
                 },
                 {
-                    "className": 'col-fee-description text-center',
+                    "className": 'col-catalog-rate text-center',
                     "targets": 3,
-                    "data": "fields.room",
-                },
-                {
-                    "className": 'col-fee-type text-center',
-                    "targets": 4,
-                    "data": "fields.status",
+                    "data": "fields.rate",
                 },
                 {
                     "className": 'col-details text-center',
@@ -106,9 +109,15 @@ Tenants
                     "data": 'fields.id',
                     render: function (data, type, row) {
                         let render =
-                            // '<button type="button" class="delete-guest btn btn-sm btn-raised btn-warning m-1" data-id="/delete/guest/' + data + '">' +
+                            '<button type="button" class="upload-catalog-2d btn btn-raised btn-sm btn-info m-1" data-id="/upload/catalog2d/' + data + '">' +
+                            '<span class="fa fa-file-upload">Upload 2d</span></button>' +
+                            '<button type="button" class="upload-catalog-3d btn btn-raised btn-sm btn-dark m-1" data-id="/upload/catalog3d/' + data + '">' +
+                            '<span class="fa fa-file-upload"> Upload 3d</span></button>' +
+                            '<button type="button" class="read-catalog btn btn-raised btn-sm btn-primary m-1" data-id="/read/catalog/' + data + '">' +
+                            '<span class="fa fa-eye"></span></button>' +
+                            // '<button type="button" class="delete-catalog btn btn-sm btn-raised btn-warning m-1" data-id="/delete/catalog/' + data + '">' +
                             // '<span class="fa fa-trash"></span></button>' +
-                            '<button type="button" class="update-guest btn btn-sm btn-raised btn-success m-1" data-id="/update/guest/' + data + '">' +
+                            '<button type="button" class="update-catalog btn btn-sm btn-raised btn-success m-1" data-id="/update/catalog/' + data + '">' +
                             '<span class="fa fa-edit"></span></button>';
                         return render
                     }

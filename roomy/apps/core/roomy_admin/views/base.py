@@ -98,25 +98,25 @@ def property_upload(request, pk):
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def room_upload2d(request, pk):
+def catalog_upload2d(request, pk):
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-        room_object = Room.objects.get(pk=pk)
+        catalog = RoomCatalog.objects.get(pk=pk)
         if request.method == 'GET':
             context = {
-                'room': room_object,
+                'catalog': catalog,
                 '2d': True,
             }
-            return render(request, "components/upload_template/room-upload.html", context)
+            return render(request, "components/upload_template/catalog-upload.html", context)
 
         elif request.method == 'POST' and request.FILES['myfile'] and request.POST.get('filetitle'):
             upload_image = ImageFile(title=request.POST.get(
                 'filetitle'), img_path=request.FILES['myfile'])
             upload_image.save()
 
-            room_object.image_2d.add(upload_image)
-            return HttpResponseRedirect(reverse('room-management'))
+            catalog.image_2d.add(upload_image)
+            return HttpResponseRedirect(reverse('catalog-management'))
         else:
-            return HttpResponseRedirect(reverse('room-management'))
+            return HttpResponseRedirect(reverse('catalog-management'))
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -140,25 +140,25 @@ def room_upload2d(request, pk):
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def room_upload3d(request, pk):
+def catalog_upload3d(request, pk):
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-        room_object = Room.objects.get(pk=pk)
+        catalog = RoomCatalog.objects.get(pk=pk)
         if request.method == 'GET':
             context = {
-                'room': room_object,
+                'catalog': catalog,
                 '2d': False,
             }
-            return render(request, "components/upload_template/room-upload.html", context)
+            return render(request, "components/upload_template/catalog-upload.html", context)
 
         elif request.method == 'POST' and request.FILES['myfile'] and request.POST.get('filetitle'):
             upload_image = ImageFile(title=request.POST.get(
                 'filetitle'), img_path=request.FILES['myfile'])
             upload_image.save()
 
-            room_object.image_3d.add(upload_image)
-            return HttpResponseRedirect(reverse('room-management'))
+            catalog.image_3d.add(upload_image)
+            return HttpResponseRedirect(reverse('catalog-management'))
         else:
-            return HttpResponseRedirect(reverse('room-management'))
+            return HttpResponseRedirect(reverse('catalog-management'))
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)

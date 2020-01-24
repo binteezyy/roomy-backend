@@ -7,10 +7,15 @@ class PropertySerializer(serializers.HyperlinkedModelSerializer):
         model = Property
         fields = ('id', 'url', 'property_type', 'name', 'description', 'property_address', 'property_image' )
 
-class RoomSerializer(serializers.HyperlinkedModelSerializer):
+class RoomCatalogSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = RoomCatalog
+        fields = ('id', 'url', 'property_id', 'name', 'description', 'floor', 'rate', 'room_type', 'img_3d', 'img_2d')
+
+class RoomSeralizer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Room
-        fields = ('id', 'url', 'property_id', 'name', 'description', 'floor', 'number', 'rate', 'room_type', 'image_3d', 'image_2d')
+        fields = ('id', 'url', 'catalog_id', 'number')
 
 class FeeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

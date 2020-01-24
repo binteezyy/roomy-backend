@@ -23,6 +23,7 @@ urlpatterns = [
     # management
     path('management/property/',      management.property_management,
          name='property_management'),
+         path('management/catalog/',      management.catalog_management, name='catalog_management'),
     path('management/room/',      management.room_management, name='room_management'),
     path('management/account/',      management.admin_management,
          name='admin_management'),
@@ -39,7 +40,7 @@ urlpatterns = [
          modalviews.BillingUpdateModal.as_view(), name='update-billing'),
 
     # Fee Table
-    path('fee/table/', datatableviews.fee_table, name='admin-fee-table'),
+    path('fee/table/<int:pk>', datatableviews.fee_table, name='admin-fee-table'),
     path('delete/fee/<int:pk>',
          modalviews.FeeDeleteModal.as_view(), name='delete-fee'),
     path('update/fee/<int:pk>',
@@ -47,7 +48,9 @@ urlpatterns = [
     path('create/fee', modalviews.FeeCreateModal.as_view(), name='create-fee'),
 
     # Rental Table
-    path('rental/table/', datatableviews.rental_table, name='admin-rental-table'),
+    path('manage-tenants/<int:pk>', modalviews.ManageTenantsModal, name='admin-manage-tenants'),
+    path('remove-tenant/<int:pk>/<int:idk>', modalviews.RemoveTenantModal, name='admin-remove-tenant'),
+    path('rental/table/<int:pk>', datatableviews.rental_table, name='admin-rental-table'),
     path('read/rental/<int:pk>',
          modalviews.RentalReadModal.as_view(), name='read-rental'),
     path('delete/rental/<int:pk>',
@@ -56,12 +59,13 @@ urlpatterns = [
          modalviews.RentalUpdateModal.as_view(), name='update-rental'),
 
     # Tenant Table
-    path('tenant/table/', datatableviews.tenant_table, name='admin-tenant-table'),
+    path('add/tenant/<int:pk>', modalviews.AddTenantModal, name='admin-add-tenant'),
+    path('tenant/table/<int:pk>', datatableviews.tenant_table, name='admin-tenant-table'),
     path('read/tenant/<int:pk>',
          modalviews.TenantReadModal.as_view(), name='read-tenant'),
 
     # Expense Table
-    path('expense/table/', datatableviews.expense_table,
+    path('expense/table/<int:pk>', datatableviews.expense_table,
          name='admin-expense-table'),
     path('create/expense', modalviews.ExpenseCreateModal.as_view(),
          name='create-expense'),
@@ -71,7 +75,7 @@ urlpatterns = [
          modalviews.ExpenseUpdateModal.as_view(), name='update-expense'),
 
     # Guest Table
-    path('guest/table/', datatableviews.guest_table, name='admin-guest-table'),
+    path('guest/table/<int:pk>', datatableviews.guest_table, name='admin-guest-table'),
     path('create/guest', modalviews.GuestCreateModal.as_view(), name='create-guest'),
     path('delete/guest/<int:pk>',
          modalviews.GuestDeleteModal.as_view(), name='delete-guest'),
@@ -79,7 +83,7 @@ urlpatterns = [
          modalviews.GuestUpdateModal.as_view(), name='update-guest'),
 
     # Tenant Request
-    path('request/table/', datatableviews.request_table,
+    path('request/table/<int:pk>', datatableviews.request_table,
          name='admin-request-table'),
     path('delete/request/<int:pk>',
          modalviews.RequestDeleteModal.as_view(), name='delete-request'),
@@ -95,7 +99,7 @@ urlpatterns = [
     path('create/notif', modalviews.NotifCreateModal.as_view(), name='create-notif'),
 
     # Booking
-    path('booking/table/', datatableviews.booking_table,
+    path('booking/table/<int:pk>', datatableviews.booking_table,
          name='admin-booking-table'),
     path('read/booking/<int:pk>',
          modalviews.BookingReadModal.as_view(), name='read-booking'),
@@ -118,8 +122,22 @@ urlpatterns = [
     path('upload/property/<int:pk>', base.property_upload,
          name='admin-property-upload'),
 
+     # Catalog
+    path('catalog/table/<int:pk>', datatableviews.catalog_table, name='admin-catalog-table'),
+    path('create/catalog', modalviews.CatalogCreateModal.as_view(), name='create-catalog'),
+    path('read/catalog/<int:pk>',
+         modalviews.CatalogReadModal.as_view(), name='read-catalog'),
+    path('delete/catalog/<int:pk>',
+         modalviews.CatalogDeleteModal.as_view(), name='delete-catalog'),
+    path('update/catalog/<int:pk>',
+         modalviews.CatalogUpdateModal.as_view(), name='update-catalog'),
+    path('upload/catalog2d/<int:pk>', base.catalog_upload2d,
+         name='admin-catalog2d-upload'),
+    path('upload/catalog3d/<int:pk>', base.catalog_upload3d,
+         name='admin-catalog3d-upload'),
+
     # Room
-    path('room/table/', datatableviews.room_table, name='admin-room-table'),
+    path('room/table/<int:pk>', datatableviews.room_table, name='admin-room-table'),
     path('create/room', modalviews.RoomCreateModal.as_view(), name='create-room'),
     path('read/room/<int:pk>',
          modalviews.RoomReadModal.as_view(), name='read-room'),
@@ -127,10 +145,6 @@ urlpatterns = [
          modalviews.RoomDeleteModal.as_view(), name='delete-room'),
     path('update/room/<int:pk>',
          modalviews.RoomUpdateModal.as_view(), name='update-room'),
-    path('upload/room2d/<int:pk>', base.room_upload2d,
-         name='admin-room2d-upload'),
-    path('upload/room3d/<int:pk>', base.room_upload3d,
-         name='admin-room3d-upload'),
 
     # Account
     #     path('account_management/table/',

@@ -12,15 +12,16 @@ Property Expenses
 
 {% block content %}
 {% include "_modal.html" %}
+{% for property in properties %}
 <div class="content container">
   <div class="card-content">
     <div class="container-fluid">
-      <h2>Property Expenses</h2>
+      <h2>Expenses in {{property.name}}</h2>
       <div class="row p-3">
         <div class="col">
           <div class="table-responsive">
-            <table id="expense-table" class="table table-bordered table-hover" width="100%" cellspacing="0" role="grid"
-              aria-describedby="dataTable_info">
+            <table id="expense-table-{{property.pk}}" class="table table-bordered table-hover" width="100%"
+              cellspacing="0" role="grid" aria-describedby="dataTable_info">
               <thead>
                 <tr role="row">
                   <th>Id</th>
@@ -37,25 +38,25 @@ Property Expenses
       </div>
     </div>
   </div>
-
 </div>
-
+{% endfor %}
 {% endblock %}
 
 {% block header %}
-Fee
+Expenses
 {% endblock %}
 
 {% block extra_js %}
 <script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
 <script type="text/javascript">
   $(document).ready(function () {
-    $('#expense-table').DataTable({
+    {% for property in properties %}
+    $('#expense-table-{{property.pk}}').DataTable({
       "dataType": 'json',
       "ajax": {
         "processing": true,
         "dataSrc": '',
-        "url": "{% url 'admin-expense-table'%}",
+        "url": "{% url 'admin-expense-table' property.pk %}",
       },
       "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-expense'>>>>" +
         "<'row'<'col-md-6'><'col-md-6'>>" +
@@ -65,9 +66,9 @@ Fee
         $(".create-expense").modalForm({ formURL: "{% url 'create-expense' %}" });
       },
       "drawCallback": function (settings) {
-        $(".delete-expense").each(function () {
-          $(this).modalForm({ formURL: $(this).data('id') });
-        });
+        // $(".delete-expense").each(function () {
+        //   $(this).modalForm({ formURL: $(this).data('id') });
+        // });
         $(".update-expense").each(function () {
           $(this).modalForm({ formURL: $(this).data('id') });
         });
@@ -99,8 +100,8 @@ Fee
           "data": 'fields.id',
           render: function (data, type, row) {
             let render =
-              '<button type="button" class="delete-expense btn btn-sm btn-raised btn-warning m-1" data-id="/delete/expense/' + data + '">' +
-              '<span class="fa fa-trash"></span></button>' +
+              // '<button type="button" class="delete-expense btn btn-sm btn-raised btn-warning m-1" data-id="/delete/expense/' + data + '">' +
+              // '<span class="fa fa-trash"></span></button>' +
               '<button type="button" class="update-expense btn btn-sm btn-raised btn-success m-1" data-id="/update/expense/' + data + '">' +
               '<span class="fa fa-edit"></span></button>';
             return render
@@ -108,6 +109,7 @@ Fee
         },
       ]
     })
+    {% endfor %}
   });
 </script>
 {% endblock %}

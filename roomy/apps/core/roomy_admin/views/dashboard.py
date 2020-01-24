@@ -48,7 +48,10 @@ def home(request):
 def rental(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-        return render(request, "components/dashboard/rental.html")
+        context = {
+            'properties': Property.objects.filter(owner_id__user_id=request.user)
+        }
+        return render(request, "components/dashboard/rental.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -77,7 +80,10 @@ def rental(request):
 def tenant(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-        return render(request, "components/dashboard/tenant.html")
+        context = {
+            'properties': Property.objects.filter(owner_id__user_id=request.user)
+        }
+        return render(request, "components/dashboard/tenant.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -134,7 +140,10 @@ def billing(request):
 @user_passes_test(lambda u: u.is_staff)
 def guest(request):
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-        return render(request, "components/dashboard/guest.html")
+        context = {
+            'properties': Property.objects.filter(owner_id__user_id=request.user)
+        }
+        return render(request, "components/dashboard/guest.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -163,7 +172,10 @@ def guest(request):
 def tenant_request(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-        return render(request, "components/dashboard/request.html")
+        context = {
+            'properties': Property.objects.filter(owner_id__user_id=request.user)
+        }
+        return render(request, "components/dashboard/request.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -221,7 +233,10 @@ def notif(request):
 def booking(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-        return render(request, "components/dashboard/booking.html")
+        context = {
+            'properties': Property.objects.filter(owner_id__user_id=request.user)
+        }
+        return render(request, "components/dashboard/booking.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)

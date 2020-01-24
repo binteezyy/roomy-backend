@@ -1,3 +1,4 @@
+{% load static %}
 {% load widget_tweaks %}
 <style media="screen">
     .section p {
@@ -16,6 +17,7 @@
         {% elif viewtype == 'adminacc' %} Admin Account
         {% elif viewtype == 'property' %} Property Info
         {% elif viewtype == 'room' %} Room Info
+        {% elif viewtype == 'manage_tenants' %} Manage Tenants
         {% endif %}</h3>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -93,6 +95,11 @@
                         </ol>
                     </h5>
                 </li>
+                <li>
+                    <h5> Rating:
+                        {{rating}}
+                    </h5>
+                </li>
             </ul>
         </div>
         {% elif viewtype == 'tenants' %}
@@ -124,7 +131,15 @@
         <div class="container">
             <ul>
                 <li>
-                    <h5> User: {{user.username}} - {{user.first_name}} {{user.last_name}}
+                    <h5> Applicant: {{user.username}} - {{user.first_name}} {{user.last_name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Applicant message: {{booking.message}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Property: {{booking.catalog_id.property_id}}
                     </h5>
                 </li>
                 <li>
@@ -146,6 +161,19 @@
                             <li>{{fee}}</li>
                             {% endfor %}
                             <li> Room rate: {{rate}}</li>
+                        </ol>
+                    </h5>
+                </li>
+                <li>
+                    <h5> Documents submitted:
+                        <ol>
+                            <li>
+                                {{booking.document1_id}}
+                            </li>
+                            <li>
+                                {{booking.document2_id}}
+                            </li>
+
                         </ol>
                     </h5>
                 </li>
@@ -269,6 +297,95 @@
                 </li>
             </ul>
         </div>
+        {% elif viewtype == 'manage_tenants' %}
+        <div class="content container">
+            <div class="card-content">
+                <div class="container-fluid">
+                    <h2>Tenants in
+                        {{transaction.room_id.catalog_id.property_id.name}}
+                        Fl. {{transaction.room_id.catalog_id.floor}}
+                        No. {{transaction.room_id.number}}
+                    </h2>
+                    <div class="row p-3">
+                        <div class="col">
+                            <div class="table-responsive">
+                                <table id="manage-tenants-table" class="table table-bordered table-hover text-center"
+                                    width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>Tenant</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for tenant in tenants %}
+                                        <tr>
+                                            <td> {{ tenant.user_id.username }}</td>
+                                            <td style="width: 30%"> <button type="button"
+                                                    class="remove-tenant btn btn-sm btn-raised btn-warning m-1"
+                                                    data-id="/remove-tenant/{{transaction.id}}/{{tenant.id}}">
+                                                    <span class="fa fa-trash"></span></button></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% elif viewtype == 'catalog' %}
+        <div class="container">
+            <ul>
+                <li>
+                    <h5> Property Under:
+                        {{catalog.property_id.name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Catalog Name:
+                        {{catalog.name}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Description:
+                        {{catalog.description}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Type:
+                        {{type}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Floor:
+                        {{catalog.floor}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Rate:
+                        {{catalog.rate}}
+                    </h5>
+                </li>
+                <li>
+                    <h5> Room 2D Images: </h5>
+                    <ol>
+                        {% for image in images_2d %}
+                        <li>{{image.title}} - media/{{image.img_path}}</li>
+                        {% endfor %}
+                    </ol>
+                </li>
+                <li>
+                    <h5> Room 3D Images: </h5>
+                    <ol>
+                        {% for image in images_3d %}
+                        <li>{{image.title}} - media/{{image.img_path}}</li>
+                        {% endfor %}
+                    </ol>
+                </li>
+            </ul>
+        </div>
         {% endif %}
     </div>
 
@@ -277,3 +394,13 @@
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
+
+{% if viewtype == 'manage_tenants' %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".remove-tenant").each(function () {
+            $(this).modalForm({ formURL: $(this).data('id') });
+        });
+    });
+</script>
+{% endif %}

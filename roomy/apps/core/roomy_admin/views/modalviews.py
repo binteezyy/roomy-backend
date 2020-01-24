@@ -6,6 +6,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth import authenticate, login, logout
 
 from django.views import generic
 from django.contrib import messages
@@ -95,6 +96,75 @@ class FeeCreateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalCreateView)
     def test_func(self):
         return self.request.user.is_staff
 
+def ManageTenantsModal(request, pk):
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        context = {
+            'viewtype': 'manage_tenants',
+            'transaction': Transaction.objects.get(pk=pk),
+            'tenants': TenantAccount.objects.filter(transaction_id__pk=pk),
+        }
+        return render(request, "components/modals/read.html", context)
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
+
+def RemoveTenantModal(request, pk, idk):
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        if request.method == 'GET':
+            context = {
+                'viewtype': 'manage_tenants',
+                'transaction': Transaction.objects.get(pk=pk),
+                'tenant': TenantAccount.objects.get(pk=idk),
+            }
+            return render(request, "components/modals/delete.html", context)
+        elif request.method == 'POST':
+            tenant = TenantAccount.objects.get(pk=idk)
+            tenant.transaction_id = None
+            tenant.save()
+
+            tenants = TenantAccount.objects.filter(transaction_id__pk=pk)
+            if not tenants:
+                transaction = Transaction.objects.get(pk=pk)
+                transaction.active = False
+                print(transaction)
+                transaction.save()
+            
+            return HttpResponseRedirect(reverse('rental'))
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 class RentalReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = Transaction
@@ -103,18 +173,23 @@ class RentalReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
 
     def get_context_data(self, **kwargs):
         fee_objects = kwargs['object'].add_ons.all()
-        fees = int(kwargs['object'].room_id.rate)
+        fees = int(kwargs['object'].room_id.catalog_id.rate)
         for fee_object in fee_objects:
             fees += int(fee_object.amount)
+        if kwargs['object'].rated:
+            rating = str(kwargs['object'].rating) + kwargs['object'].rating_description
+        else:
+            rating = 'Unrated'
         context = super().get_context_data(**kwargs)
         context['viewtype'] = 'transaction'
         context['transaction'] = kwargs['object']
-        context['room'] = f"Floor-{kwargs['object'].room_id.floor} Number-{kwargs['object'].room_id.number}"
+        context['room'] = f"Floor-{kwargs['object'].room_id.catalog_id.floor} Number-{kwargs['object'].room_id.number}"
         context['tenants'] = TenantAccount.objects.filter(
             transaction_id=kwargs['object'])
         context['add_ons'] = kwargs['object'].add_ons.all()
         context['total'] = fees
-        context['rate'] = int(kwargs['object'].room_id.rate)
+        context['rate'] = int(kwargs['object'].room_id.catalog_id.rate)
+        context['rating'] = rating
 
         return context
 
@@ -143,17 +218,63 @@ class RentalUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateVi
     def test_func(self):
         return self.request.user.is_staff
 
+def AddTenantModal(request, pk):
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        if request.method == 'GET':
+            property_obj = Property.objects.get(pk=pk)
+            context = {
+                'viewtype': 'add_tenant',
+                'property': property_obj,
+                'rooms': Room.objects.filter(catalog_id__property_id=property_obj),
+            }
+            return render(request, "components/modals/create.html", context)
+        elif request.method == 'POST':
+            user_id = authenticate(username=request.POST['username'], password=request.POST['password'])
+            transaction_id = Transaction.objects.get(room_id=request.POST.get('room'))
+
+            try: 
+                new_tenant = TenantAccount.objects.get(user_id=user_id, transaction_id=transaction_id)
+            except TenantAccount.DoesNotExist:
+                if user_id and transaction_id:
+                    new_tenant = TenantAccount(user_id=user_id, transaction_id=transaction_id)
+                    new_tenant.save()
+
+            return HttpResponseRedirect(reverse('tenant'))
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
+
 class TenantReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = TenantAccount
     context_object_name = 'tenants'
     template_name = 'components/modals/read.html'
 
     def get_context_data(self, **kwargs):
+        try:
+            bday = kwargs['object'].birthday.strftime("%B %d, %Y")
+        except:
+            bday = "None"
         context = super().get_context_data(**kwargs)
         context['viewtype'] = 'tenants'
         context['tenant'] = kwargs['object']
         context['transaction'] = kwargs['object'].transaction_id
-        context['birthday'] = kwargs['object'].birthday.strftime("%B %d, %Y")
+        context['birthday'] = bday
 
         return context
 
@@ -293,7 +414,7 @@ class BookingReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView)
         else:
             status = "No action"
         total = 0
-        rate = int(kwargs['object'].room_id.rate)
+        rate = int(kwargs['object'].catalog_id.rate)
         total += rate
         for fee_object in fee_objects:
             total += int(fee_object.amount)
@@ -301,8 +422,8 @@ class BookingReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView)
         context['viewtype'] = 'booking'
         context['booking'] = kwargs['object']
         context['user'] = kwargs['object'].user_id
-        context['room'] = f"Floor-{kwargs['object'].room_id.floor} "
-        context['type'] = kwargs['object'].room_id.get_room_type_display()
+        context['room'] = f"Floor-{kwargs['object'].catalog_id.floor} "
+        context['type'] = kwargs['object'].catalog_id.get_room_type_display()
         context['rate'] = rate
         context['fees'] = kwargs['object'].add_ons.all()
         context['total'] = total
@@ -383,6 +504,57 @@ class PropertyUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdate
     def test_func(self):
         return self.request.user.is_staff
 
+class CatalogReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
+    model = RoomCatalog
+    context_object_name = 'catalog'
+    template_name = 'components/modals/read.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['viewtype'] = 'room'
+        context['catalog'] = kwargs['object']
+        context['type'] = kwargs['object'].get_room_type_display()
+        context['images_3d'] = kwargs['object'].img_3d.all()
+        context['images_2d'] = kwargs['object'].img_2d.all()
+        return context
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class CatalogCreateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalCreateView):
+    model = RoomCatalog
+    model_type = 'catalog'
+    template_name = 'components/modals/create.html'
+    form_class = RoomCatalogModalForm
+    success_message = 'Success: Catalog created.'
+    success_url = reverse_lazy('catalog_management')
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class CatalogDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
+    model = RoomCatalog
+    context_object_name = 'catalog'
+    template_name = 'components/modals/delete.html'
+    success_message = 'Success: Catalog deleted'
+    success_url = reverse_lazy('catalog_management')
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class CatalogUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
+    model = RoomCatalog
+    template_name = 'components/modals/update.html'
+    form_class = RoomCatalogModalForm
+    sucess_message = "Success: Catalog updated"
+    success_url = reverse_lazy('catalog_management')
+
+    def test_func(self):
+        return self.request.user.is_staff
+
 class RoomReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = Room
     context_object_name = 'room'
@@ -392,9 +564,9 @@ class RoomReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
         context = super().get_context_data(**kwargs)
         context['viewtype'] = 'room'
         context['room'] = kwargs['object']
-        context['type'] = kwargs['object'].get_room_type_display()
-        context['images_3d'] = kwargs['object'].image_3d.all()
-        context['images_2d'] = kwargs['object'].image_2d.all()
+        # context['type'] = kwargs['object'].get_room_type_display()
+        # context['images_3d'] = kwargs['object'].image_3d.all()
+        # context['images_2d'] = kwargs['object'].image_2d.all()
         return context
 
     def test_func(self):
@@ -439,10 +611,14 @@ class AdminAccReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView
     template_name = 'components/modals/read.html'
 
     def get_context_data(self, **kwargs):
+        try:
+            bday = kwargs['object'].birthday.strftime("%B %d, %Y")
+        except e:
+            bday = "None"
         context = super().get_context_data(**kwargs)
         context['viewtype'] = 'adminacc'
         context['adminacc'] = kwargs['object']
-        context['birthday'] = kwargs['object'].birthday.strftime("%B %d, %Y")
+        context['birthday'] = bday
         context['name'] = f"{kwargs['object'].user_id.first_name} {kwargs['object'].user_id.last_name}"
         context['type'] = kwargs['object'].get_user_type_display()
 

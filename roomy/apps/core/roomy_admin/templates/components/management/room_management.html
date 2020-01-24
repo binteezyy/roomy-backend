@@ -12,21 +12,21 @@ Rooms
 
 {% block content %}
 {% include "_modal.html" %}
+{% for catalog in catalogs %}
 <div class="content container">
   <div class="card-content">
     <div class="container-fluid">
-      <h2>Rooms</h2>
+      <h2>Rooms in {{catalog.name}}</h2>
       <div class="row p-3">
         <div class="col">
           <div class="table-responsive">
-            <table id="room-table" class="table table-bordered table-hover" width="100%" cellspacing="0" role="grid"
-              aria-describedby="dataTable_info">
+            <table id="room-table-{{catalog.pk}}" class="table table-bordered table-hover" width="100%" cellspacing="0"
+              role="grid" aria-describedby="dataTable_info">
               <thead>
                 <tr role="row">
                   <th>Id</th>
-                  <th>Property Under</th>
-                  <th>Name</th>
-                  <th>Floor & Number</th>
+                  <th>Catalog Under</th>
+                  <th>Number</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
@@ -38,9 +38,8 @@ Rooms
       </div>
     </div>
   </div>
-
 </div>
-
+{% endfor %}
 {% endblock %}
 
 {% block header %}
@@ -51,33 +50,34 @@ Rooms
 <script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
 <script type="text/javascript">
   $(document).ready(function () {
-    $('#room-table').DataTable({
+    {% for catalog in catalogs %}
+    $('#room-table-{{catalog.pk}}').DataTable({
       "dataType": 'json',
       "ajax": {
         "processing": true,
         "dataSrc": '',
-        "url": "{% url 'admin-room-table'%}",
+        "url": "{% url 'admin-room-table' catalog.pk %}",
       },
       "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-room'>>>>" +
         "<'row'<'col-md-6'><'col-md-6'>>" +
         "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
       "initComplete": function (settings, json) {
         $("div.create-room").html('<button type="button" id="create-room" class="float-right btn btn-s btn-success btn-raised" name="button">Add room <i class="fas fa-plus"></i></button>');
-        $(".create-room").modalForm({ formURL: "{% url 'create-room' %}" });
+        $(".create-room").modalForm({ formURL: "{% url 'create-room'%}" });
       },
       "drawCallback": function (settings) {
-        $(".upload-room-2d").each(function () {
-          $(this).modalForm({ formURL: $(this).data('id') });
-        });
-        $(".upload-room-3d").each(function () {
-          $(this).modalForm({ formURL: $(this).data('id') });
-        });
-        $(".read-room").each(function () {
-          $(this).modalForm({ formURL: $(this).data('id') });
-        });
-        $(".delete-room").each(function () {
-          $(this).modalForm({ formURL: $(this).data('id') });
-        });
+        // $(".upload-room-2d").each(function () {
+        //   $(this).modalForm({ formURL: $(this).data('id') });
+        // });
+        // $(".upload-room-3d").each(function () {
+        //   $(this).modalForm({ formURL: $(this).data('id') });
+        // });
+        // $(".read-room").each(function () {
+        //   $(this).modalForm({ formURL: $(this).data('id') });
+        // });
+        // $(".delete-room").each(function () {
+        //   $(this).modalForm({ formURL: $(this).data('id') });
+        // });
         $(".update-room").each(function () {
           $(this).modalForm({ formURL: $(this).data('id') });
         });
@@ -89,23 +89,18 @@ Rooms
           "data": "fields.id",
         },
         {
-          "className": 'col-room-property text-center',
+          "className": 'col-room-catalog text-center',
           "targets": 1,
-          "data": "fields.property",
+          "data": "fields.catalog",
         },
         {
-          "className": 'col-room-name text-center',
+          "className": 'col-room-number text-center',
           "targets": 2,
-          "data": "fields.name",
-        },
-        {
-          "className": 'col-room-floorno text-center',
-          "targets": 3,
-          "data": "fields.floorno",
+          "data": "fields.number",
         },
         {
           "className": 'col-room-status text-center',
-          "targets": 4,
+          "targets": 3,
           "data": "fields.status",
         },
         {
@@ -114,14 +109,14 @@ Rooms
           "data": 'fields.id',
           render: function (data, type, row) {
             let render =
-              '<button type="button" class="upload-room-2d btn btn-raised btn-sm btn-info m-1" data-id="/upload/room2d/' + data + '">' +
-              '<span class="fa fa-file-upload">Upload 2d</span></button>' +
-              '<button type="button" class="upload-room-3d btn btn-raised btn-sm btn-dark m-1" data-id="/upload/room3d/' + data + '">' +
-              '<span class="fa fa-file-upload"> Upload 3d</span></button>' +
-              '<button type="button" class="read-room btn btn-raised btn-sm btn-primary m-1" data-id="/read/room/' + data + '">' +
-              '<span class="fa fa-eye"></span></button>' +
-              '<button type="button" class="delete-room btn btn-sm btn-raised btn-warning m-1" data-id="/delete/room/' + data + '">' +
-              '<span class="fa fa-trash"></span></button>' +
+              // '<button type="button" class="upload-room-2d btn btn-raised btn-sm btn-info m-1" data-id="/upload/room2d/' + data + '">' +
+              // '<span class="fa fa-file-upload">Upload 2d</span></button>' +
+              // '<button type="button" class="upload-room-3d btn btn-raised btn-sm btn-dark m-1" data-id="/upload/room3d/' + data + '">' +
+              // '<span class="fa fa-file-upload"> Upload 3d</span></button>' +
+              // '<button type="button" class="read-room btn btn-raised btn-sm btn-primary m-1" data-id="/read/room/' + data + '">' +
+              // '<span class="fa fa-eye"></span></button>' +
+              // '<button type="button" class="delete-room btn btn-sm btn-raised btn-warning m-1" data-id="/delete/room/' + data + '">' +
+              // '<span class="fa fa-trash"></span></button>' +
               '<button type="button" class="update-room btn btn-sm btn-raised btn-success m-1" data-id="/update/room/' + data + '">' +
               '<span class="fa fa-edit"></span></button>';
             return render
@@ -129,6 +124,7 @@ Rooms
         },
       ]
     })
+    {% endfor %}
   });
 </script>
 {% endblock %}

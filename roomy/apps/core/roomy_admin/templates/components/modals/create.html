@@ -3,12 +3,37 @@
 <form method="post" action="">
     {% csrf_token %}
     <div class="modal-header">
-        <h3 class="modal-title">Create</h3>
+        <h3 class="modal-title"> {% if viewtype == 'add_tenant' %} Add Tenant {% else %}Create{% endif %}</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+    {% if viewtype == 'add_tenant' %}
+    <div class="modal-body">
+        <div class="mb-2">
 
+        </div>
+        <div class="form-group">
+            <label for="id_username">Username</label>
+            <input type="text" name="username" maxlength="56" placeholder="Username" class="form-control" required=""
+                id="id_username">
+        </div>
+        <div class="form-group">
+            <label for="id_password">Password</label>
+            <input type="password" name="password" placeholder="********" class="textinput textInput form-control"
+                required="" id="id_password">
+        </div>
+        <div class="form-group">
+            <label for="id_room">Room</label>
+            <select name="room" placeholder="Room" class="form-control" id="id_room">
+                <option value="" selected="">---------</option>
+                {% for room in rooms %}
+                <option value="{{room.pk}}">{{room}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    {% else %}
     <div class="modal-body">
         <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
             {% for error in form.non_field_errors %}
@@ -48,10 +73,12 @@
         </div>
         {%endif%}
         {% endfor %}
-    </div>
+    </div>{% endif %}
+
 
     <div class="modal-footer">
-        <button type="button" class="submit-btn btn btn-primary">Create</button>
+        <button type="button" class="submit-btn btn btn-primary">{% if viewtype == 'add_tenant' %} Add Tenant
+            {% else %}Create{% endif %}</button>
     </div>
 
 </form>

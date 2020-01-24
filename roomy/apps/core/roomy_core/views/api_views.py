@@ -8,10 +8,14 @@ class PropertyApiView(viewsets.ModelViewSet):
     queryset = Property.objects.all()
     serializer_class = PropertySerializer
 
+class RoomCatalogApiView(viewsets.ModelViewSet):
+    queryset = RoomCatalog.objects.all()
+    serializer_class = RoomCatalogSerializer
+
 class RoomApiView(viewsets.ModelViewSet):
     queryset = Room.objects.all()
-    serializer_class = RoomSerializer
-
+    serializer_class = RoomSeralizer
+    
 class FeeApiView(viewsets.ModelViewSet):
     queryset = Fee.objects.filter()
     serializer_class = FeeSerializer
@@ -58,29 +62,29 @@ class MessageApiView(viewsets.ModelViewSet):
 
 
 ## filtered api view
-class RoomInPropertyApiView(viewsets.ModelViewSet):
-    serializer_class = RoomSerializer
+class RoomCatalogInPropertyApiView(viewsets.ModelViewSet):
+    serializer_class = RoomCatalogSerializer
 
     def get_queryset(self):
         user = self.request.user
         rooms = None
         
-        rooms = Room.objects.filter(property_id=self.kwargs['property_id'])
+        rooms = RoomCatalog.objects.filter(property_id=self.kwargs['property_id'])
 
         return rooms
 
-class RoomInLocationApiView(viewsets.ModelViewSet):
-    serializer_class = RoomSerializer
+class RoomCatalogInLocationApiView(viewsets.ModelViewSet):
+    serializer_class = RoomCatalogSerializer
 
     def get_queryset(self):
         user = self.request.user
         rooms = None
-        rooms = Room.objects.filter(property_id__property_address__icontains=self.kwargs['location'])
+        rooms = RoomCatalog.objects.filter(property_id__property_address__icontains=self.kwargs['location'])
 
         return rooms
 
-class RoomFilterApiView(viewsets.ModelViewSet):
-    serializer_class = RoomSerializer
+class RoomCatalogFilterApiView(viewsets.ModelViewSet):
+    serializer_class = RoomCatalogSerializer
     
 
     def get_queryset(self):
@@ -98,6 +102,6 @@ class RoomFilterApiView(viewsets.ModelViewSet):
             print("except")
         user = self.request.user
 
-        rooms = Room.objects.filter(Q(property_id__name__icontains=self.kwargs['search_query']) | Q(property_id__property_address__icontains=self.kwargs['search_query']) | Q(property_id__property_type__in=pkey))
+        rooms = RoomCatalog.objects.filter(Q(property_id__name__icontains=self.kwargs['search_query']) | Q(property_id__property_address__icontains=self.kwargs['search_query']) | Q(property_id__property_type__in=pkey))
 
         return rooms

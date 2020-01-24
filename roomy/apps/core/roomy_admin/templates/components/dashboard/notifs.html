@@ -70,9 +70,9 @@ Tenants
                 $(".update-notif").each(function () {
                     $(this).modalForm({ formURL: $(this).data('id') });
                 });
-                $(".delete-notif").each(function () {
-                    $(this).modalForm({ formURL: $(this).data('id') });
-                });
+                // $(".delete-notif").each(function () {
+                //     $(this).modalForm({ formURL: $(this).data('id') });
+                // });
             },
             "columnDefs": [
                 {
@@ -111,8 +111,8 @@ Tenants
                     "data": 'fields.id',
                     render: function (data, type, row) {
                         let render =
-                            '<button type="button" class="delete-notif btn btn-sm btn-raised btn-warning m-1" data-id="/delete/notif/' + data + '">' +
-                            '<span class="fa fa-trash"></span></button>' +
+                            // '<button type="button" class="delete-notif btn btn-sm btn-raised btn-warning m-1" data-id="/delete/notif/' + data + '">' +
+                            // '<span class="fa fa-trash"></span></button>' +
                             '<button type="button" class="update-notif btn btn-sm btn-raised btn-success m-1" data-id="/update/notif/' + data + '">' +
                             '<span class="fa fa-edit"></span></button>';
                         return render
