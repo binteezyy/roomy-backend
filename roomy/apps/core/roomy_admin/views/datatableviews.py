@@ -175,7 +175,7 @@ def request_table(request):
 @user_passes_test(lambda u: u.is_staff)
 def notif_table(request):
     notifs = Message.objects.filter(
-        transaction_id__room_id__property_id__owner_id__user_id=request.user)
+        tenant_id__transaction_id__room_id__property_id__owner_id__user_id=request.user)
 
     data = []
     for notif in notifs:
@@ -185,7 +185,7 @@ def notif_table(request):
         else:
             status = "Not Sent"
         x = {"fields": {"id": notif.pk,
-                        "user": f'{notif.user_id.username} - {notif.user_id.first_name} {notif.user_id.last_name}',
+                        "tenant": f'{notif.tenant_id.user_id.username} - {notif.tenant_id.user_id.first_name} {notif.tenant_id.user_id.last_name}',
                         "title": notif.title,
                         "body": notif.body,
                         "date": date,
