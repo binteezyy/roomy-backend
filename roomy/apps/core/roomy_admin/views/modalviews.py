@@ -504,6 +504,57 @@ class PropertyUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdate
     def test_func(self):
         return self.request.user.is_staff
 
+class CatalogReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
+    model = RoomCatalog
+    context_object_name = 'catalog'
+    template_name = 'components/modals/read.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['viewtype'] = 'room'
+        context['catalog'] = kwargs['object']
+        context['type'] = kwargs['object'].get_room_type_display()
+        context['images_3d'] = kwargs['object'].img_3d.all()
+        context['images_2d'] = kwargs['object'].img_2d.all()
+        return context
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class CatalogCreateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalCreateView):
+    model = RoomCatalog
+    model_type = 'catalog'
+    template_name = 'components/modals/create.html'
+    form_class = RoomCatalogModalForm
+    success_message = 'Success: Catalog created.'
+    success_url = reverse_lazy('catalog_management')
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class CatalogDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
+    model = RoomCatalog
+    context_object_name = 'catalog'
+    template_name = 'components/modals/delete.html'
+    success_message = 'Success: Catalog deleted'
+    success_url = reverse_lazy('catalog_management')
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class CatalogUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
+    model = RoomCatalog
+    template_name = 'components/modals/update.html'
+    form_class = RoomCatalogModalForm
+    sucess_message = "Success: Catalog updated"
+    success_url = reverse_lazy('catalog_management')
+
+    def test_func(self):
+        return self.request.user.is_staff
+
 class RoomReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = Room
     context_object_name = 'room'

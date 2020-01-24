@@ -63,6 +63,10 @@ class PropertyModalForm(BSModalForm):
         model = Property
         exclude = ['property_image', ]
 
+class RoomCatalogModalForm(BSModalForm):
+    class Meta:
+        model = RoomCatalog
+        exclude = ['img_2d', 'img_3d']
 
 class RoomModalForm(BSModalForm):
     class Meta:

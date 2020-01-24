@@ -70,9 +70,9 @@ Properties
         $(".read-property").each(function () {
           $(this).modalForm({ formURL: $(this).data('id') });
         });
-        $(".delete-property").each(function () {
-          $(this).modalForm({ formURL: $(this).data('id') });
-        });
+        // $(".delete-property").each(function () {
+        //   $(this).modalForm({ formURL: $(this).data('id') });
+        // });
         $(".update-property").each(function () {
           $(this).modalForm({ formURL: $(this).data('id') });
         });
@@ -103,8 +103,8 @@ Properties
               '<span class="fa fa-file-upload"></span></button>' +
               '<button type="button" class="read-property btn btn-raised btn-sm btn-primary m-1" data-id="/read/property/' + data + '">' +
               '<span class="fa fa-eye"></span></button>' +
-              '<button type="button" class="delete-property btn btn-sm btn-raised btn-warning m-1" data-id="/delete/property/' + data + '">' +
-              '<span class="fa fa-trash"></span></button>' +
+              // '<button type="button" class="delete-property btn btn-sm btn-raised btn-warning m-1" data-id="/delete/property/' + data + '">' +
+              // '<span class="fa fa-trash"></span></button>' +
               '<button type="button" class="update-property btn btn-sm btn-raised btn-success m-1" data-id="/up/property/' + data + '">' +
               '<span class="fa fa-edit"></span></button>';
             return render

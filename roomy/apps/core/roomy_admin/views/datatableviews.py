@@ -43,8 +43,8 @@ def billing_table(request):
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def fee_table(request):
-    fees = Fee.objects.filter(property_id__owner_id__user_id=request.user)
+def fee_table(request, pk):
+    fees = Fee.objects.filter(property_id__owner_id__user_id=request.user, property_id__pk=pk)
 
     data = []
     for fee in fees:
@@ -103,9 +103,9 @@ def tenant_table(request, pk):
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def expense_table(request):
+def expense_table(request, pk):
     expenses = Expense.objects.filter(
-        property_id__owner_id__user_id=request.user)
+        property_id__owner_id__user_id=request.user, property_id__pk=pk)
 
     data = []
     for expense in expenses:
@@ -123,9 +123,9 @@ def expense_table(request):
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def guest_table(request):
+def guest_table(request, pk):
     guests = Guest.objects.filter(
-        transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user)
+        transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, transaction_id__room_id__catalog_id__property_id__pk=pk)
 
     data = []
     for guest in guests:
@@ -148,9 +148,9 @@ def guest_table(request):
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def request_table(request):
+def request_table(request, pk):
     tenant_requests = Request.objects.filter(
-        transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user)
+        transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, transaction_id__room_id__catalog_id__property_id__pk=pk)
 
     data = []
     for tenant_request in tenant_requests:
@@ -242,11 +242,31 @@ def property_table(request):
     pprint(data)
     return HttpResponse(data, content_type='application/json')
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def catalog_table(request, pk):
+    catalogs = RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user, property_id__pk=pk)
+
+    data = []
+    for catalog in catalogs:
+        if catalog.name:
+            name = catalog.name
+        else:
+            name = "None"
+        x = {"fields": {"id": catalog.pk,
+                        "name": name,
+                        "floor": catalog.floor,
+                        "rate": int(catalog.rate),
+                        }}
+        data.append(x)
+    data = json.dumps(data)
+    pprint(data)
+    return HttpResponse(data, content_type='application/json')
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def room_table(request):
-    rooms = Room.objects.filter(catalog_id__property_id__owner_id__user_id=request.user)
+def room_table(request, pk):
+    rooms = Room.objects.filter(catalog_id__property_id__owner_id__user_id=request.user, catalog_id__pk=pk)
 
     data = []
     for room in rooms:

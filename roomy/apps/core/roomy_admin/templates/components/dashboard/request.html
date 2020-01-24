@@ -12,15 +12,16 @@ Tenant Requests
 
 {% block content %}
 {% include "_modal.html" %}
+{% for property in properties %}
 <div class="content container">
     <div class="card-content">
         <div class="container-fluid">
-            <h2>Tenant Requests</h2>
+            <h2>Tenant Requests in {{property.name}}</h2>
             <div class="row p-3">
                 <div class="col">
                     <div class="table-responsive">
-                        <table id="request-table" class="table table-bordered table-hover" width="100%" cellspacing="0"
-                            role="grid" aria-describedby="dataTable_info">
+                        <table id="request-table-{{property.pk}}" class="table table-bordered table-hover" width="100%"
+                            cellspacing="0" role="grid" aria-describedby="dataTable_info">
                             <thead>
                                 <tr role="row">
                                     <th>Id</th>
@@ -39,9 +40,8 @@ Tenant Requests
             </div>
         </div>
     </div>
-
 </div>
-
+{% endfor %}
 {% endblock %}
 
 {% block header %}
@@ -52,20 +52,21 @@ Tenants
 <script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#request-table').DataTable({
+        {% for property in properties %}
+        $('#request-table-{{property.pk}}').DataTable({
             "dataType": 'json',
             "ajax": {
                 "processing": true,
                 "dataSrc": '',
-                "url": "{% url 'admin-request-table'%}",
+                "url": "{% url 'admin-request-table' property.pk%}",
             },
             "drawCallback": function (settings) {
                 $(".update-request").each(function () {
                     $(this).modalForm({ formURL: $(this).data('id') });
                 });
-                $(".delete-request").each(function () {
-                    $(this).modalForm({ formURL: $(this).data('id') });
-                });
+                // $(".delete-request").each(function () {
+                //     $(this).modalForm({ formURL: $(this).data('id') });
+                // });
             },
             "columnDefs": [
                 {
@@ -104,8 +105,8 @@ Tenants
                     "data": 'fields.id',
                     render: function (data, type, row) {
                         let render =
-                            '<button type="button" class="delete-request btn btn-sm btn-raised btn-warning m-1" data-id="/delete/request/' + data + '">' +
-                            '<span class="fa fa-trash"></span></button>' +
+                            // '<button type="button" class="delete-request btn btn-sm btn-raised btn-warning m-1" data-id="/delete/request/' + data + '">' +
+                            // '<span class="fa fa-trash"></span></button>' +
                             '<button type="button" class="update-request btn btn-sm btn-raised btn-success m-1" data-id="/update/request/' + data + '">' +
                             '<span class="fa fa-edit"></span></button>';
                         return render
@@ -113,6 +114,7 @@ Tenants
                 },
             ]
         })
+        {% endfor %}
     });
 </script>
 {% endblock %}
