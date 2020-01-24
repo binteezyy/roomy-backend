@@ -58,7 +58,8 @@ urlpatterns = [
          modalviews.RentalUpdateModal.as_view(), name='update-rental'),
 
     # Tenant Table
-    path('tenant/table/', datatableviews.tenant_table, name='admin-tenant-table'),
+    path('add/tenant/<int:pk>', modalviews.AddTenantModal, name='admin-add-tenant'),
+    path('tenant/table/<int:pk>', datatableviews.tenant_table, name='admin-tenant-table'),
     path('read/tenant/<int:pk>',
          modalviews.TenantReadModal.as_view(), name='read-tenant'),
 

@@ -6,6 +6,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth import authenticate, login, logout
 
 from django.views import generic
 from django.contrib import messages
@@ -217,6 +218,48 @@ class RentalUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateVi
     def test_func(self):
         return self.request.user.is_staff
 
+def AddTenantModal(request, pk):
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        if request.method == 'GET':
+            property_obj = Property.objects.get(pk=pk)
+            context = {
+                'viewtype': 'add_tenant',
+                'property': property_obj,
+                'rooms': Room.objects.filter(catalog_id__property_id=property_obj),
+            }
+            return render(request, "components/modals/create.html", context)
+        elif request.method == 'POST':
+            user_id = authenticate(username=request.POST['username'], password=request.POST['password'])
+            transaction_id = Transaction.objects.get(room_id=request.POST.get('room'))
+
+            try: 
+                new_tenant = TenantAccount.objects.get(user_id=user_id, transaction_id=transaction_id)
+            except TenantAccount.DoesNotExist:
+                if user_id and transaction_id:
+                    new_tenant = TenantAccount(user_id=user_id, transaction_id=transaction_id)
+                    new_tenant.save()
+
+            return HttpResponseRedirect(reverse('tenant'))
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
+
 class TenantReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = TenantAccount
     context_object_name = 'tenants'
@@ -225,7 +268,7 @@ class TenantReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     def get_context_data(self, **kwargs):
         try:
             bday = kwargs['object'].birthday.strftime("%B %d, %Y")
-        except e:
+        except:
             bday = "None"
         context = super().get_context_data(**kwargs)
         context['viewtype'] = 'tenants'

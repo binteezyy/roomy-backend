@@ -62,9 +62,9 @@ Bookings
                 $(".read-booking").each(function () {
                     $(this).modalForm({ formURL: $(this).data('id') });
                 });
-                $(".delete-booking").each(function () {
-                    $(this).modalForm({ formURL: $(this).data('id') });
-                });
+                // $(".delete-booking").each(function () {
+                //     $(this).modalForm({ formURL: $(this).data('id') });
+                // });
                 $(".update-booking").each(function () {
                     $(this).modalForm({ formURL: $(this).data('id') });
                 });
@@ -98,8 +98,8 @@ Bookings
                         let render =
                             '<button type="button" class="read-booking btn btn-raised btn-sm btn-primary m-1" data-id="/read/booking/' + data + '">' +
                             '<span class="fa fa-eye"></span></button>' +
-                            '<button type="button" class="delete-booking btn btn-sm btn-raised btn-warning m-1" data-id="/delete/booking/' + data + '">' +
-                            '<span class="fa fa-trash"></span></button>' +
+                            // '<button type="button" class="delete-booking btn btn-sm btn-raised btn-warning m-1" data-id="/delete/booking/' + data + '">' +
+                            // '<span class="fa fa-trash"></span></button>' +
                             '<button type="button" class="update-booking btn btn-sm btn-raised btn-success m-1" data-id="/update/booking/' + data + '">' +
                             '<span class="fa fa-edit"></span></button>';
                         return render

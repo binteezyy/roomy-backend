@@ -3,6 +3,7 @@ from django.shortcuts import render  # get_object_or_404, redirect, reverse
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from apps.core.roomy_core.models import *
+from django.contrib.auth import authenticate, login, logout
 
 import json
 from pprint import pprint
@@ -80,9 +81,9 @@ def rental_table(request,pk):
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def tenant_table(request):
+def tenant_table(request, pk):
     tenants = TenantAccount.objects.filter(
-        transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user)
+        transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, transaction_id__room_id__catalog_id__property_id__pk=pk)
 
     data = []
     for tenant in tenants:

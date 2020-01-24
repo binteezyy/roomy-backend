@@ -319,11 +319,13 @@
                                     </thead>
                                     <tbody>
                                         {% for tenant in tenants %}
-                                        <td> {{ tenant.user_id.username }}</td>
-                                        <td style="width: 30%"> <button type="button"
-                                                class="remove-tenant btn btn-sm btn-raised btn-warning m-1"
-                                                data-id="/remove-tenant/{{transaction.id}}/{{tenant.id}}">
-                                                <span class="fa fa-trash"></span></button></td>
+                                        <tr>
+                                            <td> {{ tenant.user_id.username }}</td>
+                                            <td style="width: 30%"> <button type="button"
+                                                    class="remove-tenant btn btn-sm btn-raised btn-warning m-1"
+                                                    data-id="/remove-tenant/{{transaction.id}}/{{tenant.id}}">
+                                                    <span class="fa fa-trash"></span></button></td>
+                                        </tr>
                                         {% endfor %}
                                     </tbody>
                                 </table>
