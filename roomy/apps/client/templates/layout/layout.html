@@ -44,8 +44,9 @@
       <!-- login/signup -->
       <div class="wrapper">
         {% if user.is_authenticated %}
-        <span style="color:white">Logged in as {{user.username}}</span>
-        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'bookings' %}">
+        <span style="color:white">{{ user.first_name}} {{user.last_name }}'s Account</span>
+        </a>
         {% else %}
         <a href="{% url 'login' %}" style="text-decoration:none"><button class="btn btn-sm btn-light" style="margin-left: 10px;">Log in</button></a>
         {% endif %}

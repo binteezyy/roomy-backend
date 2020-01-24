@@ -301,7 +301,7 @@ class BookingReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView)
         context['viewtype'] = 'booking'
         context['booking'] = kwargs['object']
         context['user'] = kwargs['object'].user_id
-        context['room'] = f"Floor-{kwargs['object'].room_id.floor} Number-{kwargs['object'].room_id.number}"
+        context['room'] = f"Floor-{kwargs['object'].room_id.floor} "
         context['type'] = kwargs['object'].room_id.get_room_type_display()
         context['rate'] = rate
         context['fees'] = kwargs['object'].add_ons.all()
@@ -458,7 +458,7 @@ class AdminAccDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDelete
     template_name = 'components/modals/delete.html'
     success_message = 'Success: Admin Account deleted'
     success_url = reverse_lazy('admin_management')
-    
+
     def test_func(self):
         return self.request.user.is_staff
 

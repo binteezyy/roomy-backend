@@ -11,7 +11,7 @@ context = {
 
 def bookings(request):
     if request.user.is_authenticated:
-
+        
         context.update({
             "account_view":"booking",
         })
