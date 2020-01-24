@@ -11,9 +11,16 @@ context = {
 
 def bookings(request):
     if request.user.is_authenticated:
-        
+        bookings = Booking.objects.filter(
+            Q(user_id=request.user)
+        )
+        transactions = TenantAccount.objects.filter(
+            Q(user_id=request.user)
+        )
+        print(bookings)
         context.update({
             "account_view":"booking",
+            "bookings": bookings,
         })
         return render(request,"components/account/components/bookings.html",context)
     else:
