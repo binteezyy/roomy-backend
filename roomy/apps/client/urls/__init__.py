@@ -33,6 +33,7 @@ urlpatterns = [
     path('explore/property/room/booking', property.booking, name='booking'),
 
     path('account/bookings', account.bookings, name='bookings'),
+    path('account/bookings/<int:pk>', account.BookingView, name='booking-view'),
     path('account/saved', account.saved, name='saved'),
     path('account/messages', account.messages, name='messages'),
     path('account/profile', account.profile, name='profile'),

@@ -39,14 +39,14 @@ def index(request):
 def room_view(request,pk):
     room = RoomCatalog.objects.get(pk=pk)
 
-    try: booking = Booking.objects.get(room_id=room,user_id=request.user)
+    try: booking = Booking.objects.get(catalog_id=room,user_id=request.user)
     except Exception as e:
         booking = None
 
-    if request.method == 'POST' and request.user.is_authenticated and not booking: #BOOK ONCE
+    if request.method == 'POST' and request.user.is_authenticated: #BOOK ONCE
         book = Booking.objects.create(
             user_id=request.user,
-            room_id = room,
+            catalog_id = room,
         )
         book.save()
     else:

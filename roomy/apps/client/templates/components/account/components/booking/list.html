@@ -1,0 +1,29 @@
+{% extends "components/account/base.html" %}
+{% load static %}
+
+
+{% block account_container %}
+  <div class="container-fluid p-2">
+    {% if bookings %}
+      {% for book in bookings %}
+      <a href="{% url 'booking-view' book.id %}">
+        <div class="row card mb-3">
+          <div class="card-body">
+            <h4 class="card-title">{{ book.catalog_id.property_id.name}}</h4><vr>
+            <p>Floor: {{ book.catalog_id.floor}}</p>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    {% else %}
+    <div class="row">
+      <div class="col text-center py-5">
+        <h2>Bookings</h2>
+        <p>You have no bookings yet</p>
+        <img src="{% static "img/undraw_searching_p5ux.png" %}" alt="" class="mx-auto" style="width:20vw;display:block">
+        <button type="button" class="btn btn-primary" name="button">Find Places</button>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

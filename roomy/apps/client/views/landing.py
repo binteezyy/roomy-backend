@@ -4,7 +4,7 @@ context = {
     "TITLE": "Roomy"
 }
 def home(request):
-    dorms = Room.objects.filter(property_id__property_type=1)
+    dorms = Room.objects.filter(catalog_id__room_type=1)
     context.update({
         "dorms":dorms,
     })

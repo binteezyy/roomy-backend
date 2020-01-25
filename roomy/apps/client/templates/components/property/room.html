@@ -90,11 +90,6 @@ Room
         <!-- end of package inclusion -->
 
         <!-- booking button -->
-        {% if booking %}
-          <div class="alert alert-primary text-center" role="alert">
-            <h5>Already booked</h5>
-          </div>
-        {% else %}
         <form method="POST" id="booking">
           {% csrf_token %}
           <input type="hidden" name="" value="{{ room.pk }}">
@@ -102,7 +97,6 @@ Room
             <button class="btn btn-dark" >BOOK NOW</button>
           </div>
         </form>
-        {% endif %}
 
         <!-- end of booking button -->
       </div>
