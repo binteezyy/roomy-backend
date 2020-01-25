@@ -21,7 +21,7 @@
 </style>
 
 <!-- container -->
-<div class="container-fluid d-flex flex-wrap align-items-stretch" style="height: 100%; position: fixed; top: 0; margin: 0; padding: 0; border-top: 2px solid #F53D3D;">
+<div class="container-fluid d-flex flex-wrap align-items-stretch" style="height: 100%; position: fixed; top: 0; margin: 0; padding: 0; border-top: 2px solid #5392f9;">
 
   <!-- sidebar -->
   <div class="sidebar bg-dark d-flex flex-column justify-content-start align-items-start" style="margin: 0; padding: 0;">
@@ -47,12 +47,12 @@
         .nav-link-custom:hover {
           color: black;
           font-weight: 400;
-          background-color: #F53D3D;
+          background-color: #5392f9;
         }
       </style>
 
       <!-- dashboard -->
-      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 18px; color: white; border-bottom: 1px solid #F53D3D;"><span style="margin-right: 5px;"><i class="fas fa-tachometer-alt" style="margin-left: 10px;"></i></span>Dashboard</span>
+      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 18px; color: white; border-bottom: 1px solid #5392f9;"><span style="margin-right: 5px;"><i class="fas fa-tachometer-alt" style="margin-left: 10px;"></i></span>Dashboard</span>
       <a class="nav-link-custom" href="{% url 'booking' %}"><i class="fas fa-book" style="margin-right: 10px;"></i>Booking</a>
       <a class="nav-link-custom" href="{% url 'rental' %}"><i class="fas fa-address-book" style="margin-right: 10px;"></i>Rental</a>
       <a class="nav-link-custom" href="{% url 'tenant' %}"><i class="fas fa-user" style="margin-right: 10px;"></i>Tenant</a>
@@ -69,7 +69,7 @@
       <!-- divider -->
 
       <!-- cashflow -->
-      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 18px; color: white; border-bottom: 1px solid #F53D3D;"><span style="margin-right: 5px;"><i class="fas fa-dollar-sign" style="margin-left: 10px;"></i></span>Cashflow</span>
+      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 18px; color: white; border-bottom: 1px solid #5392f9;"><span style="margin-right: 5px;"><i class="fas fa-dollar-sign" style="margin-left: 10px;"></i></span>Cashflow</span>
       <a class="nav-link-custom" href="{% url 'billing' %}"><i class="fas fa-hand-holding-usd" style="margin-right: 10px;"></i></i>Billing</a>
       <a class="nav-link-custom" href="{% url 'expense' %}"><i class="fas fa-credit-card" style="margin-right: 10px;"></i>Expenses</a>
       <a class="nav-link-custom" href="{% url 'fee' %}"><i class="fas fa-file-invoice-dollar" style="margin-right: 10px;"></i></i>Fees</a>
@@ -80,7 +80,7 @@
       <!-- divider -->
 
       <!-- cashflow -->
-      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 18px; color: white; border-bottom: 1px solid #F53D3D;"><span style="margin-right: 5px;"><i class="fas fa-cogs" style="margin-left: 10px;"></i></span>Management</span>
+      <span style="width: 100%; margin-bottom: 5px; padding-bottom: 5px; font-size: 18px; color: white; border-bottom: 1px solid #5392f9;"><span style="margin-right: 5px;"><i class="fas fa-cogs" style="margin-left: 10px;"></i></span>Management</span>
       <a class="nav-link-custom" href="{% url 'property_management' %}"><i class="far fa-building" style="margin-right: 10px;"></i>Property</a>
       <a class="nav-link-custom" href="{% url 'catalog_management' %}"><i class="fas fa-bed" style="margin-right: 10px;"></i>Catalog</a>
       <a class="nav-link-custom" href="{% url 'room_management' %}"><i class="fas fa-bed" style="margin-right: 10px;"></i>Room</a>
@@ -115,7 +115,7 @@
           <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; background-color: #f53d3d; ">
             <span style="color: black;">{{ request.user.username }}</span>
           </button>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="background-color: #F53D3D; border-radius: none;">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="background-color: #5392f9; border-radius: none;">
             <style media="screen">
               .account-link {
                 margin: 5px 5px 0 5px;

@@ -5,7 +5,7 @@
 
 <!-- navbar -->
 <nav class="navbar navbar-expand-xl navbar-light z-depth-1" id="navbar" style="border-top: 3px solid #5392f9;">
-  <div class="container">
+
     <!-- logo -->
     <a href="{% url 'home' %}" style="margin: 5px 20px 5px 20px;">
       <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
@@ -92,7 +92,6 @@
 
     </div>
     <!-- end of navigation -->
-  </div>
 </nav>
 <!-- end of navbar -->
 
@@ -104,8 +103,8 @@
 {% block footer %}
 
 <!-- footer -->
-<div class="container-fluid d-flex flex-column z-depth-1" style="padding: 60px 30px 0 30px;">
-  <div class="container d-flex flex-column flex-wrap align-items-stretch" style="margin-bottom: 120px;">
+<div class="container-fluid d-flex flex-column z-depth-1">
+  <div class="d-flex flex-column flex-wrap align-items-stretch" style="min-height: 400px; padding: 20px;">
 
     <style media="screen">
       @media screen and (max-width: 600px) {
