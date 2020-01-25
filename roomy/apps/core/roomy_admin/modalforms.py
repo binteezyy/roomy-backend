@@ -1,7 +1,7 @@
 from bootstrap_modal_forms.forms import BSModalForm
 from django.shortcuts import render, redirect
 from apps.core.roomy_core.models import *
-
+from django import forms
 
 class BillingModalForm(BSModalForm):
     class Meta:
@@ -14,6 +14,11 @@ class FeeModalForm(BSModalForm):
         model = Fee
         exclude = ['']
 
+class FeeModelForm(forms.ModelForm):
+    class Meta:
+        model = Fee
+        exclude = ['']
+
 
 class TransactionModalForm(BSModalForm):
     class Meta:
@@ -21,11 +26,15 @@ class TransactionModalForm(BSModalForm):
         exclude = ['room_id', 'rating', 'rating_description', 'rated']
 
 
-class ExpenseModalForm(BSModalForm):
+class ExpenseModelForm(forms.ModelForm):
     class Meta:
         model = Expense
         exclude = ['']
 
+class ExpenseModalForm(BSModalForm):
+    class Meta:
+        model = Expense
+        exclude = ['']
 
 class GuestModalForm(BSModalForm):
     class Meta:
@@ -57,6 +66,10 @@ class BookingModalForm(BSModalForm):
         model = Booking
         fields = ['status',]
 
+class PropertyModelForm(forms.ModelForm):
+    class Meta:
+        model = Property
+        exclude = ['property_image', ]
 
 class PropertyModalForm(BSModalForm):
     class Meta:
