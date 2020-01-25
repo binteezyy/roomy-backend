@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'sslserver',
     'social_django',
+    'numbers',
     # APPS
 ] + GLOBAL_APPS
 

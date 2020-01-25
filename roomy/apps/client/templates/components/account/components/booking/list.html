@@ -1,23 +1,39 @@
 {% extends "components/account/base.html" %}
 {% load static %}
+{% load numbers %}
+{% block extra_css %}
+  {{ block.super}}
+  <style media="screen">
+    .card {
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.10), 0 2px 10px 0 rgba(0,0,0,0.12);
+      top: 0;
+      transition: 0.3s;
+    }
+    .card:hover{
+      -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.25), 0 2px 10px 0 rgba(0,0,0,0.12);
+      top: -10px;
+    }
+  </style>
 
+{% endblock %}
 
 {% block account_container %}
   <div class="container-fluid p-2">
     {% if bookings %}
       {% for book in bookings %}
-      <a href="{% url 'booking-view' book.id %}" style="text-decoration:none">
+      <a href="{% url 'booking-view' book.id %}" style="text-decoration:none; color: black">
         <div class="card">
           <div class="row no-gutters">
-            <div class="col-3" id="bookcard-{{book.pk}}">
+            <div class="col-7" id="bookcard-{{book.pk}}">
               <div class="img">
-
               </div>
             </div>
-            <div class="col-9 card-body px-4">
-              <h4 class="card-title">{{ book.catalog_id.property_id}}</h4><vr>
-              <p>Floor: {{ book.catalog_id.floor}}</p>
-              <span class="label label-default">Status</span>
+            <div class="col-5 card-body px-4">
+              <h4 class="card-title">{{ book.catalog_id.property_id.name}}</h4>
+              <h5>{{ book.catalog_id.name}}</h5>
+              {% if book.catalog_id.floor > 0 %}<p>{{ book.catalog_id.floor|num_to_ordinal}} floor</p>{% endif %}
+              <h5><span class="badge badge-secondary">Status</span></h5>
             </div>
           </div>
         </div>
