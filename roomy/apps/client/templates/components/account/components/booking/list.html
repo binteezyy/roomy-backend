@@ -5,14 +5,16 @@
 {% block account_container %}
   <div class="container-fluid p-2">
     {% if bookings %}
-    {% for book in bookings %}
-    <div class="row card">
-      <div class="card-body">
-        <h4 class="card-title">{{ book.transaction_id.room_id.property_id.name}}</h4><vr>
-            {{ book.transaction_id }}
-          {% endfor %}
-      </div>
-    </div>
+      {% for book in bookings %}
+      <a href="{% url 'booking-view' book.id %}">
+        <div class="row card mb-3">
+          <div class="card-body">
+            <h4 class="card-title">{{ book.catalog_id.property_id.name}}</h4><vr>
+            <p>Floor: {{ book.catalog_id.floor}}</p>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
     {% else %}
     <div class="row">
       <div class="col text-center py-5">
