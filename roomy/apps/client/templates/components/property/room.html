@@ -34,27 +34,49 @@ Room
 
       <!-- room information -->
       <div class="col-md-7 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+
+        <!-- room info first row -->
         <div class="d-flex justify-content-between align-items-center">
-          <span style="font-size: 25px; font-weight: bold;">{{ room.name }}</span>
+          <span style="font-size: 30px; font-weight: bold;">{{ room.name }}</span>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
             <div class="">
-              <span style="margin-right: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
-              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">{{ room.property_id.room_type}}</span>
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 12px; text-transform: uppercase; background-color: black; color: white;">
+                {% if room.property_id.property_type == 0 %}
+                Condominium
+                {% elif room.property_id.property_type == 1 %}
+                Apartment
+                {% elif room.property_id.property_type == 2 %}
+                Dormitory
+                {% endif %}
+              </span>
             </div>
           </div>
         </div>
+
+        <!-- room info second row -->
         <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 10px;">
           <span style="font-size: 18px; font-style: italic;">by {{ room.property_id.name}}</span>
-          <a style="font-size: 14px; color: black;" href="#reviews"><i class="fas fa-star"></i> 4.5 <span style="color: grey;">(1 review)</span></a>
+          <span style="font-size: 16px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
         </div>
+
+        <!-- room tags -->
         <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 5px; padding: 0;">
           <span style="margin: 0 15px 0 0; font-size: 15px;">4 occupants</span>
           <span style="margin: 0 15px 0 0; font-size: 15px;">2 double-deck beds</span>
           <span style="margin: 0 15px 0 0; font-size: 15px;">4 common cr</span>
         </div>
-        <hr>
-        <div class="wrapper">
-          <span>{{room.description|linebreaksbr}}</span>
+
+        <!-- room address -->
+        <div class="d-flex justify-content-start align-items-start" style="margin-bottom: 5px;">
+          <span style="margin: 0 15px 0 0; font-size: 16px;">{{ room.property_id.property_address }}</span>
+        </div>
+        <hr style="border-top: 1px solid #5392f9;">
+
+        <!-- room description -->
+        <div class="description">
+          <p style="padding: 0 0 20px 0">
+            {{room.description|linebreaksbr}}
+          </p>
         </div>
 
       </div>
@@ -66,15 +88,15 @@ Room
       <div class="col-md-4 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
         <div class="" style="margin-bottom: 20px;">
           <h5>Rates</h5>
-          <hr>
-          <span style="font-size: 18px;"><b>Php {{ room.rate }}</b>/month</span> <br>
+          <hr style="border-top: 1px solid #5392f9;">
+          <span style="font-size: 25px;"><b>Php {{ room.rate }}</b>/month</span> <br>
           <span style="font-size: 14px;"><b>1 month advance, 1 month deposit</span>
         </div>
 
         <!-- package inclusion -->
         <div class="" style="margin-bottom: 20px;">
           <h5>What's included?</h5>
-          <hr>
+          <hr style="border-top: 1px solid #5392f9;">
           <p>
             Curabitur sed sapien gravida, porta tellus id, semper ante. In volutpat leo id dolor lacinia, in finibus urna mattis. Mauris imperdiet dolor tellus, sed sodales lorem tincidunt eu. Mauris congue metus at lacus pulvinar, eget posuere odio
             porta.
@@ -82,7 +104,7 @@ Room
         </div>
         <div class="" style="margin-bottom: 20px;">
           <h5>Add-ons</h5>
-          <hr>
+          <hr style="border-top: 1px solid #5392f9;">
           <p>
             Quisque hendrerit nibh sit amet porta porttitor. Etiam gravida, augue et pellentesque elementum, eros arcu condimentum massa, nec ultricies eros massa a nulla.
           </p>
@@ -99,7 +121,7 @@ Room
           {% csrf_token %}
           <input type="hidden" name="" value="{{ room.pk }}">
           <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 30px;">
-            <button class="btn btn-dark" >BOOK NOW</button>
+            <button class="btn btn-lg" style="padding-right: 80px; padding-left: 80px; background-color: #5392f9; font-size: 20px;">BOOK NOW</button>
           </div>
         </form>
         {% endif %}

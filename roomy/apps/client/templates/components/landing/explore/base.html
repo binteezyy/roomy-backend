@@ -75,13 +75,11 @@ Explore
             <!-- room information first row -->
             <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
               <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 12px; text-transform: uppercase; background-color: black; color: white;">
-                {% if room.property_id.property_type == 1 %}
+                {% if room.property_id.property_type == 0 %}
                 Condominium
-                {% endif %}
-                {% if room.property_id.property_type == 2 %}
+                {% elif room.property_id.property_type == 1 %}
                 Apartment
-                {% endif %}
-                {% if room.property_id.property_type == 3 %}
+                {% elif room.property_id.property_type == 2 %}
                 Dormitory
                 {% endif %}
               </span>
