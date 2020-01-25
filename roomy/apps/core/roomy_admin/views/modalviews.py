@@ -183,6 +183,7 @@ class RentalReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
         context = super().get_context_data(**kwargs)
         context['viewtype'] = 'transaction'
         context['transaction'] = kwargs['object']
+        context['date'] = Booking.objects.get(tenant_id__transaction_id=kwargs['object']).start_date.strftime("%Y, %B %d")
         context['room'] = f"Floor-{kwargs['object'].room_id.catalog_id.floor} Number-{kwargs['object'].room_id.number}"
         context['tenants'] = TenantAccount.objects.filter(
             transaction_id=kwargs['object'])
@@ -409,10 +410,6 @@ class BookingReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView)
 
     def get_context_data(self, **kwargs):
         fee_objects = kwargs['object'].add_ons.all()
-        if kwargs['object'].approved:
-            status = "Approved"
-        else:
-            status = "No action"
         total = 0
         rate = int(kwargs['object'].catalog_id.rate)
         total += rate
@@ -427,7 +424,7 @@ class BookingReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView)
         context['rate'] = rate
         context['fees'] = kwargs['object'].add_ons.all()
         context['total'] = total
-        context['status'] = status
+        context['status'] = kwargs['object'].get_status_display()
         return context
 
     def test_func(self):

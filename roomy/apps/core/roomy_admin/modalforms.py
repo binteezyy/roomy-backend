@@ -55,7 +55,7 @@ class NotifCreateModalForm(BSModalForm):
 class BookingModalForm(BSModalForm):
     class Meta:
         model = Booking
-        fields = ['approved',]
+        fields = ['status',]
 
 
 class PropertyModalForm(BSModalForm):
