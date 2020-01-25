@@ -23,7 +23,7 @@ urlpatterns = [
     # management
     path('management/property/',      management.property_management,
          name='property_management'),
-         path('management/catalog/',      management.catalog_management, name='catalog_management'),
+     path('management/catalog',      management.catalog_management, name='catalog_management'),
     path('management/room/',      management.room_management, name='room_management'),
     path('management/account/',      management.admin_management,
          name='admin_management'),
@@ -45,7 +45,7 @@ urlpatterns = [
          modalviews.FeeDeleteModal.as_view(), name='delete-fee'),
     path('update/fee/<int:pk>',
          modalviews.FeeUpdateModal.as_view(), name='update-fee'),
-    path('create/fee', modalviews.FeeCreateModal.as_view(), name='create-fee'),
+    path('create/fee/<int:pk>', modalviews.FeeCreateModal, name='create-fee'),
 
     # Rental Table
     path('manage-tenants/<int:pk>', modalviews.ManageTenantsModal, name='admin-manage-tenants'),
@@ -56,7 +56,7 @@ urlpatterns = [
     path('delete/rental/<int:pk>',
          modalviews.RentalDeleteModal.as_view(), name='delete-rental'),
     path('update/rental/<int:pk>',
-         modalviews.RentalUpdateModal.as_view(), name='update-rental'),
+         modalviews.RentalUpdateModal.as_view(), name='update-rental'), 
 
     # Tenant Table
     path('add/tenant/<int:pk>', modalviews.AddTenantModal, name='admin-add-tenant'),
@@ -67,7 +67,7 @@ urlpatterns = [
     # Expense Table
     path('expense/table/<int:pk>', datatableviews.expense_table,
          name='admin-expense-table'),
-    path('create/expense', modalviews.ExpenseCreateModal.as_view(),
+    path('create/expense/<int:pk>', modalviews.ExpenseCreateModal,
          name='create-expense'),
     path('delete/expense/<int:pk>',
          modalviews.ExpenseDeleteModal.as_view(), name='delete-expense'),
@@ -113,7 +113,7 @@ urlpatterns = [
          name='admin-property-table'),
     path('read/property/<int:pk>',
          modalviews.PropertyReadModal.as_view(), name='read-property'),
-    path('create/property', modalviews.PropertyCreateModal.as_view(),
+    path('create/property', modalviews.PropertyCreateModal,
          name='create-property'),
     path('delete/property/<int:pk>',
          modalviews.PropertyDeleteModal.as_view(), name='delete-property'),

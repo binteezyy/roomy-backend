@@ -19,7 +19,11 @@ context = {
 def billing(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-        return render(request, "components/cashflow/billing.html")
+        context = {
+            'properties': Property.objects.filter(owner_id__user_id=request.user),
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+        }
+        return render(request, "components/cashflow/billing.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -49,7 +53,8 @@ def expense(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
-            'properties': Property.objects.filter(owner_id__user_id=request.user)
+            'properties': Property.objects.filter(owner_id__user_id=request.user),
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
         }
         return render(request, "components/cashflow/expense.html", context)
     else:
@@ -81,7 +86,8 @@ def fee(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
-            'properties': Property.objects.filter(owner_id__user_id=request.user)
+            'properties': Property.objects.filter(owner_id__user_id=request.user),
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
         }
         return render(request, "components/cashflow/fee.html", context)
     else:

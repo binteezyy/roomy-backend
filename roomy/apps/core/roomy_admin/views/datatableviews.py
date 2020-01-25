@@ -201,7 +201,7 @@ def notif_table(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def booking_table(request,pk):
-    bookings = Booking.objects.filter(
+    bookings = Booking.objects.filter(status=0,
         catalog_id__property_id__owner_id__user_id=request.user, catalog_id__property_id__pk=pk)
 
     data = []
