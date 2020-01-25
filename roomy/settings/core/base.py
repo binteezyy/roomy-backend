@@ -38,7 +38,7 @@ WSGI_APPLICATION = 'config.core.wsgi.application'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '../apps/core/static/')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, '../apps/core/media/')
+MEDIA_ROOT = '/media/'
 MEDIA_URL = '/media/'
 
 TEMPLATES = [
@@ -77,4 +77,3 @@ ROOT_URLCONF = 'config.core.urls'
 
 LOGIN_REDIRECT_URL = 'admin-index'
 LOGIN_URL = 'admin-index'
-

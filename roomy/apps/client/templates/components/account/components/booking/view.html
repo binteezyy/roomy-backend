@@ -1,29 +1,69 @@
 {% extends "components/account/base.html" %}
 {% load static %}
-
-
+{% load numbers %}
+{% block extra_css %}
+  {{ block.super}}
+  <style media="screen">
+      #main .row{
+        margin-bottom: 1rem;
+      }
+      #booking-info {
+        line-height: 0.5;
+      }
+      #booking-info h2{
+        font-weight: 500;
+      }
+      #booking-info h5{
+        font-weight: 500;
+      }
+  </style>
+{% endblock %}
 {% block account_container %}
-  <div class="container-fluid p-2">
-    {% if bookings %}
-      {% for book in bookings %}
-      <a href="{% url 'booking-view' book.id %}">
-        <div class="row card mb-3">
-          <div class="card-body">
-            <h4 class="card-title">{{ book.catalog_id.property_id.name}}</h4><vr>
-            <p>Floor: {{ book.catalog_id.floor}}</p>
-          </div>
-        </div>
-      </a>
-      {% endfor %}
-    {% else %}
+<!-- -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'bookings' %}">Bookings</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ catalog.name }}</li>
+    </ol>
+  </nav>
+  <div id="main" class="container-fluid p-2">
+    <!-- Booking Info -->
     <div class="row">
-      <div class="col text-center py-5">
-        <h2>Bookings</h2>
-        <p>You have no bookings yet</p>
-        <img src="{% static "img/undraw_searching_p5ux.png" %}" alt="" class="mx-auto" style="width:20vw;display:block">
-        <button type="button" class="btn btn-primary" name="button">Find Places</button>
+      <div id="booking-info" class="col">
+        <a href="{% url 'room' tenant_account.tenant_id.transaction_id.room_id.catalog_id.pk %}" style="text-decoration:none">
+          <h2>{{ catalog.name }}</h2></a>
+        <h5>Property {{catalog.property_id.name}}</h5>
+        <p>{{ catalog.floor|num_to_ordinal }} Floor</p>
+        <p>Room #{{ room.number }}</p>
+      </div>
+      {% if roomies|length > 1 %}
+      <div class="col-7">
+        <p>My Roomies</p>
       </div>
       {% endif %}
+    </div>
+
+    <div class="row card">
+      <a href="#collapseRequest" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
+        <h6 class="m-0 font-weight-bold text-dark">My Requests</h6>
+      </a>
+      <div id="collapseRequest" class="col card-body">
+        <div class="">
+          <p>{{ tenant_account.tenant_id}}</p>
+          <button class="btn btn-success" type="button" name="button">Request</button>
+        </div>
+      </div>
+    </div>
+    <div class="row card">
+      <a href="#collapseBilling" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
+        <h6 class="m-0 font-weight-bold text-dark">My Billing</h6>
+      </a>
+      <div id="collapseBilling" class="col card-body">
+        <div class="">
+          <p>{{ tenant_account.tenant_id}}</p>
+          <button class="btn btn-success" type="button" name="button">Request</button>
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}
