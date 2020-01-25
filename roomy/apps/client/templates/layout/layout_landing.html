@@ -4,29 +4,44 @@
 {% block layout_landing %}
 
 <!-- navbar -->
-<nav class="navbar navbar-expand-xl navbar-light" id="navbar" style="width: 100%; position: absolute; background-color: rgba(255, 255, 255, 0.25); box-shadow: none;">
-  <div class="container">
+<nav class="navbar navbar-expand-xl navbar-light" id="navbar" style="width: 100%; border-top: 3px solid #5392f9; position: absolute; background-color: rgba(255, 255, 255, 0.25); box-shadow: none;">
+
     <!-- logo -->
-    <a href="{% url 'home' %}" style="margin-right: 20px;">
+    <a href="{% url 'home' %}" style="margin: 5px 20px 5px 20px;">
       <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
     </a>
 
     <!-- expand button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-ellipsis-h"></i></button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars" style="color: #5392f9;"></i></button>
 
     <!-- navigation -->
     <div class="navbar-collapse collapse" id="navbarsExample04">
 
+      <style media="screen">
+        .nav-item-custom {
+          margin-right: 10px;
+        }
+
+        .nav-item-custom:hover {
+          padding: 0 5px 0 5px;
+          font-size: 18px;
+        }
+
+        .special-link:hover {
+          font-size: 18px;
+        }
+      </style>
+
       <!-- links -->
-      <ul class="navbar-nav mr-auto font-weight-bold">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item nav-item-custom">
-          <a class="nav-link" style="" href="{% url 'explore' %}">Explore</a>
+          <a class="nav-link" href="{% url 'explore' %}">Explore</a>
         </li>
         <li class="nav-item nav-item-custom">
-          <a class="nav-link" style="" href="{% url 'booking_guide' %}">Booking Guide</a>
+          <a class="nav-link" href="{% url 'booking_guide' %}">Booking Guide</a>
         </li>
         <li class="nav-item nav-item-custom dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             About Us
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width: auto; height: auto; padding: 20px;">
@@ -36,275 +51,47 @@
           </div>
         </li>
         <li class="nav-item nav-item-custom">
-          <a class="nav-link" style="" href="{% url 'partner_with_us' %}">Partner With Us</a>
+          <a class="nav-link" href="{% url 'partner_with_us' %}">Partner With Us</a>
         </li>
       </ul>
       <!-- end of links -->
 
-      <!-- login/signup -->
+      <!-- login -->
       <div class="wrapper">
         {% if user.is_authenticated %}
-        <a href="{% url 'bookings' %}">
-        <span style="color:black">{{ user.first_name}} {{user.last_name }}'s Account</span>
-        </a>
+        <div class="d-flex align-items-center">
+
+          <style media="screen">
+            .account-link {
+              padding: 5px 10px 5px 10px;
+              text-transform: uppercase;
+              font-size: 15px;
+              color: black;
+            }
+            .account-link:hover {
+              padding: 5px 10px 5px 10px;
+              font-size: 18px;
+              color: black;
+            }
+          </style>
+
+          <a class="d-flex align-items-center account-link" style=" " href="{% url 'profile' %}">
+            <div class="" style="width: 30px; height: 30px; margin-right: 10px; border-radius: 15px; background-image: url('/static/img/profile_default.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+            {{ user.username}}
+          </a>
+
+        </div>
+
         {% else %}
-        <a href="{% url 'login' %}" style="text-decoration:none"><button class="btn btn-sm btn-light" style="margin-left: 10px;">Log in</button></a>
+        <button class="btn btn-sm special-link" type="button" name="button" style="margin: 0; border: 1px solid #5392f9; box-shadow: none;"> <a href="{% url 'login' %}" style="color: black;">Login</a></button>
+        <button class="btn btn-sm special-link" type="button" name="button" style="margin: 0; border: 1px solid #5392f9; box-shadow: none;"><a class="special-link" href="{% url 'sign_up' %}" style="color: black;">Signup</a></button>
         {% endif %}
       </div>
 
     </div>
     <!-- end of navigation -->
-  </div>
 </nav>
 <!-- end of navbar -->
-
-<!-- modals -->
-<!-- login modal -->
-<form class="" action="#" method="post">
-
-  <!-- modal -->
-  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-
-      <!-- modal content -->
-      <div class="modal-content" style="width: 350px; height: auto; margin: 0 auto; border-radius: 15px;">
-
-        <!-- modal body -->
-        <div class="modal-body">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <div class="d-flex justify-content-center" style="margin-bottom: 50px;">
-                    <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px;">
-                  </div>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon3" style="width: 100px;">Username</span>
-                    </div>
-                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                  </div>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon3" style="width: 100px;">Password</span>
-                    </div>
-                    <input type="password" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                  </div>
-                  <div class="d-flex justify-content-center" style="margin-top: 40px;">
-                    <button type="button" class="btn btn-sm btn-dark">Log in</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- modal footer -->
-        <div class="modal-footer">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12 text-center" style="font-size: 14px;">
-                <a href="#" data-toggle="modal" data-target="#forgotPasswordModal" data-dismiss="modal">Forgot password?</a> <br>
-                <span>Don't have an account yet?</span>
-                <a href="#" type="button" name="button" data-toggle="modal" data-target="#signupModal" data-dismiss="modal">Sign up</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-</form>
-<!-- end of login modal -->
-
-<!-- signup modal -->
-<form class="" action="#" method="post">
-
-  <!-- modal -->
-  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-
-    <div class="modal-dialog" role="document">
-
-      <!-- modal content -->
-      <div class="modal-content" style="width: 350px; height: auto; margin: 0 auto; border-radius: 15px;">
-
-        <!-- modal body -->
-        <div class="modal-body">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <div class="d-flex justify-content-center" style="margin-bottom: 50px;">
-                    <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px;">
-                  </div>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon3" style="width: 100px;">Username</span>
-                    </div>
-                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                  </div>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon3" style="width: 100px;">Email</span>
-                    </div>
-                    <input type="email" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                  </div>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon3" style="width: 100px;">Password</span>
-                    </div>
-                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                  </div>
-                  <div class="d-flex justify-content-center" style="margin-top: 40px;">
-                    <button type="button" class="btn btn-sm btn-dark">Sign Up</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12 text-center">
-                <span class="text-center" style="font-size: 12px;">By signing up, you agree to our <a href="{% url 'terms_of_use' %}" target="_blank">Terms of Use</a> and <a href="{% url 'privacy' %}" target="_blank">Privacy Policy</a>.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- modal footer -->
-        <div class="modal-footer">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12 text-center" style="font-size: 14px;">
-                <span>Already have an account?</span>
-                <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Log in</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</form>
-<!-- end of signup modal -->
-
-<!-- forgot password modal -->
-<form class="" action="#" method="post">
-
-  <!-- modal -->
-  <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-
-      <!-- modal content -->
-      <div class="modal-content" style="width: 350px; height: auto; margin: 0 auto; border-radius: 15px;">
-
-        <!-- modal body -->
-        <div class="modal-body">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="d-flex justify-content-center" style="margin-bottom: 50px;">
-                  <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px;">
-                </div>
-                <div class="form-group">
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon3" style="width: 100px;">Email</span>
-                    </div>
-                    <input type="email" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                  </div>
-                  <div class="d-flex justify-content-center" style="margin-top: 40px;">
-                    <button type="button" class="btn btn-sm btn-dark">Reset Password</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- modal footer -->
-        <div class="modal-footer">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12 text-center" style="font-size: 14px;">
-                <span>Back to </span>
-                <a class="" href="#" type="button" name="button" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Log in</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-</form>
-<!-- end of forgot password modal -->
-<!-- get in touch modal -->
-<form class="" action="#" method="post">
-
-  <!-- modal -->
-  <div class="modal fade" id="getInTouchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-
-      <!-- modal content -->
-      <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
-
-        <!-- modal body -->
-        <div class="modal-body">
-          <div class="container-fluid">
-            <div class="row d-flex justify-content-center" style="padding-right: 10px; padding-left: 10px;">
-              <div class="d-flex flex-column justify-content-center" style="margin-bottom: 20px;">
-                <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px;">
-                <h4 class="text-center" style="margin-top: 30px;">Partner With Us</h4>
-              </div>
-              <div class="form-group">
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Full Name</span>
-                  </div>
-                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Company</span>
-                  </div>
-                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Mobile</span>
-                  </div>
-                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Email</span>
-                  </div>
-                  <input type="email" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-                </div>
-
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3" style="width: 100px;">Message</span>
-                  </div>
-                  <textarea class="form-control" name="name" rows="5" cols="50"></textarea>
-                </div>
-                <div class="d-flex justify-content-center" style="margin-top: 40px;">
-                  <button type="button" class="btn btn-sm btn-dark">Submit</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-</form>
-<!-- end of get in touch modal -->
-<!-- end of modals -->
 
 {% block content %}{% endblock content %}
 
@@ -312,104 +99,146 @@
 
 {% block footer %}
 
-<footer class="page-footer font-small black pt-4" style="padding-bottom: 100px;">
-  <div class="container-fluid">
-    <div class="container">
-      <div class="row">
+<!-- footer -->
+<div class="container-fluid d-flex flex-column z-depth-1">
+  <div class="d-flex flex-column flex-wrap align-items-stretch" style="min-height: 400px; padding: 20px;">
 
-        <!-- Company -->
-        <div class="col-md-3 mb-md-0 mb-3">
+    <style media="screen">
+      @media screen and (max-width: 600px) {
+        .wrapper-link {
+          flex-direction: column;
+        }
 
-          <!-- Links -->
-          <h5 class="text-uppercase">Roomy</h5>
+        .wrapper-link .link-container {
+          margin-bottom: 50px;
+        }
+      }
+    </style>
 
-          <ul class="navbar-nav d-flex flex-column justify-content-start text-left">
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'about' %}">About Us</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'faq' %}">FAQs</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'contact' %}">Contact Us</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'terms_of_use' %}">Terms of use</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'privacy' %}">Privacy Policy</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="{% url 'help_center' %}">Help Center</a>
-              </div>
-            </li>
-          </ul>
-          </ul>
+    <!-- links -->
+    <div class="row wrapper-link d-flex flex-wrap justify-content-around">
 
+      <style media="screen">
+        .nav-link-footer {
+          margin: 0 0 5px 2px;
+          padding: 0;
+          color: black;
+          font-size: 15px;
+          border-bottom: 2px solid transparent;
+        }
+        .nav-link-footer:hover {
+          font-size: 16px;
+          border-bottom: 2px solid #5392f9;
+        }
+
+      </style>
+
+      <!-- Company Link-->
+      <div class="link-container" style="margin: 10px 30px 10px 30px;">
+        <!-- Links -->
+        <h5 class="text-uppercase">Roomy</h5>
+        <ul class="navbar-nav d-flex flex-column justify-content-start text-left">
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'about' %}">About Us</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'faq' %}">FAQs</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'contact' %}">Contact Us</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'terms_of_use' %}">Terms of use</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'privacy' %}">Privacy Policy</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'help_center' %}">Help Center</a>
+            </div>
+          </li>
+        </ul>
+        </ul>
+
+      </div>
+
+      <!-- Follow Social Links -->
+      <div class="link-container" style="margin: 10px 30px 10px 30px;">
+        <!-- links -->
+        <h5 class="text-uppercase">FOLLOW</h5>
+        <ul class="navbar-nav d-flex flex-column justify-content-start align-items-start text-left">
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <img src="{% static "img\facebook.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+              <span>&nbsp</span>
+              <a class="nav-link nav-link-footer" href="www.facebook.com">Facebook</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <img src="{% static "img\twitter.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+              <span>&nbsp</span>
+              <a class="nav-link nav-link-footer" href="www.twitter.com">Twitter</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <img src="{% static "img\instagram.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+              <span>&nbsp</span>
+              <a class="nav-link nav-link-footer" href="www.instagram.com">Instagram</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <img src="{% static "img\youtube.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+              <span>&nbsp</span>
+              <a class="nav-link nav-link-footer" href="www.youtube.com">Youtube</a>
+            </div>
+          </li>
+        </ul>
+        <!-- end of links -->
+
+      </div>
+
+      <!-- Download Link -->
+      <div class="link-container" style="margin: 10px 30px 10px 30px;">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <h5 style=" margin-bottom: 10px;">DOWNLOAD OUR APP NOW</h5>
+          <a href="play.google.com"><img src="{% static "img\svg_playstore.svg" %}" alt=""></a>
         </div>
+      </div>
 
-        <!-- Follow Social Links -->
-        <div class="col-md-3 mb-md-0 mb-3">
+    </div>
+    <!-- end of links -->
 
-          <!-- links -->
-          <h5 class="text-uppercase">FOLLOW</h5>
+  </div>
+</div>
 
-          <ul class="navbar-nav d-flex flex-column justify-content-start text-left">
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <img src="{% static "img\facebook.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
-                <span>&nbsp</span>
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="www.facebook.com">Facebook</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <img src="{% static "img\twitter.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
-                <span>&nbsp</span>
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="www.twitter.com">Twitter</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <img src="{% static "img\instagram.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
-                <span>&nbsp</span>
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="www.instagram.com">Instagram</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-start align-items-center">
-                <img src="{% static "img\youtube.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
-                <span>&nbsp</span>
-                <a class="nav-link nav-link-custom2" style="margin: 0 0 5px 2px; padding: 0; " href="www.youtube.com">Youtube</a>
-              </div>
-            </li>
-          </ul>
-          <!-- end of links -->
-
-        </div>
-
-        <hr class="clearfix w-100 d-md-none pb-3">
-
-        <div class="col-md-6 mt-md-0 mt-3">
-          <div class="d-flex flex-column justify-content-center align-items-center">
-            <h5 style=" margin-bottom: 10px;">DOWNLOAD OUR APP NOW</h5>
-            <a href="play.google.com"><img src="{% static "img\svg_playstore.svg" %}" alt=""></a>
-          </div>
-        </div>
-
+<div class="container-fluid" style="background-color: #5392f9;">
+  <!-- copyright -->
+  <div class="row d-flex justify-content-center" style="padding: 40px;">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <a href="{% url 'home' %}" style="margin: 10px 30px 10px 30px;">
+          <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+        </a>
+        <span style="font-size: 13px; color: black;">&copy; Copyright 2019 - 2020. </span>
+        <span style="font-size: 13px; color: black;">All rights reserved. Powered by <span style="font-size: 15px; font-weight: bold;">PPTT</span> </span>
       </div>
     </div>
   </div>
-</footer>
+  <!-- end of copyright -->
+</div>
+<!-- end of footer -->
 {% endblock %}

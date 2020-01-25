@@ -6,92 +6,94 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-xl navbar-light z-depth-1" id="navbar" style="border-top: 3px solid #5392f9;">
 
-    <!-- logo -->
-    <a href="{% url 'home' %}" style="margin: 5px 20px 5px 20px;">
-      <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
-    </a>
+  <!-- logo -->
+  <a href="{% url 'home' %}" style="margin: 5px 20px 5px 20px;">
+    <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+  </a>
 
-    <!-- expand button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars" style="color: #5392f9;"></i></button>
+  <!-- expand button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars" style="color: #5392f9;"></i></button>
 
-    <!-- navigation -->
-    <div class="navbar-collapse collapse" id="navbarsExample04">
+  <!-- navigation -->
+  <div class="navbar-collapse collapse" id="navbarsExample04">
 
-      <style media="screen">
-        .nav-item-custom {
-          margin-right: 10px;
-        }
+    <style media="screen">
+      .nav-item-custom {
+        margin-right: 10px;
+      }
 
-        .nav-item-custom:hover {
-          padding: 0 5px 0 5px;
-          border: 1px solid #5392f9;
-          border-radius: 20px;
-          font-size: 18px;
-        }
+      .nav-item-custom:hover {
+        padding: 0 5px 0 5px;
+        background-color: #5392f9;
+        border: 1px solid #5392f9;
+        border-radius: 20px;
+        font-size: 18px;
+      }
 
-        .special-link:hover {
-          font-size: 18px;
-        }
-      </style>
+      .special-link:hover {
+        font-size: 18px;
+      }
+    </style>
 
-      <!-- links -->
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item nav-item-custom">
-          <a class="nav-link" href="{% url 'explore' %}">Explore</a>
-        </li>
-        <li class="nav-item nav-item-custom">
-          <a class="nav-link" href="{% url 'booking_guide' %}">Booking Guide</a>
-        </li>
-        <li class="nav-item nav-item-custom dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            About Us
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width: auto; height: auto; padding: 20px;">
-            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'about' %}">What is Roomy?</a>
-            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'contact' %}">Contact Us</a>
-            <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'faq' %}">FAQs</a>
-          </div>
-        </li>
-        <li class="nav-item nav-item-custom">
-          <a class="nav-link" href="{% url 'partner_with_us' %}">Partner With Us</a>
-        </li>
-      </ul>
-      <!-- end of links -->
-
-      <!-- login -->
-      <div class="wrapper">
-        {% if user.is_authenticated %}
-        <div class="d-flex align-items-center">
-
-          <style media="screen">
-            .account-link {
-              padding: 5px 10px 5px 10px;
-              text-transform: uppercase;
-              font-size: 15px;
-              color: black;
-            }
-            .account-link:hover {
-              padding: 5px 10px 5px 10px;
-              font-size: 18px;
-              color: black;
-            }
-          </style>
-
-          <a class="d-flex align-items-center account-link" style=" " href="{% url 'profile' %}">
-            <div class="" style="width: 30px; height: 30px; margin-right: 10px; border-radius: 15px; background-image: url('/static/img/profile_default.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
-            {{ user.username}}
-          </a>
-
+    <!-- links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item nav-item-custom">
+        <a class="nav-link" href="{% url 'explore' %}">Explore</a>
+      </li>
+      <li class="nav-item nav-item-custom">
+        <a class="nav-link" href="{% url 'booking_guide' %}">Booking Guide</a>
+      </li>
+      <li class="nav-item nav-item-custom dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          About Us
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width: auto; height: auto; padding: 20px;">
+          <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'about' %}">What is Roomy?</a>
+          <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'contact' %}">Contact Us</a>
+          <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'faq' %}">FAQs</a>
         </div>
+      </li>
+      <li class="nav-item nav-item-custom">
+        <a class="nav-link" href="{% url 'partner_with_us' %}">Partner With Us</a>
+      </li>
+    </ul>
+    <!-- end of links -->
 
-        {% else %}
-        <button class="btn btn-sm special-link" type="button" name="button" style="margin: 0; border: 1px solid #5392f9; box-shadow: none;"> <a href="{% url 'login' %}" style="color: black;">Login</a></button>
-        <button class="btn btn-sm special-link" type="button" name="button" style="margin: 0; border: 1px solid #5392f9; box-shadow: none;"><a class="special-link" href="{% url 'sign_up' %}" style="color: black;">Signup</a></button>
-        {% endif %}
+    <!-- login -->
+    <div class="wrapper">
+      {% if user.is_authenticated %}
+      <div class="d-flex align-items-center">
+
+        <style media="screen">
+          .account-link {
+            padding: 5px 10px 5px 10px;
+            text-transform: uppercase;
+            font-size: 15px;
+            color: black;
+          }
+
+          .account-link:hover {
+            padding: 5px 10px 5px 10px;
+            font-size: 18px;
+            color: black;
+          }
+        </style>
+
+        <a class="d-flex align-items-center account-link" style=" " href="{% url 'profile' %}">
+          <div class="" style="width: 30px; height: 30px; margin-right: 10px; border-radius: 15px; background-image: url('/static/img/profile_default.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+          {{ user.username}}
+        </a>
+
       </div>
 
+      {% else %}
+      <button class="btn btn-sm special-link" type="button" name="button" style="margin: 0; border: 1px solid #5392f9; box-shadow: none;"> <a href="{% url 'login' %}" style="color: black;">Login</a></button>
+      <button class="btn btn-sm special-link" type="button" name="button" style="margin: 0; border: 1px solid #5392f9; box-shadow: none;"><a class="special-link" href="{% url 'sign_up' %}" style="color: black;">Signup</a></button>
+      {% endif %}
     </div>
-    <!-- end of navigation -->
+
+  </div>
+  <!-- end of navigation -->
 </nav>
 <!-- end of navbar -->
 
@@ -129,11 +131,11 @@
           font-size: 15px;
           border-bottom: 2px solid transparent;
         }
+
         .nav-link-footer:hover {
           font-size: 16px;
           border-bottom: 2px solid #5392f9;
         }
-
       </style>
 
       <!-- Company Link-->

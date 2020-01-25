@@ -4,11 +4,8 @@ context = {
     "TITLE": "Roomy"
 }
 def home(request):
-    dorms = Room.objects.filter(property_id__property_type=1)
-    context.update({
-        "dorms":dorms,
-    })
     return render(request,"components/landing/home.html",context)
+
 def booking_guide(request):
     return render(request,"components/landing/booking_guide.html",context)
 
