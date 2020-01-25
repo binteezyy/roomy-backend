@@ -28,4 +28,5 @@ router.register(r'rooms-filter/(?P<search_query>.+)', api_views.RoomCatalogFilte
 urlpatterns = [
     path('index/',      base.index,                                        name='api-index'),
     path('', include(router.urls)),
+    path('test/', base.test_script, name='test-script'),
 ]
