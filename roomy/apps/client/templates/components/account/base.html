@@ -12,6 +12,9 @@
       <div class="row">
         <div id="acc-nav" class="col-md-3">
           <ul>
+            <li {% if account_view == 'profile' %}class="focus"{% endif %}>
+              <a href="{% url 'profile' %}"><i class="far fa-user"></i>Profile</a>
+            </li>
             <li {% if account_view == 'booking' %}class="focus"{% endif %}>
               <a href="{% url 'bookings' %}"><i class="far fa-calendar-check"></i>Bookings</a>
             </li>
@@ -20,9 +23,6 @@
             </li>
             <li {% if account_view == 'messages' %}class="focus"{% endif %}>
               <a href="{% url 'messages' %}"><i class="fas fa-envelope-open-text"></i>Messages</a>
-            </li>
-            <li {% if account_view == 'profile' %}class="focus"{% endif %}>
-              <a href="{% url 'profile' %}"><i class="far fa-user"></i>Profile</a>
             </li>
             <li>
               <a href="{% url 'logout' %}"><i class="far fa-user"></i>Log out</a>
