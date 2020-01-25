@@ -6,13 +6,30 @@
   <div class="container-fluid p-2">
     {% if bookings %}
       {% for book in bookings %}
-      <a href="{% url 'booking-view' book.id %}">
-        <div class="row card mb-3">
-          <div class="card-body">
-            <h4 class="card-title">{{ book.catalog_id.property_id.name}}</h4><vr>
-            <p>Floor: {{ book.catalog_id.floor}}</p>
+      <a href="{% url 'booking-view' book.id %}" style="text-decoration:none">
+        <div class="card">
+          <div class="row no-gutters">
+            <div class="col-3" id="bookcard-{{book.pk}}">
+              <div class="img">
+
+              </div>
+            </div>
+            <div class="col-9 card-body px-4">
+              <h4 class="card-title">{{ book.catalog_id.property_id}}</h4><vr>
+              <p>Floor: {{ book.catalog_id.floor}}</p>
+              <span class="label label-default">Status</span>
+            </div>
           </div>
         </div>
+        <style media="screen">
+          #bookcard-{{book.pk}} .img{
+                 background-image:url({% if book.catalog_id.img_2d.all %}/media/{{ book.catalog_id.img_2d.all.0 }}{% else %}{% static "img\placeholder_900x500.png" %}{% endif %});
+                 background-position: center center;
+                 background-size: cover;
+                 background-repeat: no-repeat;
+                 width:100%;
+                 height:100%;}
+        </style>
       </a>
       {% endfor %}
     {% else %}

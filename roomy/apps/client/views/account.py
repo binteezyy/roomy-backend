@@ -28,16 +28,11 @@ def bookings(request):
 
 def BookingView(request,pk):
     if request.user.is_authenticated:
-        bookings = Booking.objects.filter(
-            Q(user_id=request.user)
-        )
-        transactions = TenantAccount.objects.filter(
-            Q(user_id=request.user)
-        )
+        acc = Booking.objects.get(pk=pk)
         print(bookings)
         context.update({
             "account_view":"booking",
-            "bookings": bookings,
+            "tenant_account": acc,
         })
         return render(request,"components/account/components/booking/view.html",context)
     else:
@@ -67,7 +62,7 @@ def profile(request):
     if request.user.is_authenticated:
 
         context.update({
-            "account_view":"profile",
+            "account_view":"messages",
         })
         return render(request,"components/account/components/profile.html",context)
     else:

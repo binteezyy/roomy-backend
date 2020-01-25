@@ -3,27 +3,62 @@
 
 
 {% block account_container %}
-  <div class="container-fluid p-2">
-    {% if bookings %}
-      {% for book in bookings %}
-      <a href="{% url 'booking-view' book.id %}">
-        <div class="row card mb-3">
-          <div class="card-body">
-            <h4 class="card-title">{{ book.catalog_id.property_id.name}}</h4><vr>
-            <p>Floor: {{ book.catalog_id.floor}}</p>
-          </div>
-        </div>
+  <style media="screen">
+      #main .row{
+        margin-bottom: 1rem;
+      }
+  </style>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'bookings' %}">Bookings</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ tenant_account.tenant_id.transaction_id.room_id}}</li>
+    </ol>
+  </nav>
+  <div id="main" class="container-fluid p-2">
+    <div class="row card">
+      <a href="#collapseInfo" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
+        <h6 class="m-0 font-weight-bold text-dark">Booking Info</h6>
       </a>
-      {% endfor %}
-    {% else %}
-    <div class="row">
-      <div class="col text-center py-5">
-        <h2>Bookings</h2>
-        <p>You have no bookings yet</p>
-        <img src="{% static "img/undraw_searching_p5ux.png" %}" alt="" class="mx-auto" style="width:20vw;display:block">
-        <button type="button" class="btn btn-primary" name="button">Find Places</button>
+
+      <div id="collapseInfo" class="col card-body">
+        <div class="">
+          
+        </div>
       </div>
-      {% endif %}
+    </div>
+
+    <div class="row card">
+      <a href="#collapseRoomies" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
+        <h6 class="m-0 font-weight-bold text-dark">My Roomies</h6>
+      </a>
+      <div id="collapseRoomies" class="col card-body collapse">
+        <div class="">
+          <p>{{ tenant_account.tenant_id}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row card">
+      <a href="#collapseRequest" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
+        <h6 class="m-0 font-weight-bold text-dark">My Requests</h6>
+      </a>
+      <div id="collapseRequest" class="col card-body">
+        <div class="">
+          <p>{{ tenant_account.tenant_id}}</p>
+          <button class="btn btn-success" type="button" name="button">Request</button>
+        </div>
+      </div>
+    </div>
+    <div class="row card">
+      <a href="#collapseBilling" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
+        <h6 class="m-0 font-weight-bold text-dark">My Billing</h6>
+      </a>
+      <div id="collapseBilling" class="col card-body">
+        <div class="">
+          <p>{{ tenant_account.tenant_id}}</p>
+          <button class="btn btn-success" type="button" name="button">Request</button>
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}
