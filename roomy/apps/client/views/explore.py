@@ -34,7 +34,7 @@ def index(request):
         "search": search,
         "rooms": rooms,
     })
-    return render(request,"components/landing/explore/base.html",context)
+    return render(request,"components/explore/base.html",context)
 
 def room_view(request,pk):
     room = RoomCatalog.objects.get(pk=pk)
