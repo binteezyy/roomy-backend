@@ -1,4 +1,5 @@
 from .base import *
+from ..staging_common import *
 import os
 
 ALLOWED_HOSTS = ['*', ]

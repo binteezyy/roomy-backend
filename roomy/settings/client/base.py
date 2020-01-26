@@ -3,6 +3,7 @@ from ..common import *
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_ROOT = os.path.join(BASE_DIR, '../apps/client/static/')
 
 SECRET_KEY = config('SECRET_KEY')
 
@@ -43,11 +44,6 @@ MIDDLEWARE = [
 
 WSGI_APPLICATION = 'config.client.wsgi.application'
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, '../apps/client/static/')
-
-MEDIA_ROOT = '/media/'
-MEDIA_URL = '/media/'
 
 TEMPLATES = [
     {
