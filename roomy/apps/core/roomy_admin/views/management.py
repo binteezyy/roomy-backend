@@ -19,7 +19,11 @@ context = {
 def property_management(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-        return render(request, "components/management/property_management.html")
+        context = {
+            'properties': Property.objects.filter(owner_id__user_id=request.user),
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+        }
+        return render(request, "components/management/property_management.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -43,7 +47,8 @@ def catalog_management(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
-            'properties': Property.objects.filter(owner_id__user_id=request.user)
+            'properties': Property.objects.filter(owner_id__user_id=request.user),
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
         }
         return render(request, "components/management/catalog_management.html", context)
     else:
@@ -74,6 +79,7 @@ def room_management(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
+            'properties': Property.objects.filter(owner_id__user_id=request.user),
             'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
         }
         return render(request, "components/management/room_management.html", context)

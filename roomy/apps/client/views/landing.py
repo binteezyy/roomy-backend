@@ -4,6 +4,10 @@ context = {
     "TITLE": "Roomy"
 }
 def home(request):
+    dorms = Room.objects.filter(catalog_id__room_type=1)
+    context.update({
+        "dorms":dorms,
+    })
     return render(request,"components/landing/home.html",context)
 
 def booking_guide(request):

@@ -58,12 +58,12 @@ Fee
                 "dataSrc": '',
                 "url": "{% url 'admin-fee-table' property.pk%}",
             },
-            "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-fee'>>>>" +
+            "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-fee-{{property.pk}}'>>>>" +
                 "<'row'<'col-md-6'><'col-md-6'>>" +
                 "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
             "initComplete": function (settings, json) {
-                $("div.create-fee").html('<button type="button" id="create-fee" class="float-right btn btn-s btn-success btn-raised" name="button">Add Fee <i class="fas fa-plus"></i></button>');
-                $(".create-fee").modalForm({ formURL: "{% url 'create-fee' %}" });
+                $("div.create-fee-{{property.pk}}").html('<button type="button" id="create-fee-{{property.pk}}" class="float-right btn btn-s btn-success btn-raised" name="button">Add Fee <i class="fas fa-plus"></i></button>');
+                $(".create-fee-{{property.pk}}").modalForm({ formURL: "{% url 'create-fee' property.pk %}" });
             },
             "drawCallback": function (settings) {
                 // $(".delete-fee").each(function () {

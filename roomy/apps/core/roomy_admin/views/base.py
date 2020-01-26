@@ -113,7 +113,7 @@ def catalog_upload2d(request, pk):
                 'filetitle'), img_path=request.FILES['myfile'])
             upload_image.save()
 
-            catalog.image_2d.add(upload_image)
+            catalog.img_2d.add(upload_image)
             return HttpResponseRedirect(reverse('catalog-management'))
         else:
             return HttpResponseRedirect(reverse('catalog-management'))
@@ -155,7 +155,7 @@ def catalog_upload3d(request, pk):
                 'filetitle'), img_path=request.FILES['myfile'])
             upload_image.save()
 
-            catalog.image_3d.add(upload_image)
+            catalog.img_3d.add(upload_image)
             return HttpResponseRedirect(reverse('catalog-management'))
         else:
             return HttpResponseRedirect(reverse('catalog-management'))

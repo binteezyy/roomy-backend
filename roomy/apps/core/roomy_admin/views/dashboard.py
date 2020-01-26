@@ -49,7 +49,8 @@ def rental(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
-            'properties': Property.objects.filter(owner_id__user_id=request.user)
+            'properties': Property.objects.filter(owner_id__user_id=request.user),
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
         }
         return render(request, "components/dashboard/rental.html", context)
     else:
@@ -81,7 +82,8 @@ def tenant(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
-            'properties': Property.objects.filter(owner_id__user_id=request.user)
+            'properties': Property.objects.filter(owner_id__user_id=request.user),
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
         }
         return render(request, "components/dashboard/tenant.html", context)
     else:
@@ -104,34 +106,6 @@ def tenant(request):
         }
         return render(request, 'components/admin_login/login.html', context)
 
-# billing
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def billing(request):
-
-    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-        return render(request, "components/dashboard/billing.html")
-    else:
-        logout(request)
-        form = UserLoginForm(request.POST or None)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-
-            user = authenticate(username=username, password=password)
-            login(request, user)
-
-            if next:
-                return redirect(next)
-            return HttpResponseRedirect(reverse('admin-index'))
-
-        context = {
-            'form': form,
-            'title': 'Login',
-        }
-        return render(request, 'components/admin_login/login.html', context)
 
 # guest
 
@@ -141,7 +115,8 @@ def billing(request):
 def guest(request):
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
-            'properties': Property.objects.filter(owner_id__user_id=request.user)
+            'properties': Property.objects.filter(owner_id__user_id=request.user),
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
         }
         return render(request, "components/dashboard/guest.html", context)
     else:
@@ -173,7 +148,8 @@ def tenant_request(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
-            'properties': Property.objects.filter(owner_id__user_id=request.user)
+            'properties': Property.objects.filter(owner_id__user_id=request.user),
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
         }
         return render(request, "components/dashboard/request.html", context)
     else:
@@ -204,7 +180,11 @@ def tenant_request(request):
 def notif(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-        return render(request, "components/dashboard/notifs.html")
+        context = {
+            'properties': Property.objects.filter(owner_id__user_id=request.user),
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+        }
+        return render(request, "components/dashboard/notifs.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -234,7 +214,8 @@ def booking(request):
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
-            'properties': Property.objects.filter(owner_id__user_id=request.user)
+            'properties': Property.objects.filter(owner_id__user_id=request.user),
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
         }
         return render(request, "components/dashboard/booking.html", context)
     else:

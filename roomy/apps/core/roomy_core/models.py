@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+from datetime import datetime
+from django.core.exceptions import ValidationError
 # Create your models here.
 
 
@@ -104,7 +106,6 @@ class Fee(models.Model):
 
 class Transaction(models.Model):
     active = models.BooleanField(default=True)
-    start_date = models.DateTimeField(null=True, auto_now_add=True)
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
     rating = models.PositiveIntegerField(default=1, validators=[
         MaxValueValidator(5),
@@ -122,7 +123,7 @@ class Transaction(models.Model):
 
 
 class Billing(models.Model):
-    time_stamp = models.DateTimeField(auto_now_add=True, null=True)
+    time_stamp = models.DateField(blank=True, null=True)
     transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE)
     paid = models.BooleanField(default=False)
     billing_fee = models.ManyToManyField(Fee, blank=True)
@@ -168,41 +169,53 @@ class TenantAccount(models.Model):
         super(TenantAccount, self).save(*args, **kwargs)
 
 class Booking(models.Model):
+    status_enum = [
+        (0, 'Pending'),
+        (1, 'Approved'),
+        (2, 'Denied'),
+    ]
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    tenant_id = models.ForeignKey(TenantAccount, on_delete=models.CASCADE, null=True, blank=True)
     message = models.CharField(max_length=56, blank=True, null=True)
+    start_date = models.DateField(null=True, blank=True)
     catalog_id = models.ForeignKey(RoomCatalog, on_delete=models.CASCADE)
     document1_id = models.ForeignKey(
         Document, on_delete=models.CASCADE, null=True, blank=True, related_name="document1")
     document2_id = models.ForeignKey(
         Document, on_delete=models.CASCADE, null=True, blank=True, related_name="document2")
     add_ons = models.ManyToManyField(Fee, blank=True)
-    approved = models.BooleanField(default=False)
+    status = models.IntegerField(choices=status_enum, default=0)
+
 
     def __str__(self):
         return f'Booking: {self.user_id.username} - {self.catalog_id}'
 
     def save(self, *args, **kwargs):
-        if self.approved:
-            active_transactions = Transaction.objects.filter(active=True, room_id__catalog_id=self.catalog_id)
-            occupied_rooms_list = []
-            for active_transaction in active_transactions:
-                occupied_rooms_list.append(active_transaction.room_id.pk)
-            avail_room = Room.objects.filter(catalog_id=self.catalog_id).exclude( pk__in=occupied_rooms_list).first()
+        if not self.tenant_id:
+            if self.status == 1:
+                active_transactions = Transaction.objects.filter(active=True, room_id__catalog_id=self.catalog_id)
+                occupied_rooms_list = []
+                for active_transaction in active_transactions:
+                    occupied_rooms_list.append(active_transaction.room_id.pk)
+                avail_room = Room.objects.filter(catalog_id=self.catalog_id).exclude(pk__in=occupied_rooms_list).first()
+                
+                try: 
+                    new_transaction = Transaction.objects.get(active=True, room_id=avail_room)
+                except Transaction.DoesNotExist: 
+                    new_transaction = Transaction(room_id=avail_room)
+                    new_transaction.save()     
+                    new_transaction.add_ons.set(self.add_ons.all())
+                print(new_transaction) 
 
-            try:
-                new_transaction = Transaction.objects.get(active=True, room_id=avail_room)
-            except Transaction.DoesNotExist:
-                new_transaction = Transaction(room_id=avail_room)
-                new_transaction.save()
-                new_transaction.add_ons.set(self.add_ons.all())
-            print(new_transaction)
-
-            try:
-                new_tenant = TenantAccount.objects.get(user_id=self.user_id, transaction_id=new_transaction)
-            except TenantAccount.DoesNotExist:
-                new_tenant = TenantAccount(user_id=self.user_id, transaction_id=new_transaction)
-                new_tenant.save()
-            print(new_tenant)
+                try:
+                    new_tenant = TenantAccount.objects.get(user_id=self.user_id, transaction_id=new_transaction)
+                except TenantAccount.DoesNotExist:
+                    new_tenant = TenantAccount(user_id=self.user_id, transaction_id=new_transaction)
+                    new_tenant.save()
+                print(new_tenant)
+                
+                self.tenant_id = new_tenant
+                print(self.tenant_id)
         super(Booking, self).save(*args, **kwargs)
 
 

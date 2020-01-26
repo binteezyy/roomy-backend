@@ -22,7 +22,24 @@ def bookings(request):
             "account_view":"booking",
             "bookings": bookings,
         })
-        return render(request,"components/account/components/bookings.html",context)
+        return render(request,"components/account/components/booking/list.html",context)
+    else:
+        return redirect('login')
+
+def BookingView(request,pk):
+    acc = Booking.objects.get(pk=pk)
+    if request.user.is_authenticated and request.user == acc.user_id:
+        roomies = Transaction.objects.filter(pk = acc.tenant_id.transaction_id.pk)
+        catalog = RoomCatalog.objects.get(pk = acc.tenant_id.transaction_id.room_id.catalog_id.pk)
+        room = Room.objects.get(pk=acc.tenant_id.transaction_id.room_id.pk)
+        context.update({
+            "account_view":"booking",
+            "tenant_account": acc,
+            "roomies": roomies,
+            "catalog": catalog,
+            "room": room,
+        })
+        return render(request,"components/account/components/booking/view.html",context)
     else:
         return redirect('login')
 
@@ -50,7 +67,7 @@ def profile(request):
     if request.user.is_authenticated:
 
         context.update({
-            "account_view":"profile",
+            "account_view":"messages",
         })
         return render(request,"components/account/components/profile.html",context)
     else:

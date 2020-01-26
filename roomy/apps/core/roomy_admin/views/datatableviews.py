@@ -68,7 +68,7 @@ def rental_table(request,pk):
     data = []
     for transaction in transactions:
         room = f'Room: Floor-{transaction.room_id.catalog_id.floor} Number-{transaction.room_id.number}'
-        date = transaction.start_date.strftime("%Y, %B %d")
+        date = Booking.objects.get(tenant_id__transaction_id=transaction).start_date.strftime("%Y, %B %d")
         x = {"fields": {"id": transaction.pk,
                         "room": room,
                         "date": date,
@@ -201,19 +201,15 @@ def notif_table(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def booking_table(request,pk):
-    bookings = Booking.objects.filter(
-        catalog_id__property_id__owner_id__user_id=request.user,approved=False, catalog_id__property_id__pk=pk)
+    bookings = Booking.objects.filter(status=0,
+        catalog_id__property_id__owner_id__user_id=request.user, catalog_id__property_id__pk=pk)
 
     data = []
     for booking in bookings:
-        if booking.approved:
-            status = "Approved"
-        else:
-            status = "No Action Yet"
         x = {"fields": {"id": booking.pk,
                         "user": f'{booking.user_id.username} - {booking.user_id.first_name} {booking.user_id.last_name}',
                         "room": f'Room: Floor-{booking.catalog_id.floor}',
-                        "status": status,
+                        "status": booking.get_status_display(),
                         }}
         data.append(x)
     data = json.dumps(data)

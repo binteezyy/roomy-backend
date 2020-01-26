@@ -58,12 +58,12 @@ Expenses
         "dataSrc": '',
         "url": "{% url 'admin-expense-table' property.pk %}",
       },
-      "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-expense'>>>>" +
+      "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-expense-{{property.pk}}'>>>>" +
         "<'row'<'col-md-6'><'col-md-6'>>" +
         "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
       "initComplete": function (settings, json) {
-        $("div.create-expense").html('<button type="button" id="create-expense" class="float-right btn btn-s btn-success btn-raised" name="button">Add Expense <i class="fas fa-plus"></i></button>');
-        $(".create-expense").modalForm({ formURL: "{% url 'create-expense' %}" });
+        $("div.create-expense-{{property.pk}}").html('<button type="button" id="create-expense-{{property.pk}}" class="float-right btn btn-s btn-success btn-raised" name="button">Add Expense <i class="fas fa-plus"></i></button>');
+        $(".create-expense-{{property.pk}}").modalForm({ formURL: "{% url 'create-expense' property.pk %}" });
       },
       "drawCallback": function (settings) {
         // $(".delete-expense").each(function () {
