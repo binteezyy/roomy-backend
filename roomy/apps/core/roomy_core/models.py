@@ -31,9 +31,9 @@ class OwnerAccount(models.Model):
 
 class Property(models.Model):
     property_type_enum = [
-        (0, 'Condomenium'),
-        (1, 'Dormitory'),
-        (2, 'Apartment'),
+        (0, 'Condominium'),
+        (1, 'Apartment'),
+        (2, 'Dormitory'),
     ]
     owner_id = models.ForeignKey(
         OwnerAccount, on_delete=models.CASCADE, blank=True, null=True)

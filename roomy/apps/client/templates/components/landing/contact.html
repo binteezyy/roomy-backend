@@ -10,35 +10,28 @@ Contact
 <!-- main content -->
 <div class="container-fluid">
   <div class="container">
-    <div class="row d-flex flex-row flex-wrap jusfity-content-center align-items-center" style="padding: 30px">
-      <div class="wrapper" style="margin: 10px; flex-grow: 1;">
-        <img src="{% static "img\placeholder_400x222.png" %}" alt="" style="width:100%; margin: 0; padding: 0;">
+    <div class="row d-flex flex-row flex-wrap jusfity-content-center align-items-stretch" style="min-height: 700px; margin-top: 20px; padding-bottom: 20px;">
+      <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 20px; flex-grow: 1;">
+        <img src="{% static "img\placeholder_1200x500.png" %}" alt="" style="width:100%; margin: 0; padding: 0;">
       </div>
 
-      <div class="wrapper d-flex flex-column justify-content-center align-items-center" style="flex-grow: 1; margin: 10px; padding: 30px;">
-        <h4 class="text-center">We'd love to hear from you.</h4>
-        <h6 class="text-center">Need to get in touch with our team? We're all ears.</h6>
-        <div class="wrapper d-flex flex-row justify-content-center">
-          <button class="btn btn-dark" style="width: 200px;" type="button" name="button" data-toggle="modal" data-target="#contactUsModal">Contact Us</button>
+      <div class="d-flex flex-column justify-content-center align-items-center z-depth-1" style="margin-bottom: 20px; padding: 80px 20px 80px 20px; flex-grow: 1;">
+        <h4>We'd love to hear from you.</h4>
+        <h6>Need to get in touch with our team? We're all ears.</h6>
+        <div class="d-flex flex-row justify-content-center align-items-center">
+          <button class="btn" style="width: 200px; background-color: #5392f9;" type="button" name="button" data-toggle="modal" data-target="#contactUsModal">Contact Us</button>
         </div>
-      </div>
-
-      <div class="d-flex flex-column justify-content-center align-items-center" style="margin: 10px; padding-top: 70px; flex-grow: 1;">
-        <h4 class="text-center">Get help on social media</h4>
-        <span class="text-center">Contact us via</span>
-        <div class="d-flex justify-content-center align-items-center" style="margin-top: 10px; margin-bottom: 150px;">
-          <a href="#facebook">
-            <img src="{% static "img\facebook.png" %}" style="width: 30px; height: 30px;" alt="">
+        <span style="margin: 10px 0 10px 0; font-size: 18px;">or</span>
+        <h5>Reach us on social media.</h5>
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="www.facebook.com" style="margin: 10px;">
+            <img src="{% static "img\facebook.png" %}" style="width: 50px; height: 50px;" alt="">
           </a>
-          <div class="">
-            &nbsp
-          </div>
-          <a href="#twitter">
-            <img src="{% static "img\twitter.png" %}" style="width: 30px; height: 30px;" alt="">
+          <a href="www.twitter.com" style="margin: 10px;">
+            <img src="{% static "img\twitter.png" %}" style="width: 50px; height: 50px;" alt="">
           </a>
         </div>
       </div>
-
     </div>
   </div>
 

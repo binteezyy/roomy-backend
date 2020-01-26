@@ -9,6 +9,7 @@ def home(request):
         "dorms":dorms,
     })
     return render(request,"components/landing/home.html",context)
+
 def booking_guide(request):
     return render(request,"components/landing/booking_guide.html",context)
 
