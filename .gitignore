@@ -90,3 +90,5 @@ local_settings.py
 *.sqlite3
 *media*
 .vscode
+
+bucket-key.json
