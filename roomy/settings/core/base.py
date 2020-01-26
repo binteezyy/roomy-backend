@@ -2,10 +2,8 @@ from decouple import config
 from ..common import *
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 SECRET_KEY = config('SECRET_KEY')
-
+STATIC_ROOT = os.path.join(BASE_DIR, '../apps/core/static/')
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -33,13 +31,8 @@ MIDDLEWARE = [
 ]
 
 
+
 WSGI_APPLICATION = 'config.core.wsgi.application'
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, '../apps/core/static/')
-
-MEDIA_ROOT = '/media/'
-MEDIA_URL = '/media/'
 
 TEMPLATES = [
     {
