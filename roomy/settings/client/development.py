@@ -8,6 +8,7 @@ INSTALLED_APPS += [
     'debug_toolbar',
 ]
 
+print("\n\nBASE:",BASE_DIR)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

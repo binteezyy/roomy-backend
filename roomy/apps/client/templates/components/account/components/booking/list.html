@@ -26,7 +26,7 @@
       {% for book in bookings %}
         <div class="card">
           {% if book.status == 1 %}<a href="{% url 'booking-view' book.id %}" class="bookings" style="text-decoration:none; color: black">
-          {% else %}<a href="" class="bookings" style="text-decoration:none; color: black">
+          {% else %}<a href="#" class="bookings" style="text-decoration:none; color: black">
           {% endif %}
             <div class="row no-gutters">
               <div class="col-7" id="bookcard-{{book.pk}}">
