@@ -18,7 +18,7 @@ def index(request):
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         return render(request, "components/billing.html")
     else:
-        logout(request)
+        # logout(request)
         form = UserLoginForm(request.POST or None)
         if form.is_valid():
             username = form.cleaned_data.get('username')
