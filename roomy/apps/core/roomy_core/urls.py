@@ -4,6 +4,7 @@ from .views import base
 
 from .views import api_views
 from rest_framework import routers
+from rest_framework.authtoken import views
 
 router = routers.DefaultRouter()
 router.register('properties', api_views.PropertyApiView)
@@ -29,4 +30,5 @@ urlpatterns = [
     path('index/',      base.index,                                        name='api-index'),
     path('', include(router.urls)),
     path('test/', base.test_script, name='test-script'),
+    path('token-auth/', views.obtain_auth_token, name='token-auth'),
 ]
