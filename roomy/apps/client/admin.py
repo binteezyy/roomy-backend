@@ -15,7 +15,6 @@ class ListAdminMixin(object):
         super(ListAdminMixin, self).__init__(model, admin_site)
 # #
 for model in models:
-    print("MODEL:",model,type(model))
     if model.__name__ not in excepts:
         # if [True for x in inspect.getmro(model) if x.__name__=='SingletonModel']: # SIGLE OBJECT HANDLER
 

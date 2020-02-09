@@ -133,6 +133,11 @@ class Billing(models.Model):
 
 
 class Request(models.Model):
+    r_status = [
+        (0, 'Pending'),
+        (1, 'Processed'),
+        (2, 'Denied'),
+    ]
     subject = models.CharField(max_length=56)
     description = models.TextField(blank=True, null=True)
     time_stamp = models.DateTimeField(auto_now_add=True)
@@ -198,14 +203,14 @@ class Booking(models.Model):
                 for active_transaction in active_transactions:
                     occupied_rooms_list.append(active_transaction.room_id.pk)
                 avail_room = Room.objects.filter(catalog_id=self.catalog_id).exclude(pk__in=occupied_rooms_list).first()
-                
-                try: 
+
+                try:
                     new_transaction = Transaction.objects.get(active=True, room_id=avail_room)
-                except Transaction.DoesNotExist: 
+                except Transaction.DoesNotExist:
                     new_transaction = Transaction(room_id=avail_room)
-                    new_transaction.save()     
+                    new_transaction.save()
                     new_transaction.add_ons.set(self.add_ons.all())
-                print(new_transaction) 
+                print(new_transaction)
 
                 try:
                     new_tenant = TenantAccount.objects.get(user_id=self.user_id, transaction_id=new_transaction)
@@ -213,7 +218,7 @@ class Booking(models.Model):
                     new_tenant = TenantAccount(user_id=self.user_id, transaction_id=new_transaction)
                     new_tenant.save()
                 print(new_tenant)
-                
+
                 self.tenant_id = new_tenant
                 print(self.tenant_id)
         super(Booking, self).save(*args, **kwargs)
