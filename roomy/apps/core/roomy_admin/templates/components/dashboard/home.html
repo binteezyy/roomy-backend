@@ -1,11 +1,105 @@
 {% extends "layout.html" %}
+{% load static %}
 
 {% block title %}
-Dashboard
+Home
+{% endblock %}
+
+{% block google_chart %}
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  // Load the Visualization API and the piechart package.
+  google.charts.load('current', {
+    'packages': ['corechart']
+  });
+
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.charts.setOnLoadCallback(drawChart);
+
+  // Callback that creates and populates a data table,
+  // instantiates the pie chart, passes in the data and
+  // draws it.
+  function drawChart() {
+
+    // Create the data table.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Topping');
+    data.addColumn('number', 'Percentage');
+    data.addRows([
+      ['Paid', 200],
+      ['Unpaid', 100],
+    ]);
+
+    // Set chart options
+    var options = {
+      title: 'Payment',
+      fontSize: 18,
+      bold: false,
+      legend: 'bottom',
+      width: 400,
+      height: 400,
+      colors: ['lightgrey', '#141414'],
+      backgroundColor: 'transparent'
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+    chart.draw(data, options);
+  }
+</script>
 {% endblock %}
 
 {% block content %}
+<div class="row d-flex flex-wrap justify-content-start align-item-start">
 
+  <!-- tiles -->
+  <div class="d-flex flex-wrap justify-content-start align-items-start">
+
+    <!-- tenant tile -->
+    <div class="d-flex flex-column z-depth-1" style="width: 280px; height: 180px; margin: 20px; padding: 20px; border-radius: 5px;">
+      <!-- first row -->
+      <div class="d-flex justify-content-between align-items-center">
+        <span style="font-size: 50px; font-weight: bold;">10</span>
+        <span>
+          <img src="{% static "img\tenant.png" %}" alt="" style="width: 80px; height: 80px; margin: 0; padding: 0;">
+        </span>
+      </div>
+      <!-- second row -->
+      <div class="d-flex justicy-content-between" style="margin-top: 20px; padding-top: 10px; border-top: 2px solid black;">
+        <span style="font-size: 22px;">Tenant(s)</span>
+      </div>
+    </div>
+    <!-- end of tenant -->
+
+    <!-- room tile -->
+    <div class="d-flex flex-column z-depth-1" style="width: 280px; height: 180px; margin: 20px; padding: 20px; border-radius: 5px;">
+      <!-- first row -->
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="">
+          <span style="font-size: 50px; font-weight: bold;">10</span> <span style="font-size: 22px;">/ 30</span>
+        </div>
+        <span>
+          <img src="{% static "img\room.png" %}" alt="" style="width: 80px; height: 80px; margin: 0; padding: 0;">
+        </span>
+      </div>
+      <!-- second row -->
+      <div class="d-flex justicy-content-between" style="margin-top: 20px; padding-top: 10px; border-top: 2px solid black;">
+        <span style="font-size: 22px;">Active Room(s)</span>
+      </div>
+    </div>
+    <!-- end of room -->
+
+  </div>
+  <!-- end of tiles -->
+
+  <!-- Google Chart -->
+  <div class="z-depth-1" style="width: 400px; height: 400px; margin: 20px; border-radius: 5px;">
+    <div class="" id="pie_chart">
+
+    </div>
+  </div>
+</div>
 
 {% endblock %}
 
