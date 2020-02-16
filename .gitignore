@@ -87,7 +87,8 @@ __pycache__/
 local_settings.py
 
 .env
-env-lnvx/*
+env-lnx/*
+env-win/*
 *.sqlite3
 *media*
 .vscode
