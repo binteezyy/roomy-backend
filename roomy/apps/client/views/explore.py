@@ -34,7 +34,7 @@ def index(request):
         "search": search,
         "rooms": rooms,
     })
-    return render(request,"components/explore/base.html",context)
+    return render(request,"web/components/explore/base.html",context)
 
 def room_view(request,pk):
     room = RoomCatalog.objects.get(pk=pk)
@@ -55,4 +55,4 @@ def room_view(request,pk):
         "room":room,
         "booking":booking,
     })
-    return render(request,"components/property/room.html", context)
+    return render(request,"web/components/property/room.html", context)

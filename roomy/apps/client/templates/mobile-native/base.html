@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{{ TITLE }}</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static "vendor\mdbootstrap\css\bootstrap.min.css" %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static "vendor\mdbootstrap\css\mdb.min.css" %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="{% static "css\style.css" %}">
+  {% block extra_css %}{% endblock %}
+
+</head>
+
+
+<body>
+
+  {% block layout %}{% endblock %}
+
+  {% block layout_landing %}{% endblock %}
+
+  {% block footer %}{% endblock %}
+
+  <!-- JQuery -->
+  <script type="text/javascript" src="{% static "vendor\mdbootstrap\js\jquery.min.js" %}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static "vendor\mdbootstrap\js\popper.min.js" %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static "vendor\mdbootstrap\js\bootstrap.min.js" %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static "vendor\mdbootstrap\js\mdb.min.js" %}"></script>
+
+  {% block extra_js %}{% endblock %}
+
+  <!-- Dropzone Script -->
+  <script type="text/javascript" src="{% static "vendor\dropzone\dropzone.js" %}"></script>
+  <!-- Custom Script -->
+  <script type="text/javascript" src="{% static "js\script.js" %}"></script>
+
+</body>
+
+</html>
