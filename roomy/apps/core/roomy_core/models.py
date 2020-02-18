@@ -205,6 +205,9 @@ class Booking(models.Model):
                 avail_room = Room.objects.filter(catalog_id=self.catalog_id).exclude(pk__in=occupied_rooms_list).first()
 
                 try:
+                    import os
+                    os.system('cls')
+                    print("ROOM",avail_room)
                     new_transaction = Transaction.objects.get(active=True, room_id=avail_room)
                 except Transaction.DoesNotExist:
                     new_transaction = Transaction(room_id=avail_room)
@@ -214,13 +217,15 @@ class Booking(models.Model):
 
                 try:
                     new_tenant = TenantAccount.objects.get(user_id=self.user_id, transaction_id=new_transaction)
-                except TenantAccount.DoesNotExist:
+                except TenantAccount.DoesNotExist as e:
+                    print(e)
                     new_tenant = TenantAccount(user_id=self.user_id, transaction_id=new_transaction)
                     new_tenant.save()
                 print(new_tenant)
 
                 self.tenant_id = new_tenant
                 print(self.tenant_id)
+
         super(Booking, self).save(*args, **kwargs)
 
 

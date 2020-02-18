@@ -1,0 +1,249 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block layout %}
+
+<!-- navbar -->
+<nav class="navbar navbar-expand-xl navbar-light z-depth-1" id="navbar" style="border-top: 3px solid #5392f9;">
+
+  <!-- logo -->
+  <a href="{% url 'home' %}" style="margin: 5px 20px 5px 20px;">
+    <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+  </a>
+
+  <!-- expand button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars" style="color: #5392f9;"></i></button>
+
+  <!-- navigation -->
+  <div class="navbar-collapse collapse" id="navbarsExample04">
+
+    <style media="screen">
+      .nav-item-custom {
+        margin-right: 10px;
+        font-weight: 500;
+        color: #000000;
+      }
+
+      .nav-item-custom:hover {
+        color: #3380ff;
+      }
+
+      .special-link:hover {
+        color: #3380ff;
+      }
+    </style>
+
+    <!-- links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item nav-item-custom">
+        <a class="nav-link" href="{% url 'explore' %}">Explore</a>
+      </li>
+      <li class="nav-item nav-item-custom">
+        <a class="nav-link" href="{% url 'booking_guide' %}">Booking Guide</a>
+      </li>
+      <li class="nav-item nav-item-custom dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          About Us
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width: auto; height: auto; padding: 20px;">
+          <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'about' %}">What is Roomy?</a>
+          <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'contact' %}">Contact Us</a>
+          <a class="nav-link" style="margin: 0 0 5px 2px; padding: 0; color: black;" href="{% url 'faq' %}">FAQs</a>
+        </div>
+      </li>
+      <li class="nav-item nav-item-custom">
+        <a class="nav-link" href="{% url 'partner_with_us' %}">Partner With Us</a>
+      </li>
+    </ul>
+    <!-- end of links -->
+
+    <!-- login -->
+    <div class="wrapper">
+      {% if user.is_authenticated %}
+      <div class="d-flex align-items-center">
+
+        <style media="screen">
+          .account-link {
+            padding: 5px 10px 5px 10px;
+            text-transform: uppercase;
+            font-size: 15px;
+            color: black;
+          }
+
+          .account-link:hover {
+            padding: 5px 10px 5px 10px;
+            font-size: 18px;
+            color: black;
+          }
+        </style>
+
+        <a class="d-flex align-items-center account-link" style=" " href="{% url 'profile' %}">
+          <div class="" style="width: 30px; height: 30px; margin-right: 10px; border-radius: 15px; background-image: url('/static/img/profile_default.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+          {{ user.username}}
+        </a>
+
+      </div>
+
+      {% else %}
+      <button class="btn btn-sm special-link" type="button" name="button" style="margin: 0; border: 1px solid #5392f9; box-shadow: none;"> <a href="{% url 'login' %}" style="color: black;">Login</a></button>
+      <button class="btn btn-sm special-link" type="button" name="button" style="margin: 0; border: 1px solid #5392f9; box-shadow: none;"><a class="special-link" href="{% url 'sign_up' %}" style="color: black;">Signup</a></button>
+      {% endif %}
+    </div>
+
+  </div>
+  <!-- end of navigation -->
+</nav>
+<!-- end of navbar -->
+
+{% block layout2 %}{% endblock %}
+
+
+{% block content %}{% endblock content %}
+
+{% endblock %}
+
+{% block footer %}
+
+<!-- footer -->
+<div class="container-fluid d-flex flex-column z-depth-1">
+  <div class="d-flex flex-column flex-wrap align-items-stretch" style="min-height: 400px; padding: 20px;">
+
+    <style media="screen">
+      @media screen and (max-width: 600px) {
+        .wrapper-link {
+          flex-direction: column;
+        }
+
+        .wrapper-link .link-container {
+          margin-bottom: 50px;
+        }
+      }
+    </style>
+
+    <!-- links -->
+    <div class="row wrapper-link d-flex flex-wrap justify-content-around">
+
+      <style media="screen">
+        .nav-link-footer {
+          margin: 0 0 5px 2px;
+          padding: 0;
+          color: black;
+          font-size: 15px;
+          border-bottom: 2px solid transparent;
+        }
+
+        .nav-link-footer:hover {
+          font-size: 16px;
+          border-bottom: 2px solid #5392f9;
+        }
+      </style>
+
+      <!-- Company Link-->
+      <div class="link-container" style="margin: 10px 30px 10px 30px;">
+        <!-- Links -->
+        <h5 class="text-uppercase">Roomy</h5>
+        <ul class="navbar-nav d-flex flex-column justify-content-start text-left">
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'about' %}">About Us</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'faq' %}">FAQs</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'contact' %}">Contact Us</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'terms_of_use' %}">Terms of use</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'privacy' %}">Privacy Policy</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'help_center' %}">Help Center</a>
+            </div>
+          </li>
+        </ul>
+        </ul>
+
+      </div>
+
+      <!-- Follow Social Links -->
+      <div class="link-container" style="margin: 10px 30px 10px 30px;">
+        <!-- links -->
+        <h5 class="text-uppercase">FOLLOW</h5>
+        <ul class="navbar-nav d-flex flex-column justify-content-start align-items-start text-left">
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <img src="{% static "img\facebook.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+              <span>&nbsp</span>
+              <a class="nav-link nav-link-footer" href="www.facebook.com">Facebook</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <img src="{% static "img\twitter.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+              <span>&nbsp</span>
+              <a class="nav-link nav-link-footer" href="www.twitter.com">Twitter</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <img src="{% static "img\instagram.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+              <span>&nbsp</span>
+              <a class="nav-link nav-link-footer" href="www.instagram.com">Instagram</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <img src="{% static "img\youtube.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+              <span>&nbsp</span>
+              <a class="nav-link nav-link-footer" href="www.youtube.com">Youtube</a>
+            </div>
+          </li>
+        </ul>
+        <!-- end of links -->
+
+      </div>
+
+      <!-- Download Link -->
+      <div class="link-container" style="margin: 10px 30px 10px 30px;">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <h5 style=" margin-bottom: 10px;">DOWNLOAD OUR APP NOW</h5>
+          <a href="play.google.com"><img src="{% static "img\svg_playstore.svg" %}" alt=""></a>
+        </div>
+      </div>
+
+    </div>
+    <!-- end of links -->
+
+  </div>
+</div>
+
+<div class="container-fluid" style="background-color: #333;">
+  <!-- copyright -->
+  <div class="row d-flex justify-content-center" style="padding: 40px;">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <a href="{% url 'home' %}" style="margin: 10px 30px 10px 30px;">
+          <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+        </a>
+        <span style="font-size: 13px; color: black;">&copy; Copyright 2019 - 2020. </span>
+        <span style="font-size: 13px; color: black;">All rights reserved. Powered by <span style="font-size: 15px; font-weight: bold;">PPTT</span> </span>
+      </div>
+    </div>
+  </div>
+  <!-- end of copyright -->
+</div>
+<!-- end of footer -->
+{% endblock %}

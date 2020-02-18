@@ -1,0 +1,19 @@
+{% extends "web/components/account/base.html" %}
+{% load static %}
+
+
+{% block account_container %}
+  <div class="container-fluid">
+    <div class="row">
+      {% if saved %}
+      {% else %}
+      <div class="col text-center py-5">
+        <h2>Saved</h2>
+        <p>Compare places and prices</p>
+        <img src="{% static "img/undraw_phone_call_grmk.png" %}" alt="" class="mx-auto" style="width:20vw;display:block">
+        <button type="button" class="btn btn-primary" name="button">Find Places</button>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

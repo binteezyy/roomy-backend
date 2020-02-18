@@ -1,0 +1,49 @@
+{% extends "web/layout/layout.html" %}
+
+{% block extra_css %}
+<style media="screen">
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row d-flex flex-wrap justify-content-center align-items-center" style="margin: 10px;">
+    <div class="col-md-5 z-depth-1-half rounded d-flex flex-column justify-content-center" style="margin: 20px; padding: 20px;">
+      <span style="margin: 5px auto 15px auto; font-size: 25px;">Create an account</span>
+      <div class="d-flex justify-content-center" style="margin: 0 15px 10px 15px;">
+        <a class="btn btn-block" style="margin: 0 15px; background-color: #DB4437; color: white;" href="{% url 'social:begin' 'google-oauth2' %}">
+          <i class="fab fa-google" style="margin-right: 10px;"></i>Sign up with google
+        </a>
+      </div>
+      <span style="margin: 0 50px 0 50px; text-align: center; font-size: 14px;">We will never share any information without your permission.</span>
+      <span style="margin: 10px auto 10px auto; font-size: 18px;"><b>or</b></span>
+      <div class="form-group d-flex justify-content-center align-items" style="margin: 10px 15px;">
+        <input class="form-control" style="margin: 0 15px 0 15px;" type="text" name="username" value="" placeholder="username">
+      </div>
+      <div class="form-group d-flex justify-content-center align-items" style="margin: 10px 15px;">
+        <input class="form-control" style="margin: 0 15px 0 15px;" type="text" name="username" value="" placeholder="email">
+      </div>
+      <div class="form-group d-flex justify-content-center align-items" style="margin: 10px 15px 20px 15px;">
+        <input class="form-control" style="margin: 0 15px 0 15px;" type="text" name="username" value="" placeholder="password">
+      </div>
+
+      <div class="d-flex justify-content-center" style="margin: 10px 15px;">
+        <button class="btn btn-block btn-dark" style="margin: 0 15px;" type="submit" name="button">Sign up</button>
+      </div>
+      <span style="margin: 0 50px 20px 50px; text-align: center; font-size: 14px;">By creating your account, you agree to our <a href="{% url 'terms_of_use' %}">Terms of Use </a> & <a href="{% url 'privacy' %}">Privacy Policy</a>.</span>
+      <div class="text-center" style="margin-bottom: 20px; font-size: 14px;">
+        <span>Already have an account?</span>
+        <a href="{% url 'login' %}" type="button" name="button">Log in</a>
+      </div>
+
+    </div>
+  </div>
+  <form class="" action="index.html" method="post">
+
+
+  </form>
+</div>
+
+{% endblock %}

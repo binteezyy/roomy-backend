@@ -17,12 +17,11 @@ def bookings(request):
         transactions = TenantAccount.objects.filter(
             Q(user_id=request.user)
         )
-        print(bookings)
         context.update({
             "account_view":"booking",
             "bookings": bookings,
         })
-        return render(request,"components/account/components/booking/list.html",context)
+        return render(request,"web/components/account/components/booking/list.html",context)
     else:
         return redirect('login')
 
@@ -39,7 +38,7 @@ def BookingView(request,pk):
             "catalog": catalog,
             "room": room,
         })
-        return render(request,"components/account/components/booking/view.html",context)
+        return render(request,"web/components/account/components/booking/view.html",context)
     else:
         return redirect('login')
 
@@ -49,7 +48,7 @@ def saved(request):
         context.update({
             "account_view":"saved",
         })
-        return render(request,"components/account/components/saved.html",context)
+        return render(request,"web/components/account/components/saved.html",context)
     else:
         return redirect('login')
 
@@ -59,7 +58,7 @@ def messages(request):
         context.update({
             "account_view":"messages",
         })
-        return render(request,"components/account/components/messages.html",context)
+        return render(request,"web/components/account/components/messages.html",context)
     else:
         return redirect('login')
 
@@ -69,6 +68,6 @@ def profile(request):
         context.update({
             "account_view":"messages",
         })
-        return render(request,"components/account/components/profile.html",context)
+        return render(request,"web/components/account/components/profile.html",context)
     else:
         return redirect('login')
