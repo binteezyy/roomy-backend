@@ -27,6 +27,7 @@ def login(request):
             return redirect('home')
 
     context.update({
+        "TITLE": "Login",
         "form": form,
     })
     # if request.method == 'POST'
