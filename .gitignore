@@ -92,5 +92,5 @@ env-win/*
 *.sqlite3
 *media*
 .vscode
-
+mysqlclient-*
 bucket-key.json
