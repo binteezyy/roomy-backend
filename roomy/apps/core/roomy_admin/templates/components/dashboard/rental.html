@@ -12,16 +12,21 @@ Rental
 
 {% block content %}
 {% include "_modal.html" %}
-{% for property in properties %}
 <div class="content container">
   <div class="card-content">
     <div class="container-fluid">
-      <h2>Occupied Rooms in {{property.name}}</h2>
+      <h2>Property:</h2>
+      <select class="mdb-select md-form">
+        {% for property in properties %}
+        <option value="{{property.pk}}">{{property.name}}</option>
+        {% endfor %}
+      </select>
+      <h2>Occupied Rooms in <span id="rental-span"></span></h2>
       <div class="row p-3">
         <div class="col">
           <div class="table-responsive">
-            <table id="rental-table-{{property.pk}}" class="table table-bordered table-hover" width="100%"
-              cellspacing="0" role="grid" aria-describedby="dataTable_info">
+            <table id="rental-table" class="table table-bordered table-hover" width="100%" cellspacing="0" role="grid"
+              aria-describedby="dataTable_info">
               <thead>
                 <tr role="row">
                   <th>Id</th>
@@ -38,7 +43,6 @@ Rental
     </div>
   </div>
 </div>
-{% endfor %}
 {% endblock %}
 
 {% block header %}
@@ -49,13 +53,14 @@ Rental
 <script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
 <script type="text/javascript">
   $(document).ready(function () {
-    {% for property in properties %}
-    $('#rental-table-{{property.pk}}').DataTable({
+    var val = $('.mdb-select').val();
+    $('#rental-span').html($(".mdb-select option:selected").text());
+    var table = $('#rental-table').DataTable({
       "dataType": 'json',
       "ajax": {
         "processing": true,
         "dataSrc": '',
-        "url": "{% url 'admin-rental-table' property.pk %}",
+        "url": "/rental/table/" + val,
       },
       "drawCallback": function (settings) {
         $(".manage-tenants").each(function () {
@@ -106,7 +111,10 @@ Rental
         },
       ]
     })
-    {% endfor %}
+    $(".mdb-select").on("change", function () {
+      table.ajax.url("/rental/table/" + $(this).val()).load();
+      $('#rental-span').html($(".mdb-select option:selected").text());
+    });
   });
 </script>
 {% endblock %}

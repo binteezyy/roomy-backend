@@ -14,9 +14,9 @@ from pprint import pprint
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def billing_table(request):
+def billing_table(request, pk):
     billings = Billing.objects.filter(
-        transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user)
+        transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, transaction_id__room_id__catalog_id__property_id__pk=pk)
 
     data = []
     for billing in billings:
@@ -200,7 +200,7 @@ def notif_table(request):
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-def booking_table(request,pk):
+def booking_table(request, pk):
     bookings = Booking.objects.filter(status=0,
         catalog_id__property_id__owner_id__user_id=request.user, catalog_id__property_id__pk=pk)
 

@@ -12,16 +12,21 @@ Booking
 
 {% block content %}
 {% include "_modal.html" %}
-{% for property in properties %}
 <div class="content container">
     <div class="card-content">
         <div class="container-fluid">
-            <h2>Bookings for {{property.name}}</h2>
+            <h2>Property:</h2>
+            <select class="mdb-select md-form">
+                {% for property in properties %}
+                <option value="{{property.pk}}">{{property.name}}</option>
+                {% endfor %}
+            </select>
+            <h2>Bookings in <span id='booking-span'></span></h2>
             <div class="row p-3">
                 <div class="col">
                     <div class="table-responsive">
-                        <table id="booking-table-{{property.pk}}" class="table table-bordered table-hover" width="100%"
-                            cellspacing="0" role="grid" aria-describedby="dataTable_info">
+                        <table id="booking-table" class="table table-bordered table-hover" width="100%" cellspacing="0"
+                            role="grid" aria-describedby="dataTable_info">
                             <thead>
                                 <tr role="row">
                                     <th>Id</th>
@@ -39,7 +44,6 @@ Booking
         </div>
     </div>
 </div>
-{% endfor %}
 {% endblock %}
 
 {% block header %}
@@ -50,13 +54,14 @@ Bookings
 <script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        {% for property in properties %}
-        $('#booking-table-{{property.pk}}').DataTable({
+        var val = $('.mdb-select').val();
+        $('#booking-span').html($(".mdb-select option:selected").text());
+        var table = $('#booking-table').DataTable({
             "dataType": 'json',
             "ajax": {
                 "processing": true,
                 "dataSrc": '',
-                "url": "{% url 'admin-booking-table' property.pk %}",
+                "url": "/booking/table/" + val,
             },
             "drawCallback": function (settings) {
                 $(".read-booking").each(function () {
@@ -107,7 +112,10 @@ Bookings
                 },
             ]
         })
-        {% endfor %}
+        $(".mdb-select").on("change", function () {
+            table.ajax.url("/booking/table/" + $(this).val()).load();
+            $('#booking-span').html($(".mdb-select option:selected").text());
+        });
     });
 </script>
 {% endblock %}

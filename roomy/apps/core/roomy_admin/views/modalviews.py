@@ -308,18 +308,36 @@ class TenantReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
 
 def ExpenseCreateModal(request, pk):
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-            data = {
-                'property_id': Property.objects.get(pk=pk)
-            }
-            form = ExpenseModelForm(request.POST or None, initial=data)
+            # data = {
+            #     'property_id': Property.objects.get(pk=pk)
+            # }
+            # form = ExpenseModelForm(request.POST or None, initial=data)
+
+            # if form.is_valid():
+            #     form.save()
+            #     return HttpResponseRedirect(reverse('expense'))
+            # context = {
+            #     'form': form,
+            # }
+            # return render(request, "components/modals/create.html", context)
+        data = {
+            'property_id': Property.objects.get(pk=pk)
+        }
+        if request.method == 'POST':
+            form = ExpenseModelForm(request.POST)
 
             if form.is_valid():
                 form.save()
+                print('bat umuulet')
                 return HttpResponseRedirect(reverse('expense'))
-            context = {
-                'form': form,
-            }
-            return render(request, "components/modals/create.html", context)
+        else:
+            form = ExpenseModelForm(initial=data)
+
+        context = {
+            'form': form,
+        }
+
+        return render(request, "components/modals/create.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -588,16 +606,39 @@ class CatalogReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView)
         return self.request.user.is_staff
 
 
-class CatalogCreateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalCreateView):
-    model = RoomCatalog
-    model_type = 'catalog'
-    template_name = 'components/modals/create.html'
-    form_class = RoomCatalogModalForm
-    success_message = 'Success: Catalog created.'
-    success_url = reverse_lazy('catalog_management')
+def CatalogCreateModal(request, pk):
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+            data = {
+                'property_id': Property.objects.get(pk=pk)
+            }
+            form = CatalogModelForm(request.POST or None, initial=data)
 
-    def test_func(self):
-        return self.request.user.is_staff
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse('catalog_management'))
+            context = {
+                'form': form,
+            }
+            return render(request, "components/modals/create.html", context)
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 
 class CatalogDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):
@@ -639,16 +680,50 @@ class RoomReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
         return self.request.user.is_staff
 
 
-class RoomCreateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalCreateView):
-    model = Room
-    model_type = 'room'
-    template_name = 'components/modals/create.html'
-    form_class = RoomModalForm
-    success_message = 'Success: Room created.'
-    success_url = reverse_lazy('room_management')
+# class RoomCreateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalCreateView):
+#     model = Room
+#     model_type = 'room'
+#     template_name = 'components/modals/create.html'
+#     form_class = RoomModalForm
+#     success_message = 'Success: Room created.'
+#     success_url = reverse_lazy('room_management')
 
-    def test_func(self):
-        return self.request.user.is_staff
+#     def test_func(self):
+#         return self.request.user.is_staff
+
+def RoomCreateModal(request, pk):
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+            data = {
+                'catalog_id': RoomCatalog.objects.get(pk=pk)
+            }
+            form = RoomModelForm(request.POST or None, initial=data)
+
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse('room_management'))
+            context = {
+                'form': form,
+            }
+            return render(request, "components/modals/create.html", context)
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
 
 
 class RoomDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteView):

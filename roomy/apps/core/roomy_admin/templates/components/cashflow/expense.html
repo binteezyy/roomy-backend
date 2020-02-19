@@ -12,16 +12,21 @@ Property Expenses
 
 {% block content %}
 {% include "_modal.html" %}
-{% for property in properties %}
 <div class="content container">
   <div class="card-content">
     <div class="container-fluid">
-      <h2>Expenses in {{property.name}}</h2>
+      <h2>Property:</h2>
+      <select class="mdb-select md-form">
+        {% for property in properties %}
+        <option value="{{property.pk}}">{{property.name}}</option>
+        {% endfor %}
+      </select>
+      <h2>Expenses in <span id='expense-span'></span></h2>
       <div class="row p-3">
         <div class="col">
           <div class="table-responsive">
-            <table id="expense-table-{{property.pk}}" class="table table-bordered table-hover" width="100%"
-              cellspacing="0" role="grid" aria-describedby="dataTable_info">
+            <table id="expense-table" class="table table-bordered table-hover" width="100%" cellspacing="0" role="grid"
+              aria-describedby="dataTable_info">
               <thead>
                 <tr role="row">
                   <th>Id</th>
@@ -39,7 +44,6 @@ Property Expenses
     </div>
   </div>
 </div>
-{% endfor %}
 {% endblock %}
 
 {% block header %}
@@ -50,20 +54,21 @@ Expenses
 <script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
 <script type="text/javascript">
   $(document).ready(function () {
-    {% for property in properties %}
-    $('#expense-table-{{property.pk}}').DataTable({
+    var val = $('.mdb-select').val();
+    $('#expense-span').html($(".mdb-select option:selected").text());
+    var table = $('#expense-table').DataTable({
       "dataType": 'json',
       "ajax": {
         "processing": true,
         "dataSrc": '',
-        "url": "{% url 'admin-expense-table' property.pk %}",
+        "url": "/expense/table/" + val,
       },
-      "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-expense-{{property.pk}}'>>>>" +
+      "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-expense'>>>>" +
         "<'row'<'col-md-6'><'col-md-6'>>" +
         "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
       "initComplete": function (settings, json) {
-        $("div.create-expense-{{property.pk}}").html('<button type="button" id="create-expense-{{property.pk}}" class="float-right btn btn-s btn-success btn-raised" name="button">Add Expense <i class="fas fa-plus"></i></button>');
-        $(".create-expense-{{property.pk}}").modalForm({ formURL: "{% url 'create-expense' property.pk %}" });
+        $("div.create-expense").html('<button type="button" id="create-expense" class="float-right btn btn-s btn-success btn-raised" name="button">Add Expense <i class="fas fa-plus"></i></button>');
+        $(".create-expense").modalForm({ formURL: "/create/expense/" + val });
       },
       "drawCallback": function (settings) {
         // $(".delete-expense").each(function () {
@@ -109,7 +114,13 @@ Expenses
         },
       ]
     })
-    {% endfor %}
+    $(".mdb-select").on("change", function () {
+      table.ajax.url("/expense/table/" + $(this).val()).load();
+      $('#expense-span').html($(".mdb-select option:selected").text());
+
+      val = $('.mdb-select').val();
+      $(".create-expense").modalForm({ formURL: "/create/expense/" + val });
+    });
   });
 </script>
 {% endblock %}

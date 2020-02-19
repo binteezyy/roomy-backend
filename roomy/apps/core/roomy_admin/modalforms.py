@@ -81,11 +81,20 @@ class RoomCatalogModalForm(BSModalForm):
         model = RoomCatalog
         exclude = ['img_2d', 'img_3d']
 
+class CatalogModelForm(forms.ModelForm):
+    class Meta:
+        model = RoomCatalog
+        exclude = ['img_2d', 'img_3d']
+
 class RoomModalForm(BSModalForm):
     class Meta:
         model = Room
         exclude = ['',]
 
+class RoomModelForm(forms.ModelForm):
+    class Meta:
+        model = Room
+        exclude = ['',]
 
 class AdminAccModalForm(BSModalForm):
     class Meta:

@@ -12,16 +12,21 @@ Fee
 
 {% block content %}
 {% include "_modal.html" %}
-{% for property in properties %}
 <div class="content container">
     <div class="card-content">
         <div class="container-fluid">
-            <h2>Fees in {{property.name}}</h2>
+            <h2>Property:</h2>
+            <select class="mdb-select md-form">
+                {% for property in properties %}
+                <option value="{{property.pk}}">{{property.name}}</option>
+                {% endfor %}
+            </select>
+            <h2>Fees in <span id="fee-span"></span></h2>
             <div class="row p-3">
                 <div class="col">
                     <div class="table-responsive">
-                        <table id="fee-table-{{property.pk}}" class="table table-bordered table-hover" width="100%"
-                            cellspacing="0" role="grid" aria-describedby="dataTable_info">
+                        <table id="fee-table" class="table table-bordered table-hover" width="100%" cellspacing="0"
+                            role="grid" aria-describedby="dataTable_info">
                             <thead>
                                 <tr role="row">
                                     <th>Id</th>
@@ -39,7 +44,6 @@ Fee
         </div>
     </div>
 </div>
-{% endfor %}
 {% endblock %}
 
 {% block header %}
@@ -50,20 +54,21 @@ Fee
 <script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        {% for property in properties %}
-        $('#fee-table-{{property.pk}}').DataTable({
+        var val = $('.mdb-select').val();
+        $('#fee-span').html($(".mdb-select option:selected").text());
+        var table = $('#fee-table').DataTable({
             "dataType": 'json',
             "ajax": {
                 "processing": true,
                 "dataSrc": '',
-                "url": "{% url 'admin-fee-table' property.pk%}",
+                "url": "/fee/table/" + val,
             },
-            "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-fee-{{property.pk}}'>>>>" +
+            "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-fee'>>>>" +
                 "<'row'<'col-md-6'><'col-md-6'>>" +
                 "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
             "initComplete": function (settings, json) {
-                $("div.create-fee-{{property.pk}}").html('<button type="button" id="create-fee-{{property.pk}}" class="float-right btn btn-s btn-success btn-raised" name="button">Add Fee <i class="fas fa-plus"></i></button>');
-                $(".create-fee-{{property.pk}}").modalForm({ formURL: "{% url 'create-fee' property.pk %}" });
+                $("div.create-fee").html('<button type="button" id="create-fee" class="float-right btn btn-s btn-success btn-raised" name="button">Add Fee <i class="fas fa-plus"></i></button>');
+                $(".create-fee").modalForm({ formURL: "/create/fee/" + val });
             },
             "drawCallback": function (settings) {
                 // $(".delete-fee").each(function () {
@@ -109,7 +114,13 @@ Fee
                 },
             ]
         })
-        {% endfor %}
+        $(".mdb-select").on("change", function () {
+            table.ajax.url("/fee/table/" + $(this).val()).load();
+            $('#fee-span').html($(".mdb-select option:selected").text());
+
+            val = $('.mdb-select').val();
+            $(".create-fee").modalForm({ formURL: "/create/fee/" + val });
+        });
     });
 </script>
 {% endblock %}

@@ -30,7 +30,7 @@ urlpatterns = [
 
     # Data Table Paths
     # Billing Table
-    path('billing/table/', datatableviews.billing_table,
+    path('billing/table/<int:pk>', datatableviews.billing_table,
          name='admin-billing-table'),
     path('read/billing/<int:pk>',
          modalviews.BillingReadModal.as_view(), name='read-billing'),
@@ -124,7 +124,7 @@ urlpatterns = [
 
      # Catalog
     path('catalog/table/<int:pk>', datatableviews.catalog_table, name='admin-catalog-table'),
-    path('create/catalog', modalviews.CatalogCreateModal.as_view(), name='create-catalog'),
+    path('create/catalog/<int:pk>', modalviews.CatalogCreateModal, name='create-catalog'),
     path('read/catalog/<int:pk>',
          modalviews.CatalogReadModal.as_view(), name='read-catalog'),
     path('delete/catalog/<int:pk>',
@@ -138,7 +138,7 @@ urlpatterns = [
 
     # Room
     path('room/table/<int:pk>', datatableviews.room_table, name='admin-room-table'),
-    path('create/room', modalviews.RoomCreateModal.as_view(), name='create-room'),
+    path('create/room/<int:pk>', modalviews.RoomCreateModal, name='create-room'),
     path('read/room/<int:pk>',
          modalviews.RoomReadModal.as_view(), name='read-room'),
     path('delete/room/<int:pk>',

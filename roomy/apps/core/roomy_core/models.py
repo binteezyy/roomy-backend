@@ -182,7 +182,7 @@ class Booking(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     tenant_id = models.ForeignKey(TenantAccount, on_delete=models.CASCADE, null=True, blank=True)
     message = models.CharField(max_length=56, blank=True, null=True)
-    start_date = models.DateField(null=True, blank=True)
+    start_date = models.DateField()
     catalog_id = models.ForeignKey(RoomCatalog, on_delete=models.CASCADE)
     document1_id = models.ForeignKey(
         Document, on_delete=models.CASCADE, null=True, blank=True, related_name="document1")
@@ -221,6 +221,8 @@ class Booking(models.Model):
 
                 self.tenant_id = new_tenant
                 print(self.tenant_id)
+        else:
+            print("tenant id and transcation already done")
         super(Booking, self).save(*args, **kwargs)
 
 
