@@ -1,7 +1,10 @@
 body {
   background-color: #f8f7f9;
-}
 
+}
+.content{
+  min-height: 100vh;
+}
 footer a{
   color: #5b5b5b;
 }

@@ -20,14 +20,14 @@ def index(request):
     else:
         # logout(request)
         form = UserLoginForm(request.POST or None)
-        if form.is_valid():
+        if request.method == 'POST' and form.is_valid():
+            form.clean()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-
             user = authenticate(username=username, password=password)
-            login(request, user)
 
-            if next:
+            if user is not None:
+                login(request, user)
                 return redirect(next)
             return HttpResponseRedirect(reverse('admin-index'))
 
