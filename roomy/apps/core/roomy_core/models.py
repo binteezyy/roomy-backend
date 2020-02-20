@@ -143,6 +143,8 @@ class Request(models.Model):
     time_stamp = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=False)
     transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    sent = models.BooleanField(default=True)
+    read = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.subject}, {self.transaction_id}, {self.status}'
@@ -232,7 +234,7 @@ class Message(models.Model):
     title = models.CharField(max_length=32)
     body = models.TextField(blank=True, null=True)
     time_stamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    sent = models.BooleanField(default=False)
+    sent = models.BooleanField(default=True)
     read = models.BooleanField(default=False)
 
     def __str__(self):

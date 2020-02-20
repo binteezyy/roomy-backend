@@ -1,6 +1,6 @@
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render  # get_object_or_404, redirect, reverse
+from django.shortcuts import render, reverse, redirect  # get_object_or_404, redirect, reverse
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 
 from django.contrib.auth.models import User
@@ -94,7 +94,7 @@ def FeeCreateModal(request, pk):
 
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect(reverse('fee'))
+                return redirect('fee')
             context = {
                 'form': form,
             }
@@ -329,7 +329,7 @@ def ExpenseCreateModal(request, pk):
             if form.is_valid():
                 form.save()
                 print('bat umuulet')
-                return HttpResponseRedirect(reverse('expense'))
+                return redirect('expense')
         else:
             form = ExpenseModelForm(initial=data)
 

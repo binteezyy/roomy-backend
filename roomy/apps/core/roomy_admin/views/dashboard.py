@@ -19,7 +19,11 @@ def home(request):
     next = request.GET.get('next')
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-        return render(request, "components/dashboard/home.html")
+        context = {
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user),
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+        }
+        return render(request, "components/dashboard/home.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
