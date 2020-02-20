@@ -427,7 +427,7 @@ class RequestDeleteModal(LoginRequiredMixin, UserPassesTestMixin, BSModalDeleteV
 class RequestUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
     model = Request
     template_name = 'components/modals/update.html'
-    form_class = RequestModalForm
+    form_class = RequestUpdateModalForm
     sucess_message = "Success: Request updated"
     success_url = reverse_lazy('request')
 

@@ -141,7 +141,7 @@ class Request(models.Model):
     subject = models.CharField(max_length=56)
     description = models.TextField(blank=True, null=True)
     time_stamp = models.DateTimeField(auto_now_add=True)
-    status = models.BooleanField(default=False)
+    status = models.IntegerField(choices=r_status, default=0)
     transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE)
     sent = models.BooleanField(default=True)
     read = models.BooleanField(default=False)
@@ -239,6 +239,17 @@ class Message(models.Model):
 
     def __str__(self):
         return f'{self.tenant_id.user_id.first_name} {self.tenant_id.user_id.last_name}- {self.title} - {self.sent}'
+
+class OwnerNotification(models.Model):
+    owner_id = models.ForeignKey(OwnerAccount, on_delete=models.CASCADE)
+    title = models.CharField(max_length=32)
+    body = models.TextField(blank=True, null=True)
+    time_stamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    sent = models.BooleanField(default=True)
+    read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.owner_id.user_id.first_name} {self.owner_id.user_id.last_name}- {self.title} - {self.sent}'
 
 
 class Guest(models.Model):

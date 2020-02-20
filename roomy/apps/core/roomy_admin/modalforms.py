@@ -47,6 +47,11 @@ class RequestModalForm(BSModalForm):
         model = Request
         exclude = ['transaction_id']
 
+class RequestUpdateModalForm(BSModalForm):
+    class Meta:
+        model = Request
+        fields = ['status',]
+
 
 class NotifModalForm(BSModalForm):
     class Meta:

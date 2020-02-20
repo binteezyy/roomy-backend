@@ -21,7 +21,11 @@ def billing(request):
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
-            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
         }
         return render(request, "components/cashflow/billing.html", context)
     else:
@@ -54,7 +58,11 @@ def expense(request):
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
-            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
         }
         return render(request, "components/cashflow/expense.html", context)
     else:
@@ -87,7 +95,11 @@ def fee(request):
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
-            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
         }
         return render(request, "components/cashflow/fee.html", context)
     else:
