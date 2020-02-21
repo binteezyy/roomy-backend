@@ -55,3 +55,14 @@ class UserRegisterForm(forms.ModelForm):
             raise forms.ValidationError("Email already registered")
 
         return super(UserRegisterForm, self).clean(*args, **kwargs)
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
+        
+class OwnerAccountForm(forms.ModelForm):
+    class Meta:
+        model = OwnerAccount
+        exclude = ['user_id']

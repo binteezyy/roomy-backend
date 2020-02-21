@@ -28,6 +28,7 @@ urlpatterns = [
 #     path('management/account',      management.admin_management,
 #          name='admin_management'),
      path('management/owner-notifs', management.owner_notification, name='owner_notification'),
+    path('management/owner-profile', management.owner_profile, name='owner-profile'),
 
     # Data Table Paths
     # Billing Table
