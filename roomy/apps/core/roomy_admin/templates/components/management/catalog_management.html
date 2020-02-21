@@ -55,6 +55,7 @@ Catalogs
 <script type="text/javascript">
     $(document).ready(function () {
         var val = $('.mdb-select').val();
+        $('#catalog-span').html($(".mdb-select option:selected").text());
         var table = $('#catalog-table-').DataTable({
             "dataType": 'json',
             "ajax": {

@@ -301,6 +301,28 @@ def room_table(request, pk):
     pprint(data)
     return HttpResponse(data, content_type='application/json')
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def onotif_table(request):
+    notifs = OwnerNotification.objects.filter(owner_id__user_id=request.user)
+
+    data = []
+    for notif in notifs:
+        date = notif.time_stamp.strftime("%Y, %B %d")
+        if notif.read:
+            status = "Read"
+        else:
+            status = "Unread"
+        x = {"fields": {"id": notif.pk,
+                        "title": notif.title,
+                        "body": notif.body,
+                        "date": date,
+                        "status": status,
+                        }}
+        data.append(x)
+    data = json.dumps(data)
+    pprint(data)
+    return HttpResponse(data, content_type='application/json')
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)

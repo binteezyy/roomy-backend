@@ -2,7 +2,28 @@
 {% load static %}
 
 {% block layout %}
-
+<!-- Notif Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of Notif Modal -->
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -83,8 +104,8 @@
             <span>Catalog</span> </a>
           <a class="collapse-item" href="{% url 'room_management' %}"><i class="fas fa-fw fa-bed"></i> <span>Room</span>
           </a>
-          <!-- 
-            <a class="collapse-item" href="#"><i class="fas fa-fw fa-user-circle"></i> <span>Account</span> </a> -->
+          <a class="collapse-item" href="{% url 'owner_notification' %}"><i class="fas fa-fw fa-bell"></i>
+            <span>Notifications</span> </a>
         </div>
       </div>
     </li>
@@ -152,7 +173,11 @@
               </form>
             </div>
           </li>
-
+          <li>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+              Launch demo modal
+            </button>
+          </li>
           <!-- Nav Item - Alerts -->
           <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
@@ -187,7 +212,8 @@
                   $290.29 has been deposited into your account!
                 </div>
               </a> -->
-              <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+              <a class="dropdown-item text-center small text-gray-500" href="{% url 'owner_notification' %}">Show All
+                Alerts</a>
             </div>
           </li>
 
@@ -206,7 +232,7 @@
                 Tenant Messages
               </h6>
               {% for message in messages %}
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <button class="dropdown-item d-flex align-items-center message-{{message.pk}}">
                 {% if not message.read %}<div class="font-weight-bold"> {%endif%}
                   <div class="text-truncate"> {{ message.subject }}</div>
                   <div class="small text-gray-500">
@@ -217,7 +243,7 @@
                   </div>
                   {% if not message.read %}
                 </div>{%endif%}
-              </a>
+              </button>
               {% endfor %}
               <!-- <a class="dropdown-item d-flex align-items-center" href="#">
                 <div class="dropdown-list-image mr-3">
@@ -230,7 +256,8 @@
                   <div class="small text-gray-500">Jae Chun · 1d</div>
                 </div>
               </a> -->
-              <a class="dropdown-item text-center small text-gray-500" href="{% url 'request' %}">Read More Messages</a>
+              <a class="dropdown-item text-center small text-gray-500" href="{% url 'request' %}">Read More
+                Messages</a>
             </div>
           </li>
 
@@ -270,7 +297,6 @@
 
       </nav>
       <!-- End of Topbar -->
-
       <!-- Begin Page Content -->
       <div class="container-fluid">
 
@@ -317,6 +343,18 @@
     new WOW().init();
   });
 </script>
+
+<!-- Modal Script -->
+<script>
+  $(document).ready(() => {
+    {% for message in messages %}
+    $('.message-{{message.pk}}').click(function () {
+      $('#modalWindow').modal('show');
+    });
+    {% endfor %}
+  });
+</script>
+<!-- End of Modal Script -->
 
 {% endblock %}
 <!-- end of sidebar & content -->

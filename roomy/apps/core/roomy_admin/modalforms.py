@@ -101,6 +101,11 @@ class RoomModelForm(forms.ModelForm):
         model = Room
         exclude = ['',]
 
+class OnotifModalForm(BSModalForm):
+    class Meta:
+        model = OwnerNotification
+        fields = ['read', ]
+
 class AdminAccModalForm(BSModalForm):
     class Meta:
         model = OwnerAccount

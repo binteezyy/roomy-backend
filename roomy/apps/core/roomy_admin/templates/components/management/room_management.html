@@ -55,6 +55,7 @@ Rooms
 <script type="text/javascript">
   $(document).ready(function () {
     var val = $('.mdb-select').val()
+    $('#room-span').html($(".mdb-select option:selected").text());
     var table = $('#room-table').DataTable({
       "dataType": 'json',
       "ajax": {

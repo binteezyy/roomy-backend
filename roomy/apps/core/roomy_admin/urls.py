@@ -8,25 +8,26 @@ urlpatterns = [
 
     # dashboard
     path('',      dashboard.home,    name='admin-index'),
-    path('dashboard/booking/', dashboard.booking, name='booking'),
-    path('dashboard/rental/',      dashboard.rental,    name='rental'),
-    path('dashboard/tenant/',      dashboard.tenant,    name='tenant'),
-    path('dashboard/notification/',    dashboard.notif,    name='notif'),
-    path('dashboard/request/',  dashboard.tenant_request, name='request'),
-    path('dashboard/guest/',    dashboard.guest, name='guest'),
+    path('dashboard/booking', dashboard.booking, name='booking'),
+    path('dashboard/rental',      dashboard.rental,    name='rental'),
+    path('dashboard/tenant',      dashboard.tenant,    name='tenant'),
+    path('dashboard/notification',    dashboard.notif,    name='notif'),
+    path('dashboard/request',  dashboard.tenant_request, name='request'),
+    path('dashboard/guest',    dashboard.guest, name='guest'),
 
     # cashflow
-    path('cashflow/expense/',      cashflow.expense,  name='expense'),
-    path('cashflow/billing/',      cashflow.billing,  name='billing'),
-    path('cashflow/fee/',      cashflow.fee, name='fee'),
+    path('cashflow/expense',      cashflow.expense,  name='expense'),
+    path('cashflow/billing',      cashflow.billing,  name='billing'),
+    path('cashflow/fee',      cashflow.fee, name='fee'),
 
     # management
-    path('management/property/',      management.property_management,
+    path('management/property',      management.property_management,
          name='property_management'),
      path('management/catalog',      management.catalog_management, name='catalog_management'),
-    path('management/room/',      management.room_management, name='room_management'),
-    path('management/account/',      management.admin_management,
-         name='admin_management'),
+    path('management/room',      management.room_management, name='room_management'),
+#     path('management/account',      management.admin_management,
+#          name='admin_management'),
+     path('management/owner-notifs', management.owner_notification, name='owner_notification'),
 
     # Data Table Paths
     # Billing Table
@@ -145,6 +146,11 @@ urlpatterns = [
          modalviews.RoomDeleteModal.as_view(), name='delete-room'),
     path('update/room/<int:pk>',
          modalviews.RoomUpdateModal.as_view(), name='update-room'),
+
+     # Owner Notifs
+     path('onotif/table', datatableviews.onotif_table, name='owner-notif-table'),
+     path('update/onotif/<int:pk>', modalviews.OnotifUpdateModal.as_view(), name='update-onotif'),
+     path('read/onotif/<int:pk>', modalviews.OnotifReadModal.as_view(), name='read-onotif'),
 
     # Account
     #     path('account_management/table/',

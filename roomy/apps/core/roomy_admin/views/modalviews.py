@@ -746,6 +746,30 @@ class RoomUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView
     def test_func(self):
         return self.request.user.is_staff
 
+class OnotifUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView):
+    model = OwnerNotification
+    template_name = 'components/modals/update.html'
+    form_class = OnotifModalForm
+    sucess_message = "Success: Owner Notif updated"
+    success_url = reverse_lazy('owner_notification')
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+class OnotifReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
+    model = OwnerNotification
+    context_object_name = 'onotif'
+    template_name = 'components/modals/read.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['viewtype'] = 'onotif'
+        context['onotif'] = kwargs['object']
+        return context
+
+    def test_func(self):
+        return self.request.user.is_staff
+
 class AdminAccReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
     model = OwnerAccount
     context_object_name = 'adminacc'
