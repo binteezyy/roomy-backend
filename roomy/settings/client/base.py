@@ -23,8 +23,8 @@ INSTALLED_APPS = [
 ] + GLOBAL_APPS
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.google.GoogleOAuth2',
 )
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '799962262985-1bco370hresk0df19akuo4bmi02or742.apps.googleusercontent.com'
@@ -77,5 +77,3 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
