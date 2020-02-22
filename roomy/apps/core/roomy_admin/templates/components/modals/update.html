@@ -32,7 +32,7 @@
         </script>
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
         <input type="text" name="property_address" maxlength="256" placeholder="{{field.label}}" class="form-control"
-            id="{{field.id_for_label}}">
+            id="{{field.id_for_label}}" value={{field.value}}>
         <div class="{% if field.errors %} invalid{% endif %}">
             {% for error in field.errors %}
             <p class="help-block">{{ error }}</p>

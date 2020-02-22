@@ -323,16 +323,12 @@ def ExpenseCreateModal(request, pk):
         data = {
             'property_id': Property.objects.get(pk=pk)
         }
+        form = ExpenseModelForm(request.POST or None, initial=data)
         if request.method == 'POST':
-            form = ExpenseModelForm(request.POST)
-
             if form.is_valid():
                 form.save()
                 print('bat umuulet')
                 return redirect('expense')
-        else:
-            form = ExpenseModelForm(initial=data)
-
         context = {
             'form': form,
         }

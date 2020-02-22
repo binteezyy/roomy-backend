@@ -160,12 +160,13 @@ def owner_profile(request):
                 form1 = UserUpdateForm(request.POST, prefix='user_form')
                 form2 = OwnerAccountForm(request.POST, prefix='account_form')
 
-                if form.is_valid():
-                    form.save()
+                if form1.is_valid() and form2.is_valid():
+                    form1.save()
+                    form2.save()
                     return redirect('owner-profile')
             else:
                 form1 = UserUpdateForm(instance=request.user, prefix='user_form')
-                form2 = OwnerAccountForm(prefix='account_form')
+                form2 = OwnerAccountForm(instance=OwnerAccount.objects.get(user_id=request.user), prefix='account_form')
 
             context = {
                 'properties': Property.objects.filter(owner_id__user_id=request.user),

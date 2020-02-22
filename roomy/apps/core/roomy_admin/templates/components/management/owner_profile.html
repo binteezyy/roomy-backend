@@ -21,72 +21,105 @@ User Profile
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="md-form mb-0">
-                    <!-- <input type="text" id="username" class="form-control validate" value="{{user.username}}" required>
-                    <label for="username" data-error="wrong" data-success="right">Username</label> -->
-                    {{ form1.username.errors }}
-                    {{ form1.username.label_tag }}: {{ form1.username }}
+                    <input type="text" id="{{form1.username.id_for_label}}" class="form-control validate"
+                        value="{{form1.username.value}}" required>
+                    <label for="{{form1.username.id_for_label}}" data-error="wrong"
+                        data-success="right">{{form1.username.label}}</label>
+                    <div class="{% if field.errors %} invalid{% endif %}">
+                        {% for error in field.errors %}
+                        <p class="help-block">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="md-form mb-0">
-                    <!-- <input type="text" id="first_name" class="form-control validate" value="{{user.first_name}}"
-                        required>
-                    <label for="first_name" data-error="wrong" data-success="right">First name</label> -->
-                    {{ form1.first_name.errors }}
-                    {{ form1.first_name.label_tag }}: {{ form1.first_name }}
+                    <input type="text" id="{{form1.first_name.id_for_label}}" class="form-control validate"
+                        value="{{form1.first_name.value}}" required>
+                    <label for="{{form1.first_name.id_for_label}}" data-error="wrong"
+                        data-success="right">{{form1.first_name.label}}</label>
+                    <div class="{% if field.errors %} invalid{% endif %}">
+                        {% for error in field.errors %}
+                        <p class="help-block">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="md-form mb-0">
-                    <!-- <input type="text" id="last_name" class="form-control validate" value="{{user.last_name}}" required>
-                    <label for="last_name" data-error="wrong" data-success="right">Last name</label> -->
-                    {{ form1.last_name.errors }}
-                    {{ form1.last_name.label_tag }}: {{ form1.last_name }}
+                    <input type="text" id="{{form1.last_name.id_for_label}}" class="form-control validate"
+                        value="{{form1.last_name.value}}" required>
+                    <label for="{{form1.last_name.id_for_label}}" data-error="wrong"
+                        data-success="right">{{form1.last_name.label}}</label>
+                    <div class="{% if field.errors %} invalid{% endif %}">
+                        {% for error in field.errors %}
+                        <p class="help-block">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="md-form mb-0">
-                    <!-- <input type="email" id="email_address" class="form-control validate" value="{{user.email}}"
-                        required>
-                    <label for="email_address">Email address</label> -->
-                    {{ form1.email.errors }}
-                    {{ form1.email.label_tag }}: {{ form1.email }}
+                    <input type="text" id="{{form1.email.id_for_label}}" class="form-control validate"
+                        value="{{form1.email.value}}" required>
+                    <label for="{{form1.email.id_for_label}}" data-error="wrong"
+                        data-success="right">{{form1.email.label}}</label>
+                    <div class="{% if field.errors %} invalid{% endif %}">
+                        {% for error in field.errors %}
+                        <p class="help-block">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="md-form mb-0">
-                    <!-- <input type="text" id="last_name" class="form-control validate" value="{{user.last_name}}" required>
-                    <label for="last_name" data-error="wrong" data-success="right">Last name</label> -->
-                    {{ form2.cell_number.errors }}
-                    {{ form2.cell_number.label_tag }}: {{ form2.cell_number }}
+                    <input type="text" id="{{form2.cell_number.id_for_label}}" class="form-control validate"
+                        value="{{form2.cell_number.value}}" required>
+                    <label for="{{form2.cell_number.id_for_label}}" data-error="wrong"
+                        data-success="right">{{form2.cell_number.label}}</label>
+                    <div class="{% if field.errors %} invalid{% endif %}">
+                        {% for error in field.errors %}
+                        <p class="help-block">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="md-form mb-0">
-                    <!-- <input type="text" id="last_name" class="form-control validate" value="{{user.last_name}}" required>
-                    <label for="last_name" data-error="wrong" data-success="right">Last name</label> -->
-                    {{ form2.provincial_address.errors }}
-                    {{ form2.provincial_address.label_tag }}: {{ form2.provincial_address }}
+                    <input type="text" id="{{form2.provincial_address.id_for_label}}" class="form-control validate"
+                        value="{{form2.provincial_address.value}}" required>
+                    <label for="{{form2.provincial_address.id_for_label}}" data-error="wrong"
+                        data-success="right">{{form2.provincial_address.label}}</label>
+                    <div class="{% if field.errors %} invalid{% endif %}">
+                        {% for error in field.errors %}
+                        <p class="help-block">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="md-form mb-0">
-                    <!-- <input type="text" id="last_name" class="form-control validate" value="{{user.last_name}}" required>
-                    <label for="last_name" data-error="wrong" data-success="right">Last name</label> -->
-                    {{ form2.birthday.errors }}
-                    {{ form2.birthday.label_tag }}: {{ form2.birthday }}
+                    <input type="text" id="{{form2.birthday.id_for_label}}" class="form-control validate"
+                        value="{{form2.birthday.value}}" required>
+                    <label for="{{form2.birthday.id_for_label}}" data-error="wrong"
+                        data-success="right">{{form2.birthday.label}}</label>
+                    <div class="{% if field.errors %} invalid{% endif %}">
+                        {% for error in field.errors %}
+                        <p class="help-block">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
