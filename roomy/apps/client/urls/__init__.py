@@ -10,10 +10,10 @@ from . import account
 urlpatterns = [
     #navigation
     path('', landing.home, name='home'),
-    path('login/',auth.login, name='login'),
-    path('logout/', auth.logout, name='logout'),
-    path('sign-up/',auth.sign_up, name='sign_up'),
-    path('forgot-password/', auth.forgot_password, name='forgot_password'),
+    path('login/',auth.clogin, name='login'),
+    path('logout/', auth.clogout, name='logout'),
+    path('sign-up/',auth.csign_up, name='sign_up'),
+    path('forgot-password/', auth.cforgot_password, name='forgot_password'),
     path('get-in-touch/',auth.get_in_touch, name='get_in_touch'),
     path('explore/', explore.index, name='explore'),
     path('booking_guide/', landing.booking_guide, name='booking_guide'),
