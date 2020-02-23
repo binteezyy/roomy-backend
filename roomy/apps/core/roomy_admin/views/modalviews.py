@@ -86,19 +86,22 @@ class FeeUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateView)
         return self.request.user.is_staff
 
 def FeeCreateModal(request, pk):
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
             data = {
                 'property_id': Property.objects.get(pk=pk)
             }
             form = FeeModelForm(request.POST or None, initial=data)
 
-            if form.is_valid():
-                form.save()
+            if request.method == 'POST':
+                if form.is_valid():
+                    form.save()
                 return redirect('fee')
-            context = {
-                'form': form,
-            }
-            return render(request, "components/modals/create.html", context)
+            else:
+                context = {
+                    'form': form,
+                }
+                return render(request, "components/modals/create.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -120,6 +123,7 @@ def FeeCreateModal(request, pk):
         return render(request, 'components/admin_login/login.html', context)
         
 def ManageTenantsModal(request, pk):
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'viewtype': 'manage_tenants',
@@ -148,6 +152,7 @@ def ManageTenantsModal(request, pk):
         return render(request, 'components/admin_login/login.html', context)
 
 def RemoveTenantModal(request, pk, idk):
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         if request.method == 'GET':
             context = {
@@ -243,6 +248,7 @@ class RentalUpdateModal(LoginRequiredMixin, UserPassesTestMixin, BSModalUpdateVi
         return self.request.user.is_staff
 
 def AddTenantModal(request, pk):
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         if request.method == 'GET':
             property_obj = Property.objects.get(pk=pk)
@@ -307,33 +313,24 @@ class TenantReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
 
 
 def ExpenseCreateModal(request, pk):
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-            # data = {
-            #     'property_id': Property.objects.get(pk=pk)
-            # }
-            # form = ExpenseModelForm(request.POST or None, initial=data)
-
-            # if form.is_valid():
-            #     form.save()
-            #     return HttpResponseRedirect(reverse('expense'))
-            # context = {
-            #     'form': form,
-            # }
-            # return render(request, "components/modals/create.html", context)
-        data = {
-            'property_id': Property.objects.get(pk=pk)
-        }
-        form = ExpenseModelForm(request.POST or None, initial=data)
-        if request.method == 'POST':
-            if form.is_valid():
-                form.save()
-                print('bat umuulet')
+            data = {
+                'property_id': Property.objects.get(pk=pk)
+            }
+            form = ExpenseModelForm(request.POST or None, initial=data)
+            
+            if request.method == 'POST':
+                if form.is_valid():
+                    form.save()
+                    print('bat umuulet')
                 return redirect('expense')
-        context = {
-            'form': form,
-        }
+            else:
+                context = {
+                    'form': form,
+                }
 
-        return render(request, "components/modals/create.html", context)
+                return render(request, "components/modals/create.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -530,19 +527,22 @@ class PropertyReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView
 
 
 def PropertyCreateModal(request):
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
             data = {
                 'owner_id': OwnerAccount.objects.get(user_id=request.user)
             }
             form = PropertyModelForm(request.POST or None, initial=data)
 
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect(reverse('expense'))
-            context = {
-                'form': form,
-            }
-            return render(request, "components/modals/create.html", context)
+            if request.method == 'POST':
+                if form.is_valid():
+                    form.save()
+                return HttpResponseRedirect(reverse('property_management'))
+            else:
+                context = {
+                    'form': form,
+                }
+                return render(request, "components/modals/create.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -603,19 +603,22 @@ class CatalogReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView)
 
 
 def CatalogCreateModal(request, pk):
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
             data = {
                 'property_id': Property.objects.get(pk=pk)
             }
             form = CatalogModelForm(request.POST or None, initial=data)
 
-            if form.is_valid():
-                form.save()
+            if request.method == 'POST':
+                if form.is_valid():
+                    form.save()
                 return HttpResponseRedirect(reverse('catalog_management'))
-            context = {
-                'form': form,
-            }
-            return render(request, "components/modals/create.html", context)
+            else:
+                context = {
+                    'form': form,
+                }
+                return render(request, "components/modals/create.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -688,19 +691,22 @@ class RoomReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
 #         return self.request.user.is_staff
 
 def RoomCreateModal(request, pk):
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
             data = {
                 'catalog_id': RoomCatalog.objects.get(pk=pk)
             }
             form = RoomModelForm(request.POST or None, initial=data)
 
-            if form.is_valid():
-                form.save()
+            if request.method == 'POST':
+                if form.is_valid():
+                    form.save()
                 return HttpResponseRedirect(reverse('room_management'))
-            context = {
-                'form': form,
-            }
-            return render(request, "components/modals/create.html", context)
+            else:
+                context = {
+                    'form': form,
+                }
+                return render(request, "components/modals/create.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)

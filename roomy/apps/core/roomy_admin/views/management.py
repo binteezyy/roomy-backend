@@ -17,7 +17,7 @@ context = {
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def property_management(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
@@ -48,7 +48,7 @@ def property_management(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def catalog_management(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
@@ -84,7 +84,7 @@ def catalog_management(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def room_management(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
@@ -119,7 +119,7 @@ def room_management(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def owner_notification(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
@@ -154,7 +154,7 @@ def owner_notification(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def owner_profile(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
             if request.method == "POST":
                 form1 = UserUpdateForm(request.POST, prefix='user_form')

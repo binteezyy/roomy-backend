@@ -17,7 +17,7 @@ context = {
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def billing(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
@@ -54,7 +54,7 @@ def billing(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def expense(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
@@ -91,7 +91,7 @@ def expense(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def fee(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),

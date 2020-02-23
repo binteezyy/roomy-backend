@@ -52,7 +52,7 @@ def home(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def rental(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
@@ -89,7 +89,7 @@ def rental(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def tenant(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
@@ -127,6 +127,7 @@ def tenant(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def guest(request):
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
@@ -163,7 +164,7 @@ def guest(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def tenant_request(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
@@ -200,7 +201,7 @@ def tenant_request(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def notif(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
@@ -237,7 +238,7 @@ def notif(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def booking(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
