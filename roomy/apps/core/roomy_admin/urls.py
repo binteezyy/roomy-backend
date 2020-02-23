@@ -23,12 +23,15 @@ urlpatterns = [
     # management
     path('management/property',      management.property_management,
          name='property_management'),
-     path('management/catalog',      management.catalog_management, name='catalog_management'),
+    path('management/catalog',      management.catalog_management,
+         name='catalog_management'),
     path('management/room',      management.room_management, name='room_management'),
-#     path('management/account',      management.admin_management,
-#          name='admin_management'),
-     path('management/owner-notifs', management.owner_notification, name='owner_notification'),
-    path('management/owner-profile', management.owner_profile, name='owner-profile'),
+    #     path('management/account',      management.admin_management,
+    #          name='admin_management'),
+    path('management/owner-notifs', management.owner_notification,
+         name='owner_notification'),
+    path('management/owner-profile',
+         management.owner_profile, name='owner-profile'),
 
     # Data Table Paths
     # Billing Table
@@ -50,19 +53,23 @@ urlpatterns = [
     path('create/fee/<int:pk>', modalviews.FeeCreateModal, name='create-fee'),
 
     # Rental Table
-    path('manage-tenants/<int:pk>', modalviews.ManageTenantsModal, name='admin-manage-tenants'),
-    path('remove-tenant/<int:pk>/<int:idk>', modalviews.RemoveTenantModal, name='admin-remove-tenant'),
-    path('rental/table/<int:pk>', datatableviews.rental_table, name='admin-rental-table'),
+    path('manage-tenants/<int:pk>', modalviews.ManageTenantsModal,
+         name='admin-manage-tenants'),
+    path('remove-tenant/<int:pk>/<int:idk>',
+         modalviews.RemoveTenantModal, name='admin-remove-tenant'),
+    path('rental/table/<int:pk>', datatableviews.rental_table,
+         name='admin-rental-table'),
     path('read/rental/<int:pk>',
          modalviews.RentalReadModal.as_view(), name='read-rental'),
     path('delete/rental/<int:pk>',
          modalviews.RentalDeleteModal.as_view(), name='delete-rental'),
     path('update/rental/<int:pk>',
-         modalviews.RentalUpdateModal.as_view(), name='update-rental'), 
+         modalviews.RentalUpdateModal.as_view(), name='update-rental'),
 
     # Tenant Table
     path('add/tenant/<int:pk>', modalviews.AddTenantModal, name='admin-add-tenant'),
-    path('tenant/table/<int:pk>', datatableviews.tenant_table, name='admin-tenant-table'),
+    path('tenant/table/<int:pk>', datatableviews.tenant_table,
+         name='admin-tenant-table'),
     path('read/tenant/<int:pk>',
          modalviews.TenantReadModal.as_view(), name='read-tenant'),
 
@@ -77,7 +84,8 @@ urlpatterns = [
          modalviews.ExpenseUpdateModal.as_view(), name='update-expense'),
 
     # Guest Table
-    path('guest/table/<int:pk>', datatableviews.guest_table, name='admin-guest-table'),
+    path('guest/table/<int:pk>', datatableviews.guest_table,
+         name='admin-guest-table'),
     path('create/guest', modalviews.GuestCreateModal.as_view(), name='create-guest'),
     path('delete/guest/<int:pk>',
          modalviews.GuestDeleteModal.as_view(), name='delete-guest'),
@@ -124,9 +132,11 @@ urlpatterns = [
     path('upload/property/<int:pk>', base.property_upload,
          name='admin-property-upload'),
 
-     # Catalog
-    path('catalog/table/<int:pk>', datatableviews.catalog_table, name='admin-catalog-table'),
-    path('create/catalog/<int:pk>', modalviews.CatalogCreateModal, name='create-catalog'),
+    # Catalog
+    path('catalog/table/<int:pk>', datatableviews.catalog_table,
+         name='admin-catalog-table'),
+    path('create/catalog/<int:pk>',
+         modalviews.CatalogCreateModal, name='create-catalog'),
     path('read/catalog/<int:pk>',
          modalviews.CatalogReadModal.as_view(), name='read-catalog'),
     path('delete/catalog/<int:pk>',
@@ -148,10 +158,12 @@ urlpatterns = [
     path('update/room/<int:pk>',
          modalviews.RoomUpdateModal.as_view(), name='update-room'),
 
-     # Owner Notifs
-     path('onotif/table', datatableviews.onotif_table, name='owner-notif-table'),
-     path('update/onotif/<int:pk>', modalviews.OnotifUpdateModal.as_view(), name='update-onotif'),
-     path('read/onotif/<int:pk>', modalviews.OnotifReadModal.as_view(), name='read-onotif'),
+    # Owner Notifs
+    path('onotif/table', datatableviews.onotif_table, name='owner-notif-table'),
+    path('update/onotif/<int:pk>',
+         modalviews.OnotifUpdateModal.as_view(), name='update-onotif'),
+    path('read/onotif/<int:pk>',
+         modalviews.OnotifReadModal.as_view(), name='read-onotif'),
 
     # Account
     #     path('account_management/table/',

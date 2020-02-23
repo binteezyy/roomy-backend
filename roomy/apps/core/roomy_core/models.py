@@ -50,6 +50,7 @@ class Property(models.Model):
     class Meta:
         verbose_name_plural = 'Properties'
 
+
 class RoomCatalog(models.Model):
     room_type_enum = [
         (0, 'Fixed Rate'),
@@ -75,7 +76,8 @@ class RoomCatalog(models.Model):
 
 
 class Room(models.Model):
-    catalog_id = models.ForeignKey(RoomCatalog, on_delete=models.CASCADE, null=True, blank=True)
+    catalog_id = models.ForeignKey(
+        RoomCatalog, on_delete=models.CASCADE, null=True, blank=True)
     number = models.PositiveIntegerField(default=1)
 
     def __str__(self):
@@ -83,7 +85,6 @@ class Room(models.Model):
 
     class Meta:
         unique_together = ('catalog_id', 'number')
-
 
 
 class Fee(models.Model):
@@ -156,6 +157,7 @@ class Document(models.Model):
     def __str__(self):
         return f'{self.file_path}'
 
+
 class TenantAccount(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     birthday = models.DateTimeField(null=True, blank=True)
@@ -175,6 +177,7 @@ class TenantAccount(models.Model):
             trans.save()
         super(TenantAccount, self).save(*args, **kwargs)
 
+
 class Booking(models.Model):
     status_enum = [
         (0, 'Pending'),
@@ -182,7 +185,8 @@ class Booking(models.Model):
         (2, 'Denied'),
     ]
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    tenant_id = models.ForeignKey(TenantAccount, on_delete=models.CASCADE, null=True, blank=True)
+    tenant_id = models.ForeignKey(
+        TenantAccount, on_delete=models.CASCADE, null=True, blank=True)
     message = models.CharField(max_length=56, blank=True, null=True)
     start_date = models.DateField()
     catalog_id = models.ForeignKey(RoomCatalog, on_delete=models.CASCADE)
@@ -193,21 +197,23 @@ class Booking(models.Model):
     add_ons = models.ManyToManyField(Fee, blank=True)
     status = models.IntegerField(choices=status_enum, default=0)
 
-
     def __str__(self):
         return f'Booking: {self.user_id.username} - {self.catalog_id}'
 
     def save(self, *args, **kwargs):
         if not self.tenant_id:
             if self.status == 1:
-                active_transactions = Transaction.objects.filter(active=True, room_id__catalog_id=self.catalog_id)
+                active_transactions = Transaction.objects.filter(
+                    active=True, room_id__catalog_id=self.catalog_id)
                 occupied_rooms_list = []
                 for active_transaction in active_transactions:
                     occupied_rooms_list.append(active_transaction.room_id.pk)
-                avail_room = Room.objects.filter(catalog_id=self.catalog_id).exclude(pk__in=occupied_rooms_list).first()
+                avail_room = Room.objects.filter(catalog_id=self.catalog_id).exclude(
+                    pk__in=occupied_rooms_list).first()
 
                 try:
-                    new_transaction = Transaction.objects.get(active=True, room_id=avail_room)
+                    new_transaction = Transaction.objects.get(
+                        active=True, room_id=avail_room)
                 except Transaction.DoesNotExist:
                     new_transaction = Transaction(room_id=avail_room)
                     new_transaction.save()
@@ -215,9 +221,11 @@ class Booking(models.Model):
                 print(new_transaction)
 
                 try:
-                    new_tenant = TenantAccount.objects.get(user_id=self.user_id, transaction_id=new_transaction)
+                    new_tenant = TenantAccount.objects.get(
+                        user_id=self.user_id, transaction_id=new_transaction)
                 except TenantAccount.DoesNotExist:
-                    new_tenant = TenantAccount(user_id=self.user_id, transaction_id=new_transaction)
+                    new_tenant = TenantAccount(
+                        user_id=self.user_id, transaction_id=new_transaction)
                     new_tenant.save()
                 print(new_tenant)
 
@@ -226,7 +234,6 @@ class Booking(models.Model):
         else:
             print("tenant id and transcation already done")
         super(Booking, self).save(*args, **kwargs)
-
 
 
 class Message(models.Model):
@@ -239,6 +246,7 @@ class Message(models.Model):
 
     def __str__(self):
         return f'{self.tenant_id.user_id.first_name} {self.tenant_id.user_id.last_name}- {self.title} - {self.sent}'
+
 
 class OwnerNotification(models.Model):
     owner_id = models.ForeignKey(OwnerAccount, on_delete=models.CASCADE)
@@ -270,3 +278,6 @@ class Expense(models.Model):
 
     def __str__(self):
         return f'Expense - {self.description}, {self.amount}'
+
+    class Meta:
+        unique_together = ('description', 'amount')
