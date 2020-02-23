@@ -116,6 +116,8 @@ def room_management(request):
         return render(request, 'components/admin_login/login.html', context)
 
 # owner notification
+
+
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def owner_notification(request):
@@ -149,24 +151,44 @@ def owner_notification(request):
             'title': 'Login',
         }
         return render(request, 'components/admin_login/login.html', context)
-    
+
 # owner profile
+
+
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def owner_profile(request):
     next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-            if request.method == "POST":
-                form1 = UserUpdateForm(request.POST, prefix='user_form')
-                form2 = OwnerAccountForm(request.POST, prefix='account_form')
+        user = request.user
+        owner_account = OwnerAccount.objects.get(user_id=request.user)
+        form1 = UserUpdateForm(request.POST, prefix='user_form')
+        form2 = OwnerAccountForm(request.POST, prefix='account_form')
 
-                if form1.is_valid() and form2.is_valid():
-                    form1.save()
-                    form2.save()
-                    return redirect('owner-profile')
+        if request.method == "POST":
+            if form1.is_valid() or form2.is_valid():
+                print('nice')
+                user.username = request.POST.get('id_user_form-username')
+                user.first_name = request.POST.get('id_user_form-first_name')
+                user.last_name = request.POST.get('id_user_form-last_name')
+                user.email = request.POST.get('id_user_form-email')
+                user.save()
+
+                owner_account.birthday = request.POST.get(
+                    'id_account_form-birthday')
+                owner_account.cell_number = request.POST.get(
+                    'id_account_form-cell_number')
+                owner_account.provincial_address = request.POST.get(
+                    'id_account_form-provincial_address')
+                owner_account.save()
             else:
-                form1 = UserUpdateForm(instance=request.user, prefix='user_form')
-                form2 = OwnerAccountForm(instance=OwnerAccount.objects.get(user_id=request.user), prefix='account_form')
+                print('invalid form?')
+
+            return redirect('owner-profile')
+        else:
+            form1 = UserUpdateForm(instance=user, prefix='user_form')
+            form2 = OwnerAccountForm(
+                instance=owner_account, prefix='account_form')
 
             context = {
                 'properties': Property.objects.filter(owner_id__user_id=request.user),
@@ -179,8 +201,6 @@ def owner_profile(request):
                 'form2': form2,
             }
             return render(request, "components/management/owner_profile.html", context)
-
-            
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)

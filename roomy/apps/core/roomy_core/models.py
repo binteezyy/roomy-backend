@@ -20,7 +20,7 @@ class ImageFile(models.Model):
 
 class OwnerAccount(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    birthday = models.DateTimeField(null=True, blank=True)
+    birthday = models.DateField(null=True, blank=True)
     cell_number = models.PositiveIntegerField(null=True, blank=True)
     provincial_address = models.CharField(
         max_length=128, null=True, blank=True)
@@ -160,7 +160,7 @@ class Document(models.Model):
 
 class TenantAccount(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    birthday = models.DateTimeField(null=True, blank=True)
+    birthday = models.DateField(null=True, blank=True)
     cell_number = models.PositiveIntegerField(null=True, blank=True)
     provincial_address = models.CharField(
         max_length=128, null=True, blank=True)
@@ -272,7 +272,7 @@ class Guest(models.Model):
 
 class Expense(models.Model):
     property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
-    time_stamp = models.DateTimeField()
+    time_stamp = models.DateField()
     description = models.CharField(max_length=56)
     amount = models.DecimalField(max_digits=9, decimal_places=2)
 
