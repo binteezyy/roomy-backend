@@ -261,22 +261,30 @@ def AddTenantModal(request, pk):
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         if request.method == 'GET':
             property_obj = Property.objects.get(pk=pk)
+            rooms = []
+            transactions = Transaction.objects.filter(room_id__catalog_id__property_id=property_obj)
+            for transaction in transactions:
+                rooms.append(transaction.room_id)
             context = {
                 'viewtype': 'add_tenant',
                 'property': property_obj,
-                'rooms': Room.objects.filter(catalog_id__property_id=property_obj),
+                # 'rooms': Room.objects.filter(catalog_id__property_id=property_obj),
+                'rooms': rooms,
             }
             return render(request, "components/modals/create.html", context)
         elif request.method == 'POST':
+            print('POST')
             user_id = authenticate(
                 username=request.POST['username'], password=request.POST['password'])
             transaction_id = Transaction.objects.get(
                 room_id=request.POST.get('room'))
 
             try:
+                print('get tenant')
                 new_tenant = TenantAccount.objects.get(
                     user_id=user_id, transaction_id=transaction_id)
             except TenantAccount.DoesNotExist:
+                print('new tenant')
                 if user_id and transaction_id:
                     new_tenant = TenantAccount(
                         user_id=user_id, transaction_id=transaction_id)
