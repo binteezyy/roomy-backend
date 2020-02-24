@@ -38,12 +38,13 @@ def index(request):
 
 def room_view(request,pk):
     room = RoomCatalog.objects.get(pk=pk)
+    room_avail = Room.objects.filter(catalog_id=room).exclude(type=2)
 
     try: booking = Booking.objects.get(catalog_id=room,user_id=request.user)
     except Exception as e:
         booking = None
 
-    if request.method == 'POST' and request.user.is_authenticated: #BOOK ONCE
+    if request.method == 'POST' and request.user.is_authenticated and room_avail > 0: #BOOK ONCE
         book = Booking.objects.create(
             user_id=request.user,
             catalog_id = room,
@@ -54,5 +55,6 @@ def room_view(request,pk):
     context.update({
         "room":room,
         "booking":booking,
+        "available": room_avail,
     })
     return render(request,"web/components/property/room.html", context)

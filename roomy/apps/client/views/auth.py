@@ -69,4 +69,20 @@ def csign_up(request):
     return render(request,"web/components/sign_up.html",context)
 
 def get_in_touch(request):
+    form = OwnerApplicationForm(request.POST or None)
+    if request.method == 'POST':
+        print("POST")
+        if form.is_valid():
+            form.cleaned_data()
+            full_name = form.cleaned_data.get('full_name')
+            company = form.cleaned_data.get('company')
+            print("wow")
+        else:
+            messages.error(request, "Error")
+    else:
+        pass
+    context.update({
+        "TITLE": "Partner With US!",
+        "form": form,
+    })
     return render(request,"web/components/get_in_touch.html",context)

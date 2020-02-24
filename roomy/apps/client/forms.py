@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from apps.core.roomy_core.models import *
 from bootstrap_modal_forms.forms import BSModalForm
-
+from phonenumber_field.formfields import PhoneNumberField
+from .models.application import *
 class UserRegisterForm(forms.ModelForm):
     username = forms.CharField(label='Username')
     email = forms.EmailField(label='Email',max_length=254)
@@ -35,3 +36,27 @@ class UserRegisterForm(forms.ModelForm):
             raise forms.ValidationError("Email already registered")
 
         return super(UserRegisterForm, self).clean(*args, **kwargs)
+
+
+class OwnerApplicationForm(forms.ModelForm):
+    full_name = forms.CharField(label='Full Name')
+    company = forms.CharField(label='Company')
+    email = forms.EmailField(label='Email',max_length=254)
+    phone_number = PhoneNumberField()
+    message = forms.CharField(label='Message',widget=forms.Textarea)
+
+
+    class Meta:
+        model = OwnerApplication
+        fields = [
+            'full_name',
+            'company',
+            'email',
+            'phone_number',
+            'message',
+        ]
+
+    def clean(self, *args, **kwargs):
+        full_name = self.cleaned_data.get('full_name')
+        company = self.cleaned_data.get('company')
+        return super(OwnerApplicationForm, self).clean(*args, **kwargs)

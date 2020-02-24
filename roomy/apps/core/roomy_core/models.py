@@ -77,8 +77,14 @@ class RoomCatalog(models.Model):
 
 
 class Room(models.Model):
+    rtype = [
+        (0, 'Available(Solo)'),
+        (1, 'Available(Shared)'),
+        (2, 'Unavailable'),
+    ]
     catalog_id = models.ForeignKey(RoomCatalog, on_delete=models.CASCADE, null=True, blank=True)
     number = models.PositiveIntegerField(default=1)
+    type = models.IntegerField(choices=rtype, default=0)
 
     def __str__(self):
         return f'{self.catalog_id} - Room {self.number}'
