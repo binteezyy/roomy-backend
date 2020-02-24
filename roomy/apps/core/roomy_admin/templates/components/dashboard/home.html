@@ -53,52 +53,7 @@ Home
 {% block content %}
 <div class="row d-flex flex-wrap justify-content-start align-item-start">
 
-  <!-- tiles -->
-  <div class="d-flex flex-wrap justify-content-start align-items-start">
 
-    <!-- tenant tile -->
-    <div class="d-flex flex-column z-depth-1" style="width: 280px; height: 180px; margin: 20px; padding: 20px; border-radius: 5px;">
-      <!-- first row -->
-      <div class="d-flex justify-content-between align-items-center">
-        <span style="font-size: 50px; font-weight: bold;">10</span>
-        <span>
-          <img src="{% static "img\tenant.png" %}" alt="" style="width: 80px; height: 80px; margin: 0; padding: 0;">
-        </span>
-      </div>
-      <!-- second row -->
-      <div class="d-flex justicy-content-between" style="margin-top: 20px; padding-top: 10px; border-top: 2px solid black;">
-        <span style="font-size: 22px;">Tenant(s)</span>
-      </div>
-    </div>
-    <!-- end of tenant -->
-
-    <!-- room tile -->
-    <div class="d-flex flex-column z-depth-1" style="width: 280px; height: 180px; margin: 20px; padding: 20px; border-radius: 5px;">
-      <!-- first row -->
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="">
-          <span style="font-size: 50px; font-weight: bold;">10</span> <span style="font-size: 22px;">/ 30</span>
-        </div>
-        <span>
-          <img src="{% static "img\room.png" %}" alt="" style="width: 80px; height: 80px; margin: 0; padding: 0;">
-        </span>
-      </div>
-      <!-- second row -->
-      <div class="d-flex justicy-content-between" style="margin-top: 20px; padding-top: 10px; border-top: 2px solid black;">
-        <span style="font-size: 22px;">Active Room(s)</span>
-      </div>
-    </div>
-    <!-- end of room -->
-
-  </div>
-  <!-- end of tiles -->
-
-  <!-- Google Chart -->
-  <div class="z-depth-1" style="width: 400px; height: 400px; margin: 20px; border-radius: 5px;">
-    <div class="" id="pie_chart">
-
-    </div>
-  </div>
 </div>
 
 {% endblock %}

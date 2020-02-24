@@ -7,7 +7,7 @@ urlpatterns = [
     path('demo/<str:place>', base.demo, name='demo'),
 
     # dashboard
-    path('home/',      dashboard.home,    name='admin-index'),
+    path('',      dashboard.home,    name='admin-index'),
     path('dashboard/booking/', dashboard.booking, name='booking'),
     path('dashboard/rental/',      dashboard.rental,    name='rental'),
     path('dashboard/tenant/',      dashboard.tenant,    name='tenant'),
