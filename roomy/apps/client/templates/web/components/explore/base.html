@@ -3,113 +3,115 @@
 
 
 {% block content %}
-<div class="search_area form-inline mr-auto mb-4 d-flex justify-content-center">
-  <form _lpchecked="1" style="width: 100%;" method="GET">
-    <div class="bar" style="background-color: #20274d;">
-      <div class="bar_wrapper">
-        <input name="search" type="text" class="form-control" placeholder="Enter a location or property" aria-label="Search" aria-describedby="search">
-        <button class="btn" value="submit" id="search-icn" style="background-color: #5392f9;">SEARCH</button>
-      </div>
-    </div>
-  </form>
-</div>
-
-<div class="container-fluid" style="margin-bottom: 50px;">
-  <div class="container d-flex flex-column justify-content-center align-items-center">
-    <div class="row d-flex flex-column justify-content-center align-items-center" style="width: 100%;">
-
-      <div class="d-flex flex-wrap justify-content-center align-items-center">
-        {% if message and search != "" %}
-        <h2>{{ message }}{{ specific_brand }}{{ text }}{{ cat }}.</h2>
-        {% endif %}
-        {% if rooms.has_previous %}
-        <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page=1">First</a>
-        <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page={{ rooms.previous_page_number }}">{{ rooms.previous_page_number }}</a>
-        {% endif %}
-        <a class="btn btn-xs btn-primary mb-4 mr-1 text-white" style="pointer-events: none;">{{ rooms.number }}</a>
-        {% if rooms.has_next %}
-        <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page={{ rooms.next_page_number }}">{{ rooms.next_page_number }}</a>
-        <a class="btn btn-xs btn-primary mb-4" href="?page={{ rooms.paginator.num_pages }}">Last</a>
-        {% endif %}
-      </div>
-
-      <div class="col-lg-3"></div>
-      <div class="col-lg-6 d-flex justify-content-center align-items-center">
-        {% for room in rooms %}
-
-        <!-- room container -->
-        <div class="d-flex flex-column justify-content-center" style="width: 100%;">
-
-          <style>
-            .img-container {
-              position: relative;
-              width: 100%;
-              height: 350px;
-            }
-
-            .btn-over {
-              position: absolute;
-              top: 88%;
-              left: 90%;
-              transform: translate(-50%, -50%);
-              -ms-transform: translate(-50%, -50%);
-            }
-          </style>
-
-          <!-- room image -->
-          <div class="img-container">
-            <div class="image-cont wrapper d-flex justify-content-center"
-              style="width: 100%; height: 100%; border-radius: 10px; background-image:url('{% if room.image_2d.all %}/media/{{ room.img_2d.all.0 }} {% else %}/static/img/placeholder_1200x500.png {% endif %}'); background-position: center; background-size: cover; background-repeat: no-repeat;">
-            </div>
-            <div class="btn-over d-flex">
-              <a class="btn btn-md btn-dark" style="color: white;" href="{% url 'room' room.pk %}">View</a>
-            </div>
-          </div>
-
-          <!-- room information -->
-          <div class="d-flex flex-column" style="margin-bottom: 20px; padding: 10px;">
-
-            <!-- room information first row -->
-            <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 12px; text-transform: uppercase; background-color: black; color: white;">
-                {% if room.property_id.property_type == 0 %}
-                Condominium
-                {% elif room.property_id.property_type == 1 %}
-                Apartment
-                {% elif room.property_id.property_type == 2 %}
-                Dormitory
-                {% endif %}
-              </span>
-              <span style="font-size: 16px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
-            </div>
-
-            <!-- room information second row -->
-            <div class="d-flex justify-content-between align-items-center">
-              <span style="font-size: 25px; font-weight: bold;">{{ room.name }}</span>
-              <span style="margin-right: 10px; font-size: 20px;">PHP{{ room.rate }}<span style="font-size: 16px;">/month</span></span>
-            </div>
-
-            <!-- room information third row -->
-            <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-              <span style="font-size: 18px; font-style: italic;">by {{ room.property_id.name}}</span>
-            </div>
-
-            <!-- room address -->
-            <div class="d-flex justify-content-start align-items-start" style="margin-bottom: 5px;">
-              <span style="margin: 0 15px 0 0; font-size: 15px;">{{ room.property_id.property_address }}</span>
-            </div>
-
-          </div>
-          <!-- end of room information -->
-
-
+<div class="content" style="margin-top: 60px;">
+  <div class="search_area form-inline mr-auto mb-4 d-flex justify-content-center ">
+    <form _lpchecked="1" style="width: 100%;" method="GET">
+      <div class="bar" style="background-color: #20274d;">
+        <div class="bar_wrapper">
+          <input name="search" type="text" class="form-control" placeholder="Enter a location or property" aria-label="Search" aria-describedby="search">
+          <button class="btn" value="submit" id="search-icn" style="background-color: #5392f9;">SEARCH</button>
         </div>
-        <!-- end of room container -->
-
-        {% endfor %}
       </div>
-      <div class="col-lg-3"></div>
+    </form>
+  </div>
 
+  <div class="container-fluid" style="margin-bottom: 50px;">
+    <div class="container d-flex flex-column justify-content-center align-items-center">
+      <div class="row d-flex flex-column justify-content-center align-items-center" style="width: 100%;">
+
+        <div class="d-flex flex-wrap justify-content-center align-items-center">
+          {% if message and search != "" %}
+          <h2>{{ message }}{{ specific_brand }}{{ text }}{{ cat }}.</h2>
+          {% endif %}
+          {% if rooms.has_previous %}
+          <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page=1">First</a>
+          <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page={{ rooms.previous_page_number }}">{{ rooms.previous_page_number }}</a>
+          {% endif %}
+          <a class="btn btn-xs btn-primary mb-4 mr-1 text-white" style="pointer-events: none;">{{ rooms.number }}</a>
+          {% if rooms.has_next %}
+          <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page={{ rooms.next_page_number }}">{{ rooms.next_page_number }}</a>
+          <a class="btn btn-xs btn-primary mb-4" href="?page={{ rooms.paginator.num_pages }}">Last</a>
+          {% endif %}
+        </div>
+
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6 d-flex justify-content-center align-items-center">
+          {% for room in rooms %}
+
+          <!-- room container -->
+          <div class="d-flex flex-column justify-content-center" style="width: 100%;">
+
+            <style>
+              .img-container {
+                position: relative;
+                width: 100%;
+                height: 350px;
+              }
+
+              .btn-over {
+                position: absolute;
+                top: 88%;
+                left: 90%;
+                transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+              }
+            </style>
+
+            <!-- room image -->
+            <div class="img-container">
+              <div class="image-cont wrapper d-flex justify-content-center"
+                style="width: 100%; height: 100%; border-radius: 10px; background-image:url('{% if room.image_2d.all %}/media/{{ room.img_2d.all.0 }} {% else %}/static/img/placeholder_1200x500.png {% endif %}'); background-position: center; background-size: cover; background-repeat: no-repeat;">
+              </div>
+              <div class="btn-over d-flex">
+                <a class="btn btn-md btn-dark" style="color: white;" href="{% url 'room' room.pk %}">View</a>
+              </div>
+            </div>
+
+            <!-- room information -->
+            <div class="d-flex flex-column" style="margin-bottom: 20px; padding: 10px;">
+
+              <!-- room information first row -->
+              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 12px; text-transform: uppercase; background-color: black; color: white;">
+                  {% if room.property_id.property_type == 0 %}
+                  Condominium
+                  {% elif room.property_id.property_type == 1 %}
+                  Apartment
+                  {% elif room.property_id.property_type == 2 %}
+                  Dormitory
+                  {% endif %}
+                </span>
+                <span style="font-size: 16px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+              </div>
+
+              <!-- room information second row -->
+              <div class="d-flex justify-content-between align-items-center">
+                <span style="font-size: 25px; font-weight: bold;">{{ room.name }}</span>
+                <span style="margin-right: 10px; font-size: 20px;">PHP{{ room.rate }}<span style="font-size: 16px;">/month</span></span>
+              </div>
+
+              <!-- room information third row -->
+              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                <span style="font-size: 18px; font-style: italic;">by {{ room.property_id.name}}</span>
+              </div>
+
+              <!-- room address -->
+              <div class="d-flex justify-content-start align-items-start" style="margin-bottom: 5px;">
+                <span style="margin: 0 15px 0 0; font-size: 15px;">{{ room.property_id.property_address }}</span>
+              </div>
+
+            </div>
+            <!-- end of room information -->
+
+
+          </div>
+          <!-- end of room container -->
+
+          {% endfor %}
+        </div>
+        <div class="col-lg-3"></div>
+
+      </div>
     </div>
   </div>
 </div>
