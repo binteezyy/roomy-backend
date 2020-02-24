@@ -7,7 +7,7 @@ urlpatterns = [
     path('demo/<str:place>', base.demo, name='demo'),
 
     # dashboard
-    path('',      dashboard.home,    name='admin-index'),
+    path('home/',      dashboard.home,    name='admin-index'),
     path('dashboard/booking/', dashboard.booking, name='booking'),
     path('dashboard/rental/',      dashboard.rental,    name='rental'),
     path('dashboard/tenant/',      dashboard.tenant,    name='tenant'),
@@ -56,7 +56,7 @@ urlpatterns = [
     path('delete/rental/<int:pk>',
          modalviews.RentalDeleteModal.as_view(), name='delete-rental'),
     path('update/rental/<int:pk>',
-         modalviews.RentalUpdateModal.as_view(), name='update-rental'), 
+         modalviews.RentalUpdateModal.as_view(), name='update-rental'),
 
     # Tenant Table
     path('add/tenant/<int:pk>', modalviews.AddTenantModal, name='admin-add-tenant'),
