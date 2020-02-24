@@ -5,14 +5,6 @@
   overflow: hidden;
 }
 
-.sb_fixed {
-  position: fixed;
-  width: 100%;
-  top: 150;
-  left: 0;
-  right: 0;
-}
-
 .search_area .bar {
   background: rgba(145, 8, 8, 1);
   padding: 11px 0;
