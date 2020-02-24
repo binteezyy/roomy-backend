@@ -80,13 +80,9 @@
           </div>
         </div>
 
-      {% else %}
-      <a href="{% url 'login' %}" style="">
-        <button class="btn btn-sm btn-elegant btn-rounded my-0 waves-effect waves-light" type="button" name="button">
-          Login
-        </button>
-      </a>
-      {% endif %}
+        {% else %}
+        <a class="bnt-link" href="{% url 'login' %}" style="font-size: 15px; color: black; font-weight: bold;">LOG IN</a>
+        {% endif %}
     </div>
 
   </div>
@@ -156,11 +152,6 @@
           color: black;
           font-size: 15px;
           border-bottom: 2px solid transparent;
-        }
-
-        .nav-link-footer:hover {
-          font-size: 16px;
-          border-bottom: 2px solid #5392f9;
         }
       </style>
 
