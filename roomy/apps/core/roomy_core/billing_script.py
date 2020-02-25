@@ -1,21 +1,53 @@
 from django.contrib.auth.models import User
 from .models import *
-from datetime import datetime
+from datetime import datetime, date
 from django.db.models import Count
 from functools import reduce
 
-def billing_create():
+def billing_create(request):
     ## get all active transactions - meaning rooms that are occupied by tenants with on going contracts
-    transactions = Transaction.objects.filter(active=True)
-
+    transactions = Transaction.objects.filter(active=True, room_id__catalog_id__property_id__owner_id__user_id=request.user)
     ## loop through transactions
-    # for transaction in transactions:
-        ## check every transacction if ther is an existing billing with the same fees(many-to-many) as the transaction
-        # billing = Billing.objects.annotate(count=Count('billing_fee')).filter(count=len(transaction.add_ons.all()))
-        # billing = reduce(lambda p, id: billing.filter(billing_fee=id), transaction.add_ons.all(), billing)
+    for transaction in transactions:
+        ## get or create billing with this transaction and datetime.month
+        b_date = date(datetime.now().year, datetime.now().month, transaction.billing_date.day)
+        try:
+            billing = Billing.objects.get(time_stamp__month=datetime.now().month, transaction_id=transaction)
+            print('billing exists')
+        except Billing.DoesNotExist:
+            billing = Billing(time_stamp=b_date, transaction_id=transaction)
+            
+            fees = []
+            for fee in transaction.add_ons.all():
+                fees.append(fee)
 
-        ## check if there is an existing for this 
-        # billing = Billing.objects.filter(transaction_id=)
-        # if billing:
-        #     if str(billing[0].time_stamp) < date.now().strftime('%Y-%b-%d'):
-        #         print(billing)
+            billing.save()
+            billing.billing_fee.set(fees)
+            print('does not exists')       
+        ## if datetime.now is > 1 week before time stamp and notif does not exist, get or create owner notif to let him adjust
+            ## ** NOTE THAT THIS BILLING SHOULD NOT BE VISIBLE IN THE CLIENT UI NOT UNTIL TENANT NOTIF ARRIVES
+        if (billing.time_stamp - date.today()).days < 7:
+            ## create notif every day 1 week before billing notif sent to tenant
+            print(f'{(billing.time_stamp - date.today()).days} days before billing')
+            title = f'New billing for {transaction.room_id.catalog_id.property_id.name}, {transaction.room_id.catalog_id.name}, {transaction.room_id.number}'
+            body = f'Please review billing details for Property:{transaction.room_id.catalog_id.property_id.name}, Catalog:{transaction.room_id.catalog_id.name}, Room:{transaction.room_id.number}. URL: localhost:8080/cashflow/billing'
+            try:
+                owner_notif = OwnerNotification.objects.get(owner_id__user_id=request.user, title=title, time_stamp=date.today())
+                print('owner notif exists')
+            except OwnerNotification.DoesNotExist:
+                owner_notif = OwnerNotification(owner_id=OwnerAccount.objects.get(user_id=request.user), title=title, body=body, time_stamp=date.today())
+                owner_notif.save()
+                print('owner notif does not exist')
+        ## if datetime.now is = 1 day before time stamp, get or create tenant notif for his billing
+        if (billing.time_stamp - date.today()).days < 2:
+            print(f'{(billing.time_stamp - date.today()).days} days before billing')
+            title = f'New billing arrived for {transaction.room_id.catalog_id.property_id.name}, {transaction.room_id.catalog_id.name}, {transaction.room_id.number}!'
+            body = f'Please review your billing for {billing.time_stamp}'
+            tenant = TenantAccount.objects.get(transaction_id=transaction)
+            try:
+                tenant_notif = Message.objects.get(tenant_id=tenant, title=title, time_stamp=date.today())
+                print('tenant notif exists')
+            except Message.DoesNotExist:
+                tenant_notif = Message(tenant_id=tenant, title=title, body=body, time_stamp=date.today())
+                tenant_notif.save()
+                print('tenant notif does not exist')

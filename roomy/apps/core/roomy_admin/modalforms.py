@@ -69,7 +69,7 @@ class NotifCreateModalForm(BSModalForm):
 class BookingModalForm(BSModalForm):
     class Meta:
         model = Booking
-        fields = ['status',]
+        fields = ['status', 'start_date']
 
 class PropertyModelForm(forms.ModelForm):
     class Meta:

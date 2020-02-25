@@ -115,6 +115,7 @@ class Transaction(models.Model):
     rating_description = models.TextField(blank=True, null=True)
     rated = models.BooleanField(default=False)
     add_ons = models.ManyToManyField(Fee, blank=True)
+    billing_date = models.DateField(blank=True)
 
     def __str__(self):
         if self.active:
@@ -215,11 +216,10 @@ class Booking(models.Model):
                     new_transaction = Transaction.objects.get(
                         active=True, room_id=avail_room)
                 except Transaction.DoesNotExist:
-                    new_transaction = Transaction(room_id=avail_room)
+                    new_transaction = Transaction(room_id=avail_room, billing_date=self.start_date)
                     new_transaction.save()
                     new_transaction.add_ons.set(self.add_ons.all())
                 print(new_transaction)
-
                 try:
                     new_tenant = TenantAccount.objects.get(
                         user_id=self.user_id, transaction_id=new_transaction)
