@@ -7,11 +7,11 @@
 <div id="wrapper">
 
   <!-- Sidebar -->
-  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+  <ul class="navbar-nav sidebar blue-gradient sidebar-dark accordion" id="accordionSidebar">
 
     <!-- logo -->
     <a href="{% url 'admin-index' %}" style="margin: 15px auto 15px auto;">
-      <img src="{% static "img\logo_white.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+      <img src="{% static "img\logo_white.png" %}" alt="" style="width: 170px; height: 35px; margin:0 auto;">
     </a>
     <!-- end of logo -->
 
@@ -235,7 +235,7 @@
               <!-- profile picture -->
               <div class="" style="width: 30px; height: 30px; margin-right: 10px; border-radius: 15px; background-image: url('/static/img/profile_default.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
               </div>
-              <span class="mr-2 d-none d-lg-inline text-gray-600" style="font-size: 15px;">{{ request.user.username }}</span>
+              <span class="mr-2 d-none d-lg-inline" style="color: black; font-size: 15px; text-transform: uppercase;">{{ request.user.username }}</span>
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -257,12 +257,13 @@
       <!-- End of Topbar -->
 
       <!-- Begin Page Content -->
-      <div class="container-fluid bg-light">
+      <div class="container-fluid bg-light" style="min-height: 100vh;">
 
         <!-- Content Row -->
         {% block content %}
 
         {% endblock %}
+
       </div>
       <!-- /.container-fluid -->
 
@@ -270,16 +271,15 @@
     <!-- End of Main Content -->
 
     <!-- Footer -->
-    <footer class="sticky-footer z-depth-2" style="margin-top: 200px; background-color: grey;">
+    <footer class="sticky-footer" style="background-color: #202020;">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
           <!-- copyright -->
           <div class="d-flex flex-column justify-content-center align-items-center">
-            <a href="{% url 'admin-index' %}" style="margin: 10px 30px 10px 30px;">
-              <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
-            </a>
-            <span style="font-size: 13px; color: black;">&copy; Copyright 2019 - 2020. </span>
-            <span style="font-size: 13px; color: black;">All rights reserved. Powered by <span style="font-size: 15px; font-weight: bold;">PPTT</span> </span>
+            <div href="{% url 'admin-index' %}" style="margin-bottom: 20px;">
+              <img src="{% static "img\logo_white.png" %}" alt="" style="width:170px; height: 35px; margin: 0 auto;">
+            </div>
+            <span style="font-size: 14px;">&copy;Copyright 2019 - 2020. <br> All rights reserved. Powered by <span style="color: white; font-weight: bold; font-style: italic;">PPTT</span></span>
           </div>
           <!-- end of copyright -->
         </div>
