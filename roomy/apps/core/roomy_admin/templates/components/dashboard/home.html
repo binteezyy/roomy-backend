@@ -33,13 +33,12 @@ Home
 
     // Set chart options
     var options = {
-      title: 'Payment',
-      fontSize: 18,
-      bold: false,
+      title: 'Pie Chart',
+      fontSize: 15,
       legend: 'bottom',
-      width: 400,
-      height: 400,
-      colors: ['lightgrey', '#141414'],
+      width: 250,
+      height: 250,
+      colors: ['darkgrey', '#303030'],
       backgroundColor: 'transparent'
     };
 
@@ -51,58 +50,140 @@ Home
 {% endblock %}
 
 {% block content %}
-<div class="row d-flex flex-wrap justify-content-start align-item-start">
+
+
+{% if properties %}
+
+{% for property in properties %}
+
+<div class="row d-flex justify-content-between align-items-start" style="margin: 20px 20px 100px 20px; padding: 0;">
 
   <!-- tiles -->
-  <div class="d-flex flex-wrap justify-content-start align-items-start">
+  <div class="d-flex flex-column flex-wrap justify-content-center" style="width: 450px; margin-right: 0 15px;">
 
-    <!-- tenant tile -->
-    <div class="d-flex flex-column z-depth-1" style="width: 280px; height: 180px; margin: 20px; padding: 20px; border-radius: 5px;">
-      <!-- first row -->
-      <div class="d-flex justify-content-between align-items-center">
-        <span style="font-size: 50px; font-weight: bold;">10</span>
-        <span>
-          <img src="{% static "img\tenant.png" %}" alt="" style="width: 80px; height: 80px; margin: 0; padding: 0;">
-        </span>
-      </div>
-      <!-- second row -->
-      <div class="d-flex justicy-content-between" style="margin-top: 20px; padding-top: 10px; border-top: 2px solid black;">
-        <span style="font-size: 22px;">Tenant(s)</span>
-      </div>
+    <div class="z-depth-1" style="margin-bottom: 20px; padding: 5px;">
+      <span style="color: black; text-transform: uppercase; font-size: 22px; font-weight: bold;">{{property.name}}</span>
     </div>
-    <!-- end of tenant -->
 
-    <!-- room tile -->
-    <div class="d-flex flex-column z-depth-1" style="width: 280px; height: 180px; margin: 20px; padding: 20px; border-radius: 5px;">
-      <!-- first row -->
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="">
-          <span style="font-size: 50px; font-weight: bold;">10</span> <span style="font-size: 22px;">/ 30</span>
+    <!-- row 1 -->
+    <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
+        <div class="d-flex flex-column">
+          <span style="color: black; font-size: 25px;">20</span>
+          <span style="font-size: 15px;">Tenant(s)</span>
+          <span style="font-size: 10px;">All active tenants</span>
         </div>
-        <span>
-          <img src="{% static "img\room.png" %}" alt="" style="width: 80px; height: 80px; margin: 0; padding: 0;">
-        </span>
+        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/tenant.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        </div>
       </div>
-      <!-- second row -->
-      <div class="d-flex justicy-content-between" style="margin-top: 20px; padding-top: 10px; border-top: 2px solid black;">
-        <span style="font-size: 22px;">Active Room(s)</span>
+      <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
+        <div class="d-flex flex-column">
+          <span style="color: black; font-size: 25px;">20</span>
+          <span style="font-size: 15px;">Booking(s)</span>
+          <span style="font-size: 10px;">Waiting for approval</span>
+        </div>
+        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/booking.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        </div>
       </div>
     </div>
-    <!-- end of room -->
+
+    <!-- row 2 -->
+    <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
+        <div class="d-flex flex-column">
+          <span style="color: black; font-size: 25px;">20</span>
+          <span style="font-size: 15px;">Active Room(s)</span>
+          <span style="font-size: 10px;">As of this moment</span>
+        </div>
+        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/lock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
+        <div class="d-flex flex-column">
+          <span style="color: black; font-size: 25px;">20</span>
+          <span style="font-size: 15px;">Available Room(s)</span>
+          <span style="font-size: 10px;">As of this moment</span>
+        </div>
+        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/unlock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        </div>
+      </div>
+    </div>
+
+    <!-- generate report -->
+    <div class="d-flex flex-column z-depth-1" style="margin-bottom: 20px; padding: 10px;">
+      <span style="color: black; text-transform: uppercase; font-size: 15px; font-weight: bold;">generate report</span>
+      <div class="d-flex flex-wrap justify-content-center align-items-center" style="margin-top: 20px;">
+        <a class="btn btn-sm btn-dark" href="#">List of properties</a>
+        <a class="btn btn-sm btn-dark" href="#">List of rooms</a>
+        <a class="btn btn-sm btn-dark" href="#">list of active tenants</a>
+        <a class="btn btn-sm btn-dark" href="#">List of payments</a>
+        <a class="btn btn-sm btn-dark" href="#">List of expenses</a>
+      </div>
+    </div>
+    <!-- end of generate report -->
 
   </div>
   <!-- end of tiles -->
 
-  <!-- Google Chart -->
-  <div class="z-depth-1" style="width: 400px; height: 400px; margin: 20px; border-radius: 5px;">
-    <div class="" id="pie_chart">
+  <!-- cashflow -->
+  <div class="d-flex flex-column justify-content-center z-depth-1" style="width: 500px; margin: 0; padding: 10px;">
+    <div class="d-flex flex-column flex-wrap justify-content-center" style="margin-bottom: 10px;">
+      <span style="color: black; text-transform: uppercase; font-size: 15px; font-weight: bold;">Cashflow</span>
+    </div>
+
+    <!-- row 1 -->
+    <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-around align-items-center z-depth-1" style="width: 400px; height: 90px; margin: 0 0 20px 0; padding: 0 15px;">
+        <div class="d-flex flex-column">
+          <span style="color: black; font-size: 25px;">5000</span>
+          <span style="font-size: 15px;">Payment</span>
+          <span style="font-size: 10px;">For This Month</span>
+        </div>
+        <div class="" style="width: 40px; height: 40px; background-image: url('static/img/arrow_up.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        </div>
+        <div class="" style="height: 90px; border: 1px solid black;"></div>
+        <div class="d-flex flex-column">
+          <span style="color: black; font-size: 25px;">10000</span>
+          <span style="font-size: 15px;">Expense</span>
+          <span style="font-size: 10px;">For This Month</span>
+        </div>
+        <div class="" style="width: 40px; height: 40px; background-image: url('static/img/arrow_down.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        </div>
+      </div>
+    </div>
+
+    <!-- row 2 -->
+    <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 250px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
+        <div class="d-flex flex-column">
+          <span style="color: black; font-size: 25px;">-5000</span>
+          <span style="font-size: 15px;">Net Income</span>
+          <span style="font-size: 10px;">Payment - Expenses</span>
+        </div>
+        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/net_income.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        </div>
+      </div>
+    </div>
+
+    <!-- pie chart -->
+    <div class="" id="" style="margin: 0 auto;">
 
     </div>
+    <!-- end of pie chart -->
+
+  </div>
+  <!-- end of cashflow -->
+
+
+</div>
+{% endfor %}
+
+{% else %}
+<div class="row d-flex justify-content-center">
+  <div class="d-flex justify-content-center" style="margin-top: 20px;">
+    <span style="font-size: 22px;">There are currently no registered properties under your account.</span>
   </div>
 </div>
+{% endif %}
 
-{% endblock %}
-
-{% block header %}
-Dashboard
 {% endblock %}
