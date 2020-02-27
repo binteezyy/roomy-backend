@@ -51,13 +51,67 @@ Home
 {% endblock %}
 
 {% block content %}
-<div class="row d-flex flex-wrap justify-content-start align-item-start">
+<div class="row d-flex justify-content-between" style="margin: 0; padding: 0;">
 
+  <!-- tiles -->
+  <div class="d-flex flex-column flex-wrap justify-content-center">
 
+    <div class="" style="margin-bottom: 20px;">
+      <span>PROPERTY NAME</span>
+    </div>
+
+    <!-- row 1 -->
+    <div class="d-flex">
+      <div class="d-flex justify-content-between align-items-center z-depth-2" style="min-width: 200px; min-height: 80px; margin: 0 45px 45px 0; padding: 0 15px;">
+        <div class="d-flex flex-column">
+          <span style="font-size: 20px;">20</span>
+          <span style="font-size: 15px;">tenant(s)</span>
+          <span style="font-size: 10px;">as of this moment</span>
+        </div>
+        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/tenant.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center z-depth-2" style="min-width: 200px; min-height: 80px; margin: 0 45px 45px 0; padding: 0 15px;">
+        <div class="d-flex flex-column">
+          <span style="font-size: 20px;">20</span>
+          <span style="font-size: 15px;">booking(s)</span>
+          <span style="font-size: 10px;">as of this moment</span>
+        </div>
+        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/booking.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        </div>
+      </div>
+    </div>
+
+    <!-- row 2 -->
+    <div class="d-flex">
+      <div class="d-flex justify-content-between align-items-center z-depth-2" style="min-width: 200px; min-height: 80px; margin: 0 45px 45px 0; padding: 0 15px;">
+        <div class="d-flex flex-column">
+          <span style="font-size: 20px;">20</span>
+          <span style="font-size: 15px;">active room(s)</span>
+          <span style="font-size: 10px;">as of this moment</span>
+        </div>
+        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/lock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center z-depth-2" style="min-width: 200px; min-height: 80px; margin: 0 45px 45px 0; padding: 0 15px;">
+        <div class="d-flex flex-column">
+          <span style="font-size: 20px;">20</span>
+          <span style="font-size: 15px;">available room(s)</span>
+          <span style="font-size: 10px;">as of this moment</span>
+        </div>
+        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/unlock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- end of tiles -->
+
+  <!-- pie chart -->
+  <div class="" style="width: 550px; background-color: green;">
+    fsdf
+  </div>
+  <!-- end of pie chart -->
 </div>
 
-{% endblock %}
-
-{% block header %}
-Dashboard
 {% endblock %}
