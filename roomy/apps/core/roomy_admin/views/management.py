@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 from apps.core.roomy_core.models import *
-
+from apps.core.roomy_admin.forms import *
 context = {
     "title": "Roomy",
 }
@@ -17,11 +17,15 @@ context = {
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def property_management(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
-            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
         }
         return render(request, "components/management/property_management.html", context)
     else:
@@ -44,11 +48,15 @@ def property_management(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def catalog_management(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
             'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
         }
         return render(request, "components/management/catalog_management.html", context)
     else:
@@ -76,13 +84,123 @@ def catalog_management(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def room_management(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
-            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
         }
         return render(request, "components/management/room_management.html", context)
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
+
+# owner notification
+
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def owner_notification(request):
+    next = request.GET.get('next')
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        context = {
+            'properties': Property.objects.filter(owner_id__user_id=request.user),
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
+        }
+        return render(request, "components/management/owner_notification.html", context)
+    else:
+        logout(request)
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            if next:
+                return redirect(next)
+            return HttpResponseRedirect(reverse('admin-index'))
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        return render(request, 'components/admin_login/login.html', context)
+
+# owner profile
+
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def owner_profile(request):
+    next = request.GET.get('next')
+    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        user = request.user
+        owner_account = OwnerAccount.objects.get(user_id=request.user)
+        form1 = UserUpdateForm(request.POST, prefix='user_form')
+        form2 = OwnerAccountForm(request.POST, prefix='account_form')
+
+        if request.method == "POST":
+            if form1.is_valid() or form2.is_valid():
+                print('nice')
+                user.username = request.POST.get('id_user_form-username')
+                user.first_name = request.POST.get('id_user_form-first_name')
+                user.last_name = request.POST.get('id_user_form-last_name')
+                user.email = request.POST.get('id_user_form-email')
+                user.save()
+
+                owner_account.birthday = request.POST.get(
+                    'id_account_form-birthday')
+                owner_account.cell_number = request.POST.get(
+                    'id_account_form-cell_number')
+                owner_account.provincial_address = request.POST.get(
+                    'id_account_form-provincial_address')
+                owner_account.save()
+            else:
+                print('invalid form?')
+
+            return redirect('owner-profile')
+        else:
+            form1 = UserUpdateForm(instance=user, prefix='user_form')
+            form2 = OwnerAccountForm(
+                instance=owner_account, prefix='account_form')
+
+            context = {
+                'properties': Property.objects.filter(owner_id__user_id=request.user),
+                'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+                'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+                'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+                'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+                'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
+                'form1': form1,
+                'form2': form2,
+            }
+            return render(request, "components/management/owner_profile.html", context)
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)

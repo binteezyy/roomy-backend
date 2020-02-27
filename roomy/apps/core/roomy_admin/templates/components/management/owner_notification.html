@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Booking
+Owner Notifications
 {% endblock %}
 
 {% block extra_css %}
@@ -15,23 +15,17 @@ Booking
 <div class="content container">
     <div class="card-content">
         <div class="container-fluid">
-            <h2>Property:</h2>
-            <select class="mdb-select md-form">
-                {% for property in properties %}
-                <option value="{{property.pk}}">{{property.name}}</option>
-                {% endfor %}
-            </select>
-            <h2>Bookings in <span id='booking-span'></span></h2>
+            <h2>Notifications</h2>
             <div class="row p-3">
                 <div class="col">
                     <div class="table-responsive">
-                        <table id="booking-table" class="table table-bordered table-hover" width="100%" cellspacing="0"
-                            role="grid" aria-describedby="dataTable_info">
+                        <table id="owner-notif-table" class="table table-bordered table-hover" width="100%"
+                            cellspacing="0" role="grid" aria-describedby="dataTable_info">
                             <thead>
                                 <tr role="row">
                                     <th>Id</th>
-                                    <th>Applicant</th>
-                                    <th>Room</th>
+                                    <th>Title</th>
+                                    <th>Date</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -47,51 +41,46 @@ Booking
 {% endblock %}
 
 {% block header %}
-Bookings
+Rooms
 {% endblock %}
 
 {% block extra_js %}
 <script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        var val = $('.mdb-select').val();
-        $('#booking-span').html($(".mdb-select option:selected").text());
-        var table = $('#booking-table').DataTable({
+        var table = $('#owner-notif-table').DataTable({
             "dataType": 'json',
             "ajax": {
                 "processing": true,
                 "dataSrc": '',
-                "url": "/booking/table/" + val,
+                "url": "{% url 'owner-notif-table' %}",
             },
             "drawCallback": function (settings) {
-                $(".read-booking").each(function () {
+                $(".update-onotif").each(function () {
                     $(this).modalForm({ formURL: $(this).data('id') });
                 });
-                // $(".delete-booking").each(function () {
-                //     $(this).modalForm({ formURL: $(this).data('id') });
-                // });
-                $(".update-booking").each(function () {
+                $(".read-onotif").each(function () {
                     $(this).modalForm({ formURL: $(this).data('id') });
                 });
             },
             "columnDefs": [
                 {
-                    "className": 'col-booking-id text-center',
+                    "className": 'col-onotif-id text-center',
                     "targets": 0,
                     "data": "fields.id",
                 },
                 {
-                    "className": 'col-booking-user text-center',
+                    "className": 'col-onotif-title text-center',
                     "targets": 1,
-                    "data": "fields.user",
+                    "data": "fields.title",
                 },
                 {
-                    "className": 'col-booking-room text-center',
+                    "className": 'col-onotif-date text-center',
                     "targets": 2,
-                    "data": "fields.room",
+                    "data": "fields.date",
                 },
                 {
-                    "className": 'col-booking-status text-center',
+                    "className": 'col-onotif-status text-center',
                     "targets": 3,
                     "data": "fields.status",
                 },
@@ -101,21 +90,15 @@ Bookings
                     "data": 'fields.id',
                     render: function (data, type, row) {
                         let render =
-                            '<button type="button" class="read-booking btn btn-raised btn-sm btn-primary m-1" data-id="/read/booking/' + data + '">' +
+                            '<button type="button" class="read-onotif btn btn-raised btn-sm btn-primary m-1" data-id="/read/onotif/' + data + '">' +
                             '<span class="fa fa-eye"></span></button>' +
-                            // '<button type="button" class="delete-booking btn btn-sm btn-raised btn-warning m-1" data-id="/delete/booking/' + data + '">' +
-                            // '<span class="fa fa-trash"></span></button>' +
-                            '<button type="button" class="update-booking btn btn-sm btn-raised btn-success m-1" data-id="/update/booking/' + data + '">' +
+                            '<button type="button" class="update-onotif btn btn-sm btn-raised btn-success m-1" data-id="/update/onotif/' + data + '">' +
                             '<span class="fa fa-edit"></span></button>';
                         return render
                     }
                 },
             ]
         })
-        $(".mdb-select").on("change", function () {
-            table.ajax.url("/booking/table/" + $(this).val()).load();
-            $('#booking-span').html($(".mdb-select option:selected").text());
-        });
     });
 </script>
 {% endblock %}

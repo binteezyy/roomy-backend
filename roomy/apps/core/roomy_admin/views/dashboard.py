@@ -19,10 +19,11 @@ def home(request):
     next = request.GET.get('next')
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-
         context = {
-            'properties': Property.objects.filter(owner_id__user_id=request.user),
-            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
         }
         return render(request, "components/dashboard/home.html", context)
     else:
@@ -51,11 +52,15 @@ def home(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def rental(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
-            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
         }
         return render(request, "components/dashboard/rental.html", context)
     else:
@@ -84,11 +89,15 @@ def rental(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def tenant(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
-            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
         }
         return render(request, "components/dashboard/tenant.html", context)
     else:
@@ -118,10 +127,15 @@ def tenant(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def guest(request):
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
-            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
         }
         return render(request, "components/dashboard/guest.html", context)
     else:
@@ -150,11 +164,15 @@ def guest(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def tenant_request(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
-            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
         }
         return render(request, "components/dashboard/request.html", context)
     else:
@@ -183,11 +201,15 @@ def tenant_request(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def notif(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
-            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
         }
         return render(request, "components/dashboard/notifs.html", context)
     else:
@@ -216,11 +238,15 @@ def notif(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def booking(request):
-
+    next = request.GET.get('next')
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
         context = {
             'properties': Property.objects.filter(owner_id__user_id=request.user),
-            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user)
+            'catalogs': RoomCatalog.objects.filter(property_id__owner_id__user_id=request.user),
+            'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
+            'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
+            'unread_notif': OwnerNotification.objects.filter(owner_id__user_id=request.user, read=False).count(),
         }
         return render(request, "components/dashboard/booking.html", context)
     else:

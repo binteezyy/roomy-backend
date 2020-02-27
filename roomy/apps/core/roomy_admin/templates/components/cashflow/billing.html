@@ -15,7 +15,13 @@ Billing
 <div class="content container">
   <div class="card-content">
     <div class="container-fluid">
-      <h2>Billing</h2>
+      <h2>Property:</h2>
+      <select class="mdb-select md-form">
+        {% for property in properties %}
+        <option value="{{property.pk}}">{{property.name}}</option>
+        {% endfor %}
+      </select>
+      <h2>Billings in <span id="billing-span"></span></h2>
       <div class="row p-3">
         <div class="col">
           <div class="table-responsive">
@@ -50,12 +56,14 @@ Billing
 <script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
 <script type="text/javascript">
   $(document).ready(function () {
-    $('#billing-table').DataTable({
+    var val = $('.mdb-select').val()
+    $('#billing-span').html($(".mdb-select option:selected").text());
+    var table = $('#billing-table').DataTable({
       "dataType": 'json',
       "ajax": {
         "processing": true,
         "dataSrc": '',
-        "url": "{% url 'admin-billing-table'%}",
+        "url": "/billing/table/" + val,
       },
       "drawCallback": function (settings) {
         $(".read-billing").each(function () {
@@ -110,6 +118,10 @@ Billing
         },
       ]
     })
+    $(".mdb-select").on("change", function () {
+      table.ajax.url("/billing/table/" + $(this).val()).load();
+      $('#billing-span').html($(".mdb-select option:selected").text());
+    });
   });
 </script>
 {% endblock %}

@@ -11,6 +11,6 @@ def index(request):
 
 def test_script(request):
 
-    billing_create()
+    billing_create(request)
 
     return HttpResponse("script went through")

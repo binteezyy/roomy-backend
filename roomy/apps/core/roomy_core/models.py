@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from datetime import datetime
 from django.core.exceptions import ValidationError
-from django.dispatch import receiver
-from django.db.models.signals import post_save
 # Create your models here.
 
 
@@ -22,7 +20,7 @@ class ImageFile(models.Model):
 
 class OwnerAccount(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    birthday = models.DateTimeField(null=True, blank=True)
+    birthday = models.DateField(null=True, blank=True)
     cell_number = models.PositiveIntegerField(null=True, blank=True)
     provincial_address = models.CharField(
         max_length=128, null=True, blank=True)
@@ -52,6 +50,7 @@ class Property(models.Model):
     class Meta:
         verbose_name_plural = 'Properties'
 
+
 class RoomCatalog(models.Model):
     room_type_enum = [
         (0, 'Fixed Rate'),
@@ -77,21 +76,15 @@ class RoomCatalog(models.Model):
 
 
 class Room(models.Model):
-    rtype = [
-        (0, 'Available(Solo)'),
-        (1, 'Available(Shared)'),
-        (2, 'Unavailable'),
-    ]
-    catalog_id = models.ForeignKey(RoomCatalog, on_delete=models.CASCADE, null=True, blank=True)
+    catalog_id = models.ForeignKey(
+        RoomCatalog, on_delete=models.CASCADE, null=True, blank=True)
     number = models.PositiveIntegerField(default=1)
-    type = models.IntegerField(choices=rtype, default=0)
 
     def __str__(self):
         return f'{self.catalog_id} - Room {self.number}'
 
     class Meta:
         unique_together = ('catalog_id', 'number')
-
 
 
 class Fee(models.Model):
@@ -122,6 +115,7 @@ class Transaction(models.Model):
     rating_description = models.TextField(blank=True, null=True)
     rated = models.BooleanField(default=False)
     add_ons = models.ManyToManyField(Fee, blank=True)
+    billing_date = models.DateField(blank=True)
 
     def __str__(self):
         if self.active:
@@ -149,8 +143,10 @@ class Request(models.Model):
     subject = models.CharField(max_length=56)
     description = models.TextField(blank=True, null=True)
     time_stamp = models.DateTimeField(auto_now_add=True)
-    status = models.BooleanField(default=False)
+    status = models.IntegerField(choices=r_status, default=0)
     transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    sent = models.BooleanField(default=True)
+    read = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.subject}, {self.transaction_id}, {self.status}'
@@ -162,9 +158,10 @@ class Document(models.Model):
     def __str__(self):
         return f'{self.file_path}'
 
+
 class TenantAccount(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    birthday = models.DateTimeField(null=True, blank=True)
+    birthday = models.DateField(null=True, blank=True)
     cell_number = models.PositiveIntegerField(null=True, blank=True)
     provincial_address = models.CharField(
         max_length=128, null=True, blank=True)
@@ -181,11 +178,6 @@ class TenantAccount(models.Model):
             trans.save()
         super(TenantAccount, self).save(*args, **kwargs)
 
-# @receiver(post_save, sender=User)
-# def update_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         TenantAccount.objects.create(user=instance)
-#     instance.profile.save()
 
 class Booking(models.Model):
     status_enum = [
@@ -194,9 +186,10 @@ class Booking(models.Model):
         (2, 'Denied'),
     ]
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    tenant_id = models.ForeignKey(TenantAccount, on_delete=models.CASCADE, null=True, blank=True)
+    tenant_id = models.ForeignKey(
+        TenantAccount, on_delete=models.CASCADE, null=True, blank=True)
     message = models.CharField(max_length=56, blank=True, null=True)
-    start_date = models.DateField(null=True, blank=True)
+    start_date = models.DateField()
     catalog_id = models.ForeignKey(RoomCatalog, on_delete=models.CASCADE)
     document1_id = models.ForeignKey(
         Document, on_delete=models.CASCADE, null=True, blank=True, related_name="document1")
@@ -205,43 +198,42 @@ class Booking(models.Model):
     add_ons = models.ManyToManyField(Fee, blank=True)
     status = models.IntegerField(choices=status_enum, default=0)
 
-
     def __str__(self):
         return f'Booking: {self.user_id.username} - {self.catalog_id}'
 
     def save(self, *args, **kwargs):
         if not self.tenant_id:
             if self.status == 1:
-                active_transactions = Transaction.objects.filter(active=True, room_id__catalog_id=self.catalog_id)
+                active_transactions = Transaction.objects.filter(
+                    active=True, room_id__catalog_id=self.catalog_id)
                 occupied_rooms_list = []
                 for active_transaction in active_transactions:
                     occupied_rooms_list.append(active_transaction.room_id.pk)
-                avail_room = Room.objects.filter(catalog_id=self.catalog_id).exclude(pk__in=occupied_rooms_list).first()
+                avail_room = Room.objects.filter(catalog_id=self.catalog_id).exclude(
+                    pk__in=occupied_rooms_list).first()
 
                 try:
-                    import os
-                    os.system('cls')
-                    print("ROOM",avail_room)
-                    new_transaction = Transaction.objects.get(active=True, room_id=avail_room)
+                    new_transaction = Transaction.objects.get(
+                        active=True, room_id=avail_room)
                 except Transaction.DoesNotExist:
-                    new_transaction = Transaction(room_id=avail_room)
+                    new_transaction = Transaction(room_id=avail_room, billing_date=self.start_date)
                     new_transaction.save()
                     new_transaction.add_ons.set(self.add_ons.all())
                 print(new_transaction)
-
                 try:
-                    new_tenant = TenantAccount.objects.get(user_id=self.user_id, transaction_id=new_transaction)
-                except TenantAccount.DoesNotExist as e:
-                    print(e)
-                    new_tenant = TenantAccount(user_id=self.user_id, transaction_id=new_transaction)
+                    new_tenant = TenantAccount.objects.get(
+                        user_id=self.user_id, transaction_id=new_transaction)
+                except TenantAccount.DoesNotExist:
+                    new_tenant = TenantAccount(
+                        user_id=self.user_id, transaction_id=new_transaction)
                     new_tenant.save()
                 print(new_tenant)
 
                 self.tenant_id = new_tenant
                 print(self.tenant_id)
-
+        else:
+            print("tenant id and transcation already done")
         super(Booking, self).save(*args, **kwargs)
-
 
 
 class Message(models.Model):
@@ -249,11 +241,23 @@ class Message(models.Model):
     title = models.CharField(max_length=32)
     body = models.TextField(blank=True, null=True)
     time_stamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    sent = models.BooleanField(default=False)
+    sent = models.BooleanField(default=True)
     read = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.tenant_id.user_id.first_name} {self.tenant_id.user_id.last_name}- {self.title} - {self.sent}'
+
+
+class OwnerNotification(models.Model):
+    owner_id = models.ForeignKey(OwnerAccount, on_delete=models.CASCADE)
+    title = models.CharField(max_length=32)
+    body = models.TextField(blank=True, null=True)
+    time_stamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    sent = models.BooleanField(default=True)
+    read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.owner_id.user_id.first_name} {self.owner_id.user_id.last_name}- {self.title} - {self.sent}'
 
 
 class Guest(models.Model):
@@ -268,9 +272,12 @@ class Guest(models.Model):
 
 class Expense(models.Model):
     property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
-    time_stamp = models.DateTimeField()
+    time_stamp = models.DateField()
     description = models.CharField(max_length=56)
     amount = models.DecimalField(max_digits=9, decimal_places=2)
 
     def __str__(self):
         return f'Expense - {self.description}, {self.amount}'
+
+    class Meta:
+        unique_together = ('description', 'amount')

@@ -49,3 +49,7 @@ footer a{
 .box__error {
   display: none;
 }
+
+.pac-container {
+  z-index: 1051 !important;
+}

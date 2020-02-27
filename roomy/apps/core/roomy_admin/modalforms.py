@@ -47,6 +47,11 @@ class RequestModalForm(BSModalForm):
         model = Request
         exclude = ['transaction_id']
 
+class RequestUpdateModalForm(BSModalForm):
+    class Meta:
+        model = Request
+        fields = ['status',]
+
 
 class NotifModalForm(BSModalForm):
     class Meta:
@@ -64,7 +69,7 @@ class NotifCreateModalForm(BSModalForm):
 class BookingModalForm(BSModalForm):
     class Meta:
         model = Booking
-        fields = ['status',]
+        fields = ['status', 'start_date']
 
 class PropertyModelForm(forms.ModelForm):
     class Meta:
@@ -81,11 +86,25 @@ class RoomCatalogModalForm(BSModalForm):
         model = RoomCatalog
         exclude = ['img_2d', 'img_3d']
 
+class CatalogModelForm(forms.ModelForm):
+    class Meta:
+        model = RoomCatalog
+        exclude = ['img_2d', 'img_3d']
+
 class RoomModalForm(BSModalForm):
     class Meta:
         model = Room
         exclude = ['',]
 
+class RoomModelForm(forms.ModelForm):
+    class Meta:
+        model = Room
+        exclude = ['',]
+
+class OnotifModalForm(BSModalForm):
+    class Meta:
+        model = OwnerNotification
+        fields = ['read', ]
 
 class AdminAccModalForm(BSModalForm):
     class Meta:

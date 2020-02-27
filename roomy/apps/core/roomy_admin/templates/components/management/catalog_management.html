@@ -12,16 +12,21 @@ Catalogs
 
 {% block content %}
 {% include "_modal.html" %}
-{% for property in properties %}
 <div class="content container">
     <div class="card-content">
         <div class="container-fluid">
-            <h2>Catalogs in {{property.name}}</h2>
+            <h2>Property:</h2>
+            <select class="mdb-select md-form">
+                {% for property in properties %}
+                <option value="{{property.pk}}">{{property.name}}</option>
+                {% endfor %}
+            </select>
+            <h2>Catalogs in <span id="catalog-span"></span></h2>
             <div class="row p-3">
                 <div class="col">
                     <div class="table-responsive">
-                        <table id="catalog-table-{{property.pk}}" class="table table-bordered table-hover" width="100%"
-                            cellspacing="0" role="grid" aria-describedby="dataTable_info">
+                        <table id="catalog-table-" class="table table-bordered table-hover" width="100%" cellspacing="0"
+                            role="grid" aria-describedby="dataTable_info">
                             <thead>
                                 <tr role="row">
                                     <th>Id</th>
@@ -39,7 +44,6 @@ Catalogs
         </div>
     </div>
 </div>
-{% endfor %}
 {% endblock %}
 
 {% block header %}
@@ -50,20 +54,21 @@ Catalogs
 <script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        {% for property in properties %}
-        $('#catalog-table-{{property.pk}}').DataTable({
+        var val = $('.mdb-select').val();
+        $('#catalog-span').html($(".mdb-select option:selected").text());
+        var table = $('#catalog-table-').DataTable({
             "dataType": 'json',
             "ajax": {
                 "processing": true,
                 "dataSrc": '',
-                "url": "{% url 'admin-catalog-table' property.pk %}",
+                "url": "/catalog/table/" + val,
             },
             "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-catalog'>>>>" +
                 "<'row'<'col-md-6'><'col-md-6'>>" +
                 "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
             "initComplete": function (settings, json) {
                 $("div.create-catalog").html('<button type="button" id="create-catalog" class="float-right btn btn-s btn-success btn-raised" name="button">Add Catalog <i class="fas fa-plus"></i></button>');
-                $(".create-catalog").modalForm({ formURL: "{% url 'create-catalog' %}" });
+                $(".create-catalog").modalForm({ formURL: "/create/catalog/" + val });
             },
             "drawCallback": function (settings) {
                 $(".upload-catalog-2d").each(function () {
@@ -124,7 +129,13 @@ Catalogs
                 },
             ]
         })
-        {% endfor %}
+        $(".mdb-select").on("change", function () {
+            table.ajax.url("/catalog/table/" + $(this).val()).load();
+            $('#catalog-span').html($(".mdb-select option:selected").text());
+
+            val = $('.mdb-select').val();
+            $(".create-catalog").modalForm({ formURL: "/create/catalog/" + val });
+        });
     });
 </script>
 {% endblock %}
