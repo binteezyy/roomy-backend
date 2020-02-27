@@ -50,12 +50,13 @@ Home
 {% endblock %}
 
 {% block content %}
-<div class="row d-flex justify-content-between align-items-start" style="margin: 20px; padding: 0;">
 
-  {% if properties %}
 
-  {% for property in properties %}
+{% if properties %}
 
+{% for property in properties %}
+
+<div class="row d-flex justify-content-between align-items-start" style="margin: 20px 20px 100px 20px; padding: 0;">
 
   <!-- tiles -->
   <div class="d-flex flex-column flex-wrap justify-content-center" style="width: 450px; margin-right: 0 15px;">
@@ -112,11 +113,11 @@ Home
     <div class="d-flex flex-column z-depth-1" style="margin-bottom: 20px; padding: 10px;">
       <span style="color: black; text-transform: uppercase; font-size: 15px; font-weight: bold;">generate report</span>
       <div class="d-flex flex-wrap justify-content-center align-items-center" style="margin-top: 20px;">
-        <a class="btn btn-sm btn-dark" href="#">All properties</a>
-        <a class="btn btn-sm btn-dark" href="#">all rooms</a>
-        <a class="btn btn-sm btn-dark" href="#">active tenants</a>
-        <a class="btn btn-sm btn-dark" href="#">all payments</a>
-        <a class="btn btn-sm btn-dark" href="#">all expenses</a>
+        <a class="btn btn-sm btn-dark" href="#">List of properties</a>
+        <a class="btn btn-sm btn-dark" href="#">List of rooms</a>
+        <a class="btn btn-sm btn-dark" href="#">list of active tenants</a>
+        <a class="btn btn-sm btn-dark" href="#">List of payments</a>
+        <a class="btn btn-sm btn-dark" href="#">List of expenses</a>
       </div>
     </div>
     <!-- end of generate report -->
@@ -124,7 +125,7 @@ Home
   </div>
   <!-- end of tiles -->
 
-  <!-- pie chart -->
+  <!-- cashflow -->
   <div class="d-flex flex-column justify-content-center z-depth-1" style="width: 500px; margin: 0; padding: 10px;">
     <div class="d-flex flex-column flex-wrap justify-content-center" style="margin-bottom: 10px;">
       <span style="color: black; text-transform: uppercase; font-size: 15px; font-weight: bold;">Cashflow</span>
@@ -163,20 +164,26 @@ Home
         </div>
       </div>
     </div>
-    <div class="" id="pie_chart" style="margin: 0 auto;">
+
+    <!-- pie chart -->
+    <div class="" id="" style="margin: 0 auto;">
 
     </div>
-  </div>
-  <!-- end of pie chart -->
+    <!-- end of pie chart -->
 
-  {% endfor %}
-
-  {% else %}
-  <div class="" style="margin-top: 20px;">
-    <span style="font-size: 22px;">There are currently no registered properties found.</span>
   </div>
-  {% endif %}
+  <!-- end of cashflow -->
+
 
 </div>
+{% endfor %}
+
+{% else %}
+<div class="row d-flex justify-content-center">
+  <div class="d-flex justify-content-center" style="margin-top: 20px;">
+    <span style="font-size: 22px;">There are currently no registered properties under your account.</span>
+  </div>
+</div>
+{% endif %}
 
 {% endblock %}
