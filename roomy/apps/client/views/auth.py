@@ -1,3 +1,4 @@
+from django.conf                    import settings
 from django.shortcuts               import render
 from django.contrib.auth.forms      import AuthenticationForm
 from django.shortcuts               import render, get_object_or_404, redirect, reverse
@@ -6,8 +7,8 @@ from django.contrib                 import auth,messages
 from django.contrib.auth            import authenticate, logout, login
 from ..forms                        import *
 from apps.commons.views.apis        import recaptcha_verify
-
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 # GLOBAL CONTEXT
 context = {
     'AUTHORS': 'PPTT',
@@ -39,7 +40,8 @@ def clogin(request):
 
 def clogout(request):
     auth.logout(request)
-    return redirect('home')
+
+    return redirect(request.META.get('HTTP_REFERER', 'index'))
 
 def cforgot_password(request):
     return render(request,"web/components/forgot_password.html",context)
@@ -86,5 +88,6 @@ def get_in_touch(request):
     context.update({
         "TITLE": "Partner With US!",
         "form": form,
+        "RECAPTCHA_KEY": settings.RECAPTCHA_KEY,
     })
     return render(request,"web/components/get_in_touch.html",context)

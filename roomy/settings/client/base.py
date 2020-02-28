@@ -5,7 +5,7 @@ import os
 STATIC_ROOT = os.path.join(BASE_DIR, '../apps/client/static/')
 
 SECRET_KEY = config('SECRET_KEY')
-
+RECAPTCHA_KEY = config('RECAPTCHA_KEY')
 ROOT_URLCONF = 'config.client.urls'
 
 INSTALLED_APPS = [
@@ -18,6 +18,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'sslserver',
     'social_django',
+    'bootstrap_modal_forms',
+    'sekizai',
     'numbers',
     # APPS
 ] + GLOBAL_APPS
