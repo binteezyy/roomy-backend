@@ -5,11 +5,13 @@ chardet==3.0.4
 defusedxml==0.6.0
 Django==3.0.3
 django-bootstrap-modal-forms==1.5.0
+django-classy-tags==1.0.0
 django-crispy-forms==1.8.1
 django-debug-toolbar==2.1
 django-phonenumber-field==4.0.0
 django-places==0.1
 django-rest-framework==0.1.0
+django-sekizai==1.1.0
 django-sslserver==0.22
 django-user-agents==0.4.0
 django-widget-tweaks==1.4.5
@@ -21,10 +23,11 @@ mysqlclient==1.4.6
 oauthlib==3.1.0
 phonenumbers==8.11.2
 Pillow==7.0.0
+pkg-resources==0.0.0
 places==0.3.4
 PyJWT==1.7.1
 python-decouple==3.3
-python-memcached
+python-memcached==1.59
 python3-openid==3.1.0
 pytz==2019.3
 requests==2.22.0

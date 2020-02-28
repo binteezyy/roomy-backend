@@ -14,6 +14,7 @@ def booking_guide(request):
     return render(request,"web/components/landing/booking_guide.html",context)
 
 def partner_with_us(request):
+
     return render(request,"web/components/landing/partner_with_us.html",context)
 
 def about(request):

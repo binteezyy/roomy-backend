@@ -39,12 +39,10 @@ class UserRegisterForm(forms.ModelForm):
 
 
 class OwnerApplicationForm(forms.ModelForm):
-    full_name = forms.CharField(label='Full Name')
-    company = forms.CharField(label='Company')
-    email = forms.EmailField(label='Email',max_length=254)
+    full_name = forms.CharField(label='Full Name', required=True)
+    company = forms.CharField(label='Company', required=True)
+    email = forms.EmailField(label='Email',max_length=254, required=True)
     phone_number = PhoneNumberField()
-    message = forms.CharField(label='Message',widget=forms.Textarea)
-
 
     class Meta:
         model = OwnerApplication
@@ -53,10 +51,15 @@ class OwnerApplicationForm(forms.ModelForm):
             'company',
             'email',
             'phone_number',
-            'message',
         ]
 
-    def clean(self, *args, **kwargs):
-        full_name = self.cleaned_data.get('full_name')
-        company = self.cleaned_data.get('company')
-        return super(OwnerApplicationForm, self).clean(*args, **kwargs)
+
+    # def validation(self, *args, **kwargs):
+    #     from django.core.validators import validate_email,validate_slug
+    #     from django.utils.translation import gettext as _
+    #     validate_slug(self.cleaned_data.get('full_name'))
+    #     try:
+    #         validate_email(self.cleaned_data.get('email'))
+    #     except Exception as e:
+    #         raise forms.ValidationError(_("Invalid Email"),code="invalid")
+    #     return super(OwnerApplicationForm, self).clean(*args, **kwargs)
