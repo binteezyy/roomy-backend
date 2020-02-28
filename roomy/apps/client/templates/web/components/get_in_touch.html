@@ -6,47 +6,49 @@
 </style>
 {% endblock %}
 
+{% block extra_js %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endblock %}
 {% block content %}
+
 
 <div class="container">
   <form class="" method="POST">
   {% csrf_token %}
+
   <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin: 10px;">
     <div class="col z-depth-1-half rounded justify-content-center" style="margin: 20px; padding: 20px;">
       <span style="margin: 5px auto 15px auto; font-size: 25px;">Partner With Us</span>
       {% for field in form %}
-
-
-      {% if field.name != 'message' %}
-        <div class="fieldWrapper" style="margin: 10px 15px;">
-          <div class="form-group" style="margin: 0 15px;">
-            <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}}" class="form-control" style="margin-bottom: 5px;" placeholder="{{field.label}}" value="{{field.value|default_if_none:''}}">
-          </div>
-          {% if field.help_text %}
-          <p class="help">{{ field.help_text|safe }}</p>
-          {% endif %}
-          {% for error in field.errors %}
-            <div class="invalid-feedback">
-              {{ error|escape }}
+        {% if field.name != 'message' %}
+          <div class="fieldWrapper" style="margin: 10px 15px;">
+            <div class="form-group" style="margin: 0 15px;">
+              <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}}" class="form-control" style="margin-bottom: 5px;" placeholder="{{field.label}}" value="{{field.value|default_if_none:''}}">
             </div>
-          {% endfor %}
-          {% if field.help_text %}
-          <small id="passwordHelpBlock" class="form-text text-muted">
-            {{ field.help_text|safe }}
-          </small>
-          {% endif %}
-        </div>
-      {% else %}
-        <div class="form-group justify-content-center align-items" style="margin: 10px 15px 20px 15px;">
-          <textarea class="form-control" style="margin: 0 15px 0 15px;" name="name" rows="7" cols="80" placeholder="message"></textarea>
-        </div>
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+            {% for error in field.errors %}
+              <div class="invalid-feedback">
+                {{ error|escape }}
+              </div>
+            {% endfor %}
+            {% if field.help_text %}
+            <small id="passwordHelpBlock" class="form-text text-muted">
+              {{ field.help_text|safe }}
+            </small>
+            {% endif %}
+          </div>
+        {% else %}
+          <div class="form-group justify-content-center align-items" style="margin: 10px 15px 20px 15px;">
+            <textarea class="form-control" style="margin: 0 15px 0 15px;" name="name" rows="7" cols="80" placeholder="message"></textarea>
+          </div>
 
-        <div class="d-flex justify-content-center" style="margin: 10px 15px;">
-          <button class="btn btn-block btn-dark" style="margin: 0 15px;" type="submit" name="button">Send</button>
-        </div>
-      {% endif %}
-
-
+          <div class="g-recaptcha" data-sitekey="6LfrJ90UAAAAALUsETmT5QYr59_OFpyYO3OrO60d"></div>
+          <div class="d-flex justify-content-center" style="margin: 10px 15px;">
+            <button class="btn btn-block btn-dark" style="margin: 0 15px;" type="submit" name="button">Send</button>
+          </div>
+        {% endif %}
       {% endfor %}
     </div>
   </div>

@@ -5,7 +5,7 @@ from apps.core.roomy_admin.forms    import UserLoginForm
 from django.contrib                 import auth,messages
 from django.contrib.auth            import authenticate, logout, login
 from ..forms                        import *
-
+from apps.commons.views.apis        import recaptcha_verify
 
 from django.contrib.auth.models import User
 # GLOBAL CONTEXT
@@ -71,8 +71,10 @@ def csign_up(request):
 def get_in_touch(request):
     form = OwnerApplicationForm(request.POST or None)
     if request.method == 'POST':
-        print("POST")
-        if form.is_valid():
+        for key, value in request.POST.items():
+            print("POST",key, value)
+        recaptcha = recaptcha_verify(request.POST["g-recaptcha-response"])['success']
+        if form.is_valid() and recaptcha:
             form.cleaned_data()
             full_name = form.cleaned_data.get('full_name')
             company = form.cleaned_data.get('company')
