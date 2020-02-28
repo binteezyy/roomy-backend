@@ -8,6 +8,7 @@ urlpatterns = [
 
     # dashboard
     path('',      dashboard.home,    name='admin-index'),
+    path('home-ajax', dashboard.home_ajax, name='home-ajax'),
     path('dashboard/booking', dashboard.booking, name='booking'),
     path('dashboard/rental',      dashboard.rental,    name='rental'),
     path('dashboard/tenant',      dashboard.tenant,    name='tenant'),

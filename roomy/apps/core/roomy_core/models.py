@@ -79,6 +79,7 @@ class Room(models.Model):
     catalog_id = models.ForeignKey(
         RoomCatalog, on_delete=models.CASCADE, null=True, blank=True)
     number = models.PositiveIntegerField(default=1)
+    is_available = models.BooleanField(default=True)
 
     def __str__(self):
         return f'{self.catalog_id} - Room {self.number}'
@@ -219,6 +220,8 @@ class Booking(models.Model):
                     new_transaction = Transaction(room_id=avail_room, billing_date=self.start_date)
                     new_transaction.save()
                     new_transaction.add_ons.set(self.add_ons.all())
+                avail_room.is_available = False
+                avail_room.save()
                 print(new_transaction)
                 try:
                     new_tenant = TenantAccount.objects.get(

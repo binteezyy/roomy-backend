@@ -53,8 +53,13 @@ Home
 
 
 {% if properties %}
+<h2>Property:</h2>
+<select class="mdb-select md-form">
+  {% for property in properties %}
+  <option value="{{property.pk}}">{{property.name}}</option>
+  {% endfor %}
+</select>
 
-{% for property in properties %}
 
 <div class="row d-flex justify-content-between align-items-start" style="margin: 20px 20px 100px 20px; padding: 0;">
 
@@ -62,49 +67,58 @@ Home
   <div class="d-flex flex-column flex-wrap justify-content-center" style="width: 450px; margin-right: 0 15px;">
 
     <div class="z-depth-1" style="margin-bottom: 20px; padding: 5px;">
-      <span style="color: black; text-transform: uppercase; font-size: 22px; font-weight: bold;">{{property.name}}</span>
+      <span class="property-name-span"
+        style="color: black; text-transform: uppercase; font-size: 22px; font-weight: bold;"></span>
     </div>
 
     <!-- row 1 -->
     <div class="d-flex justify-content-between">
-      <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
+      <div class="d-flex justify-content-between align-items-center z-depth-1"
+        style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
         <div class="d-flex flex-column">
           <span style="color: black; font-size: 25px;">20</span>
           <span style="font-size: 15px;">Tenant(s)</span>
           <span style="font-size: 10px;">All active tenants</span>
         </div>
-        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/tenant.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        <div class=""
+          style="width: 50px; height: 50px; background-image: url('static/img/tenant.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
         </div>
       </div>
-      <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
+      <div class="d-flex justify-content-between align-items-center z-depth-1"
+        style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
         <div class="d-flex flex-column">
           <span style="color: black; font-size: 25px;">20</span>
           <span style="font-size: 15px;">Booking(s)</span>
           <span style="font-size: 10px;">Waiting for approval</span>
         </div>
-        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/booking.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        <div class=""
+          style="width: 50px; height: 50px; background-image: url('static/img/booking.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
         </div>
       </div>
     </div>
 
     <!-- row 2 -->
     <div class="d-flex justify-content-between">
-      <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
+      <div class="d-flex justify-content-between align-items-center z-depth-1"
+        style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
         <div class="d-flex flex-column">
           <span style="color: black; font-size: 25px;">20</span>
           <span style="font-size: 15px;">Active Room(s)</span>
           <span style="font-size: 10px;">As of this moment</span>
         </div>
-        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/lock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        <div class=""
+          style="width: 50px; height: 50px; background-image: url('static/img/lock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
         </div>
       </div>
-      <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
+      <div class="d-flex justify-content-between align-items-center z-depth-1"
+        style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
         <div class="d-flex flex-column">
           <span style="color: black; font-size: 25px;">20</span>
           <span style="font-size: 15px;">Available Room(s)</span>
           <span style="font-size: 10px;">As of this moment</span>
         </div>
-        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/unlock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        <div class=""
+          style="width: 50px; height: 50px; background-image: url('static/img/unlock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
         </div>
       </div>
     </div>
@@ -133,13 +147,15 @@ Home
 
     <!-- row 1 -->
     <div class="d-flex justify-content-center">
-      <div class="d-flex justify-content-around align-items-center z-depth-1" style="width: 400px; height: 90px; margin: 0 0 20px 0; padding: 0 15px;">
+      <div class="d-flex justify-content-around align-items-center z-depth-1"
+        style="width: 400px; height: 90px; margin: 0 0 20px 0; padding: 0 15px;">
         <div class="d-flex flex-column">
           <span style="color: black; font-size: 25px;">5000</span>
           <span style="font-size: 15px;">Payment</span>
           <span style="font-size: 10px;">For This Month</span>
         </div>
-        <div class="" style="width: 40px; height: 40px; background-image: url('static/img/arrow_up.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        <div class=""
+          style="width: 40px; height: 40px; background-image: url('static/img/arrow_up.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
         </div>
         <div class="" style="height: 90px; border: 1px solid black;"></div>
         <div class="d-flex flex-column">
@@ -147,20 +163,23 @@ Home
           <span style="font-size: 15px;">Expense</span>
           <span style="font-size: 10px;">For This Month</span>
         </div>
-        <div class="" style="width: 40px; height: 40px; background-image: url('static/img/arrow_down.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        <div class=""
+          style="width: 40px; height: 40px; background-image: url('static/img/arrow_down.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
         </div>
       </div>
     </div>
 
     <!-- row 2 -->
     <div class="d-flex justify-content-center">
-      <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 250px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
+      <div class="d-flex justify-content-between align-items-center z-depth-1"
+        style="min-width: 250px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
         <div class="d-flex flex-column">
           <span style="color: black; font-size: 25px;">-5000</span>
           <span style="font-size: 15px;">Net Income</span>
           <span style="font-size: 10px;">Payment - Expenses</span>
         </div>
-        <div class="" style="width: 50px; height: 50px; background-image: url('static/img/net_income.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        <div class=""
+          style="width: 50px; height: 50px; background-image: url('static/img/net_income.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
         </div>
       </div>
     </div>
@@ -176,7 +195,6 @@ Home
 
 
 </div>
-{% endfor %}
 
 {% else %}
 <div class="row d-flex justify-content-center">
@@ -187,3 +205,30 @@ Home
 {% endif %}
 
 {% endblock %}
+
+
+{% block extra_js %}
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.property-name-span').html($(".mdb-select option:selected").text());
+
+    $(".mdb-select").on("change", function () {
+      var val = $('.mdb-select').val();
+      $('.property-name-span').html($(".mdb-select option:selected").text());
+      $.ajax({
+        url: '/home-ajax',
+        data: {
+          'property': val
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data) {
+
+          }
+        }
+      });
+
+    });
+  });
+</script>
+{% endblock extra_js %}

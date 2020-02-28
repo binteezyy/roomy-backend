@@ -7,6 +7,10 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 from apps.core.roomy_core.models import *
 from apps.core.roomy_admin.forms import *
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 context = {
     "title": "Roomy",
 }
@@ -78,6 +82,19 @@ def catalog_management(request):
             'title': 'Login',
         }
         return render(request, 'components/admin_login/login.html', context)
+
+# catalog signals
+@receiver(post_save, sender=RoomCatalog)
+def my_handler(sender, instance, created, **kwargs):
+    print('start')
+    if created:
+        print('created')
+        try:
+            new_room = Room.objects.get(catalog_id__pk=instance.pk, number=1)
+        except Room.DoesNotExist:
+            new_room = Room(catalog_id=instance, number=1)
+            new_room.save()
+        print(new_room)
 # room management
 
 
