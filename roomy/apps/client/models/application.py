@@ -1,5 +1,5 @@
-from django.db      import models
-
+from django.db                      import models
+from django.contrib.auth.models     import User
 # CUSTOM MODELS
 from phonenumber_field.modelfields      import PhoneNumberField
 
@@ -16,11 +16,14 @@ class ContactUs(models.Model):
         app_label="client"
 
 class OwnerApplication(models.Model):
-    name = models.CharField(max_length=56, unique=True)
-    company = models.CharField(max_length=56, unique=True)
+    name = models.CharField(max_length=56)
+    company = models.CharField(max_length=56)
     email = models.EmailField(max_length=40)
     phone_number = PhoneNumberField()
-    message = models.TextField(max_length=150)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True,blank=True)
+
+    class Meta:
+        unique_together = ('name','email')
 
     def __str__(self):
         return f'{self.name}'

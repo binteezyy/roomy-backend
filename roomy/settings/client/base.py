@@ -57,6 +57,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'sekizai.context_processors.sekizai',
             ],
         },
     },
@@ -69,7 +70,8 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
-
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'social-close'
+PHONENUMBER_DEFAULT_FORMAT = "E164"
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
