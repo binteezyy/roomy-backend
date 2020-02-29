@@ -5,10 +5,14 @@ context = {
 }
 def home(request):
     dorms = Room.objects.filter(catalog_id__room_type=1)
-    context.update({
-        "dorms":dorms,
-    })
-    return render(request,"web/components/landing/home.html",context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/base.html",context)
+    else:
+        context.update({
+            "dorms":dorms,
+        })
+        return render(request,"web/components/landing/home.html",context)
+
 
 def booking_guide(request):
     return render(request,"web/components/landing/booking_guide.html",context)
