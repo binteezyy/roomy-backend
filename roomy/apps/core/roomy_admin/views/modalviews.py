@@ -207,7 +207,8 @@ class RentalReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView):
 
     def get_context_data(self, **kwargs):
         fee_objects = kwargs['object'].add_ons.all()
-        fees = int(kwargs['object'].room_id.catalog_id.rate)
+        # fees = int(kwargs['object'].room_id.catalog_id.rate)
+        fees = 0
         for fee_object in fee_objects:
             fees += int(fee_object.amount)
         if kwargs['object'].rated:

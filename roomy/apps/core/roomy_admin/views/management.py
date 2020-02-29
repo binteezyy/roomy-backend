@@ -88,13 +88,19 @@ def catalog_management(request):
 def my_handler(sender, instance, created, **kwargs):
     print('start')
     if created:
-        print('created')
+        print('catalog created')
         try:
             new_room = Room.objects.get(catalog_id__pk=instance.pk, number=1)
         except Room.DoesNotExist:
             new_room = Room(catalog_id=instance, number=1)
             new_room.save()
         print(new_room)
+        try:
+            new_fee = Fee.objects.get(property_id=instance.property_id, description=f'{instance.name} rate', amount=instance.rate, fee_type=0)
+        except Fee.DoesNotExist:
+            new_fee = Fee(property_id=instance.property_id, description=f'{instance.name} rate', amount=instance.rate, fee_type=0)
+            new_fee.save()
+        print(new_fee)
 # room management
 
 

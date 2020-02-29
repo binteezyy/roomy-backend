@@ -76,7 +76,7 @@ Home
       <div class="d-flex justify-content-between align-items-center z-depth-1"
         style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
         <div class="d-flex flex-column">
-          <span style="color: black; font-size: 25px;">20</span>
+          <span class="active-tenants-span" style="color: black; font-size: 25px;"></span>
           <span style="font-size: 15px;">Tenant(s)</span>
           <span style="font-size: 10px;">All active tenants</span>
         </div>
@@ -87,7 +87,7 @@ Home
       <div class="d-flex justify-content-between align-items-center z-depth-1"
         style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
         <div class="d-flex flex-column">
-          <span style="color: black; font-size: 25px;">20</span>
+          <span class="pending-bookings-span" style="color: black; font-size: 25px;"></span>
           <span style="font-size: 15px;">Booking(s)</span>
           <span style="font-size: 10px;">Waiting for approval</span>
         </div>
@@ -102,7 +102,7 @@ Home
       <div class="d-flex justify-content-between align-items-center z-depth-1"
         style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
         <div class="d-flex flex-column">
-          <span style="color: black; font-size: 25px;">20</span>
+          <span class="active-rooms-span" style="color: black; font-size: 25px;"></span>
           <span style="font-size: 15px;">Active Room(s)</span>
           <span style="font-size: 10px;">As of this moment</span>
         </div>
@@ -113,7 +113,7 @@ Home
       <div class="d-flex justify-content-between align-items-center z-depth-1"
         style="min-width: 200px; min-height: 90px; margin: 0 0 40px 0; padding: 0 15px;">
         <div class="d-flex flex-column">
-          <span style="color: black; font-size: 25px;">20</span>
+          <span class="avail-rooms-span" style="color: black; font-size: 25px;"></span>
           <span style="font-size: 15px;">Available Room(s)</span>
           <span style="font-size: 10px;">As of this moment</span>
         </div>
@@ -150,7 +150,7 @@ Home
       <div class="d-flex justify-content-around align-items-center z-depth-1"
         style="width: 400px; height: 90px; margin: 0 0 20px 0; padding: 0 15px;">
         <div class="d-flex flex-column">
-          <span style="color: black; font-size: 25px;">5000</span>
+          <span class="payments-span" style="color: black; font-size: 25px;"></span>
           <span style="font-size: 15px;">Payment</span>
           <span style="font-size: 10px;">For This Month</span>
         </div>
@@ -159,7 +159,7 @@ Home
         </div>
         <div class="" style="height: 90px; border: 1px solid black;"></div>
         <div class="d-flex flex-column">
-          <span style="color: black; font-size: 25px;">10000</span>
+          <span class="expenses-span" style="color: black; font-size: 25px;"></span>
           <span style="font-size: 15px;">Expense</span>
           <span style="font-size: 10px;">For This Month</span>
         </div>
@@ -174,7 +174,7 @@ Home
       <div class="d-flex justify-content-between align-items-center z-depth-1"
         style="min-width: 250px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
         <div class="d-flex flex-column">
-          <span style="color: black; font-size: 25px;">-5000</span>
+          <span class="net-span" style="color: black; font-size: 25px;"></span>
           <span style="font-size: 15px;">Net Income</span>
           <span style="font-size: 10px;">Payment - Expenses</span>
         </div>
@@ -210,7 +210,24 @@ Home
 {% block extra_js %}
 <script type="text/javascript">
   $(document).ready(function () {
+    var val = $('.mdb-select').val();
     $('.property-name-span').html($(".mdb-select option:selected").text());
+    $.ajax({
+      url: '/home-ajax',
+      data: {
+        'val': val
+      },
+      dataType: 'json',
+      success: function (data) {
+        if (data) {
+          $('.active-tenants-span').html(data.active_tenants);
+          $('.pending-bookings-span').html(data.pending_bookings);
+          $('.active-rooms-span').html(data.active_rooms);
+          $('.avail-rooms-span').html(data.avail_rooms);
+          $('.payments-span').html(data.payments);
+        }
+      }
+    });
 
     $(".mdb-select").on("change", function () {
       var val = $('.mdb-select').val();
@@ -218,12 +235,16 @@ Home
       $.ajax({
         url: '/home-ajax',
         data: {
-          'property': val
+          'val': val
         },
         dataType: 'json',
         success: function (data) {
           if (data) {
-
+            $('.active-tenants-span').html(data.active_tenants);
+            $('.pending-bookings-span').html(data.pending_bookings);
+            $('.active-rooms-span').html(data.active_rooms);
+            $('.avail-rooms-span').html(data.avail_rooms);
+            $('.payments-span').html(data.payments);
           }
         }
       });

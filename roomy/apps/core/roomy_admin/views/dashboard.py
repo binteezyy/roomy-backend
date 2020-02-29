@@ -50,17 +50,25 @@ def home(request):
 
 # home ajax
 def home_ajax(request):
-    val = request.GET.get('property', None)
-    property_o = Property.objects.filter(owner_id__user_id=request.user, pk=val)
+    val = request.GET.get('val', None)
+    property_o = Property.objects.get(owner_id__user_id=request.user, pk=val)
     active_tenants = TenantAccount.objects.filter(transaction_id__active=True, transaction_id__room_id__catalog_id__property_id=property_o).count()
     pending_bookings = Booking.objects.filter(status=0, catalog_id__property_id__owner_id__user_id=request.user, catalog_id__property_id=property_o).count()
     active_rooms = Room.objects.filter(catalog_id__property_id=property_o, is_available=False).count()
     avail_rooms = Room.objects.filter(catalog_id__property_id=property_o, is_available=True).count()
+    billings = Billing.objects.filter(transaction_id__room_id__catalog_id__property_id=property_o, paid=True)
+    payments = 0
+
+    for billing in billings:
+        for fee in billing.fees.all():
+            payments += int(fee.amount)
+
     data = {
         'active_tenants': active_tenants,
         'pending_bookings': pending_bookings,
         'active_rooms': active_rooms,
         'avail_rooms': avail_rooms,
+        'payments': payments,
     }
     return JsonResponse(data)
 
@@ -101,6 +109,26 @@ def rental(request):
         }
         return render(request, 'components/admin_login/login.html', context)
 
+from django.db.models.signals import post_save, m2m_changed
+from django.dispatch import receiver
+from datetime import datetime, date
+# transaction signals
+@receiver(m2m_changed, sender=Transaction.add_ons.through)
+def create_billing_on_transaction_save(sender, instance, **kwargs):
+    print('start')
+    action = kwargs.pop('action', None)
+    if action == "post_add":
+        print('transaction created')
+        try:
+            billing = Billing.objects.get(time_stamp=instance.billing_date, transaction_id__pk=instance.pk)
+            print('billing exists')
+        except Billing.DoesNotExist:
+            billing = Billing(time_stamp=instance.billing_date, transaction_id=instance)
+            billing.save()
+            print(instance.add_ons.all())
+            billing.billing_fee.set(instance.add_ons.all())
+            print('does not exists')      
+        print(billing)
 # tenant
 
 
