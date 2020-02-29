@@ -130,8 +130,7 @@ def modal_auth(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('home')
-        return redirect(request.META.get('HTTP_REFERER', 'index'))
+                return redirect(request.META.get('HTTP_REFERER', 'index'))
     else:
         context.update({
             "TITLE": "Login",

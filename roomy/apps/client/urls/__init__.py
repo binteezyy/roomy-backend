@@ -25,10 +25,10 @@ urlpatterns = [
     path('explore/', explore.index, name='explore'),
     path('explore/property/', property.property, name='property'),
     path('explore/property/room/<int:pk>', explore.room_view, name='room'),
+    path('explore/property/room/<int:pk>/book', transaction.booking_modal, name='booking-confirm'),
     path('explore/property/amenities', property.amenities, name='amenities'),
     path('explore/property/photos', property.photos, name='photos'),
     path('explore/property/room/booking', property.booking, name='booking'),
-
     path('account/bookings', account.bookings, name='bookings'),
     path('account/bookings/<int:pk>', account.BookingView, name='booking-view'),
     path('account/saved', account.saved, name='saved'),

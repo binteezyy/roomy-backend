@@ -38,8 +38,8 @@ def index(request):
 
 def room_view(request,pk):
     room = RoomCatalog.objects.get(pk=pk)
-    room_avail = Room.objects.filter(catalog_id=room) #p.exclude(type=2)
-
+    room_avail = Room.objects.filter(catalog_id=room).exclude(status=2)
+    print(room_avail)
     try: booking = Booking.objects.get(catalog_id=room,user_id=request.user)
     except Exception as e:
         booking = None
