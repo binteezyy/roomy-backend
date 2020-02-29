@@ -38,7 +38,7 @@ def index(request):
 
 def room_view(request,pk):
     room = RoomCatalog.objects.get(pk=pk)
-    room_avail = Room.objects.filter(catalog_id=room).exclude(type=2)
+    room_avail = Room.objects.filter(catalog_id=room) #p.exclude(type=2)
 
     try: booking = Booking.objects.get(catalog_id=room,user_id=request.user)
     except Exception as e:

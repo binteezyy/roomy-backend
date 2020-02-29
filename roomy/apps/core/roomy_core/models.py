@@ -76,10 +76,15 @@ class RoomCatalog(models.Model):
 
 
 class Room(models.Model):
+    room_status = [
+        (0, 'Available'),
+        (1, 'Shared'),
+        (2, 'Occupied'),
+    ]
     catalog_id = models.ForeignKey(
         RoomCatalog, on_delete=models.CASCADE, null=True, blank=True)
     number = models.PositiveIntegerField(default=1)
-
+    status = models.IntegerField(choices=room_status, default=0)
     def __str__(self):
         return f'{self.catalog_id} - Room {self.number}'
 
