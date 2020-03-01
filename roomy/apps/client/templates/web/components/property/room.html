@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
+{% if room.img_3d %}
   <link rel="stylesheet" href="{% static "vendor/pannellum/pannellum.css" %}">
   <style>
     #panorama {
@@ -9,6 +10,8 @@
         height: 400px;
     }
     </style>
+{% endif %}
+  <link rel="stylesheet" href="{% static "" %}">
 {% endblock %}
 
 {% block extra_js %}
@@ -25,31 +28,24 @@
 
   </script>
   {% endif %}
-
+  <script src="{% static "vendor/jquery/ui/ui/widgets/datepicker.js" %}"></script>
   <script type="text/javascript">
-  $("#book-button").modalForm({
-    {% if user.is_authenticated %}
-      formURL: "{% url 'booking-confirm' room.pk %}"
-    {% else %}
-      formURL: "{% url 'modal-login' %}"
-    {% endif %}
-  });
-
-  </script>
-  <script type="text/javascript">
-    $(".datepicker").pickadate({
-      container: "body",
-      format: 'mm/dd/yyyy',
-      startDate: '-3d'
+    $("#book-button").modalForm({
+      {% if user.is_authenticated %}
+        formURL: "{% url 'booking-confirm' room.pk %}"
+      {% else %}
+        formURL: "{% url 'modal-login' %}"
+      {% endif %}
     });
+    $( ".datepicker" ).datepicker({
+      dateFormat: 'dd/mm/yy',
+    });
+
   </script>
 {% endblock %}
 {% block content %}
+<input type="text" id="datepicker">
 <!-- main content -->
-<div class="md-form">
-  <input placeholder="Selected date" type="text" id="date-picker-example" class="form-control datepicker">
-  <label for="date-picker-example">Try me...</label>
-</div>
 <div class="container-fluid">
   {% include "web/components/modals/_modal.html" with size="modal-xl" %}
   <div class="container">
