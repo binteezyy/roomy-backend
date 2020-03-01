@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
-{% if room.img_3d %}
+{% if room.img_3d.all %}
   <link rel="stylesheet" href="{% static "vendor/pannellum/pannellum.css" %}">
   <style>
     #panorama {
@@ -11,11 +11,14 @@
     }
     </style>
 {% endif %}
-  <link rel="stylesheet" href="{% static "" %}">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="{% static "vendor/jquery/ui/themes/datepicker.css" %}">
+
+
 {% endblock %}
 
 {% block extra_js %}
-  {% if room.img_3d %}
+  {% if room.img_3d.all %}
   <!-- PANELLUM -->
   <script src="{% static "vendor/pannellum/pannellum.js" %}"></script>
   <script type="text/javascript">
@@ -29,25 +32,55 @@
   </script>
   {% endif %}
   <script src="{% static "vendor/jquery/ui/ui/widgets/datepicker.js" %}"></script>
+  <script src="{% static "vendor/jquery/ui/ui/widgets/datepicker-format.min.js" %}"></script>
   <script type="text/javascript">
-    $("#book-button").modalForm({
+    book_modal = $("#book-button").modalForm({
       {% if user.is_authenticated %}
         formURL: "{% url 'booking-confirm' room.pk %}"
       {% else %}
         formURL: "{% url 'modal-login' %}"
       {% endif %}
     });
-    $( ".datepicker" ).datepicker({
-      dateFormat: 'dd/mm/yy',
+
+    $('body, html').on('click','.modal', function(e) {
+      // e.preventDefault();
+      $( ".datepicker" ).datepicker({
+        dateFormat: 'MM dd,yy',
+        minDate: "dateToday",
+
+      });
+      $(".datepicker").css("z-index", "9999");
+
     });
+
+    {% if request.session.form_error %}
+    book_modal.click()
+    {% endif %}
+    $('.modal').on('hidden.bs.modal', function (e) {
+      $.ajax({
+            url: "{% url 'clear-form' %}",
+            // data: form.serialize(),
+            dataType: 'json',
+            success: function (data) {
+                if (data.is_taken) {
+                    alert(data.error_message);
+                  }
+                }
+              });
+    })
 
   </script>
 {% endblock %}
 {% block content %}
-<input type="text" id="datepicker">
+
+{% if user.is_authenticated %}
+  {% include "web/components/modals/_modal.html" with size="" %}
+{% else %}
+  {% include "web/components/modals/_modal.html" with size="" %}
+{% endif %}
 <!-- main content -->
 <div class="container-fluid">
-  {% include "web/components/modals/_modal.html" with size="modal-xl" %}
+
   <div class="container">
     <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 20px;">
 
@@ -136,7 +169,7 @@
           {% csrf_token %}
           <input type="hidden" name="" value="{{ room.pk }}">
           <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 30px;">
-            <button type="button" id="book-button" class="btn btn-lg" style="padding-right: 80px; padding-left: 80px; background-color: #5392f9; font-size: 20px;">BOOK NOW</button>
+            <button type="button" id="book-button" class="btn btn-lg btn-outline-primary waves-effect" style="padding-right: 80px; padding-left: 80px; background-color: #5392f9; font-size: 20px;">BOOK NOW</button>
           </div>
         </form>
         {% else %}
@@ -246,23 +279,6 @@
 </div>
 <!-- end of main content -->
 
-<!-- picture modal -->
-<div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <!-- modal content -->
-    <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
-      <!-- modal body -->
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row d-flex justify-content-center" style="padding-right: 10px; padding-left: 10px;">
-            <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end of picture modal -->
 
 
 {% endblock %}

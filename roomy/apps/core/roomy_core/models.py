@@ -94,7 +94,7 @@ class Room(models.Model):
 
 class Fee(models.Model):
     fee_type_enum = [
-        (0, 'Misc Fees'),
+        (0, 'Miscellaneous Fees'),
         (1, 'Add-ons'),
     ]
     property_id = models.ForeignKey(
