@@ -53,8 +53,9 @@ Home
 
 
 {% if properties %}
+
 <h2>Property:</h2>
-<select class="mdb-select md-form">
+<select class="mdb-select md-form property-select">
   {% for property in properties %}
   <option value="{{property.pk}}">{{property.name}}</option>
   {% endfor %}
@@ -141,6 +142,12 @@ Home
 
   <!-- cashflow -->
   <div class="d-flex flex-column justify-content-center z-depth-1" style="width: 500px; margin: 0; padding: 10px;">
+    <h2>Month-Year:</h2>
+    <select class="mdb-select md-form my-select">
+      {% for month_year in month_years %}
+      <option value="{{month_year|date:'m-y'}}">{{month_year|date:"M-Y"}}</option>
+      {% endfor %}
+    </select>
     <div class="d-flex flex-column flex-wrap justify-content-center" style="margin-bottom: 10px;">
       <span style="color: black; text-transform: uppercase; font-size: 15px; font-weight: bold;">Cashflow</span>
     </div>
@@ -210,12 +217,14 @@ Home
 {% block extra_js %}
 <script type="text/javascript">
   $(document).ready(function () {
-    var val = $('.mdb-select').val();
-    $('.property-name-span').html($(".mdb-select option:selected").text());
+    var val = $('.property-select').val();
+    var my = $('.my-select').val();
+    $('.property-name-span').html($(".property-select option:selected").text());
     $.ajax({
       url: '/home-ajax',
       data: {
-        'val': val
+        'val': val,
+        'my': my
       },
       dataType: 'json',
       success: function (data) {
@@ -225,17 +234,21 @@ Home
           $('.active-rooms-span').html(data.active_rooms);
           $('.avail-rooms-span').html(data.avail_rooms);
           $('.payments-span').html(data.payments);
+          $('.expenses-span').html(data.expenses);
+          $('.net-span').html(data.net_income);
         }
       }
     });
 
-    $(".mdb-select").on("change", function () {
-      var val = $('.mdb-select').val();
-      $('.property-name-span').html($(".mdb-select option:selected").text());
+    $(".property-select").on("change", function () {
+      var val = $('.property-select').val();
+      var my = $('.my-select').val();
+      $('.property-name-span').html($(".property-select option:selected").text());
       $.ajax({
         url: '/home-ajax',
         data: {
-          'val': val
+          'val': val,
+          'my': my
         },
         dataType: 'json',
         success: function (data) {
@@ -245,11 +258,37 @@ Home
             $('.active-rooms-span').html(data.active_rooms);
             $('.avail-rooms-span').html(data.avail_rooms);
             $('.payments-span').html(data.payments);
+            $('.expenses-span').html(data.expenses);
+            $('.net-span').html(data.net_income);
           }
         }
       });
-
     });
+
+    $(".my-select").on("change", function () {
+      var val = $('.property-select').val();
+      var my = $('.my-select').val();
+      $.ajax({
+        url: '/home-ajax',
+        data: {
+          'val': val,
+          'my': my
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data) {
+            $('.active-tenants-span').html(data.active_tenants);
+            $('.pending-bookings-span').html(data.pending_bookings);
+            $('.active-rooms-span').html(data.active_rooms);
+            $('.avail-rooms-span').html(data.avail_rooms);
+            $('.payments-span').html(data.payments);
+            $('.expenses-span').html(data.expenses);
+            $('.net-span').html(data.net_income);
+          }
+        }
+      });
+    });
+
   });
 </script>
 {% endblock extra_js %}

@@ -5,6 +5,7 @@ from django.db.models import Count
 from functools import reduce
 
 def billing_create(request):
+    print('BILLING CREATION')
     ## get all active transactions - meaning rooms that are occupied by tenants with on going contracts
     transactions = Transaction.objects.filter(active=True)
     ## loop through transactions
