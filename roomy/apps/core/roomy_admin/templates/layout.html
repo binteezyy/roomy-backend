@@ -53,7 +53,8 @@
     <!-- Nav Item - Dashboard Collapse Menu -->
     <li class="nav-item">
 
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDashboard" aria-expanded="true" aria-controls="collapseCashflow">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDashboard"
+        aria-expanded="true" aria-controls="collapseCashflow">
 
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span>
@@ -61,13 +62,17 @@
       <div id="collapseDashboard" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
 
-          <a class="collapse-item" href="{% url 'booking' %}"><i class="fas fa-fw fa-book"></i> <span>Booking</span> </a>
-          <a class="collapse-item" href="{% url 'rental' %}"><i class="fas fa-fw fa-address-book"></i> <span>Rental</span> </a>
+          <a class="collapse-item" href="{% url 'booking' %}"><i class="fas fa-fw fa-book"></i> <span>Booking</span>
+          </a>
+          <a class="collapse-item" href="{% url 'rental' %}"><i class="fas fa-fw fa-address-book"></i>
+            <span>Rental</span> </a>
           <a class="collapse-item" href="{% url 'tenant' %}"><i class="fas fa-fw fa-user"></i>Tenant</a>
-          <a class="collapse-item" href="{% url 'guest' %}"><i class="fas fa-fw fa-user-friends"></i> <span>Guest</span> </a>
+          <a class="collapse-item" href="{% url 'guest' %}"><i class="fas fa-fw fa-user-friends"></i> <span>Guest</span>
+          </a>
           <a class="collapse-item" href="{% url 'notif' %}"><i class="fas fa-fw fa-bell"></i> <span>Tenant
               Notifications</span> </a>
-          <a class="collapse-item" href="{% url 'request' %}"><i class="fas fa-fw fa-comment"></i> <span>Tenant Request</span> </a>
+          <a class="collapse-item" href="{% url 'request' %}"><i class="fas fa-fw fa-comment"></i> <span>Tenant
+              Request</span> </a>
 
         </div>
       </div>
@@ -75,30 +80,40 @@
 
     <!-- Nav Item - Cashflow Collapse Menu -->
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCashflow" aria-expanded="true" aria-controls="collapseCashflow">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCashflow" aria-expanded="true"
+        aria-controls="collapseCashflow">
         <i class="fas fa-fw fa-dollar-sign"></i>
         <span>Cashflow</span>
       </a>
       <div id="collapseCashflow" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="{% url 'billing' %}"><i class="fas fa-fw fa-hand-holding-usd"></i></i> <span>Billing</span> </a>
-          <a class="collapse-item" href="{% url 'expense' %}"><i class="fas fa-fw fa-credit-card"></i> <span>Expense</span> </a>
-          <a class="collapse-item" href="{% url 'fee' %}"><i class="fas fa-fw fa-file-invoice-dollar"></i></i> <span>Fees</span> </a>
+          <a class="collapse-item" href="{% url 'billing' %}"><i class="fas fa-fw fa-hand-holding-usd"></i></i>
+            <span>Billing</span> </a>
+          <a class="collapse-item" href="{% url 'expense' %}"><i class="fas fa-fw fa-credit-card"></i>
+            <span>Expense</span> </a>
+          <a class="collapse-item" href="{% url 'fee' %}"><i class="fas fa-fw fa-file-invoice-dollar"></i></i>
+            <span>Fees</span> </a>
         </div>
       </div>
     </li>
 
     <!-- Nav Item - Management Collapse Menu -->
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+        aria-expanded="true" aria-controls="collapseUtilities">
         <i class="fas fa-fw fa-wrench"></i>
         <span>Management</span>
       </a>
       <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="{% url 'property_management' %}"><i class="fas fa-fw fa-building"></i> <span>Property</span> </a>
-          <a class="collapse-item" href="{% url 'catalog_management' %}"><i class="fas fa-fw fa-bed"></i> <span>Catalog</span> </a>
-          <a class="collapse-item" href="{% url 'room_management' %}"><i class="fas fa-fw fa-bed"></i> <span>Room</span> </a>
+          <a class="collapse-item" href="{% url 'property_management' %}"><i class="fas fa-fw fa-building"></i>
+            <span>Property</span> </a>
+          <a class="collapse-item" href="{% url 'catalog_management' %}"><i class="fas fa-fw fa-book"></i>
+            <span>Catalog</span> </a>
+          <a class="collapse-item" href="{% url 'room_management' %}"><i class="fas fa-fw fa-bed"></i> <span>Room</span>
+          </a>
+          <a class="collapse-item" href="{% url 'owner_notification' %}"><i class="fas fa-fw fa-bell"></i>
+            <span>Notifications</span> </a>
         </div>
       </div>
     </li>
@@ -134,14 +149,17 @@
 
           <!-- Nav Item - Search Dropdown (Visible Only XS) -->
           <li class="nav-item dropdown no-arrow d-sm-none">
-            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-search fa-fw"></i>
             </a>
             <!-- Dropdown - Messages -->
-            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+              aria-labelledby="searchDropdown">
               <form class="form-inline mr-auto w-100 navbar-search">
                 <div class="input-group">
-                  <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                  <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                    aria-label="Search" aria-describedby="basic-addon2">
                   <div class="input-group-append">
                     <button class="btn btn-primary" type="button">
                       <i class="fas fa-search fa-sm"></i>
@@ -299,7 +317,8 @@
             <div href="{% url 'admin-index' %}" style="margin-bottom: 20px;">
               <img src="{% static "img\logo_white.png" %}" alt="" style="width:170px; height: 35px; margin: 0 auto;">
             </div>
-            <span style="font-size: 14px;">&copy;Copyright 2019 - 2020. <br> All rights reserved. Powered by <span style="color: white; font-weight: bold; font-style: italic;">PPTT</span></span>
+            <span style="font-size: 14px;">&copy;Copyright 2019 - 2020. <br> All rights reserved. Powered by <span
+                style="color: white; font-weight: bold; font-style: italic;">PPTT</span></span>
           </div>
           <!-- end of copyright -->
         </div>
