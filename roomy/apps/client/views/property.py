@@ -6,13 +6,25 @@ context = {
 }
 
 def property(request):
-    return render(request,"web/components/property/property.html", context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/property/property.html", context)
+    else:
+        return render(request,"web/components/property/property.html", context)
 
 def amenities(request):
-    return render(request,"web/components/property/amenities.html", context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/property/amenities.html", context)
+    else:
+        return render(request,"web/components/property/amenities.html", context)
 
 def photos(request):
-    return render(request,"web/components/property/photos.html", context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/property/photos.html", context)
+    else:
+        return render(request,"web/components/property/photos.html", context)
 
 def booking(request):
-    return render(request,"web/components/property/booking.html", context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/property/booking.html", context)
+    else:
+        return render(request,"web/components/property/booking.html", context)

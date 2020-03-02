@@ -21,23 +21,43 @@ def booking_guide(request):
         return render(request,"web/components/landing/booking_guide.html",context)
 
 def partner_with_us(request):
-
-    return render(request,"web/components/landing/partner_with_us.html",context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/landing/partner_with_us.html",context)
+    else:
+        return render(request,"web/components/landing/partner_with_us.html",context)
 
 def about(request):
-    return render(request,"web/components/landing/about.html",context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/landing/about.html",context)
+    else:
+        return render(request,"web/components/landing/about.html",context)
 
 def faq(request):
-    return render(request,"web/components/landing/faq.html",context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/landing/faq.html",context)
+    else:
+        return render(request,"web/components/landing/faq.html",context)
 
 def contact(request):
-    return render(request,"web/components/landing/contact.html",context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/landing/contact.html",context)
+    else:
+        return render(request,"web/components/landing/contact.html",context)
 
 def terms_of_use(request):
-    return render(request,"web/components/landing/terms_of_use.html",context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/landing/terms_of_use.html",context)
+    else:
+        return render(request,"web/components/landing/terms_of_use.html",context)
 
 def privacy(request):
-    return render(request,"web/components/landing/privacy.html",context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/landing/privacy.html",context)
+    else:
+        return render(request,"web/components/landing/privacy.html",context)
 
 def help_center(request):
-    return render(request,"web/components/landing/help_center.html",context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/landing/help_center.html",context)
+    else:
+        return render(request,"web/components/landing/help_center.html",context)
