@@ -76,9 +76,15 @@ class RoomCatalog(models.Model):
 
 
 class Room(models.Model):
+    room_status = [
+        (0, 'Available'),
+        (1, 'Shared'),
+        (2, 'Occupied'),
+    ]
     catalog_id = models.ForeignKey(
         RoomCatalog, on_delete=models.CASCADE, null=True, blank=True)
     number = models.PositiveIntegerField(default=1)
+    status = models.IntegerField(choices=room_status, default=0)
 
     def __str__(self):
         return f'{self.catalog_id} - Room {self.number}'
@@ -89,7 +95,7 @@ class Room(models.Model):
 
 class Fee(models.Model):
     fee_type_enum = [
-        (0, 'Misc Fees'),
+        (0, 'Miscellaneous Fees'),
         (1, 'Add-ons'),
     ]
     property_id = models.ForeignKey(
@@ -218,7 +224,21 @@ class Booking(models.Model):
                 except Transaction.DoesNotExist:
                     new_transaction = Transaction(room_id=avail_room, billing_date=self.start_date)
                     new_transaction.save()
-                    new_transaction.add_ons.set(self.add_ons.all())
+                    
+                    try:
+                        new_fee = Fee.objects.get(property_id=self.catalog_id.property_id, description=f'{self.catalog_id.name} rate', amount=self.catalog_id.rate, fee_type=0)
+                    except Fee.DoesNotExist:
+                        new_fee = Fee(property_id=self.catalog_id.property_id, description=f'{self.catalog_id.name} rate', amount=self.catalog_id.rate, fee_type=0)
+                        new_fee.save()
+                    print(new_fee)
+                    all_add_ons = []
+                    all_add_ons.append(new_fee)
+                    for add_on in self.add_ons.all():
+                        all_add_ons.append(add_on)
+                    new_transaction.add_ons.set(all_add_ons)
+                    
+                avail_room.is_available = False
+                avail_room.save()
                 print(new_transaction)
                 try:
                     new_tenant = TenantAccount.objects.get(

@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect, reverse  # get_object_or_404
 
 from apps.core.roomy_admin.forms import UserLoginForm, UserRegisterForm
@@ -19,7 +19,9 @@ def home(request):
     next = request.GET.get('next')
 
     if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
+        properties = Property.objects.filter(owner_id__user_id=request.user)
         context = {
+            'properties': properties,
             'messages': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user).order_by('-time_stamp')[:5],
             'unread': Request.objects.filter(transaction_id__room_id__catalog_id__property_id__owner_id__user_id=request.user, read=False).count(),
             'notifs': OwnerNotification.objects.filter(owner_id__user_id=request.user).order_by('-time_stamp')[:5],
@@ -45,6 +47,30 @@ def home(request):
             'title': 'Login',
         }
         return render(request, 'components/admin_login/login.html', context)
+
+# home ajax
+def home_ajax(request):
+    val = request.GET.get('val', None)
+    property_o = Property.objects.get(owner_id__user_id=request.user, pk=val)
+    active_tenants = TenantAccount.objects.filter(transaction_id__active=True, transaction_id__room_id__catalog_id__property_id=property_o).count()
+    pending_bookings = Booking.objects.filter(status=0, catalog_id__property_id__owner_id__user_id=request.user, catalog_id__property_id=property_o).count()
+    active_rooms = Room.objects.filter(catalog_id__property_id=property_o, is_available=False).count()
+    avail_rooms = Room.objects.filter(catalog_id__property_id=property_o, is_available=True).count()
+    billings = Billing.objects.filter(transaction_id__room_id__catalog_id__property_id=property_o, paid=True)
+    payments = 0
+
+    for billing in billings:
+        for fee in billing.fees.all():
+            payments += int(fee.amount)
+
+    data = {
+        'active_tenants': active_tenants,
+        'pending_bookings': pending_bookings,
+        'active_rooms': active_rooms,
+        'avail_rooms': avail_rooms,
+        'payments': payments,
+    }
+    return JsonResponse(data)
 
 # rental
 
@@ -83,6 +109,26 @@ def rental(request):
         }
         return render(request, 'components/admin_login/login.html', context)
 
+from django.db.models.signals import post_save, m2m_changed
+from django.dispatch import receiver
+from datetime import datetime, date
+# transaction signals
+@receiver(m2m_changed, sender=Transaction.add_ons.through)
+def create_billing_on_transaction_save(sender, instance, **kwargs):
+    print('start')
+    action = kwargs.pop('action', None)
+    if action == "post_add":
+        print('transaction created')
+        try:
+            billing = Billing.objects.get(time_stamp=instance.billing_date, transaction_id__pk=instance.pk)
+            print('billing exists')
+        except Billing.DoesNotExist:
+            billing = Billing(time_stamp=instance.billing_date, transaction_id=instance)
+            billing.save()
+            print(instance.add_ons.all())
+            billing.billing_fee.set(instance.add_ons.all())
+            print('does not exists')      
+        print(billing)
 # tenant
 
 

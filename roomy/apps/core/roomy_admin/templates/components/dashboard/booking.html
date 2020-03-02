@@ -11,6 +11,7 @@ Booking
 {% endblock %}
 
 {% block content %}
+{% if properties %}
 {% include "_modal.html" %}
 <div class="content container">
     <div class="card-content">
@@ -44,6 +45,13 @@ Booking
         </div>
     </div>
 </div>
+{% else %}
+<div class="row d-flex justify-content-center">
+    <div class="d-flex justify-content-center" style="margin-top: 20px;">
+        <span style="font-size: 22px;">There are currently no registered properties under your account.</span>
+    </div>
+</div>
+{% endif %}
 {% endblock %}
 
 {% block header %}

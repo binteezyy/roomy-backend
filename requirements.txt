@@ -23,7 +23,6 @@ mysqlclient==1.4.6
 oauthlib==3.1.0
 phonenumbers==8.11.2
 Pillow==7.0.0
-pkg-resources==0.0.0
 places==0.3.4
 PyJWT==1.7.1
 python-decouple==3.3
