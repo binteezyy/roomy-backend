@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load sekizai_tags %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -38,11 +38,14 @@
   <script type="text/javascript" src="{% static "vendor\mdbootstrap\js\mdb.min.js" %}"></script>
   <!-- Dropzone Script -->
   <script type="text/javascript" src="{% static "vendor\dropzone\dropzone.js" %}"></script>
+  <!-- django-bootstrap-modal-forms -->
+  <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
   <!-- Custom Script -->
   <script type="text/javascript" src="{% static "js\script.js" %}"></script>
 
-
+  <!-- EXTRA JS -->
   {% block extra_js %}{% endblock %}
+  {% render_block "js" %}
 </body>
 
 </html>

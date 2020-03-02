@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="row d-flex flex-wrap justify-content-center align-items-center">
+    <div class="col rounded d-flex flex-column justify-content-center" style="padding: 20px;">
+      <h2 class="modal-title text-center my-4">Log in to your account</h2>
+      <div class="d-flex justify-content-center" style="margin: 0 15px 10px 15px;">
+        <a class="btn btn-block" style="margin: 0 15px; background-color: #DB4437; color: white;" href="#"
+          onclick="window.open('{% url 'social:begin' 'google-oauth2' %}?next={{request.get_full_path}}', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">
+          <i class="fab fa-google" style="margin-right: 10px;"></i>Continue with google
+        </a>
+      </div>
+      <span style="margin: 0 50px 0 50px; text-align: center; font-size: 14px;">We will never share any information without your permission.</span>
+      <span style="margin: 10px auto 10px auto; font-size: 18px;"><b>or</b></span>
+      {% for error in form.non_field_errors %}
+      <div class="alert alert-danger">
+          <strong>{{ error|escape }}</strong>
+      </div>
+      {% endfor %}
+      <form class="form" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+        <div class="fieldWrapper" style="margin: 10px 15px;">
+          <div class="form-group" style="margin: 0 15px;">
+            <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}}" class="form-control" style="margin-bottom: 5px;" placeholder="{{field.label}}" value="{{field.value|default_if_none:''}}">
+          </div>
+          {% if field.help_text %}
+          <p class="help">{{ field.help_text|safe }}</p>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="d-flex justify-content-center" style="margin: 10px 15px;">
+          <button class="btn btn-block btn-dark" style="margin: 0 15px;" type="submit" name="button">Login</button>
+        </div>
+      </form>
+
+      <a class="text-center" style="margin-bottom: 5px; font-size: 14px;" href="{% url 'forgot_password' %}">Forgot password?</a>
+      <div class="text-center" style="margin-bottom: 20px; font-size: 14px;">
+        <span>Don't have an account yet?</span>
+        <a href="{% url 'sign_up' %}" type="button" name="button">Sign up</a>
+      </div>
+      <span style="margin: 0 20px 5px 20px; text-align: center; font-size: 14px;">By signing in, you agree to our <a href="{% url 'terms_of_use' %}">Terms of Use </a> & <a href="{% url 'privacy' %}">Privacy Policy</a>.</span>
+
+    </div>
+  </div>
+</div>

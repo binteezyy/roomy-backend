@@ -5,7 +5,7 @@ import os
 STATIC_ROOT = os.path.join(BASE_DIR, '../apps/client/static/')
 
 SECRET_KEY = config('SECRET_KEY')
-
+RECAPTCHA_KEY = config('RECAPTCHA_KEY')
 ROOT_URLCONF = 'config.client.urls'
 
 INSTALLED_APPS = [
@@ -18,6 +18,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'sslserver',
     'social_django',
+    'bootstrap_modal_forms',
+    'sekizai',
     'numbers',
     # APPS
 ] + GLOBAL_APPS
@@ -55,6 +57,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'sekizai.context_processors.sekizai',
             ],
         },
     },
@@ -67,7 +70,8 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
-
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'social-close'
+PHONENUMBER_DEFAULT_FORMAT = "E164"
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'

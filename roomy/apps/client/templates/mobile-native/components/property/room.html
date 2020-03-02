@@ -1,0 +1,249 @@
+{% extends "web/layout/layout_2.html" %}
+{% load static %}
+
+{% block title %}
+Room
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static "vendor/pannellum/pannellum.css" %}">
+  <style>
+    #panorama {
+        width: 600px;
+        height: 400px;
+    }
+    </style>
+{% endblock %}
+{% block extra_js %}
+  <script src="{% static "vendor/pannellum/pannellum.js" %}"></script>
+  <script type="text/javascript">
+
+  viewer = pannellum.viewer('panorama', {
+      "type": "equirectangular",
+      "panorama": "/media/{{ room.img_3d.all.0}}",
+      "autoLoad": true,
+    });
+
+  </script>
+{% endblock %}
+{% block content %}
+<!-- main content -->
+<div class="container-fluid">
+  <div class="container">
+    <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 20px;">
+
+      <!-- room information -->
+      <div class="col-md-7 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+
+        <!-- room info first row -->
+        <div class="d-flex justify-content-between align-items-center">
+          <span style="font-size: 30px; font-weight: bold;">{{ room.name }}</span>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 12px; text-transform: uppercase; background-color: black; color: white;">
+                {% if room.property_id.property_type == 0 %}
+                Condominium
+                {% elif room.property_id.property_type == 1 %}
+                Apartment
+                {% elif room.property_id.property_type == 2 %}
+                Dormitory
+                {% endif %}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- room info second row -->
+        <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 10px;">
+          <span style="font-size: 18px; font-style: italic;">by {{ room.property_id.name}}</span>
+          <span style="font-size: 16px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+        </div>
+
+        <!-- room tags -->
+        <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 5px; padding: 0;">
+          <span style="margin: 0 15px 0 0; font-size: 15px;">4 occupants</span>
+          <span style="margin: 0 15px 0 0; font-size: 15px;">2 double-deck beds</span>
+          <span style="margin: 0 15px 0 0; font-size: 15px;">4 common cr</span>
+        </div>
+
+        <!-- room address -->
+        <div class="d-flex justify-content-start align-items-start" style="margin-bottom: 5px;">
+          <span style="margin: 0 15px 0 0; font-size: 16px;">{{ room.property_id.property_address }}</span>
+        </div>
+        <hr style="border-top: 1px solid #5392f9;">
+
+        <!-- room description -->
+        <div class="description">
+          <p style="padding: 0 0 20px 0">
+            {{room.description|linebreaksbr}}
+          </p>
+        </div>
+
+      </div>
+      <!-- end of room information -->
+
+
+
+      <!-- booking -->
+      <div class="col-md-4 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+        <div class="" style="margin-bottom: 20px;">
+          <h5>Rates</h5>
+          <hr style="border-top: 1px solid #5392f9;">
+          <span style="font-size: 25px;"><b>Php {{ room.rate }}</b>/month</span> <br>
+          <span style="font-size: 14px;"><b>1 month advance, 1 month deposit</span>
+        </div>
+
+        <!-- package inclusion -->
+        <div class="" style="margin-bottom: 20px;">
+          <h5>What's included?</h5>
+          <hr style="border-top: 1px solid #5392f9;">
+          <p>
+            Curabitur sed sapien gravida, porta tellus id, semper ante. In volutpat leo id dolor lacinia, in finibus urna mattis. Mauris imperdiet dolor tellus, sed sodales lorem tincidunt eu. Mauris congue metus at lacus pulvinar, eget posuere odio
+            porta.
+          </p>
+        </div>
+        <div class="" style="margin-bottom: 20px;">
+          <h5>Add-ons</h5>
+          <hr style="border-top: 1px solid #5392f9;">
+          <p>
+            Quisque hendrerit nibh sit amet porta porttitor. Etiam gravida, augue et pellentesque elementum, eros arcu condimentum massa, nec ultricies eros massa a nulla.
+          </p>
+        </div>
+        <!-- end of package inclusion -->
+
+        <!-- booking button -->
+        {% if available.count > 0 %}
+        <form method="POST" id="booking">
+          {% csrf_token %}
+          <input type="hidden" name="" value="{{ room.pk }}">
+          <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 30px;">
+            <button class="btn btn-lg" style="padding-right: 80px; padding-left: 80px; background-color: #5392f9; font-size: 20px;">BOOK NOW</button>
+          </div>
+        </form>
+        {% else %}
+        <div class="alert alert-danger alert-dismissible text-center font-italic" role="alert">
+          Fully Booked
+        </div>
+        {% endif %}
+
+        <!-- end of booking button -->
+      </div>
+      <!-- end of booking -->
+    </div>
+
+    <!-- photos -->
+    {% if room.img_2d.all %}
+    <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 20px;">
+      <div class="col shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+        <h5>Photos</h5>
+        {% for foto in room.img_2d.all %}
+        <div class="d-flex flex-wrap justify-content-center align-items-center" style="min-height: 300px;">
+          <a style="width: 220px; margin: 10px;" data-toggle="modal" data-target="#photoModal">
+            <img class="img-fluid" src="/media/{{ foto.img_path}}" alt="">
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+      {% if room.img_3d.all %}
+      <div class="col shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+        <h5>360 view</h5>
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
+          <a style="margin: 10px;">
+            <!--img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt=""-->
+            <div id="panorama"></div>
+          </a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    <!-- end of photos -->
+
+    <!-- reviews -->
+    <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 50px;">
+
+      <div class="col-md-4 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+        <h5>Pureza Mansion</h5>
+        <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 10px;">
+          <span style="font-size: 14px; ">Manila, Metro Manila</span>
+          <span style="margin: 0 10px 0 10px;"><i class="fas fa-grip-lines-vertical"></i></span>
+          <span style="font-size: 14px;">Joined in October 2019</span>
+        </div>
+        <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 15px;">
+          <span style="font-size: 14px;"><i class="fas fa-star"></i> 1 review </span>
+          <span style="margin: 0 10px 0 10px; font-size: 14px;"><i class="fas fa-check-circle" style="margin-right: 5px;"></i>Verified</span>
+        </div>
+        <div class="d-flex flex-column justify-content-start align-items-start" style="margin-bottom: 15px;">
+          <span>Phasellus sodales, sapien vel placerat tempus, ex erat vulputate dolor, a dictum ante ipsum eget ipsum.</span> <br>
+          <span>Response Rate: 100%</span>
+          <span>Response Time: within an hour</span>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button class="btn btn-dark" type="button" name="button">Contact</button>
+        </div>
+      </div>
+
+      <div class="col-md-7 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+
+        <div class="wrapper" id="reviews" style="padding-bottom: 50px;">
+          <h5 style="margin-bottom: 20px;">Reviews</h5>
+
+          <!-- tenant review -->
+          <div class="d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center" style="margin: 0 10px 10px 0;">
+              <div class="d-flex justify-content-start align-items-center">
+                <div class=""
+                  style="width: 50px; height: 50px; margin-right: 10px; border-radius: 25px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+                <div class="d-flex flex-column">
+                  <span style="font-size: 15px; font-weight: bold;">Geralt</span>
+                  <span style="font-size: 14px; color: grey;">November 2019</span>
+                </div>
+              </div>
+              <div class="">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+            <div class="message">
+              <p>
+                Mauris venenatis aliquet consequat. Aliquam erat volutpat. Quisque hendrerit nibh sit amet porta porttitor. Etiam gravida, augue et pellentesque elementum, eros arcu condimentum massa, nec ultricies eros massa a nulla. Donec
+                ultricies sapien sed ornare commodo. Nam rhoncus, elit at tempor congue, enim leo tincidunt ipsum, sit amet volutpat mauris tortor nec lacus.
+              </p>
+            </div>
+          </div>
+          <!-- end of tenant review -->
+
+        </div>
+
+      </div>
+      <!-- end of reviews -->
+    </div>
+    <!-- end of reviews -->
+
+  </div>
+</div>
+<!-- end of main content -->
+
+<!-- picture modal -->
+<div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <!-- modal content -->
+    <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
+      <!-- modal body -->
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row d-flex justify-content-center" style="padding-right: 10px; padding-left: 10px;">
+            <img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of picture modal -->
+
+
+{% endblock %}
