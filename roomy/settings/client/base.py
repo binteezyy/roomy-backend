@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'sslserver',
     'social_django',
+    'webpush',
     'bootstrap_modal_forms',
     'sekizai',
     'numbers',
@@ -43,6 +44,27 @@ MIDDLEWARE = [
     'django_user_agents.middleware.UserAgentMiddleware'
 ]
 
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+# https://web-push-codelab.glitch.me/
+WEBPUSH_SETTINGS = {
+   "VAPID_PUBLIC_KEY": config('WEBPUSH_PUBLIC_KEY'),
+   "VAPID_PRIVATE_KEY": config('WEBPUSH_PRIVATE_KEY'),
+   "VAPID_ADMIN_EMAIL": config('WEBPUSH_ADMIN_EMAIL')
+}
 
 WSGI_APPLICATION = 'config.client.wsgi.application'
 
