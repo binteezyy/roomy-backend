@@ -15,15 +15,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'pwa',
+    'webpush',
+    'channels',
     'rest_framework',
     'sslserver',
     'social_django',
-    'webpush',
     'bootstrap_modal_forms',
     'sekizai',
     'numbers',
     # APPS
 ] + GLOBAL_APPS
+
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'apps/client/static/js/service_worker.js')
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -67,7 +71,7 @@ WEBPUSH_SETTINGS = {
 }
 
 WSGI_APPLICATION = 'config.client.wsgi.application'
-
+ASGI_APPLICATION = 'config.client.asgi.application'
 
 TEMPLATES = [
     {
