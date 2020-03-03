@@ -98,7 +98,7 @@ def my_handler(sender, instance, created, **kwargs):
         try:
             new_fee = Fee.objects.get(property_id=instance.property_id, description=f'{instance.name} rate', amount=instance.rate, fee_type=0)
         except Fee.DoesNotExist:
-            new_fee = Fee(property_id=instance.property_id, description=f'{instance.name} rate', amount=instance.rate, fee_type=0)
+            new_fee = Fee(property_id=instance.property_id, description=f'{instance.name} rate', amount=instance.rate, fee_type=2)
             new_fee.save()
         print(new_fee)
 # room management

@@ -1,6 +1,6 @@
 from django.urls import path, include
 from django.conf.urls.static import static
-from .views import base, dashboard, cashflow, management, datatableviews, modalviews
+from .views import base, dashboard, cashflow, management, datatableviews, modalviews, reports
 urlpatterns = [
     #     path('', base.index, name='admin-index'),
     path('logout/', base.admin_logout, name='admin-logout'),
@@ -175,5 +175,13 @@ urlpatterns = [
     #          modalviews.AdminAccDeleteModal.as_view(), name='delete-admin-acc'),
     #     path('update/admin_acc/<int:pk>',
     #          modalviews.AdminAccUpdateModal.as_view(), name='update-admin-acc'),
+
+    # Generate reports
+    path('generate/properties', reports.list_properties, name='list-properties'),
+    path('generate/rooms/<int:pk>', reports.list_rooms, name='list-rooms'),
+    path('generate/tenants/<int:pk>', reports.list_tenants, name='list-tenants'),
+    path('generate/payments/<int:pk>', reports.list_payments, name='list-payments'),
+    path('generate/expenses/<int:pk>', reports.list_expenses, name='list-expenses'),
+    path('generate/cashflow/<str:date>', reports.generate_my_cashflow, name='generate-my-cashflow'),
 
 ]

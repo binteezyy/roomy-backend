@@ -149,5 +149,14 @@ User Profile
 {% endblock %}
 
 {% block extra_js %}
-<script></script>
+<script>
+    var searchInput = 'id_account_form-provincial_address'
+
+    $(document).ready(function () {
+        var autocomplete;
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+            types: ['geocode']
+        })
+    }); 
+</script>
 {% endblock %}

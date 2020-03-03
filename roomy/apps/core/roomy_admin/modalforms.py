@@ -94,7 +94,7 @@ class CatalogModelForm(forms.ModelForm):
 class RoomModalForm(BSModalForm):
     class Meta:
         model = Room
-        exclude = ['',]
+        exclude = ['catalog_id', 'status']
 
 class RoomModelForm(forms.ModelForm):
     class Meta:
