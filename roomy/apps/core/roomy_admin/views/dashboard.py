@@ -70,8 +70,8 @@ def home_ajax(request):
     property_o = Property.objects.get(owner_id__user_id=request.user, pk=val)
     active_tenants = TenantAccount.objects.filter(transaction_id__active=True, transaction_id__room_id__catalog_id__property_id=property_o).count()
     pending_bookings = Booking.objects.filter(status=0, catalog_id__property_id__owner_id__user_id=request.user, catalog_id__property_id=property_o).count()
-    active_rooms = Room.objects.filter(catalog_id__property_id=property_o, status=0).count()
-    avail_rooms = Room.objects.filter(catalog_id__property_id=property_o).exclude(status=0).count()
+    active_rooms = Room.objects.filter(catalog_id__property_id=property_o).exclude(status=0).count()
+    avail_rooms = Room.objects.filter(catalog_id__property_id=property_o, status=0).count()
     billings = Billing.objects.filter(transaction_id__room_id__catalog_id__property_id=property_o, paid=True, time_stamp__month__gte=month, time_stamp__year__gte=year)
     payments = 0
 

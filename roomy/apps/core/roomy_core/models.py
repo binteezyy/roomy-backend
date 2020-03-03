@@ -87,7 +87,7 @@ class Room(models.Model):
     status = models.IntegerField(choices=room_status, default=0)
 
     def __str__(self):
-        return f'{self.catalog_id} - Room {self.number}'
+        return f'{self.catalog_id.name} - Room {self.number}'
 
     class Meta:
         unique_together = ('catalog_id', 'number')
