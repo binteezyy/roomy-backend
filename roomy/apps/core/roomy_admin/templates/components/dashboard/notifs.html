@@ -16,13 +16,16 @@ Tenant Notification
 <div class="content container">
     <div class="card-content">
         <div class="container-fluid">
-            <h2>Tenant Notifications</h2>
+          <div class="" style="margin-bottom: 20px;">
+            <span style="margin-right: 10px; color: black; font-size: 22px; text-transform: uppercase; font-weight: bold;">Notifications</span>
+          </div>
+
             <div class="row p-3">
                 <div class="col">
-                    <div class="table-responsive">
+                    <div class="table table-responsive-sm">
                         <table id="notif-table" class="table table-bordered table-hover" width="100%" cellspacing="0"
                             role="grid" aria-describedby="dataTable_info">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr role="row">
                                     <th>Id</th>
                                     <th>Tenant</th>
@@ -69,7 +72,7 @@ Tenants
                 "<'row'<'col-md-6'><'col-md-6'>>" +
                 "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
             "initComplete": function (settings, json) {
-                $("div.create-notif").html('<button type="button" id="create-notif" class="float-right btn btn-s btn-success btn-raised" name="button">Add Notif <i class="fas fa-plus"></i></button>');
+                $("div.create-notif").html('<button type="button" id="create-notif" class="float-right btn btn-s btn-success btn-raised" name="button">Add Notification <i class="fas fa-plus"></i></button>');
                 $(".create-notif").modalForm({ formURL: "{% url 'create-notif' %}" });
             },
             "drawCallback": function (settings) {
