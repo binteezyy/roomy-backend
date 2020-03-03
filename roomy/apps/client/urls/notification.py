@@ -1,4 +1,6 @@
 from django.urls import path,include
-notification_urls = [
+from ..views.notification import *
 
+notification_urls = [
+    path('demo/', demo, name='webpush-demo'),
 ]

@@ -21,6 +21,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'roomy.settings')
 
 application = ProtocolTypeRouter({
     "websocket": URLRouter([
-        path("notifications/get_notif", get_notif),
+        path("notifications/get_notif", notification),
     ])
 })
