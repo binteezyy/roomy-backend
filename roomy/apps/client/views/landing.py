@@ -45,7 +45,7 @@ def about(request):
 
 def faq(request):
     faqs = FAQ.objects.all().order_by('order')
-    paginator = Paginator(faqs, 12)#pagination
+    paginator = Paginator(faqs, 10)#pagination
     page = request.GET.get('page')
     faqs = paginator.get_page(page)#pagintation end
     context.update({
