@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from django.core.paginator                          import Paginator
 from apps.core.roomy_core.models import *
+from ..models.site import *
 from django.urls import resolve
 
 from webpush import send_user_notification
@@ -42,6 +44,13 @@ def about(request):
     return render(request,"web/components/landing/about.html",context)
 
 def faq(request):
+    faqs = FAQ.objects.all().order_by('order')
+    paginator = Paginator(faqs, 10)#pagination
+    page = request.GET.get('page')
+    faqs = paginator.get_page(page)#pagintation end
+    context.update({
+        "faqs": faqs
+    })
     return render(request,"web/components/landing/faq.html",context)
 
 def contact(request):
