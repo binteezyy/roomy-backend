@@ -1,9 +1,9 @@
-{% extends "web/layout/layout.html" %}
+{% extends "mobile-native/layout/layout.html" %}
 {% load static %}
 
 
 {% block content %}
-<div class="content" style="margin-top: 60px;">
+<div class="content">
   <div class="search_area form-inline mr-auto mb-4 d-flex justify-content-center">
     <form _lpchecked="1" style="width: 100%;" method="GET">
       <div class="bar" style="background-color: #20274d;">
@@ -19,23 +19,8 @@
     <div class="container d-flex flex-column justify-content-center align-items-center">
       <div class="row d-flex flex-column justify-content-center align-items-center" style="width: 100%;">
 
-        <div class="d-flex flex-wrap justify-content-center align-items-center">
-          {% if message and search != "" %}
-          <h2>{{ message }}{{ specific_brand }}{{ text }}{{ cat }}.</h2>
-          {% endif %}
-          {% if rooms.has_previous %}
-          <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page=1">First</a>
-          <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page={{ rooms.previous_page_number }}">{{ rooms.previous_page_number }}</a>
-          {% endif %}
-          <a class="btn btn-xs btn-primary mb-4 mr-1 text-white" style="pointer-events: none;">{{ rooms.number }}</a>
-          {% if rooms.has_next %}
-          <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page={{ rooms.next_page_number }}">{{ rooms.next_page_number }}</a>
-          <a class="btn btn-xs btn-primary mb-4" href="?page={{ rooms.paginator.num_pages }}">Last</a>
-          {% endif %}
-        </div>
-
         <div class="col-lg-3"></div>
-        <div class="col-lg-6 d-flex justify-content-center align-items-center">
+        <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
           {% for room in rooms %}
 
           <!-- room container -->

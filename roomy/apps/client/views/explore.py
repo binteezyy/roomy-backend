@@ -34,7 +34,10 @@ def index(request):
         "search": search,
         "rooms": rooms,
     })
-    return render(request,"web/components/explore/base.html",context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/explore/base.html",context)
+    else:
+        return render(request,"web/components/explore/base.html",context)
 
 def room_view(request,pk):
     room = RoomCatalog.objects.get(pk=pk)

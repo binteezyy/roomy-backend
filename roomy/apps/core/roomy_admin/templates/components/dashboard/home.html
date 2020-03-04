@@ -15,6 +15,12 @@ Home
 {% block content %}
 
 {% if properties %}
+<h2>Property:</h2>
+<select class="mdb-select md-form property-select">
+  {% for property in properties %}
+  <option value="{{property.pk}}">{{property.name}}</option>
+  {% endfor %}
+</select>
 
 <div class="row d-flex justify-content-center" style="margin-bottom: 25px;">
   <div class="" style="width: 50%; height: 100vh; margin: 0; padding: 10px;">
@@ -117,7 +123,33 @@ Home
             </div>
           </div>
 
+    <!-- generate report -->
+    <div class="d-flex flex-column z-depth-1" style="margin-bottom: 20px; padding: 10px;">
+      <span style="color: black; text-transform: uppercase; font-size: 15px; font-weight: bold;">generate report</span>
+      <div class="d-flex flex-wrap justify-content-center align-items-center" style="margin-top: 20px;">
+        <!-- <a class="btn btn-sm btn-dark" href="#">List of properties</a> -->
+        <a id="generate-rooms-list" class="btn btn-sm btn-dark" href="#">List of rooms</a>
+        <a id="generate-tenants-list" class="btn btn-sm btn-dark" href="#">List of tenants</a>
+        <a id="generate-payments-list" class="btn btn-sm btn-dark" href="#">List of payments</a>
+        <a id="generate-expenses-list" class="btn btn-sm btn-dark" href="#">List of expenses</a>
       </div>
+    </div>
+    <!-- end of generate report -->
+
+  </div>
+  <!-- end of tiles -->
+
+  <!-- cashflow -->
+  <div class="d-flex flex-column justify-content-center z-depth-1" style="width: 500px; margin: 0; padding: 10px;">
+    <h2>Month-Year:</h2>
+    <select class="mdb-select md-form my-select">
+      {% for month_year in month_years %}
+      <option value="{{month_year|date:'m-Y'}}">{{month_year|date:"M-Y"}}</option>
+      {% endfor %}
+    </select>
+    <div class="d-flex flex-column flex-wrap justify-content-center" style="margin-bottom: 10px;">
+      <span style="color: black; text-transform: uppercase; font-size: 15px; font-weight: bold;">Cashflow</span>
+    </div>
 
     </div>
     <!-- end of row 2 -->
@@ -171,6 +203,7 @@ Home
     </div>
     <!-- end of pie chart -->
 
+    <a class="btn btn-sm btn-dark" id="generate-month-year-cashflow" href="#">Generate Report</a>
   </div>
 </div>
 
@@ -189,13 +222,21 @@ Home
 
 {% block extra_js %}
 <script type="text/javascript">
-  $(document).ready(function() {
-    var val = $('.mdb-select').val();
-    $('.property-name-span').html($(".mdb-select option:selected").text());
+  $(document).ready(function () {
+    var val = $('.property-select').val();
+    var my = $('.my-select').val();
+    $('#generate-month-year-cashflow').attr("href", "/generate/cashflow/" + my);
+    $('#generate-rooms-list').attr("href", "/generate/rooms/" + val);
+    $('#generate-tenants-list').attr("href", "/generate/tenants/" + val);
+    $('#generate-payments-list').attr("href", "/generate/payments/" + val);
+    $('#generate-expenses-list').attr("href", "/generate/expenses/" + val);
+
+    $('.property-name-span').html($(".property-select option:selected").text());
     $.ajax({
       url: '/home-ajax',
       data: {
-        'val': val
+        'val': val,
+        'my': my
       },
       dataType: 'json',
       success: function(data) {
@@ -205,17 +246,26 @@ Home
           $('.active-rooms-span').html(data.active_rooms);
           $('.avail-rooms-span').html(data.avail_rooms);
           $('.payments-span').html(data.payments);
+          $('.expenses-span').html(data.expenses);
+          $('.net-span').html(data.net_income);
         }
       }
     });
 
-    $(".mdb-select").on("change", function() {
-      var val = $('.mdb-select').val();
-      $('.property-name-span').html($(".mdb-select option:selected").text());
+
+    $(".property-select").on("change", function () {
+      var val = $('.property-select').val();
+      var my = $('.my-select').val();
+      $('.property-name-span').html($(".property-select option:selected").text());
+      $('#generate-rooms-list').attr("href", "/generate/rooms/" + val);
+      $('#generate-tenants-list').attr("href", "/generate/tenants/" + val);
+      $('#generate-payments-list').attr("href", "/generate/payments/" + val);
+      $('#generate-expenses-list').attr("href", "/generate/expenses/" + val);
       $.ajax({
         url: '/home-ajax',
         data: {
-          'val': val
+          'val': val,
+          'my': my
         },
         dataType: 'json',
         success: function(data) {
@@ -225,11 +275,38 @@ Home
             $('.active-rooms-span').html(data.active_rooms);
             $('.avail-rooms-span').html(data.avail_rooms);
             $('.payments-span').html(data.payments);
+            $('.expenses-span').html(data.expenses);
+            $('.net-span').html(data.net_income);
           }
         }
       });
-
     });
+
+    $(".my-select").on("change", function () {
+      var val = $('.property-select').val();
+      var my = $('.my-select').val();
+      $('#generate-month-year-cashflow').attr("href", "/generate/cashflow/" + my);
+      $.ajax({
+        url: '/home-ajax',
+        data: {
+          'val': val,
+          'my': my
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data) {
+            $('.active-tenants-span').html(data.active_tenants);
+            $('.pending-bookings-span').html(data.pending_bookings);
+            $('.active-rooms-span').html(data.active_rooms);
+            $('.avail-rooms-span').html(data.avail_rooms);
+            $('.payments-span').html(data.payments);
+            $('.expenses-span').html(data.expenses);
+            $('.net-span').html(data.net_income);
+          }
+        }
+      });
+    });
+
   });
 </script>
 {% endblock extra_js %}
