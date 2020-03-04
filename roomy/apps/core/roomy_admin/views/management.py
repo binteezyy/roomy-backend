@@ -87,6 +87,7 @@ def catalog_management(request):
 @receiver(post_save, sender=RoomCatalog)
 def my_handler(sender, instance, created, **kwargs):
     print('start')
+
     if created:
         print('catalog created')
         try:

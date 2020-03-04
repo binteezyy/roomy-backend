@@ -191,6 +191,7 @@ class Booking(models.Model):
         (0, 'Pending'),
         (1, 'Approved'),
         (2, 'Denied'),
+        (3, 'Cancelledt')
     ]
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     tenant_id = models.ForeignKey(
@@ -222,7 +223,7 @@ class Booking(models.Model):
                 except Transaction.DoesNotExist:
                     new_transaction = Transaction(room_id=avail_room, billing_date=self.start_date)
                     new_transaction.save()
-                    
+
                     try:
                         new_fee = Fee.objects.get(property_id=self.catalog_id.property_id, description=f'{self.catalog_id.name} rate', amount=self.catalog_id.rate, fee_type=2)
                     except Fee.DoesNotExist:
@@ -234,7 +235,7 @@ class Booking(models.Model):
                     for add_on in self.add_ons.all():
                         all_add_ons.append(add_on)
                     new_transaction.add_ons.set(all_add_ons)
-                    
+
                 avail_room.status = 2
                 avail_room.save()
                 print(new_transaction)
