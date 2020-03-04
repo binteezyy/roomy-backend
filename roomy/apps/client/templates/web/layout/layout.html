@@ -90,8 +90,6 @@
 </nav>
 <!-- end of navbar -->
 
-{% block layout2 %}{% endblock %}
-
 <div style="position: fixed; bottom:0; min-width: 250px; padding: 25px 15px; z-index:99999;">
   <!-- Position toasts -->
   <div style="bottom: 0; left: 0;">
@@ -247,16 +245,16 @@
   </div>
 </div>
 
-<div class="container-fluid" style="background-color: grey;">
+<div class="container-fluid" style="background-color: #333;">
   <!-- copyright -->
   <div class="row d-flex justify-content-center" style="padding: 40px;">
     <div class="d-flex flex-column justify-content-center align-items-center">
       <div class="d-flex flex-column justify-content-center align-items-center">
         <a href="{% url 'home' %}" style="margin: 10px 30px 10px 30px;">
-          <img src="{% static "img\logo_black.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
+          <img src="{% static "img\logo_white.png" %}" alt="" style="width:170px; height: 35px; margin:0 auto;">
         </a>
-        <span style="font-size: 13px; color: black;">&copy; Copyright 2019 - 2020. </span>
-        <span style="font-size: 13px; color: black;">All rights reserved. Powered by <span style="font-size: 15px; font-weight: bold;">PPTT</span> </span>
+        <span style="font-size: 13px; color: white;">&copy; Copyright 2019 - 2020. </span>
+        <span style="font-size: 13px; color: white;">All rights reserved. Powered by <span style="font-size: 15px; font-weight: bold;">PPTT</span> </span>
       </div>
     </div>
   </div>
