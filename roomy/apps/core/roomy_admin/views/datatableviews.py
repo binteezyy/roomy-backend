@@ -44,7 +44,7 @@ def billing_table(request, pk):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def fee_table(request, pk):
-    fees = Fee.objects.filter(property_id__owner_id__user_id=request.user, property_id__pk=pk)
+    fees = Fee.objects.filter(property_id__owner_id__user_id=request.user, property_id__pk=pk).exclude(fee_type=2)
 
     data = []
     for fee in fees:
@@ -68,7 +68,7 @@ def rental_table(request,pk):
     data = []
     for transaction in transactions:
         room = f'Room: Floor-{transaction.room_id.catalog_id.floor} Number-{transaction.room_id.number}'
-        date = Booking.objects.get(tenant_id__transaction_id=transaction).start_date.strftime("%Y, %B %d")
+        date = Transaction.objects.get(pk=transaction.pk).billing_date.strftime("%Y, %B %d")
         x = {"fields": {"id": transaction.pk,
                         "room": room,
                         "date": date,
@@ -266,8 +266,10 @@ def room_table(request, pk):
 
     data = []
     for room in rooms:
-        if TenantAccount.objects.filter(transaction_id__room_id=room):
+        if room.status == 2:
             status = "Occupied"
+        elif room.status == 1:
+            status = "Shared"
         else:
             status = "Vacant"
         if room.catalog_id.img_2d.all():

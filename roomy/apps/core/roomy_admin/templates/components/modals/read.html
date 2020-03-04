@@ -312,7 +312,7 @@
                 <div class="container-fluid">
                     <h2>Tenants in
                         {{transaction.room_id.catalog_id.property_id.name}}
-                        Fl. {{transaction.room_id.catalog_id.floor}}
+                        Catalog. {{transaction.room_id.catalog_id.name}}
                         No. {{transaction.room_id.number}}
                     </h2>
                     <div class="row p-3">
@@ -330,10 +330,17 @@
                                         {% for tenant in tenants %}
                                         <tr>
                                             <td> {{ tenant.user_id.username }}</td>
+                                            {% if tenants.count != 1 %}
                                             <td style="width: 30%"> <button type="button"
                                                     class="remove-tenant btn btn-sm btn-raised btn-warning m-1"
                                                     data-id="/remove-tenant/{{transaction.id}}/{{tenant.id}}">
                                                     <span class="fa fa-trash"></span></button></td>
+                                            {% else %}
+                                            <td style="width: 30%"> <button type="button"
+                                                    class="remove-tenant btn btn-sm btn-raised btn-warning m-1"
+                                                    data-id="/remove-tenant/{{transaction.id}}/{{tenant.id}}" disabled>
+                                                    <span class="fa fa-trash"></span></button></td>
+                                            {% endif %}
                                         </tr>
                                         {% endfor %}
                                     </tbody>

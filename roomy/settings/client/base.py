@@ -15,6 +15,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'pwa',
+    'webpush',
+    'channels',
     'rest_framework',
     'sslserver',
     'social_django',
@@ -23,6 +26,8 @@ INSTALLED_APPS = [
     'numbers',
     # APPS
 ] + GLOBAL_APPS
+
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'apps/client/static/js/service_worker.js')
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -43,9 +48,30 @@ MIDDLEWARE = [
     'django_user_agents.middleware.UserAgentMiddleware'
 ]
 
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+# https://web-push-codelab.glitch.me/
+WEBPUSH_SETTINGS = {
+   "VAPID_PUBLIC_KEY": config('WEBPUSH_PUBLIC_KEY'),
+   "VAPID_PRIVATE_KEY": config('WEBPUSH_PRIVATE_KEY'),
+   "VAPID_ADMIN_EMAIL": config('WEBPUSH_ADMIN_EMAIL')
+}
 
 WSGI_APPLICATION = 'config.client.wsgi.application'
-
+ASGI_APPLICATION = 'config.client.asgi.application'
 
 TEMPLATES = [
     {

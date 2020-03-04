@@ -290,6 +290,9 @@ def AddTenantModal(request, pk):
                     new_tenant = TenantAccount(
                         user_id=user_id, transaction_id=transaction_id)
                     new_tenant.save()
+            room = transaction_id.room_id
+            room.status = 1
+            room.save()
 
             return HttpResponseRedirect(reverse('tenant'))
     else:

@@ -114,9 +114,9 @@ def catalog_upload2d(request, pk):
             upload_image.save()
 
             catalog.img_2d.add(upload_image)
-            return HttpResponseRedirect(reverse('catalog-management'))
+            return HttpResponseRedirect(reverse('catalog_management'))
         else:
-            return HttpResponseRedirect(reverse('catalog-management'))
+            return HttpResponseRedirect(reverse('catalog_management'))
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
@@ -156,9 +156,9 @@ def catalog_upload3d(request, pk):
             upload_image.save()
 
             catalog.img_3d.add(upload_image)
-            return HttpResponseRedirect(reverse('catalog-management'))
+            return HttpResponseRedirect(reverse('catalog_management'))
         else:
-            return HttpResponseRedirect(reverse('catalog-management'))
+            return HttpResponseRedirect(reverse('catalog_management'))
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)

@@ -6,7 +6,7 @@ from django import forms
 class BillingModalForm(BSModalForm):
     class Meta:
         model = Billing
-        exclude = ['transaction_id', ]
+        exclude = ['transaction_id', 'time_stamp']
 
 
 class FeeModalForm(BSModalForm):
@@ -94,7 +94,7 @@ class CatalogModelForm(forms.ModelForm):
 class RoomModalForm(BSModalForm):
     class Meta:
         model = Room
-        exclude = ['',]
+        exclude = ['catalog_id', 'status']
 
 class RoomModelForm(forms.ModelForm):
     class Meta:

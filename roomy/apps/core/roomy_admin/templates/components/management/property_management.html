@@ -6,22 +6,27 @@ Properties
 {% endblock %}
 
 {% block extra_css %}
+
 <!-- SELECT2 -->
 <link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
 {% endblock %}
 
 {% block content %}
+
 {% include "_modal.html" %}
+
 <div class="content container">
   <div class="card-content">
     <div class="container-fluid">
-      <h2>Properties</h2>
+      <div class="" style="margin-bottom: 20px;">
+        <span style="margin-right: 10px; color: black; font-size: 22px; text-transform: uppercase; font-weight: bold;">Property</span>
+      </div>
       <div class="row p-3">
         <div class="col">
-          <div class="table-responsive">
+          <div class="table table-responsive-sm">
             <table id="property-table" class="table table-bordered table-hover" width="100%" cellspacing="0" role="grid"
               aria-describedby="dataTable_info">
-              <thead>
+              <thead class="thead-dark">
                 <tr role="row">
                   <th>Id</th>
                   <th>Name</th>
@@ -42,7 +47,7 @@ Properties
 {% endblock %}
 
 {% block header %}
-Properties
+Property
 {% endblock %}
 
 {% block extra_js %}

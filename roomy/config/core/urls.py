@@ -6,6 +6,7 @@ from ..common import urlpatterns
 urlpatterns +=  [
     path('api/', include('apps.core.roomy_core.urls')),
     path('', include('apps.core.roomy_admin.urls')),
+    path('', include('pwa.urls')),
 ]
 
 if settings.DEBUG:

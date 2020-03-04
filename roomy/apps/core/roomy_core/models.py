@@ -87,7 +87,7 @@ class Room(models.Model):
     status = models.IntegerField(choices=room_status, default=0)
 
     def __str__(self):
-        return f'{self.catalog_id} - Room {self.number}'
+        return f'{self.catalog_id.name} - Room {self.number}'
 
     class Meta:
         unique_together = ('catalog_id', 'number')
@@ -97,6 +97,7 @@ class Fee(models.Model):
     fee_type_enum = [
         (0, 'Miscellaneous Fees'),
         (1, 'Add-ons'),
+        (2, 'Room rates'),
     ]
     property_id = models.ForeignKey(
         Property, on_delete=models.CASCADE, null=True, blank=True)
@@ -190,6 +191,7 @@ class Booking(models.Model):
         (0, 'Pending'),
         (1, 'Approved'),
         (2, 'Denied'),
+        (3, 'Cancelledt')
     ]
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     tenant_id = models.ForeignKey(
@@ -212,11 +214,8 @@ class Booking(models.Model):
             if self.status == 1:
                 active_transactions = Transaction.objects.filter(
                     active=True, room_id__catalog_id=self.catalog_id)
-                occupied_rooms_list = []
-                for active_transaction in active_transactions:
-                    occupied_rooms_list.append(active_transaction.room_id.pk)
-                avail_room = Room.objects.filter(catalog_id=self.catalog_id).exclude(
-                    pk__in=occupied_rooms_list).first()
+
+                avail_room = Room.objects.filter(catalog_id=self.catalog_id, status=0).first()
 
                 try:
                     new_transaction = Transaction.objects.get(
@@ -224,11 +223,11 @@ class Booking(models.Model):
                 except Transaction.DoesNotExist:
                     new_transaction = Transaction(room_id=avail_room, billing_date=self.start_date)
                     new_transaction.save()
-                    
+
                     try:
-                        new_fee = Fee.objects.get(property_id=self.catalog_id.property_id, description=f'{self.catalog_id.name} rate', amount=self.catalog_id.rate, fee_type=0)
+                        new_fee = Fee.objects.get(property_id=self.catalog_id.property_id, description=f'{self.catalog_id.name} rate', amount=self.catalog_id.rate, fee_type=2)
                     except Fee.DoesNotExist:
-                        new_fee = Fee(property_id=self.catalog_id.property_id, description=f'{self.catalog_id.name} rate', amount=self.catalog_id.rate, fee_type=0)
+                        new_fee = Fee(property_id=self.catalog_id.property_id, description=f'{self.catalog_id.name} rate', amount=self.catalog_id.rate, fee_type=2)
                         new_fee.save()
                     print(new_fee)
                     all_add_ons = []
@@ -236,8 +235,8 @@ class Booking(models.Model):
                     for add_on in self.add_ons.all():
                         all_add_ons.append(add_on)
                     new_transaction.add_ons.set(all_add_ons)
-                    
-                avail_room.is_available = False
+
+                avail_room.status = 2
                 avail_room.save()
                 print(new_transaction)
                 try:
