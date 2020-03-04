@@ -32,9 +32,12 @@
                 {% endfor %}
             </select>
         </div>
+        <a href="https://localhost:8080/sign-up/" onclick="window.open('https://localhost:8080/sign-up/', 
+        'newwindow', 
+        'width=750,height=750'); return false;">Register here</a>
     </div>
     {% else %}
-    <div class="modal-body">
+    <div class=" modal-body">
         <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
             {% for error in form.non_field_errors %}
             {{ error }}

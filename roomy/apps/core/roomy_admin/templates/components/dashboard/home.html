@@ -26,9 +26,11 @@ Home
   <div class="" style="width: 50%; height: 100vh; margin: 0; padding: 10px;">
 
     <!-- row 1 -->
-    <div class="row d-flex justify-content-center align-items-center" style="width: 90%; margin: 0 auto 20px auto; padding: 0;">
+    <div class="row d-flex justify-content-center align-items-center"
+      style="width: 90%; margin: 0 auto 20px auto; padding: 0;">
 
-      <select class="form-control z-depth-1" id="select_property" style="width: 100%; margin: 0; padding: 2px 5px; font-size: 18px; font-weight: bold; text-transform: uppercase; border: none;">
+      <select class="form-control z-depth-1" id="select_property"
+        style="width: 100%; margin: 0; padding: 2px 5px; font-size: 18px; font-weight: bold; text-transform: uppercase; border: none;">
         {% for property in properties %}
         <option value="{{property.pk}}" style="font-size: 18px; text-transform: uppercase;">{{ property.name }}</option>
         {% endfor %}
@@ -43,175 +45,192 @@ Home
       <!-- tiles -->
       <div class="d-flex flex-wrap justify-content-center" style="margin: 0;">
 
-          <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
-            <div class="d-flex flex-column">
-              <span class="active-tenants-span" style="color: black; font-size: 25px;">{{ active_tenants }}</span>
-              <span style="color: black; font-size: 15px; font-weight: 500;">Tenant(s)</span>
-              <span style="font-size: 10px;">All active tenants</span>
-            </div>
-            <div class="" style="width: 50px; height: 50px; background-image: url('static/img/tenant.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-            </div>
+        <div class="d-flex justify-content-between align-items-center z-depth-1"
+          style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
+          <div class="d-flex flex-column">
+            <span class="active-tenants-span" style="color: black; font-size: 25px;">{{ active_tenants }}</span>
+            <span style="color: black; font-size: 15px; font-weight: 500;">Tenant(s)</span>
+            <span style="font-size: 10px;">All active tenants</span>
           </div>
-
-          <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
-            <div class="d-flex flex-column">
-              <span class="pending-bookings-span" style="color: black; font-size: 25px;">{{ pending_bookings }}</span>
-              <span style="color: black; font-size: 15px; font-weight: 500;">Booking(s)</span>
-              <span style="font-size: 10px;">Waiting for approval</span>
-            </div>
-            <div class="" style="width: 50px; height: 50px; background-image: url('static/img/booking.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-            </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/tenant.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
           </div>
+        </div>
 
-          <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
-            <div class="d-flex flex-column">
-              <span class="active-rooms-span" style="color: black; font-size: 25px;">{{ active_rooms }}</span>
-              <span style="color: black; font-size: 15px; font-weight: 500;">Active Room(s)</span>
-              <span style="font-size: 10px;">As of this moment</span>
-            </div>
-            <div class="" style="width: 50px; height: 50px; background-image: url('static/img/lock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-            </div>
+        <div class="d-flex justify-content-between align-items-center z-depth-1"
+          style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
+          <div class="d-flex flex-column">
+            <span class="pending-bookings-span" style="color: black; font-size: 25px;">{{ pending_bookings }}</span>
+            <span style="color: black; font-size: 15px; font-weight: 500;">Booking(s)</span>
+            <span style="font-size: 10px;">Waiting for approval</span>
           </div>
-
-          <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
-            <div class="d-flex flex-column">
-              <span class="avail-rooms-span" style="color: black; font-size: 25px;">{{ avail_rooms }}</span>
-              <span style="color: black; font-size: 15px; font-weight: 500;">Available Room(s)</span>
-              <span style="font-size: 10px;">As of this moment</span>
-            </div>
-            <div class="" style="width: 50px; height: 50px; background-image: url('static/img/unlock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-            </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/booking.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
           </div>
+        </div>
 
-          <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
-            <div class="d-flex flex-column">
-              <span class="active-tenants-span" style="color: black; font-size: 25px;"></span>
-              <span style="color: black; font-size: 15px; font-weight: 500;">Payment</span>
-              <span style="font-size: 10px;">For This Month</span>
-            </div>
-            <div class="" style="width: 50px; height: 50px; background-image: url('static/img/tenant.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-            </div>
+        <div class="d-flex justify-content-between align-items-center z-depth-1"
+          style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
+          <div class="d-flex flex-column">
+            <span class="active-rooms-span" style="color: black; font-size: 25px;">{{ active_rooms }}</span>
+            <span style="color: black; font-size: 15px; font-weight: 500;">Active Room(s)</span>
+            <span style="font-size: 10px;">As of this moment</span>
           </div>
-
-          <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
-            <div class="d-flex flex-column">
-              <span class="pending-bookings-span" style="color: black; font-size: 25px;"></span>
-              <span style="color: black; font-size: 15px; font-weight: 500;">Expense</span>
-              <span style="font-size: 10px;">For This Month</span>
-            </div>
-            <div class="" style="width: 50px; height: 50px; background-image: url('static/img/booking.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-            </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/lock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
           </div>
+        </div>
 
-          <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
-            <div class="d-flex flex-column">
-              <span class="net-span" style="color: black; font-size: 25px;"></span>
-              <span style="color: black; font-size: 15px; font-weight: 500;">Net Income</span>
-              <span style="font-size: 10px;">For This Month</span>
-            </div>
-            <div class="" style="width: 50px; height: 50px; background-image: url('static/img/net_income.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-            </div>
+        <div class="d-flex justify-content-between align-items-center z-depth-1"
+          style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
+          <div class="d-flex flex-column">
+            <span class="avail-rooms-span" style="color: black; font-size: 25px;">{{ avail_rooms }}</span>
+            <span style="color: black; font-size: 15px; font-weight: 500;">Available Room(s)</span>
+            <span style="font-size: 10px;">As of this moment</span>
           </div>
-
-          <div class="d-flex justify-content-between align-items-center z-depth-1" style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
-            <div class="d-flex flex-column">
-              <span class="net-span" style="color: black; font-size: 25px;"></span>
-              <span style="color: black; font-size: 15px; font-weight: 500;">Gross Income</span>
-              <span style="font-size: 10px;">For This Month</span>
-            </div>
-            <div class="" style="width: 50px; height: 50px; background-image: url('static/img/net_income.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-            </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/unlock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
           </div>
+        </div>
 
-    <!-- generate report -->
-    <div class="d-flex flex-column z-depth-1" style="margin-bottom: 20px; padding: 10px;">
-      <span style="color: black; text-transform: uppercase; font-size: 15px; font-weight: bold;">generate report</span>
-      <div class="d-flex flex-wrap justify-content-center align-items-center" style="margin-top: 20px;">
-        <!-- <a class="btn btn-sm btn-dark" href="#">List of properties</a> -->
-        <a id="generate-rooms-list" class="btn btn-sm btn-dark" href="#">List of rooms</a>
-        <a id="generate-tenants-list" class="btn btn-sm btn-dark" href="#">List of tenants</a>
-        <a id="generate-payments-list" class="btn btn-sm btn-dark" href="#">List of payments</a>
-        <a id="generate-expenses-list" class="btn btn-sm btn-dark" href="#">List of expenses</a>
+        <div class="d-flex justify-content-between align-items-center z-depth-1"
+          style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
+          <div class="d-flex flex-column">
+            <span class="active-tenants-span" style="color: black; font-size: 25px;"></span>
+            <span style="color: black; font-size: 15px; font-weight: 500;">Payment</span>
+            <span style="font-size: 10px;">For This Month</span>
+          </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/tenant.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center z-depth-1"
+          style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
+          <div class="d-flex flex-column">
+            <span class="pending-bookings-span" style="color: black; font-size: 25px;"></span>
+            <span style="color: black; font-size: 15px; font-weight: 500;">Expense</span>
+            <span style="font-size: 10px;">For This Month</span>
+          </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/booking.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center z-depth-1"
+          style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
+          <div class="d-flex flex-column">
+            <span class="net-span" style="color: black; font-size: 25px;"></span>
+            <span style="color: black; font-size: 15px; font-weight: 500;">Net Income</span>
+            <span style="font-size: 10px;">For This Month</span>
+          </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/net_income.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center z-depth-1"
+          style="min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px;">
+          <div class="d-flex flex-column">
+            <span class="net-span" style="color: black; font-size: 25px;"></span>
+            <span style="color: black; font-size: 15px; font-weight: 500;">Gross Income</span>
+            <span style="font-size: 10px;">For This Month</span>
+          </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/net_income.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+          </div>
+        </div>
+
+        <!-- generate report -->
+        <div class="d-flex flex-column z-depth-1" style="margin-bottom: 20px; padding: 10px;">
+          <span style="color: black; text-transform: uppercase; font-size: 15px; font-weight: bold;">generate
+            report</span>
+          <div class="d-flex flex-wrap justify-content-center align-items-center" style="margin-top: 20px;">
+            <!-- <a class="btn btn-sm btn-dark" href="#">List of properties</a> -->
+            <a id="generate-rooms-list" class="btn btn-sm btn-dark" href="#">List of rooms</a>
+            <a id="generate-tenants-list" class="btn btn-sm btn-dark" href="#">List of tenants</a>
+            <a id="generate-payments-list" class="btn btn-sm btn-dark" href="#">List of payments</a>
+            <a id="generate-expenses-list" class="btn btn-sm btn-dark" href="#">List of expenses</a>
+          </div>
+        </div>
+        <!-- end of generate report -->
+
       </div>
-    </div>
-    <!-- end of generate report -->
+      <!-- end of tiles -->
 
-  </div>
-  <!-- end of tiles -->
+      <!-- cashflow -->
+      <div class="d-flex flex-column justify-content-center z-depth-1" style="width: 500px; margin: 0; padding: 10px;">
+        <h2>Month-Year:</h2>
+        <select class="mdb-select md-form my-select">
+          {% for month_year in month_years %}
+          <option value="{{month_year|date:'m-Y'}}">{{month_year|date:"M-Y"}}</option>
+          {% endfor %}
+        </select>
+        <div class="d-flex flex-column flex-wrap justify-content-center" style="margin-bottom: 10px;">
+          <span style="color: black; text-transform: uppercase; font-size: 15px; font-weight: bold;">Cashflow</span>
+        </div>
 
-  <!-- cashflow -->
-  <div class="d-flex flex-column justify-content-center z-depth-1" style="width: 500px; margin: 0; padding: 10px;">
-    <h2>Month-Year:</h2>
-    <select class="mdb-select md-form my-select">
-      {% for month_year in month_years %}
-      <option value="{{month_year|date:'m-Y'}}">{{month_year|date:"M-Y"}}</option>
-      {% endfor %}
-    </select>
-    <div class="d-flex flex-column flex-wrap justify-content-center" style="margin-bottom: 10px;">
-      <span style="color: black; text-transform: uppercase; font-size: 15px; font-weight: bold;">Cashflow</span>
-    </div>
-
-    </div>
-    <!-- end of row 2 -->
-
-  </div>
-  <div class="" style="width: 50%; height: 100vh; margin: 0; padding: 10px;">
-
-    <!-- pie chart -->
-    <div class="d-flex justify-content-start align-items-center z-depth-1" style="margin: 0 auto;">
-      <div class="" id="pie_chart{{ property.name }}" style="margin: 0 auto;">
-        <script type="text/javascript">
-          // Load the Visualization API and the piechart package.
-          google.charts.load('current', {
-            'packages': ['corechart']
-          });
-
-          // Set a callback to run when the Google Visualization API is loaded.
-          google.charts.setOnLoadCallback(drawChart);
-
-          // Callback that creates and populates a data table,
-          // instantiates the pie chart, passes in the data and
-          // draws it.
-          function drawChart() {
-
-            // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Topping');
-            data.addColumn('number', 'Percentage');
-            data.addRows([
-              ['paid', 200],
-              ['unpaid', 100],
-            ]);
-
-            // Set chart options
-            var options = {
-              title: 'Payment',
-              fontSize: 13,
-              legend: 'bottom',
-              width: 300,
-              height: 300,
-              colors: ['#303030', '#F87060'],
-              backgroundColor: 'transparent'
-            };
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('pie_chart{{ property.name }}'));
-            chart.draw(data, options);
-          }
-        </script>
       </div>
+      <!-- end of row 2 -->
+
     </div>
-    <!-- end of pie chart -->
+    <div class="" style="width: 50%; height: 100vh; margin: 0; padding: 10px;">
 
-    <a class="btn btn-sm btn-dark" id="generate-month-year-cashflow" href="#">Generate Report</a>
+      <!-- pie chart -->
+      <div class="d-flex justify-content-start align-items-center z-depth-1" style="margin: 0 auto;">
+        <div class="" id="pie_chart{{ property.name }}" style="margin: 0 auto;">
+          <script type="text/javascript">
+            // Load the Visualization API and the piechart package.
+            google.charts.load('current', {
+              'packages': ['corechart']
+            });
+
+            // Set a callback to run when the Google Visualization API is loaded.
+            google.charts.setOnLoadCallback(drawChart);
+
+            // Callback that creates and populates a data table,
+            // instantiates the pie chart, passes in the data and
+            // draws it.
+            function drawChart() {
+
+              // Create the data table.
+              var data = new google.visualization.DataTable();
+              data.addColumn('string', 'Topping');
+              data.addColumn('number', 'Percentage');
+              data.addRows([
+                ['paid', 200],
+                ['unpaid', 100],
+              ]);
+
+              // Set chart options
+              var options = {
+                title: 'Payment',
+                fontSize: 13,
+                legend: 'bottom',
+                width: 300,
+                height: 300,
+                colors: ['#303030', '#F87060'],
+                backgroundColor: 'transparent'
+              };
+
+              // Instantiate and draw our chart, passing in some options.
+              var chart = new google.visualization.PieChart(document.getElementById('pie_chart{{ property.name }}'));
+              chart.draw(data, options);
+            }
+          </script>
+        </div>
+      </div>
+      <!-- end of pie chart -->
+
+      <a class="btn btn-sm btn-dark" id="generate-month-year-cashflow" href="#">Generate Report</a>
+    </div>
   </div>
-</div>
 
-{% else %}
+  {% else %}
 
-<div class="row d-flex justify-content-center">
-  <div class="d-flex justify-content-center" style="margin-top: 20px;">
-    <span style="font-size: 22px;">There are currently no registered properties under your account.</span>
+  <div class="row d-flex justify-content-center">
+    <div class="d-flex justify-content-center" style="margin-top: 20px;">
+      <span style="font-size: 22px;">There are currently no registered properties under your account. <a href="{% url 'property_management' }%">Click here.</a></span>
   </div>
 </div>
 
@@ -221,26 +240,26 @@ Home
 
 
 {% block extra_js %}
-<script type="text/javascript">
-  $(document).ready(function () {
-    var val = $('.property-select').val();
-    var my = $('.my-select').val();
-    $('#generate-month-year-cashflow').attr("href", "/generate/cashflow/" + my);
-    $('#generate-rooms-list').attr("href", "/generate/rooms/" + val);
-    $('#generate-tenants-list').attr("href", "/generate/tenants/" + val);
-    $('#generate-payments-list').attr("href", "/generate/payments/" + val);
-    $('#generate-expenses-list').attr("href", "/generate/expenses/" + val);
+<script type=" text/javascript">
+          $(document).ready(function () {
+          var val = $('.property-select').val();
+          var my = $('.my-select').val();
+          $('#generate-month-year-cashflow').attr("href", "/generate/cashflow/" + my);
+          $('#generate-rooms-list').attr("href", "/generate/rooms/" + val);
+          $('#generate-tenants-list').attr("href", "/generate/tenants/" + val);
+          $('#generate-payments-list').attr("href", "/generate/payments/" + val);
+          $('#generate-expenses-list').attr("href", "/generate/expenses/" + val);
 
-    $('.property-name-span').html($(".property-select option:selected").text());
-    $.ajax({
-      url: '/home-ajax',
-      data: {
-        'val': val,
-        'my': my
-      },
-      dataType: 'json',
-      success: function(data) {
-        if (data) {
+          $('.property-name-span').html($(".property-select option:selected").text());
+          $.ajax({
+          url: '/home-ajax',
+          data: {
+          'val': val,
+          'my': my
+          },
+          dataType: 'json',
+          success: function(data) {
+          if (data) {
           $('.active-tenants-span').html(data.active_tenants);
           $('.pending-bookings-span').html(data.pending_bookings);
           $('.active-rooms-span').html(data.active_rooms);
@@ -248,65 +267,65 @@ Home
           $('.payments-span').html(data.payments);
           $('.expenses-span').html(data.expenses);
           $('.net-span').html(data.net_income);
-        }
-      }
-    });
+          }
+          }
+          });
 
 
-    $(".property-select").on("change", function () {
-      var val = $('.property-select').val();
-      var my = $('.my-select').val();
-      $('.property-name-span').html($(".property-select option:selected").text());
-      $('#generate-rooms-list').attr("href", "/generate/rooms/" + val);
-      $('#generate-tenants-list').attr("href", "/generate/tenants/" + val);
-      $('#generate-payments-list').attr("href", "/generate/payments/" + val);
-      $('#generate-expenses-list').attr("href", "/generate/expenses/" + val);
-      $.ajax({
-        url: '/home-ajax',
-        data: {
+          $(".property-select").on("change", function () {
+          var val = $('.property-select').val();
+          var my = $('.my-select').val();
+          $('.property-name-span').html($(".property-select option:selected").text());
+          $('#generate-rooms-list').attr("href", "/generate/rooms/" + val);
+          $('#generate-tenants-list').attr("href", "/generate/tenants/" + val);
+          $('#generate-payments-list').attr("href", "/generate/payments/" + val);
+          $('#generate-expenses-list').attr("href", "/generate/expenses/" + val);
+          $.ajax({
+          url: '/home-ajax',
+          data: {
           'val': val,
           'my': my
-        },
-        dataType: 'json',
-        success: function(data) {
+          },
+          dataType: 'json',
+          success: function(data) {
           if (data) {
-            $('.active-tenants-span').html(data.active_tenants);
-            $('.pending-bookings-span').html(data.pending_bookings);
-            $('.active-rooms-span').html(data.active_rooms);
-            $('.avail-rooms-span').html(data.avail_rooms);
-            $('.payments-span').html(data.payments);
-            $('.expenses-span').html(data.expenses);
-            $('.net-span').html(data.net_income);
+          $('.active-tenants-span').html(data.active_tenants);
+          $('.pending-bookings-span').html(data.pending_bookings);
+          $('.active-rooms-span').html(data.active_rooms);
+          $('.avail-rooms-span').html(data.avail_rooms);
+          $('.payments-span').html(data.payments);
+          $('.expenses-span').html(data.expenses);
+          $('.net-span').html(data.net_income);
           }
-        }
-      });
-    });
+          }
+          });
+          });
 
-    $(".my-select").on("change", function () {
-      var val = $('.property-select').val();
-      var my = $('.my-select').val();
-      $('#generate-month-year-cashflow').attr("href", "/generate/cashflow/" + my);
-      $.ajax({
-        url: '/home-ajax',
-        data: {
+          $(".my-select").on("change", function () {
+          var val = $('.property-select').val();
+          var my = $('.my-select').val();
+          $('#generate-month-year-cashflow').attr("href", "/generate/cashflow/" + my);
+          $.ajax({
+          url: '/home-ajax',
+          data: {
           'val': val,
           'my': my
-        },
-        dataType: 'json',
-        success: function (data) {
+          },
+          dataType: 'json',
+          success: function (data) {
           if (data) {
-            $('.active-tenants-span').html(data.active_tenants);
-            $('.pending-bookings-span').html(data.pending_bookings);
-            $('.active-rooms-span').html(data.active_rooms);
-            $('.avail-rooms-span').html(data.avail_rooms);
-            $('.payments-span').html(data.payments);
-            $('.expenses-span').html(data.expenses);
-            $('.net-span').html(data.net_income);
+          $('.active-tenants-span').html(data.active_tenants);
+          $('.pending-bookings-span').html(data.pending_bookings);
+          $('.active-rooms-span').html(data.active_rooms);
+          $('.avail-rooms-span').html(data.avail_rooms);
+          $('.payments-span').html(data.payments);
+          $('.expenses-span').html(data.expenses);
+          $('.net-span').html(data.net_income);
           }
-        }
-      });
-    });
+          }
+          });
+          });
 
-  });
+          });
 </script>
 {% endblock extra_js %}

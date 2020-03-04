@@ -44,7 +44,7 @@ def billing_table(request, pk):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def fee_table(request, pk):
-    fees = Fee.objects.filter(property_id__owner_id__user_id=request.user, property_id__pk=pk)
+    fees = Fee.objects.filter(property_id__owner_id__user_id=request.user, property_id__pk=pk).exclude(fee_type=2)
 
     data = []
     for fee in fees:

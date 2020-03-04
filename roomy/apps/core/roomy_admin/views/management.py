@@ -97,10 +97,31 @@ def my_handler(sender, instance, created, **kwargs):
             new_room.save()
         print(new_room)
         try:
-            new_fee = Fee.objects.get(property_id=instance.property_id, description=f'{instance.name} rate', amount=instance.rate, fee_type=0)
+            new_fee = Fee.objects.get(property_id=instance.property_id, description=f'{instance.name} rate', amount=instance.rate, fee_type=2)
         except Fee.DoesNotExist:
             new_fee = Fee(property_id=instance.property_id, description=f'{instance.name} rate', amount=instance.rate, fee_type=2)
             new_fee.save()
+        print(new_fee)
+    else:
+        print('update catalog')
+        try:
+            new_fee = Fee.objects.get(property_id=instance.property_id, description=f'{instance.name} rate', amount=instance.rate, fee_type=2)
+        except Fee.DoesNotExist:
+            new_fee = Fee(property_id=instance.property_id, description=f'{instance.name} rate', amount=instance.rate, fee_type=2)
+            new_fee.save()
+        
+        transactions = Transaction.objects.filter(room_id__catalog_id__pk=instance.pk)
+        print(transactions)
+        for transaction in transactions:
+            try:
+                old_fee = Fee.objects.exclude(amount=new_fee.amount).get(property_id=instance.property_id, description=f'{instance.name} rate', fee_type=2)
+                print(f'OLD FEE {old_fee}')
+                transaction.add_ons.remove(old_fee)
+                print('add fee')
+                transaction.add_ons.add(new_fee)
+            except Exception as e:
+                print(f' EXCEPTION {e}')
+
         print(new_fee)
 # room management
 
