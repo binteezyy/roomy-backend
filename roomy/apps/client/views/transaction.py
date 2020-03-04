@@ -36,15 +36,15 @@ def booking_modal(request,pk):
                 catalog_id = catalog,
                 start_date = start_date
             )
-            
+
             addons = request.POST.getlist('addons[]')
 
             book.save()
         except Exception as e:
             request.session['form_error'] = True
             request.session['form_error_msg'] = str(e)
-
-        return redirect(request.META.get('HTTP_REFERER', 'index'))
+        return redirect('bookings')
+        # return redirect(request.META.get('HTTP_REFERER', 'index'))
 
     context.update({
         "catalog": catalog,

@@ -11,7 +11,8 @@
     }
     </style>
 {% endif %}
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="{% static "vendor/jquery/ui/jquery-ui.min.css" %}">
+  <link rel="stylesheet" href="{% static "vendor/jquery/ui/jquery-ui.theme.css" %}">
   <link rel="stylesheet" href="{% static "vendor/jquery/ui/themes/datepicker.css" %}">
 
 
@@ -31,6 +32,7 @@
 
   </script>
   {% endif %}
+  <script src="{% static "vendor/jquery/ui/jquery-ui.min.js" %}"></script>
   <script src="{% static "vendor/jquery/ui/ui/widgets/datepicker.js" %}"></script>
   <script src="{% static "vendor/jquery/ui/ui/widgets/datepicker-format.min.js" %}"></script>
   <script type="text/javascript">

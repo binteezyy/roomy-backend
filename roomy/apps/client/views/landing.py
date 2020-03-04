@@ -1,10 +1,21 @@
 from django.shortcuts import render
 from apps.core.roomy_core.models import *
+from django.urls import resolve
+
+from webpush import send_user_notification
+webpush = {"group": "my_group" }
+
 context = {
-    "TITLE": "Roomy"
+    "TITLE": "Roomy",
+    "webpush":webpush,
 }
 def home(request):
     dorms = Room.objects.filter(catalog_id__room_type=1)
+
+    current_url = resolve(request.path_info).url_name
+    payload = {"head": "Welcome to Roomy!", "body": f"Hi {request.user.first_name}, start booking apps now!","url": current_url}
+    send_user_notification(user=request.user, payload=payload, ttl=1000)
+    print("USER_AGENT:",request.user_agent)
     if request.user_agent.is_mobile:
         return render(request,"mobile-native/components/landing/home.html",context)
     else:

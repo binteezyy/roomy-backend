@@ -1,9 +1,11 @@
 from django.urls import path,include
 from ..views import *
 from ..views.session import session_urls
+from .notification import notification_urls
 urlpatterns = [
     #navigation
     path('modals/', include('apps.client.urls.modals')),
+    path('notifications/', include(notification_urls)),
     path('sessions/', include(session_urls)),
     path('', landing.home, name='home'),
     path('login/',auth.clogin, name='login'),

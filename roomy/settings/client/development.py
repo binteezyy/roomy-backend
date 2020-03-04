@@ -1,4 +1,5 @@
 from .base import *
+from decouple import config
 import os
 
 ALLOWED_HOSTS = ['*']
@@ -16,26 +17,11 @@ DATABASES = {
     }
 }
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
 # DEBUG TOOLBAR
 INTERNAL_IPS = ['127.0.0.1',]
 MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
 DEBUG_TOOLBAR_PANELS = [
-    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.versions.VersionsPanel', 
     'debug_toolbar.panels.timer.TimerPanel',
     'debug_toolbar.panels.settings.SettingsPanel',
     'debug_toolbar.panels.headers.HeadersPanel',
