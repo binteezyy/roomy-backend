@@ -144,6 +144,7 @@ def create_billing_on_transaction_save(sender, instance, **kwargs):
         print('transaction created')
         try:
             billing = Billing.objects.get(time_stamp=instance.billing_date, transaction_id__pk=instance.pk)
+            billing.billing_fee.set(instance.add_ons.all())
             print('billing exists')
         except Billing.DoesNotExist:
             billing = Billing(time_stamp=instance.billing_date, transaction_id=instance)
