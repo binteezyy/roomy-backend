@@ -132,7 +132,7 @@
     <div id="content">
 
       <!-- Topbar -->
-      <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top z-depth-1">
+      <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top z-depth-1" style="background-color: #282828;">
 
         <!-- Sidebar Toggle (Topbar) -->
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -151,7 +151,7 @@
           <!-- Nav Item - Alerts -->
           <div class="dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-bell fa-fw"></i>
+              <i class="fas fa-bell fa-fw" style="color: white;"></i>
               <!-- Counter - Alerts -->
               <span class="badge badge-danger badge-counter"><span id="notif-counter-span">{{unread_notif}}</span></span>
             </a>
@@ -176,7 +176,7 @@
           <!-- Nav Item - Messages -->
           <div class="dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-envelope fa-fw"></i>
+              <i class="fas fa-envelope fa-fw" style="color: white;"></i>
               <!-- Counter - Messages -->
               <span class="badge badge-danger badge-counter"><span id="message-count-span">{{unread}}</span>
             </a>
@@ -208,8 +208,9 @@
 
           <!-- Nav Item - User Information -->
           <div class="dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Welcome,</span><span class="mr-2 d-none d-lg-inline text-gray-600 small" style="text-transform: uppercase;">{{ request.user.username }}</span>
+
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+              <span class="mr-2 d-none d-lg-inline small">Welcome,</span><span class="mr-2 d-none d-lg-inline small" style="text-transform: uppercase;">{{ request.user.username }}</span>
             </a>
 
             <!-- Dropdown - User Information -->
@@ -254,7 +255,7 @@
     <!-- End of Main Content -->
 
     <!-- Footer -->
-      <div class="container-fluid" style="background-color: #333;">
+      <div class="container-fluid mt-4" style="background-color: #282828;">
         <!-- copyright -->
         <div class="row d-flex justify-content-center" style="padding: 40px;">
           <div class="d-flex flex-column justify-content-center align-items-center">
