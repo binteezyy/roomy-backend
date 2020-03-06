@@ -4,11 +4,11 @@ from django.contrib.auth.models     import User
 from phonenumber_field.modelfields      import PhoneNumberField
 
 class ContactUs(models.Model):
-    name = models.CharField(max_length=56, unique=True)
+    name = models.CharField(max_length=56)
     email = models.EmailField(max_length=40)
     phone_number = PhoneNumberField()
     message = models.TextField(max_length=150)
-
+    created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f'{self.name}'
 

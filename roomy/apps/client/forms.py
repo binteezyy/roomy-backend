@@ -38,6 +38,35 @@ class UserRegisterForm(forms.ModelForm):
         return super(UserRegisterForm, self).clean(*args, **kwargs)
 
 
+class ContactUsForm(forms.ModelForm):
+    name = forms.CharField(label='Name')
+    email = forms.EmailField(label='Email',max_length="254")
+    phone_number = PhoneNumberField()
+    message = forms.CharField(label='Message',widget=forms.Textarea(attrs={"rows":"5", "cols":"20"}))
+
+    class Meta:
+        model = ContactUs
+        fields = [
+            'name',
+            'email',
+            'phone_number',
+            'message'
+        ]
+
+    def clean(self, *args, **kwargs):
+        cleaned_data = super().clean()
+        name = cleaned_data.get('name')
+        email = cleaned_data.get('email')
+        phone_number = cleaned_data.get('phone_number')
+        message = cleaned_data.get('message')
+
+        print("CONTACT SUBMISSION")
+        print("NAME:",name)
+        print("EMAIL:",email)
+        print("PHONE NUMBER:",phone_number)
+        print("MESSAGE:",message)
+        return super(ContactUsForm, self).clean(*args, **kwargs)
+
 class OwnerApplicationForm(forms.ModelForm):
     full_name = forms.CharField(label='Full Name', required=True)
     company = forms.CharField(label='Company', required=True)
