@@ -92,11 +92,10 @@ def get_in_touch(request):
         except Exception as e:
             pass
         if form.is_valid() and recaptcha:
-            form.clean()
-            full_name = form.cleaned_data.get('full_name')
-            company = form.cleaned_data.get('company')
-            email = form.cleaned_data.get('email')
-            phone_number = form.cleaned_data.get('phone_number')
+            full_name = form.clean.get('full_name')
+            company = form.clean.get('company')
+            email = form.clean.get('email')
+            phone_number = form.clean.get('phone_number')
 
             user_ = None
             if request.user.is_authenticated:
