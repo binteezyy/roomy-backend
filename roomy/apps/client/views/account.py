@@ -22,7 +22,10 @@ def bookings(request):
             "account_view":"booking",
             "bookings": bookings,
         })
-        return render(request,"web/components/account/components/booking/list.html",context)
+        if request.user_agent.is_mobile:
+            return render(request,"mobile-native/components/account/components/booking/list.html",context)
+        else:
+            return render(request,"web/components/account/components/booking/list.html",context)
     else:
         return redirect('login')
 
