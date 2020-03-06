@@ -9,6 +9,7 @@ from django.urls import resolve
 from ..models.site import *
 from ..forms import *
 from webpush import send_user_notification
+from ..emails import ContactUs_Handler
 webpush = {"group": "my_group" }
 
 context = {
@@ -111,7 +112,7 @@ def contact(request):
                 message = form.cleaned_data.get('message')
 
                 try:
-                    contact_us = ContactUs.object.create(
+                    contact_us = ContactUs.objects.create(
                         name = name,
                         email = email,
                         phone_number = phone_number,
@@ -119,10 +120,13 @@ def contact(request):
                     )
 
                     contact_us.save()
+                    ContactUs_Handler(name,email,phone_number,message)
+                    messages.success(request, 'Thank you for your feedback! We will be reviewing it later.')
                 except Exception as e:
-                    print("CONTACT FORM ERROR OCCURED")
+                    print("CONTACT FORM ERROR OCCURED:",e)
+                    contact_us.delete()
+                    messages.success(request, 'Something went wrong 😞')
                     # TODO: CONTACT FORM ERROR HANDLING
-                messages.success(request, 'Thank you for your feedback! We will be reviewing it later.')
             else:
                 print("WEW")
 

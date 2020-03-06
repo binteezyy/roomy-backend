@@ -42,10 +42,17 @@
 
   {% if form.errors or messages%}
   $(".modal").modal("show");
-
   {% endif %}
 
-
+  document.getElementById("contact-form").addEventListener("submit", function () {
+    var recaptcha = $("#g-recaptcha-response").val();
+    if (recaptcha === "") {
+       event.preventDefault();
+       alert("Please check the recaptcha");
+    } else {
+      form.submit();
+    }
+  });
 </script>
 {% endblock %}
 {% block content %}
@@ -78,7 +85,7 @@
   </div>
 
   <!-- contact us modal -->
-  <form class="" action="#" method="POST">
+  <form id="contact-form" action="#" method="POST">
 
     <!-- modal -->
     <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -97,7 +104,7 @@
           <div class="modal-body">
             {% if messages %}
               {% for message in messages %}
-              <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+              {{ message }}
               {% endfor %}
             {% else %}
             <div class="container-fluid">
