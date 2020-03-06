@@ -1,0 +1,160 @@
+{% extends "web/layout/layout.html" %}
+{% load static %}
+
+{% block extra_js %}
+<script type="text/javascript">
+  $('textarea').keyup(function() {
+
+    var characterCount = $(this).val().length,
+      current = $('#current'),
+      maximum = $('#maximum'),
+      theCount = $('#the-count');
+
+    current.text(characterCount);
+
+
+    /*This isn't entirely necessary, just playin around*/
+    if (characterCount < 70) {
+      current.css('color', '#666');
+    }
+    if (characterCount > 70 && characterCount < 90) {
+      current.css('color', '#6d5555');
+    }
+    if (characterCount > 90 && characterCount < 100) {
+      current.css('color', '#793535');
+    }
+    if (characterCount > 100 && characterCount < 120) {
+      current.css('color', '#841c1c');
+    }
+    if (characterCount > 120 && characterCount < 139) {
+      current.css('color', '#8f0001');
+    }
+
+    if (characterCount >= 140) {
+      maximum.css('color', '#8f0001');
+      current.css('color', '#8f0001');
+      theCount.css('font-weight', 'bold');
+    } else {
+      maximum.css('color', '#666');
+      theCount.css('font-weight', 'normal');
+    }
+  });
+
+  {% if form.errors or messages%}
+  $(".modal").modal("show");
+
+  {% endif %}
+
+
+</script>
+{% endblock %}
+{% block content %}
+<!-- main content -->
+<div class="container-fluid" style="margin-top: 80px;">
+  <div class="container">
+    <div class="row d-flex flex-row flex-wrap jusfity-content-center align-items-stretch" style="min-height: 700px; margin-top: 20px; padding-bottom: 20px;">
+      <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 20px; flex-grow: 1;">
+        <img src="{% static "img\placeholder_1200x500.png" %}" alt="" style="width:100%; margin: 0; padding: 0;">
+      </div>
+
+      <div class="d-flex flex-column justify-content-center align-items-center z-depth-1" style="margin-bottom: 20px; padding: 80px 20px 80px 20px; flex-grow: 1;">
+        <h4>We'd love to hear from you.</h4>
+        <h6>Need to get in touch with our team? We're all ears.</h6>
+        <div class="d-flex flex-row justify-content-center align-items-center">
+          <button class="btn" style="width: 200px; background-color: #5392f9;" type="button" name="button" data-toggle="modal" data-target="#contactUsModal">Contact Us</button>
+        </div>
+        <span style="margin: 10px 0 10px 0; font-size: 18px;">or</span>
+        <h5>Reach us on social media.</h5>
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="www.facebook.com" style="margin: 10px;">
+            <img src="{% static "img\facebook.png" %}" style="width: 50px; height: 50px;" alt="">
+          </a>
+          <a href="www.twitter.com" style="margin: 10px;">
+            <img src="{% static "img\twitter.png" %}" style="width: 50px; height: 50px;" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- contact us modal -->
+  <form class="" action="#" method="POST">
+
+    <!-- modal -->
+    <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+
+        <!-- modal content -->
+        <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
+
+          <!-- modal header -->
+          <div class="modal-header text-center">
+            <h4 class="text-center">Contact Us</h4>
+          </div>
+
+
+          <!-- modal body -->
+          <div class="modal-body">
+            {% if messages %}
+              {% for message in messages %}
+              <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+              {% endfor %}
+            {% else %}
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="fieldWrapper" style="">
+                      <div class="form-group">
+                        <label class="col-form-label" for="">{{field.label}}</label>
+                        {% if field.name == "message" %}
+                        <textarea class="form-control textarea" name="{{ field.html_name }}"  id="{{field.id_for_label}}"
+                                  style="resize:none;" maxlength="300" rows="{{field.field.widget.attrs.rows}}" cols="{{field.field.widget.attrs.cols}}"></textarea> <br>
+                        <div id="pull-right">
+                          <span id="current">0</span>
+                          <span id="maximum">/ 300</span>
+                        </div>
+
+                        {% else %}
+                        <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}}"
+                                class="form-control {% if field.errors %}is-invalid{% endif %}" style="margin-bottom: 5px;" value="{{field.value|default_if_none:''}}" placeholder="">
+                        {% endif %}
+
+                        {% for error in field.errors %}
+                        <div class="invalid-feedback">
+                          <strong>{{ error|escape }}</strong>
+                        </div>
+                        {% endfor %}
+                      </div>
+                      {% if field.help_text %}
+                      <p class="help">{{ field.help_text|safe }}</p>
+                      {% endif %}
+                    </div>
+                    {% endfor %}
+                    <div class="d-flex justify-content-center" style="margin: 10px 15px;">
+                      {% include "web/components/recaptchav2.html" with RECAPTCHA_KEY=RECAPTCHA_KEY %}
+                    </div>
+                    <button type="submit" class="btn btn-block btn-black" name="button">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </form>
+  <!-- end of login modal -->
+
+  <!-- end of content -->
+
+</div>
+<!-- end of main content -->
+
+{% endblock %}

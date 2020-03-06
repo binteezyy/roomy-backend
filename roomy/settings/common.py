@@ -20,5 +20,3 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
