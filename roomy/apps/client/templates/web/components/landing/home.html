@@ -1,4 +1,4 @@
-{% extends "web/layout/layout.html" %}
+{% extends "web/layout/layout_home.html" %}
 {% load static %}
 
 {% block title %}
@@ -8,10 +8,10 @@ Roomy
 {% block content %}
 
 <div class="d-flex justify-content-center align-items-start"
-  style="width: 100%; height: 100vh; margin-bottom: 100px; background-image: url('{% static 'img/banner.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+  style="width: 100%; height: 100vh; margin: 0; padding: 0; background-color: red;">
 
   <!-- search bar -->
-  <div class="d-flex justify-content-center align-items-center" style="width: 100%; margin: 80px auto 10px auto;">
+  <div class="d-flex justify-content-center align-items-center" style="width: 100%; margin: 0 auto;">
     <form class="form-inline mr-auto mb-4 d-flex justify-content-center" _lpchecked="1" style="width: 100%; margin-bottom: 50px;" action="/explore/?search=q" method="GET">
       <div class="input-group mb-3 d-flex justify-content-center align-items-center" style="width: 80%;">
         <input type="search" name="q" class="form-control form-control-lg search-bar-custom" placeholder="Search for a property or location" aria-label="Search" aria-describedby="button-addon2" style="width: 100%; border: none; outline: none;">
