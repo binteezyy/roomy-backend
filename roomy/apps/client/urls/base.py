@@ -20,7 +20,6 @@ urlpatterns = [
     path('about/', landing.about, name='about'),
     path('faq/', landing.faq, name='faq'),
     path('contact_us/', landing.contact, name='contact'),
-    path('team/', landing.team, name='team'),
     path('terms_of_use/', landing.terms_of_use, name='terms_of_use'),
     path('privacy/', landing.privacy, name='privacy'),
     path('help_center/', landing.help_center, name='help_center'),

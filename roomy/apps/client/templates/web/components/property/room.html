@@ -81,20 +81,20 @@
   {% include "web/components/modals/_modal.html" with size="" %}
 {% endif %}
 <!-- main content -->
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: 80px;">
 
   <div class="container">
     <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 20px;">
 
       <!-- room information -->
-      <div class="col-md-7 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+      <div class="col-md-7 p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
 
         <!-- room info first row -->
         <div class="d-flex justify-content-between align-items-center">
-          <span style="font-size: 30px; font-weight: bold;">{{ room.name }}</span>
+          <span style="font-size: 30px; font-weight: bold; text-transform: uppercase;">{{ room.name }}</span>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
             <div class="">
-              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 12px; text-transform: uppercase; background-color: black; color: white;">
+              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 30px; font-size: 12px; text-transform: uppercase; background-color: #FF3F00;">
                 {% if room.property_id.property_type == 0 %}
                 Condominium
                 {% elif room.property_id.property_type == 1 %}
@@ -109,22 +109,15 @@
 
         <!-- room info second row -->
         <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 10px;">
-          <span style="font-size: 18px; font-style: italic;">by {{ room.property_id.name}}</span>
-          <span style="font-size: 16px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
-        </div>
-
-        <!-- room tags -->
-        <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 5px; padding: 0;">
-          <span style="margin: 0 15px 0 0; font-size: 15px;">4 occupants</span>
-          <span style="margin: 0 15px 0 0; font-size: 15px;">2 double-deck beds</span>
-          <span style="margin: 0 15px 0 0; font-size: 15px;">4 common cr</span>
+          <span style="font-size: 18px; font-style: italic; text-transform: uppercase;">{{ room.property_id.name}}</span>
+          <span style="font-size: 16px;"><i class="fas fa-star" style="color: #FF3F00;"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
         </div>
 
         <!-- room address -->
         <div class="d-flex justify-content-start align-items-start" style="margin-bottom: 5px;">
-          <span style="margin: 0 15px 0 0; font-size: 16px;">{{ room.property_id.property_address }}</span>
+          <span style="margin: 0 13px 0 0; font-size: 16px;">{{ room.property_id.property_address }}</span>
         </div>
-        <hr style="border-top: 1px solid #5392f9;">
+        <hr style="border-top: 1px solid #FF3F00;">
 
         <!-- room description -->
         <div class="description">
@@ -139,10 +132,10 @@
 
 
       <!-- booking -->
-      <div class="col-md-4 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+      <div class="col-md-4 p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
         <div class="" style="margin-bottom: 20px;">
           <h5>Rates</h5>
-          <hr style="border-top: 1px solid #5392f9;">
+          <hr style="border-top: 1px solid #FF3F00;">
           <span style="font-size: 25px;"><b>Php {{ room.rate }}</b>/month</span> <br>
           <span style="font-size: 14px;"><b>1 month advance, 1 month deposit</span>
         </div>
@@ -150,7 +143,7 @@
         <!-- package inclusion -->
         <div class="" style="margin-bottom: 20px;">
           <h5>What's included?</h5>
-          <hr style="border-top: 1px solid #5392f9;">
+          <hr style="border-top: 1px solid #FF3F00;">
           <p>
             Curabitur sed sapien gravida, porta tellus id, semper ante. In volutpat leo id dolor lacinia, in finibus urna mattis. Mauris imperdiet dolor tellus, sed sodales lorem tincidunt eu. Mauris congue metus at lacus pulvinar, eget posuere odio
             porta.
@@ -158,7 +151,7 @@
         </div>
         <div class="" style="margin-bottom: 20px;">
           <h5>Add-ons</h5>
-          <hr style="border-top: 1px solid #5392f9;">
+          <hr style="border-top: 1px solid #FF3F00;">
           <p>
             Quisque hendrerit nibh sit amet porta porttitor. Etiam gravida, augue et pellentesque elementum, eros arcu condimentum massa, nec ultricies eros massa a nulla.
           </p>
@@ -171,7 +164,7 @@
           {% csrf_token %}
           <input type="hidden" name="" value="{{ room.pk }}">
           <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 30px;">
-            <button type="button" id="book-button" class="btn btn-lg btn-outline-primary waves-effect" style="padding-right: 80px; padding-left: 80px; background-color: #5392f9; font-size: 20px;">BOOK NOW</button>
+            <button type="button" id="book-button" class="btn btn-lg" style="padding-right: 80px; padding-left: 80px; background-color: #FF3F00; font-size: 20px;">BOOK NOW</button>
           </div>
         </form>
         {% else %}
@@ -188,7 +181,7 @@
     <!-- photos -->
     {% if room.img_2d.all %}
     <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 20px;">
-      <div class="col shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+      <div class="col p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
         <h5>Photos</h5>
         {% for foto in room.img_2d.all %}
         <div class="d-flex flex-wrap justify-content-center align-items-center" style="min-height: 300px;">
@@ -200,7 +193,7 @@
       </div>
     {% endif %}
       {% if room.img_3d.all %}
-      <div class="col shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+      <div class="col p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
         <h5>360 view</h5>
         <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
           <a style="margin: 10px;">
@@ -214,9 +207,9 @@
     <!-- end of photos -->
 
     <!-- reviews -->
-    <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 50px;">
+    <div class="row d-flex flex-wrap justify-content-center align-items-stretch" style="margin-bottom: 50px;">
 
-      <div class="col-md-4 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+      <div class="col-md-4 p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
         <h5>Pureza Mansion</h5>
         <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 10px;">
           <span style="font-size: 14px; ">Manila, Metro Manila</span>
@@ -233,11 +226,11 @@
           <span>Response Time: within an hour</span>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-          <button class="btn btn-dark" type="button" name="button">Contact</button>
+          <button class="btn" type="button" name="button" style="background-color: #FF3F00;">Contact</button>
         </div>
       </div>
 
-      <div class="col-md-7 shadow p-3 mb-5 bg-white rounded" style="margin: 10px; padding: 20px;">
+      <div class="col-md-7 p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
 
         <div class="wrapper" id="reviews" style="padding-bottom: 50px;">
           <h5 style="margin-bottom: 20px;">Reviews</h5>
@@ -247,18 +240,18 @@
             <div class="d-flex justify-content-between align-items-center" style="margin: 0 10px 10px 0;">
               <div class="d-flex justify-content-start align-items-center">
                 <div class=""
-                  style="width: 50px; height: 50px; margin-right: 10px; border-radius: 25px; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+                  style="width: 50px; height: 50px; margin-right: 10px; border-radius: 25px; background-image: url('/static/img/placeholder.png'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
                 <div class="d-flex flex-column">
                   <span style="font-size: 15px; font-weight: bold;">Geralt</span>
                   <span style="font-size: 14px; color: grey;">November 2019</span>
                 </div>
               </div>
               <div class="">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
+                <i class="fas fa-star" style="color: #FF3F00;"></i>
+                <i class="fas fa-star" style="color: #FF3F00;"></i>
+                <i class="fas fa-star" style="color: #FF3F00;"></i>
+                <i class="fas fa-star" style="color: #FF3F00;"></i>
+                <i class="fas fa-star-half-alt" style="color: #FF3F00;"></i>
               </div>
             </div>
             <div class="message">

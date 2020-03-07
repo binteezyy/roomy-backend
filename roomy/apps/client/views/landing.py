@@ -67,12 +67,6 @@ def contact(request):
     else:
         return render(request,"web/components/landing/contact.html",context)
 
-def team(request):
-    if request.user_agent.is_mobile:
-        return render(request,"mobile-native/components/landing/team.html",context)
-    else:
-        return render(request,"web/components/landing/team.html",context)
-
 def terms_of_use(request):
     if request.user_agent.is_mobile:
         return render(request,"mobile-native/components/landing/terms_of_use.html",context)

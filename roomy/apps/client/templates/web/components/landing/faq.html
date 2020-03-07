@@ -42,13 +42,13 @@ FAQ
 
     <div class="row d-flex flex-wrap justify-content-center align-items-center" style="margin: 20px 0;">
       {% if faqs.has_previous %}
-      <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page=1" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00;">First</a>
-      <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ faqs.previous_page_number }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00;">{{ faqs.previous_page_number }}</a>
+      <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page=1" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #E5B7A7; border-radius: 25px; background-color: #E5B7A7;">First</a>
+      <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ faqs.previous_page_number }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #E5B7A7; border-radius: 25px; background-color: #E5B7A7;">{{ faqs.previous_page_number }}</a>
       {% endif %}
-      <a class="d-flex justify-content-center align-items-center mb-4 mr-1 text-white" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00; pointer-events: none;">{{ faqs.number }}</a>
+      <a class="d-flex justify-content-center align-items-center mb-4 mr-1 text-white" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #E5B7A7; border-radius: 25px; background-color: #E5B7A7; pointer-events: none;">{{ faqs.number }}</a>
       {% if faqs.has_next %}
-      <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ faqs.next_page_number }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00;">{{ faqs.next_page_number }}</a>
-      <a class="mb-4" href="?page={{ faqs.paginator.num_pages }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00;">Last</a>
+      <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ faqs.next_page_number }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #E5B7A7; border-radius: 25px; background-color: #E5B7A7;">{{ faqs.next_page_number }}</a>
+      <a class="mb-4" href="?page={{ faqs.paginator.num_pages }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #E5B7A7; border-radius: 25px; background-color: #E5B7A7;">Last</a>
       {% endif %}
     </div>
 
