@@ -7,11 +7,24 @@
   });
   $('.toast').toast('show');
 </script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(window).scroll(function() {
+      var scroll = $(window).scrollTop();
+      if (scroll > 667) {
+        $(".navbar").css("background", "#F6FAFC");
+      } else {
+        $(".navbar").css("background", "rgba(255, 255, 255, 0.25)");
+      }
+    })
+  })
+</script>
 {% endblock %}
 {% block layout %}
 
 <!-- navbar -->
-<nav class="navbar navbar-expand-xl navbar-light fixed-top" style="background-color: #F6FAFC; box-shadow: none; background-color: rgba(255, 255, 255, 0.25)">
+<nav class="navbar navbar-expand-xl navbar-light fixed-top" id="navbar" style="box-shadow: none; background-color: rgba(255, 255, 255, 0.25);">
 
   <!-- logo -->
   <a href="{% url 'home' %}" style="margin: 5px 10px 5px 10px;">
@@ -53,10 +66,10 @@
       <div class="dropdown">
         <a class="d-flex align-items-center dropdown-toggle" data-offset="50" href="#" id="dropdownMenuLink" data-toggle="dropdown" style="padding: 5px 10px; color: black;">
           <div class="" style="margin-right: 5px;">
-            <span style="font-size: 15px;">Welcome,</span> <span style="color: #FF3F00; font-size: 15px; font-weight: bold; text-transform: uppercase;">{{ user.username }}</span>
+            <span style="font-size: 15px; font-weight: bold;">Welcome,</span> <span style="color: #FF3F00; font-size: 15px; font-weight: bold; text-transform: uppercase;">{{ user.username }}</span>
           </div>
         </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" style="margin-top: 5px; padding: 20px; border: none; background-color: #F6FAFC; border: 2px solid #FF3F00;">
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" style="margin: 5px 0; padding: 20px; border: none; background-color: #F6FAFC; border: 2px solid #FF3F00;">
           <a class="nav-link" style="margin: 0 0 10px 5px; padding: 0;" href="{% url 'profile' %}">
             <i class="fas fa-user-alt" style="margin-right: 10px; color: #FF3F00;"></i>
             Profile
@@ -112,7 +125,7 @@
     </div>
   </div>
 </div>
-<div class="content" style="margin-top: 50px;">
+<div class="content">
   {% block content %}{% endblock content %}
 </div>
 
