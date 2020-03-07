@@ -9,44 +9,49 @@ FAQ
 
 <!-- main content -->
 <div class="container-fluid" style="margin-top: 80px;">
-  <div class="container">
-    <div class="row" style="margin: 20px 0 20px 0;">
-      <div class="col-12 z-depth-1 rounded" style="padding: 20px;">
-        <h2>Frequently Asked Questions (FAQ)</h2>
+  <div class="container bg-white">
+    <div class="row" style="margin: 20px 0 0 0;">
+      <div class="col-md-1"></div>
+      <div class="col-md-9" style="margin: 0; padding: 20px 10px;">
+        <h4>Frequently Asked Questions (FAQs)</h4>
       </div>
     </div>
 
     {% for faq in faqs %}
-    <div class="row">
-      <div class="accordion col" id="faqs">
+    <div class="row" style="margin-bottom: 20px;">
+
+      <div class="col-md-1"></div>
+
+      <div class="accordion col-md-9" id="faqs">
         <div class="card z-depth-0 bordered">
-          <div class="card-header" id="headingOne">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{faq.pk}}" aria-expanded="true" aria-controls="collapseOne">
-            <h5 class="mb-0">{{faq.question}}</h5>
-          </button>
+          <div class="card-header" id="headingOne" style="margin: 0; padding: 0;">
+            <div type="button" data-toggle="collapse" data-target="#collapse{{faq.pk}}" aria-expanded="true" aria-controls="collapseOne" style="margin: 0; padding: 10px;">
+              <span class="mb-0" style="font-size: 20px; font-weight: bold;">{{ faq.question }}</span>
+            </div>
           </div>
           <div id="collapse{{faq.pk}}" class="collapse {% if forloop.first %}show{% endif %}" aria-labelledby="headingOne" data-parent="#faqs">
-            <div class="card-body">
-              {{ faq.answer }}
+            <div class="card-body" style="margin: 0; padding: 10px;">
+              <span style="color: grey;">{{ faq.answer }}</span>
             </div>
           </div>
         </div>
-
       </div>
+
     </div>
     {% endfor %}
 
-    <div class="row">
+    <div class="row d-flex flex-wrap justify-content-center align-items-center" style="margin: 20px 0;">
       {% if faqs.has_previous %}
-      <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page=1">First</a>
-      <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page={{ faqs.previous_page_number }}">{{ faqs.previous_page_number }}</a>
+      <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page=1" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00;">First</a>
+      <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ faqs.previous_page_number }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00;">{{ faqs.previous_page_number }}</a>
       {% endif %}
-      <a class="btn btn-xs btn-primary mb-4 mr-1 text-white" style="pointer-events: none;">{{ faqs.number }}</a>
+      <a class="d-flex justify-content-center align-items-center mb-4 mr-1 text-white" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00; pointer-events: none;">{{ faqs.number }}</a>
       {% if faqs.has_next %}
-      <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page={{ faqs.next_page_number }}">{{ faqs.next_page_number }}</a>
-      <a class="btn btn-xs btn-primary mb-4" href="?page={{ faqs.paginator.num_pages }}">Last</a>
+      <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ faqs.next_page_number }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00;">{{ faqs.next_page_number }}</a>
+      <a class="mb-4" href="?page={{ faqs.paginator.num_pages }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00;">Last</a>
       {% endif %}
     </div>
+
   </div>
 </div>
 <!-- end of main content -->

@@ -6,10 +6,27 @@
 <div class="content" style="margin-top: 60px;">
   <div class="search_area form-inline mr-auto mb-4 d-flex justify-content-center">
     <form _lpchecked="1" style="width: 100%;" method="GET">
-      <div class="bar" style="background-color: #20274d;">
+      <div class="bar" style="background-color: #FF3F00;">
         <div class="d-flex bar_wrapper">
-          <input name="search" type="text" class="form-control" placeholder="Search for a property or location" aria-label="Search" aria-describedby="search">
-          <button class="btn" value="submit" id="search-icn" style="background-color: #5392f9;">SEARCH</button>
+          <input name="search" type="text" class="form-control search-bar-custom" placeholder="Search for a property or location" aria-label="Search" aria-describedby="search" style="border: none; outline: none;">
+          <button class="btn" value="submit" id="search-icn" style="color: white; background-color: #911AFF;">SEARCH</button>
+          <style media="screen">
+            .search-bar-custom:hover {
+              border: none;
+              outline: none;
+              box-shadow: none;
+            }
+            .search-bar-custom:focus {
+              border: none;
+              outline: none;
+              box-shadow: none;
+            }
+            .search-bar-custom:active {
+              border: none;
+              outline: none;
+              box-shadow: none;
+            }
+          </style>
         </div>
       </div>
     </form>
@@ -19,18 +36,22 @@
     <div class="container d-flex flex-column justify-content-center align-items-center">
       <div class="row d-flex flex-column justify-content-center align-items-center" style="width: 100%;">
 
-        <div class="d-flex flex-wrap justify-content-center align-items-center">
+        <div class="row" style="margin-bottom: 50px;">
           {% if message and search != "" %}
-          <h2>{{ message }}{{ specific_brand }}{{ text }}{{ cat }}.</h2>
+          <span style="font-style: italic;">{{ message }} {{ specific_brand }}{{ text }}{{ cat }} </span>
           {% endif %}
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-center align-items-center">
+
           {% if rooms.has_previous %}
-          <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page=1">First</a>
-          <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page={{ rooms.previous_page_number }}">{{ rooms.previous_page_number }}</a>
+          <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page=1" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00;">First</a>
+          <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ rooms.previous_page_number }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00;">{{ rooms.previous_page_number }}</a>
           {% endif %}
-          <a class="btn btn-xs btn-primary mb-4 mr-1 text-white" style="pointer-events: none;">{{ rooms.number }}</a>
+          <a class="d-flex justify-content-center align-items-center text-centered mb-4 mr-1 text-white" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00; pointer-events: none;">{{ rooms.number }}</a>
           {% if rooms.has_next %}
-          <a class="btn btn-xs btn-primary mb-4 mr-1" href="?page={{ rooms.next_page_number }}">{{ rooms.next_page_number }}</a>
-          <a class="btn btn-xs btn-primary mb-4" href="?page={{ rooms.paginator.num_pages }}">Last</a>
+          <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ rooms.next_page_number }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00;">{{ rooms.next_page_number }}</a>
+          <a class="d-flex justify-content-center align-items-center mb-4" href="?page={{ rooms.paginator.num_pages }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #FF3F00; border-radius: 25px; background-color: #FF3F00;">Last</a>
           {% endif %}
         </div>
 
