@@ -161,7 +161,6 @@ def owner_application_submit(request):
 
 def authListener(request):
     if request.user.is_authenticated: 
-        return request.user.username
-        # return HttpResponse("Logged In")
+        return HttpResponse(request.user.username)
     else:
-        return HttpResponse("No one's logged in")
+        return HttpResponse("nologgedinusers")
