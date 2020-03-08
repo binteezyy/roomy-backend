@@ -22,7 +22,10 @@ def bookings(request):
             "account_view":"booking",
             "bookings": bookings,
         })
-        return render(request,"web/components/account/components/booking/list.html",context)
+        if request.user_agent.is_mobile:
+            return render(request,"mobile-native/components/account/components/booking/list.html",context)
+        else:
+            return render(request,"web/components/account/components/booking/list.html",context)
     else:
         return redirect('login')
 
@@ -39,7 +42,10 @@ def BookingView(request,pk):
             "catalog": catalog,
             "room": room,
         })
-        return render(request,"web/components/account/components/booking/view.html",context)
+        if request.user_agent.is_mobile:
+            return render(request,"mobile-native/components/account/components/booking/view.html",context)
+        else:
+            return render(request,"web/components/account/components/booking/view.html",context)
     else:
         return redirect('login')
 
@@ -49,7 +55,10 @@ def saved(request):
         context.update({
             "account_view":"saved",
         })
-        return render(request,"web/components/account/components/saved.html",context)
+        if request.user_agent.is_mobile:
+            return render(request,"mobile-native/components/account/components/saved.html",context)
+        else:
+            return render(request,"web/components/account/components/saved.html",context)
     else:
         return redirect('login')
 
@@ -59,7 +68,10 @@ def messages(request):
         context.update({
             "account_view":"messages",
         })
-        return render(request,"web/components/account/components/messages.html",context)
+        if request.user_agent.is_mobile:
+            return render(request,"mobile-native/components/account/components/messages.html",context)
+        else:
+            return render(request,"web/components/account/components/messages.html",context)
     else:
         return redirect('login')
 
@@ -69,6 +81,9 @@ def profile(request):
         context.update({
             "account_view":"messages",
         })
-        return render(request,"web/components/account/components/profile.html",context)
+        if request.user_agent.is_mobile:
+            return render(request,"mobile-native/components/account/components/profile.html",context)
+        else:
+            return render(request,"web/components/account/components/profile.html",context)
     else:
         return redirect('login')

@@ -39,7 +39,10 @@ def clogin(request):
         "form": form,
     })
     # if request.method == 'POST'
-    return render(request,"web/components/login.html",context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/login.html",context)
+    else:
+        return render(request,"web/components/login.html",context)
 
 def clogout(request):
     auth.logout(request)
@@ -47,7 +50,10 @@ def clogout(request):
     return redirect(request.META.get('HTTP_REFERER', 'index'))
 
 def cforgot_password(request):
-    return render(request,"web/components/forgot_password.html",context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/forgot_password.html",context)
+    else:
+        return render(request,"web/components/forgot_password.html",context)
 
 def csign_up(request):
     form = UserRegisterForm(request.POST or None)
@@ -71,7 +77,10 @@ def csign_up(request):
         "TITLE": "Sign Up",
         "form": form,
     })
-    return render(request,"web/components/sign_up.html",context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/sign_up.html",context)
+    else:
+        return render(request,"web/components/sign_up.html",context)
 
 def get_in_touch(request):
     form = OwnerApplicationForm(request.POST or None)
@@ -114,7 +123,10 @@ def get_in_touch(request):
         "RECAPTCHA_KEY": settings.RECAPTCHA_KEY,
         "form_type": "owner-application",
     })
-    return render(request,"web/components/get_in_touch.html",context)
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/get_in_touch.html",context)
+    else:
+        return render(request,"web/components/get_in_touch.html",context)
 
 def modal_auth(request):
     next = request.GET.get('next')
