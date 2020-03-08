@@ -127,47 +127,134 @@ Roomy
   </div>
 </div>
 
-<!-- condominium -->
-<div class="container-fluid bg-white" style="margin-bottom: 50px;">
-  <div class="container bg-white">
-    <div class="row d-flex flex-column" style="margin: 0; padding: 10px;">
-      <h4>Condominium</h4>
-      <span style="margin-bottom: 10px;">For people who prefer a luxurious and flexible lifestyle</span>
-      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; min-height: 300px; margin: 0; padding: 20px; border-top: 2px solid #FF3F00;">
+
+<!-- Dormitory -->
+<div class="container-fluid" style="padding: 0 5%;margin-bottom: 50px;">
+  <div class="container-fluid ">
+    <div class="row d-flex flex-column" style="margin: 0; padding: 15px 0;">
+      <h3 style="font-weight: 1000;">Dormitory</h3>
+      <span style="margin: 10px 0;">Affordable Residence halls perfect for students</span>
+      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; min-height: 300px;padding: 5px;">
+        {% for dorm in dorms %}
+          <div class="wrapper-room card">
+            <a href="{% url 'room' dorm.pk %}" style="text-decoration:none;color:black;">
+              <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto;
+                                                 border-radius: 10px; background-image:url('{% if dorm.img_2d.all %}/media/{{ dorm.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}');
+                                                 background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+            <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+              <div class="">
+                <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">{{ dorm.property_id.get_property_type_display}}</span>
+                <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+              </div>
+              <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span style="font-size: 20px;">{{dorm.name}}</span>
+              <span style="font-size: 15px;"><b>Php {{dorm.rate}}</b>/month</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+              <span style="font-size: 15px; font-style: italic;">by {{dorm.property_id.name}}</span>
+            </div><hr>
+            <div class="d-flex justify-content-start">
+              <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+            </div>
+            </a>
+          </div>
+        {% endfor %}
+
 
       </div>
+      <a href="#">SEE MORE ></a>
+    </div>
+  </div>
+</div>
+<!-- end of Dormitory -->
+
+
+<!-- condominium -->
+<div class="container-fluid bg-white" style="padding: 0 5%;margin-bottom: 50px;">
+  <div class="container-fluid bg-white">
+    <div class="row d-flex flex-column" style="margin: 0; padding: 15px 0;">
+      <h3 style="font-weight: 1000;">Condominium</h3>
+      <span style="margin: 10px 0;">For people who prefer a luxurious and flexible lifestyle</span>
+      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; min-height: 300px;padding: 5px;">
+        {% for condo in condos %}
+          <div class="wrapper-room card">
+            <a href="{% url 'room' condo.pk %}" style="text-decoration:none;color:black;">
+              <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto;
+                                                 border-radius: 10px; background-image:url('{% if condo.img_2d.all %}/media/{{ condo.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}');
+                                                 background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+            <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+              <div class="">
+                <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">{{ condo.property_id.get_property_type_display}}</span>
+                <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+              </div>
+              <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span style="font-size: 20px;">{{condo.name}}</span>
+              <span style="font-size: 15px;"><b>Php {{condo.rate}}</b>/month</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+              <span style="font-size: 15px; font-style: italic;">by {{condo.property_id.name}}</span>
+            </div><hr>
+            <div class="d-flex justify-content-start">
+              <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+            </div>
+            </a>
+          </div>
+        {% endfor %}
+
+
+      </div>
+      <a href="#">SEE MORE ></a>
+
     </div>
   </div>
 </div>
 <!-- end of condominium -->
 
 <!-- apartment -->
-<div class="container-fluid bg-white" style="margin-bottom: 50px;">
-  <div class="container bg-white">
-    <div class="row d-flex flex-column" style="margin: 0; padding: 10px;">
-      <h4>Apartment</h4>
-      <span style="margin-bottom: 10px;">Sustainable and affordable residential units</span>
-      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; min-height: 300px; margin: 0; padding: 20px; border-top: 2px solid #FF3F00;">
+<div class="container-fluid bg-white" style="padding: 0 5%;margin-bottom: 50px;">
+  <div class="container-fluid bg-white">
+    <div class="row d-flex flex-column" style="margin: 0; padding: 15px 0;">
+      <h3 style="font-weight: 1000;">Apartment</h3>
+      <span style="margin: 10px 0;">Sustainable and affordable residential units</span>
+      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; min-height: 300px;padding: 5px;">
+        {% for apartment in apartments %}
+          <div class="wrapper-room card">
+            <a href="{% url 'room' apartment.pk %}" style="text-decoration:none;color:black;">
+              <div class="img-contaniner" style="width: 300px; height: 200px; margin: 0 auto 5px auto;
+                                                 border-radius: 10px; background-image:url('{% if apartment.img_2d.all %}/media/{{ apartment.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}');
+                                                 background-repeat: no-repeat; background-size: cover; background-position: center; background-color: red;"></div>
+            <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+              <div class="">
+                <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 10px; font-size: 10px; background-color: black; color: white;">{{ apartment.property_id.get_property_type_display}}</span>
+                <span style="margin-left: 10px; font-size: 14px; font-weight: bold;">MANILA</span>
+              </div>
+              <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span style="font-size: 20px;">{{apartment.name}}</span>
+              <span style="font-size: 15px;"><b>Php {{apartment.rate}}</b>/month</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+              <span style="font-size: 15px; font-style: italic;">by {{apartment.property_id.name}}</span>
+            </div><hr>
+            <div class="d-flex justify-content-start">
+              <span style="font-size: 16px;">In feugiat diam quam, id mollis nibh elementum vel. Otiam quis volutpat massa.</span>
+            </div>
+            </a>
+          </div>
+        {% endfor %}
+
 
       </div>
+      <a href="#">SEE MORE ></a>
     </div>
   </div>
 </div>
 <!-- end of apartment -->
-
-<!-- Dormitory -->
-<div class="container-fluid bg-white" style="margin-bottom: 50px;">
-  <div class="container bg-white">
-    <div class="row d-flex flex-column" style="margin: 0; padding: 10px;">
-      <h4>Dormitory</h4>
-      <span style="margin-bottom: 10px;">Residence halls perfect for students</span>
-      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; min-height: 300px; margin: 0; padding: 20px; border-top: 2px solid #FF3F00;">
-
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end of Dormitory -->
 
 <!-- end of main content -->
 

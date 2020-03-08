@@ -17,9 +17,13 @@ context = {
     "webpush":webpush,
 }
 def home(request):
-    dorms = Room.objects.filter(catalog_id__room_type=1)
+    condos = RoomCatalog.objects.filter(property_id__property_type=0).order_by('?')[:6]
+    apartments = RoomCatalog.objects.filter(property_id__property_type=1).order_by('?')[:6]
+    dorms = RoomCatalog.objects.filter(property_id__property_type=2).order_by('?')[:6]
 
     current_url = resolve(request.path_info).url_name
+
+
     try:
         payload = {"head": "Welcome to Roomy!", "body": f"Hi {request.user.first_name}, start booking apps now!","url": current_url}
         send_user_notification(user=request.user, payload=payload, ttl=1000)
@@ -31,6 +35,8 @@ def home(request):
     else:
         context.update({
             "dorms":dorms,
+            "condos":condos,
+            "apartments":apartments
         })
         return render(request,"web/components/landing/home.html",context)
 
