@@ -10,7 +10,8 @@ from apps.commons.views.apis        import recaptcha_verify
 from apps.client.models.application import OwnerApplication
 from django.contrib.auth.models     import User
 from django.http                    import HttpResponseRedirect
-from django.contrib import messages
+from django.http                    import HttpResponse
+from django.contrib                 import messages
 
 # GLOBAL CONTEXT
 context = {
