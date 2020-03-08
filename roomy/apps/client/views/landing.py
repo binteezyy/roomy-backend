@@ -26,7 +26,7 @@ def home(request):
     except Exception as e:
         pass
     print("USER_AGENT:",request.user_agent)
-    if request.user_agent == "Roomy Native / Android 4.1.1 / Chrome Mobile 18.0.1025":
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/home.html",context)
     else:
         context.update({
@@ -36,19 +36,19 @@ def home(request):
 
 
 def booking_guide(request):
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/booking_guide.html",context)
     else:
         return render(request,"web/components/landing/booking_guide.html",context)
 
 def partner_with_us(request):
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/partner_with_us.html",context)
     else:
         return render(request,"web/components/landing/partner_with_us.html",context)
 
 def about(request):
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/about.html",context)
     else:
         return render(request,"web/components/landing/about.html",context)
@@ -62,7 +62,7 @@ def faq(request):
         "faqs": faqs
     })
 
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/faq.html",context)
     else:
         return render(request,"web/components/landing/faq.html",context)
@@ -95,7 +95,7 @@ def modal_contact(request):
 def contact(request):
     form = ContactUsForm(request.POST or None)
 
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/contact.html",context)
     else:
         if request.method == "POST":
@@ -137,19 +137,19 @@ def contact(request):
         return render(request,"web/components/landing/contact/base.html",context)
 
 def terms_of_use(request):
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/terms_of_use.html",context)
     else:
         return render(request,"web/components/landing/terms_of_use.html",context)
 
 def privacy(request):
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/privacy.html",context)
     else:
         return render(request,"web/components/landing/privacy.html",context)
 
 def help_center(request):
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/help_center.html",context)
     else:
         return render(request,"web/components/landing/help_center.html",context)

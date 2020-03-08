@@ -39,7 +39,7 @@ def clogin(request):
         "form": form,
     })
     # if request.method == 'POST'
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/login.html",context)
     else:
         return render(request,"web/components/login.html",context)
@@ -50,7 +50,7 @@ def clogout(request):
     return redirect(request.META.get('HTTP_REFERER', 'index'))
 
 def cforgot_password(request):
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/forgot_password.html",context)
     else:
         return render(request,"web/components/forgot_password.html",context)
@@ -77,7 +77,7 @@ def csign_up(request):
         "TITLE": "Sign Up",
         "form": form,
     })
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/sign_up.html",context)
     else:
         return render(request,"web/components/sign_up.html",context)
@@ -123,7 +123,7 @@ def get_in_touch(request):
         "RECAPTCHA_KEY": settings.RECAPTCHA_KEY,
         "form_type": "owner-application",
     })
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/get_in_touch.html",context)
     else:
         return render(request,"web/components/get_in_touch.html",context)

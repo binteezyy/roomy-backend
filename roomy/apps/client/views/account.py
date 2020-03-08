@@ -22,7 +22,7 @@ def bookings(request):
             "account_view":"booking",
             "bookings": bookings,
         })
-        if request.user_agent.is_mobile:
+        if request.user_agent.device.family == "Roomy Native":
             return render(request,"mobile-native/components/account/components/booking/list.html",context)
         else:
             return render(request,"web/components/account/components/booking/list.html",context)
@@ -42,7 +42,7 @@ def BookingView(request,pk):
             "catalog": catalog,
             "room": room,
         })
-        if request.user_agent.is_mobile:
+        if request.user_agent.device.family == "Roomy Native":
             return render(request,"mobile-native/components/account/components/booking/view.html",context)
         else:
             return render(request,"web/components/account/components/booking/view.html",context)
@@ -55,7 +55,7 @@ def saved(request):
         context.update({
             "account_view":"saved",
         })
-        if request.user_agent.is_mobile:
+        if request.user_agent.device.family == "Roomy Native":
             return render(request,"mobile-native/components/account/components/saved.html",context)
         else:
             return render(request,"web/components/account/components/saved.html",context)
@@ -68,7 +68,7 @@ def messages(request):
         context.update({
             "account_view":"messages",
         })
-        if request.user_agent.is_mobile:
+        if request.user_agent.device.family == "Roomy Native":
             return render(request,"mobile-native/components/account/components/messages.html",context)
         else:
             return render(request,"web/components/account/components/messages.html",context)
@@ -81,7 +81,7 @@ def profile(request):
         context.update({
             "account_view":"messages",
         })
-        if request.user_agent.is_mobile:
+        if request.user_agent.device.family == "Roomy Native":
             return render(request,"mobile-native/components/account/components/profile.html",context)
         else:
             return render(request,"web/components/account/components/profile.html",context)
