@@ -147,9 +147,3 @@ def privacy(request):
         return render(request,"mobile-native/components/landing/privacy.html",context)
     else:
         return render(request,"web/components/landing/privacy.html",context)
-
-def help_center(request):
-    if request.user_agent.is_mobile:
-        return render(request,"mobile-native/components/landing/help_center.html",context)
-    else:
-        return render(request,"web/components/landing/help_center.html",context)
