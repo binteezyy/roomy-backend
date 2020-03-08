@@ -79,7 +79,7 @@ def profile(request):
     if request.user.is_authenticated:
 
         context.update({
-            "account_view":"messages",
+            "account_view":"profile",
         })
         if request.user_agent.device.family == "Roomy Native":
             return render(request,"mobile-native/components/account/components/profile.html",context)
