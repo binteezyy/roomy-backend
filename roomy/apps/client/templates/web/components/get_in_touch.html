@@ -31,7 +31,8 @@
       <div class="col-md-1"></div>
       <div class="col-md-9 bg-white" style="padding: 20px;">
 
-        <span style="margin: 5px auto 15px auto; font-size: 25px;">Partner With Us</span>
+        <h3>Partner With Us</h3>
+        <hr style="border-top: 1px solid #FF3F00;">
 
         <div class="d-flex flex-column justify-content-center" style="margin: 0; padding: 20px;">
 
@@ -41,7 +42,8 @@
           <!-- fields -->
           <div class="d-flex flex-column justify-content-center form-group-form-check" style="width: 100%;">
 
-            <input class="input-custom form-control {% if field.errors %}is-invalid{% endif %}" type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}} {% if field.errors %}is-invalid{% endif %}" style="margin-bottom: 20px;" placeholder="{{field.label}}"
+            <label for="{{field.id_for_label}}" style="font-size: 14px; font-weight: bold;">{{field.label}}</label>
+            <input class="input-custom form-control {% if field.errors %}is-invalid{% endif %}" type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}} {% if field.errors %}is-invalid{% endif %}" style="margin-bottom: 20px;"
               value="{{field.value|default_if_none:''}}">
 
             {% for error in field.errors %}
@@ -76,7 +78,7 @@
   </div>
 
   {% include "_modal.html" with modal_size="modal" %}
-  
+
 </div>
 
 {% endblock %}
