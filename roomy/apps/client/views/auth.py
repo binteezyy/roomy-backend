@@ -157,3 +157,8 @@ def owner_application_submit(request):
 
     })
     return render(request,"web/components/modals/submit+recaptcha.html",context)
+
+def authListener(request):
+    if request.user.is_authenticated: 
+        return request.user.username
+        # return HttpResponse("Logged In")
