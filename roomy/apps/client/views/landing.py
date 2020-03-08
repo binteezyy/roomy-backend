@@ -147,3 +147,9 @@ def privacy(request):
         return render(request,"mobile-native/components/landing/privacy.html",context)
     else:
         return render(request,"web/components/landing/privacy.html",context)
+
+def page_not_found(request):
+    if request.user_agent.is_mobile:
+        return render(request,"mobile-native/components/landing/privacy.html",context)
+    else:
+        return render(request,"web/components/404.html",context)
