@@ -117,10 +117,12 @@
       <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
 
         <!-- modal header -->
-        <div class="modal-header text-center">
-          <h4 class="text-center">Contact Us</h4>
+        <div class="modal-header">
+          <h4 class="modal-title">Contact Us</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
         </div>
-
 
         <!-- modal body -->
         <div class="modal-body">
@@ -139,17 +141,20 @@
                   <div class="fieldWrapper" style="">
                     <div class="form-group">
                       <label class="col-form-label" for="">{{field.label}}</label>
+
                       {% if field.name == "message" %}
-                      <textarea class="form-control textarea" name="{{ field.html_name }}" id="{{field.id_for_label}}" style="resize:none;" maxlength="300" rows="{{field.field.widget.attrs.rows}}" cols="{{field.field.widget.attrs.cols}}"></textarea>
-                      <br>
-                      <div id="pull-right">
-                        <span id="current">0</span>
-                        <span id="maximum">/ 300</span>
+
+                      <textarea class="input-custom form-control textarea" name="{{ field.html_name }}" id="{{field.id_for_label}}" style="resize:none;" maxlength="300" rows="{{field.field.widget.attrs.rows}}" cols="{{field.field.widget.attrs.cols}}"></textarea>
+                      <div class="d-flex justify-content-end" style="margin-top: 10px;">
+                        <span id="current" style="font-size: 14px;">0</span>
+                        <span id="maximum" style="font-size: 14px;">/300</span>
                       </div>
 
                       {% else %}
-                      <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}}" class="form-control {% if field.errors %}is-invalid{% endif %}" style="margin-bottom: 5px;"
+
+                      <input class="input-custom form-control {% if field.errors %}is-invalid{% endif %}" type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}}" style="margin-bottom: 5px;"
                         value="{{field.value|default_if_none:''}}" placeholder="">
+
                       {% endif %}
 
                       {% for error in field.errors %}
@@ -163,10 +168,14 @@
                     {% endif %}
                   </div>
                   {% endfor %}
-                  <div class="d-flex justify-content-center" style="margin: 10px 15px;">
-                    {% include "web/components/recaptchav2.html" with RECAPTCHA_KEY=RECAPTCHA_KEY %}
+
+                  <div class="d-flex flex-column justify-content-center" style="margin: 20px auto;">
+                    <div class="" style="margin: 20px auto;">
+                      {% include "web/components/recaptchav2.html" with RECAPTCHA_KEY=RECAPTCHA_KEY %}
+                    </div>
+                    <button class="btn" type="submit" name="button" style="margin: 20px auto; background-color: #FF3F00;">Submit</button>
                   </div>
-                  <button type="submit" class="btn btn-block btn-black" name="button">Submit</button>
+
                 </div>
               </div>
             </div>
