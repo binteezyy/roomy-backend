@@ -26,7 +26,7 @@ def home(request):
     except Exception as e:
         pass
     print("USER_AGENT:",request.user_agent)
-    if request.user_agent.is_mobile:
+    if request.user_agent == "Roomy Native / Android 4.1.1 / Chrome Mobile 18.0.1025":
         return render(request,"mobile-native/components/landing/home.html",context)
     else:
         context.update({
