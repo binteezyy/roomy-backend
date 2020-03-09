@@ -1,4 +1,4 @@
-{% extends "web/layout/layout.html" %}
+{% extends "mobile-native/layout/layout.html" %}
 {% load static %}
 
 {% block extra_css %}
@@ -10,25 +10,6 @@
   <div id="main-container" class="container-fluid" style="margin-top: 80px;">
     <div class="container">
       <div class="row">
-        <div id="acc-nav" class="col-md-3">
-          <ul>
-            <li {% if account_view == 'booking' %}class="focus"{% endif %}>
-              <a href="{% url 'bookings' %}"><i class="far fa-calendar-check"></i>Bookings</a>
-            </li>
-            <li {% if account_view == 'saved' %}class="focus"{% endif %}>
-              <a href="{% url 'saved' %}"><i class="far fa-heart"></i>Saved</a>
-            </li>
-            <li {% if account_view == 'messages' %}class="focus"{% endif %}>
-              <a href="{% url 'messages' %}"><i class="fas fa-envelope-open-text"></i>Messages</a>
-            </li>
-            <li {% if account_view == 'profile' %}class="focus"{% endif %}>
-              <a href="{% url 'profile' %}"><i class="far fa-user"></i>Profile</a>
-            </li>
-            <li>
-              <a href="{% url 'logout' %}"><i class="far fa-user"></i>Log out</a>
-            </li>
-          </ul>
-        </div>
         <div class="col-md-9">
             {% block account_container %}{% endblock %}
         </div>

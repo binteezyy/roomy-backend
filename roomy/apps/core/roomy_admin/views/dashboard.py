@@ -62,24 +62,24 @@ def home(request):
 # home ajax
 def home_ajax(request):
     val = request.GET.get('val', None)
-    my = request.GET.get('my', None)
+    # my = request.GET.get('my', None)
     print(val)
-    month, year = my.split('-')
-    print(month)
-    print(year)
+    # month, year = my.split('-')
+    # print(month)
+    # print(year)
     property_o = Property.objects.get(owner_id__user_id=request.user, pk=val)
     active_tenants = TenantAccount.objects.filter(transaction_id__active=True, transaction_id__room_id__catalog_id__property_id=property_o).count()
     pending_bookings = Booking.objects.filter(status=0, catalog_id__property_id__owner_id__user_id=request.user, catalog_id__property_id=property_o).count()
     active_rooms = Room.objects.filter(catalog_id__property_id=property_o).exclude(status=0).count()
     avail_rooms = Room.objects.filter(catalog_id__property_id=property_o, status=0).count()
-    billings = Billing.objects.filter(transaction_id__room_id__catalog_id__property_id=property_o, paid=True, time_stamp__month__gte=month, time_stamp__year__gte=year)
+    billings = Billing.objects.filter(transaction_id__room_id__catalog_id__property_id=property_o, paid=True, time_stamp__month__gte=date.today().month, time_stamp__year__gte=date.today().year)
     payments = 0
 
     for billing in billings:
         for fee in billing.fees.all():
             payments += int(fee.amount)
     
-    expenses_o = Expense.objects.filter(property_id=property_o, time_stamp__month__gte=month, time_stamp__year__gte=year)
+    expenses_o = Expense.objects.filter(property_id=property_o, time_stamp__month__gte=date.today().month, time_stamp__year__gte=date.today().year)
     expenses = 0
     for expense in expenses_o:
         expenses += int(expense.amount)

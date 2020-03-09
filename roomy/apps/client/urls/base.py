@@ -19,10 +19,9 @@ urlpatterns = [
     path('partner-with-us/application/submit/',auth.owner_application_submit, name="partner-submit"),
     path('about/', landing.about, name='about'),
     path('faq/', landing.faq, name='faq'),
-    path('contact_us/', landing.contact, name='contact'),
+    path('contact/', landing.contact, name='contact'),
     path('terms_of_use/', landing.terms_of_use, name='terms_of_use'),
-    path('privacy/', landing.privacy, name='privacy'),
-    path('help_center/', landing.help_center, name='help_center'),
+    path('privacy_policy/', landing.privacy, name='privacy'),
     #property
     path('explore/', explore.index, name='explore'),
     path('explore/property/', property.property, name='property'),
