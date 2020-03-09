@@ -161,6 +161,6 @@ def owner_application_submit(request):
 
 def authListener(request):
     if request.user.is_authenticated: 
-        return HttpResponse("[{\"username\" : \"",request.user.username,"\",\"first_name\" : \"", request.user.first_name, "\"}]")
+        return HttpResponse("[{\"username\" : \"" + request.user.username + "\",\"first_name\" : \"" + request.user.first_name + "\"}]")
     else:
         return HttpResponse("[{\"username\" : \"0\",\"first_name\" : \"Guest\"}]")
