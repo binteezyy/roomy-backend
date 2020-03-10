@@ -23,7 +23,7 @@ urlpatterns = [
     path('terms_of_use/', landing.terms_of_use, name='terms_of_use'),
     path('privacy/', landing.privacy, name='privacy'),
     path('help_center/', landing.help_center, name='help_center'),
-    path('authListener/', auth.authListener, name='authListener'),
+    path('authListener.json/', auth.authListener, name='authListener'),
     #property
     path('explore/', explore.index, name='explore'),
     path('explore/property/', property.property, name='property'),
