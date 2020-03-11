@@ -1,0 +1,12 @@
+.input-custom {
+  font-size: 14px;
+}
+
+.input-custom:active {
+  border: 1px solid #532388;
+  box-shadow: none;
+}
+
+.input-custom:focus {
+  border: 1px solid #532388;
+}
