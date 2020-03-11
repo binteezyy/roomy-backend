@@ -263,7 +263,8 @@ def AddTenantModal(request, pk):
         if request.method == 'GET':
             property_obj = Property.objects.get(pk=pk)
             rooms = []
-            transactions = Transaction.objects.filter(room_id__catalog_id__property_id=property_obj)
+            transactions = Transaction.objects.filter(
+                room_id__catalog_id__property_id=property_obj)
             for transaction in transactions:
                 rooms.append(transaction.room_id)
             context = {
@@ -622,7 +623,7 @@ class CatalogReadModal(LoginRequiredMixin, UserPassesTestMixin, BSModalReadView)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['viewtype'] = 'room'
+        context['viewtype'] = 'catalog'
         context['catalog'] = kwargs['object']
         context['type'] = kwargs['object'].get_room_type_display()
         context['images_3d'] = kwargs['object'].img_3d.all()
