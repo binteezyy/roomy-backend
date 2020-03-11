@@ -13,7 +13,10 @@ User Profile
 
 {% block content %}
 {% include "_modal.html" %}
-<div class="card-body card-body-cascade text-center">
+<div class="card-body card-body-cascade">
+  <div class="" style="margin-bottom: 20px;">
+    <span style="margin-right: 10px; color: black; font-size: 22px; text-transform: uppercase; font-weight: bold;">Property</span>
+  </div>
 
     <!-- Edit Form -->
     <form method="POST">
@@ -134,8 +137,7 @@ User Profile
         </div>
         <div class="row justify-content-center">
             <div class="col-md-12 text-center my-4">
-                <span class="waves-input-wrapper waves-effect waves-light"><input type="submit" value="Update Account"
-                        class="btn btn-info btn-rounded"></span>
+                <button class="btn" type="submit" name="button" style="color: white; background-color: #61299F;">Update</button>
             </div>
         </div>
     </form>
@@ -157,6 +159,6 @@ User Profile
         autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
             types: ['geocode']
         })
-    }); 
+    });
 </script>
 {% endblock %}
