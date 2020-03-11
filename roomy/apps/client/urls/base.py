@@ -13,7 +13,6 @@ urlpatterns = [
     path('sign-up/',auth.csign_up, name='sign_up'),
     path('forgot-password/', auth.cforgot_password, name='forgot_password'),
     path('explore/', explore.index, name='explore'),
-    path('booking_guide/', landing.booking_guide, name='booking_guide'),
     path('partner_with_us/', landing.partner_with_us, name='partner_with_us'),
     path('partner_with_us/application/',auth.get_in_touch, name='get_in_touch'),
     path('partner-with-us/application/submit/',auth.owner_application_submit, name="partner-submit"),

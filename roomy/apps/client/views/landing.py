@@ -40,13 +40,6 @@ def home(request):
         })
         return render(request,"web/components/landing/home.html",context)
 
-
-def booking_guide(request):
-    if request.user_agent.is_mobile:
-        return render(request,"mobile-native/components/landing/booking_guide.html",context)
-    else:
-        return render(request,"web/components/landing/booking_guide.html",context)
-
 def partner_with_us(request):
     if request.user_agent.is_mobile:
         return render(request,"mobile-native/components/landing/partner_with_us.html",context)
