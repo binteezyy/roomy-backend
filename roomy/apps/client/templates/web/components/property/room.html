@@ -44,8 +44,8 @@
       {% endif %}
     });
 
-    $('body, html').on('click','.modal', function(e) {
-      // e.preventDefault();
+    {% if user.is_authenticated %}
+    $('.modal').on('shown.bs.modal', function () {
       $( ".datepicker" ).datepicker({
         dateFormat: 'MM dd,yy',
         minDate: "dateToday",
@@ -53,7 +53,8 @@
       });
       $(".datepicker").css("z-index", "9999");
 
-    });
+    })
+    {% endif %}
 
     {% if request.session.form_error %}
     book_modal.click()
@@ -140,20 +141,15 @@
           <span style="font-size: 14px;"><b>1 month advance, 1 month deposit</span>
         </div>
 
-        <!-- package inclusion -->
-        <div class="" style="margin-bottom: 20px;">
-          <h5>What's included?</h5>
-          <hr style="border-top: 1px solid #FF3F00;">
-          <p>
-            Curabitur sed sapien gravida, porta tellus id, semper ante. In volutpat leo id dolor lacinia, in finibus urna mattis. Mauris imperdiet dolor tellus, sed sodales lorem tincidunt eu. Mauris congue metus at lacus pulvinar, eget posuere odio
-            porta.
-          </p>
-        </div>
+
         <div class="" style="margin-bottom: 20px;">
           <h5>Add-ons</h5>
           <hr style="border-top: 1px solid #FF3F00;">
           <p>
-            Quisque hendrerit nibh sit amet porta porttitor. Etiam gravida, augue et pellentesque elementum, eros arcu condimentum massa, nec ultricies eros massa a nulla.
+            {% for addon in addons %}
+                <span class="badge badge-pill badge-primary">{{ addon.description }}</span>
+            {% endfor %}
+
           </p>
         </div>
         <!-- end of package inclusion -->

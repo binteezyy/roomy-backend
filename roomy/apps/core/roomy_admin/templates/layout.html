@@ -272,7 +272,18 @@
 
   </div>
   <!-- End of Content Wrapper -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const webSocketBridge = new channels.WebSocketBridge();
 
+      webSocketBridge.connect('/notif-channel/booking/');
+      webSocketBridge.listen(function (action, stream) {
+        console.log("RESPONSE:", action, stream);
+      })
+
+      document.ws = webSocketBridge;
+    })
+  </script>
 </div>
 <!-- End of Page Wrapper -->
 
@@ -283,24 +294,9 @@
 
     new WOW().init();
   });
+
 </script>
 
-<!-- Modal Script -->
-<script>
-  $(document).ready(() => {
-    {
-      %
-      for message in messages %
-    }
-    $('.message-{{message.pk}}').click(function() {
-      $('#modalWindow').modal('show');
-    }); {
-      %
-      endfor %
-    }
-  });
-</script>
-<!-- End of Modal Script -->
 
 {% endblock %}
 <!-- end of sidebar & content -->
