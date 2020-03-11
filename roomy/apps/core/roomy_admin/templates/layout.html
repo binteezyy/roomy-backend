@@ -23,16 +23,42 @@
   </div>
 </div>
 <!-- End of Notif Modal -->
+
+<style media="screen">
+  @media only screen and (min-width: 500px) {
+    #logo-mini {
+      display: none;
+    }
+
+    #logo-full {
+      display: block;
+    }
+  }
+
+  @media only screen and (max-width: 770px) {
+    #logo-full {
+      display: none;
+    }
+
+    #logo-mini {
+      display: block;
+    }
+  }
+</style>
+
 <!-- Page Wrapper -->
 <div id="wrapper">
 
   <!-- Sidebar -->
 
-  <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #151515;">
+  <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #161616;" onchange="changeFunction()">
 
     <!-- logo -->
-    <a href="{% url 'admin-index' %}" style="margin: 15px auto 15px auto;">
-      <img src="{% static "img\roomy_full.png" %}" alt="" style="width: 150px; height: 40px; margin: 0 auto;">
+    <a id="logo-full" href="{% url 'admin-index' %}" style="margin: 15px auto 15px auto;">
+      <img id="logo" src="{% static "img\roomy_full.png" %}" alt="" style="width: 150px; height: 40px; margin: 0 auto;">
+    </a>
+    <a id="logo-mini" href="{% url 'admin-index' %}" style="margin: 15px auto 15px auto;">
+      <img id="logo" src="{% static "img\roomy_mini.png" %}" alt="" style="width: 60px; height: 54px; margin: 0 auto;">
     </a>
     <!-- end of logo -->
 
@@ -111,14 +137,6 @@
       </div>
     </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-      <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
-
   </ul>
   <!-- End of Sidebar -->
 
@@ -129,7 +147,7 @@
     <div id="content">
 
       <!-- Topbar -->
-      <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top z-depth-1" style="background-color: #202020;">
+      <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top z-depth-1" id="topbar" style="background-color: #202020;">
 
         <!-- Topbar Navbar -->
         <div class="navbar-nav justify-content-start align-items-center ml-auto">
@@ -202,7 +220,8 @@
           <div class="dropdown no-arrow">
 
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
-              <div class="img-profile" style="width: 40px; height: 40px; margin: 0 10px 0 0; padding: 0; border: 2px solid #61299F; border-radius: 20px; background-image: url('{% static 'img/elon.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+              <div class="img-profile"
+                style="width: 40px; height: 40px; margin: 0 10px 0 0; padding: 0; border-radius: 20px; background-image: url('{% static 'img/elon.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
               <span class="mr-2 d-none d-lg-inline small" style="text-transform: uppercase;">{{ request.user.username }}</span>
             </a>
 

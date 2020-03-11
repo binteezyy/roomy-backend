@@ -14,6 +14,23 @@ Home
 
 {% block content %}
 
+<style media="screen">
+  .select-custom:active {
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+  .select-custom:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+  .select-custom option {
+    font-weight: bold;
+  }
+
+</style>
+
 {% if properties %}
 
 <!-- property selector -->
@@ -21,8 +38,8 @@ Home
   {% csrf_token %}
   <div class="row d-flex justify-content-start align-items-center" style="margin: 0 30px 5px 30px; padding: 0;">
 
-    <select class="form-control" id="select_property" name="select_property"
-      style="width: 100%; margin: 0; padding: 2px 5px; font-size: 17px; font-weight: bold; text-transform: uppercase; border: none; color: white; background-color: #303030;">
+    <select class="select-custom form-control bg-white" id="select_property" name="select_property"
+      style="width: 100%; margin: 0; padding: 2px 5px; font-size: 20px; font-weight: bold; text-transform: uppercase; border: none; outline: none; box-shadow: none;">
       {% for property in properties %}
       <option value="{{property.pk}}" style="font-size: 18px; text-transform: uppercase;">{{ property.name }}</option>
       {% endfor %}
@@ -139,7 +156,7 @@ Home
           style="margin-right: 10px; color: black; font-weight: bold;">Type</span>
 
         <select class="form-control form-control-sm" id="report_type" name="report_type"
-          style="margin: 10px 0; onchange="filter()">
+          style="margin: 10px 0;" onchange="filter()">
           <option value="Room">Room</option>
           <option value="Tenant">Tenant</option>
           <option value="Payment">Payment</option>
@@ -164,7 +181,7 @@ Home
             style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Filter</span>
 
           <select class="form-control form-control-sm" id="payment_filter" name="payment_filter"
-            style="margin: 10px 0; onchange="filter()">
+            style="margin: 10px 0;" onchange="filter()">
             <option value="All">All</option>
             <option value="Custom">Custom</option>
           </select>
@@ -220,7 +237,7 @@ Home
             style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Filter</span>
 
           <select class="form-control form-control-sm" id="cashflow_filter" name="cashflow_filter"
-            style="margin: 10px 0; onchange="filter()">
+            style="margin: 10px 0;" onchange="filter()">
             <option value="All">All</option>
             <option value="Custom">Custom</option>
           </select>
