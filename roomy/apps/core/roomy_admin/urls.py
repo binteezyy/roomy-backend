@@ -177,6 +177,8 @@ urlpatterns = [
     #          modalviews.AdminAccUpdateModal.as_view(), name='update-admin-acc'),
 
     # Generate reports
+     path('generate-report', reports.generate_report, name='generate-report'),
+
     path('generate/properties', reports.list_properties, name='list-properties'),
     path('generate/rooms/<int:pk>', reports.list_rooms, name='list-rooms'),
     path('generate/tenants/<int:pk>', reports.list_tenants, name='list-tenants'),

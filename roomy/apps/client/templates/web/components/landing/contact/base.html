@@ -40,128 +40,154 @@
     }
   });
 
-  {% if form.errors or messages%}
-  $(".modal").modal("show");
-  {% endif %}
+  {
+    %
+    if form.errors or messages %
+  }
+  $(".modal").modal("show"); {
+    % endif %
+  }
 
-  document.getElementById("contact-form").addEventListener("submit", function () {
+  document.getElementById("contact-form").addEventListener("submit", function() {
     var recaptcha = $("#g-recaptcha-response").val();
     if (recaptcha === "") {
-       event.preventDefault();
-       alert("Please check the recaptcha");
+      event.preventDefault();
+      alert("Please check the recaptcha");
     } else {
       form.submit();
     }
   });
 </script>
 {% endblock %}
+
 {% block content %}
+<!-- main content -->
+<style media="screen">
+  .con {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .con div {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 1000px) {
+    .con {
+      flex-direction: column;
+    }
+
+    .con div {
+      width: 100%;
+    }
+  }
+</style>
+
 <!-- main content -->
 <div class="container-fluid" style="margin-top: 80px;">
   <div class="container">
-    <div class="row d-flex flex-row flex-wrap jusfity-content-center align-items-stretch" style="min-height: 700px; margin-top: 20px; padding-bottom: 20px;">
-      <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 20px; flex-grow: 1;">
-        <img src="{% static "img\placeholder_1200x500.png" %}" alt="" style="width:100%; margin: 0; padding: 0;">
+    <div class="con row">
+      <div class="d-flex flex-column justify-content-center align-items-center text-center" style="height: 80vh; padding: 20px;">
+        <span style="font-size: 35px; font-weight: bold; text-transform: uppercase;">CONTACT US</span> <br>
+        <h4>Need to talk with us? We're all ears.</h4>
+        <h5>We'd love to hear a feedback from you.</h5>
+        <div class="d-flex flex-row justify-content-center align-items-center" style="margin-top: 20px;">
+          <button class="btn" style="width: 200px; background-color: #FF3F00;" type="button" type="button" name="button" data-toggle="modal" data-target="#contactUsModal">MESSAGE</button>
+        </div>
       </div>
+      <div class="d-flex justify-content-center align-items-center"
+        style="min-height: 350px; margin: 20px auto; background-image: url('{% static 'img/team.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of main content -->
 
-      <div class="d-flex flex-column justify-content-center align-items-center z-depth-1" style="margin-bottom: 20px; padding: 80px 20px 80px 20px; flex-grow: 1;">
-        <h4>We'd love to hear from you.</h4>
-        <h6>Need to get in touch with our team? We're all ears.</h6>
-        <div class="d-flex flex-row justify-content-center align-items-center">
-          <button class="btn" style="width: 200px; background-color: #5392f9;" type="button" name="button" data-toggle="modal" data-target="#contactUsModal">Contact Us</button>
+<!-- contact us modal -->
+<form id="contact-form" action="#" method="POST">
+
+  <!-- modal -->
+  <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <!-- modal content -->
+      <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
+
+        <!-- modal header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Contact Us</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
         </div>
-        <span style="margin: 10px 0 10px 0; font-size: 18px;">or</span>
-        <h5>Reach us on social media.</h5>
-        <div class="d-flex justify-content-center align-items-center">
-          <a href="www.facebook.com" style="margin: 10px;">
-            <img src="{% static "img\facebook.png" %}" style="width: 50px; height: 50px;" alt="">
-          </a>
-          <a href="www.twitter.com" style="margin: 10px;">
-            <img src="{% static "img\twitter.png" %}" style="width: 50px; height: 50px;" alt="">
-          </a>
+
+        <!-- modal body -->
+        <div class="modal-body">
+          {% if messages %}
+          {% for message in messages %}
+          {{ message }}
+          {% endfor %}
+          {% else %}
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+
+                  {% csrf_token %}
+                  {% for field in form %}
+                  <div class="fieldWrapper" style="">
+                    <div class="form-group">
+                      <label class="col-form-label" for="" style="font-size: 15px; font-weight: bold;">{{field.label}}</label>
+
+                      {% if field.name == "message" %}
+
+                      <textarea class="input-custom form-control textarea" name="{{ field.html_name }}" id="{{field.id_for_label}}" style="resize:none;" maxlength="300" rows="{{field.field.widget.attrs.rows}}" cols="{{field.field.widget.attrs.cols}}"></textarea>
+                      <div class="d-flex justify-content-end" style="margin-top: 10px;">
+                        <span id="current" style="font-size: 14px;">0</span>
+                        <span id="maximum" style="font-size: 14px;">/300</span>
+                      </div>
+
+                      {% else %}
+
+                      <input class="input-custom form-control {% if field.errors %}is-invalid{% endif %}" type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}}" style="margin-bottom: 5px;"
+                        value="{{field.value|default_if_none:''}}" placeholder="">
+
+                      {% endif %}
+
+                      {% for error in field.errors %}
+                      <div class="invalid-feedback">
+                        <strong>{{ error|escape }}</strong>
+                      </div>
+                      {% endfor %}
+                    </div>
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                  </div>
+                  {% endfor %}
+
+                  <div class="d-flex flex-column justify-content-center" style="margin: 20px auto;">
+                    <div class="" style="margin: 20px auto;">
+                      {% include "web/components/recaptchav2.html" with RECAPTCHA_KEY=RECAPTCHA_KEY %}
+                    </div>
+                    <button class="btn" type="submit" name="button" style="margin: 20px auto; background-color: #FF3F00;">Submit</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
         </div>
+
       </div>
     </div>
   </div>
 
-  <!-- contact us modal -->
-  <form id="contact-form" action="#" method="POST">
-
-    <!-- modal -->
-    <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-
-        <!-- modal content -->
-        <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
-
-          <!-- modal header -->
-          <div class="modal-header text-center">
-            <h4 class="text-center">Contact Us</h4>
-          </div>
-
-
-          <!-- modal body -->
-          <div class="modal-body">
-            {% if messages %}
-              {% for message in messages %}
-              {{ message }}
-              {% endfor %}
-            {% else %}
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-
-                    {% csrf_token %}
-                    {% for field in form %}
-                    <div class="fieldWrapper" style="">
-                      <div class="form-group">
-                        <label class="col-form-label" for="">{{field.label}}</label>
-                        {% if field.name == "message" %}
-                        <textarea class="form-control textarea" name="{{ field.html_name }}"  id="{{field.id_for_label}}"
-                                  style="resize:none;" maxlength="300" rows="{{field.field.widget.attrs.rows}}" cols="{{field.field.widget.attrs.cols}}"></textarea> <br>
-                        <div id="pull-right">
-                          <span id="current">0</span>
-                          <span id="maximum">/ 300</span>
-                        </div>
-
-                        {% else %}
-                        <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}}"
-                                class="form-control {% if field.errors %}is-invalid{% endif %}" style="margin-bottom: 5px;" value="{{field.value|default_if_none:''}}" placeholder="">
-                        {% endif %}
-
-                        {% for error in field.errors %}
-                        <div class="invalid-feedback">
-                          <strong>{{ error|escape }}</strong>
-                        </div>
-                        {% endfor %}
-                      </div>
-                      {% if field.help_text %}
-                      <p class="help">{{ field.help_text|safe }}</p>
-                      {% endif %}
-                    </div>
-                    {% endfor %}
-                    <div class="d-flex justify-content-center" style="margin: 10px 15px;">
-                      {% include "web/components/recaptchav2.html" with RECAPTCHA_KEY=RECAPTCHA_KEY %}
-                    </div>
-                    <button type="submit" class="btn btn-block btn-black" name="button">Submit</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% endif %}
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-  </form>
-  <!-- end of login modal -->
-
-  <!-- end of content -->
-
-</div>
-<!-- end of main content -->
+</form>
+<!-- end of contact us modal -->
 
 {% endblock %}

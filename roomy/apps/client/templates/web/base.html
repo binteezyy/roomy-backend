@@ -12,6 +12,7 @@
   {% progressive_web_app_meta %}
   {% webpush_header %}
   <title>{{ TITLE }}</title>
+  <link rel="shortcut icon" href="{% static "img\roomy.ico" %}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -29,6 +30,8 @@
   {% block layout %}{% endblock %}
 
   {% block layout_home %}{% endblock %}
+
+  {% block content_404 %}{% endblock %}
 
   {% block footer %}{% endblock %}
 

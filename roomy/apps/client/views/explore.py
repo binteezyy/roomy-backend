@@ -18,7 +18,7 @@ def index(request):
         )#.order_by('product_name')
     # if len(products) == 0 :
     #     message='No results for "' + search + '"'
-    message = 'Results for "' + search + '"'
+    message = 'Showing results for "' + search + '"'
 
     paginator = Paginator(rooms, 12)#pagination
     page = request.GET.get('page')

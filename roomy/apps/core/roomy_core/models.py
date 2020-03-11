@@ -215,19 +215,23 @@ class Booking(models.Model):
                 active_transactions = Transaction.objects.filter(
                     active=True, room_id__catalog_id=self.catalog_id)
 
-                avail_room = Room.objects.filter(catalog_id=self.catalog_id, status=0).first()
+                avail_room = Room.objects.filter(
+                    catalog_id=self.catalog_id, status=0).first()
 
                 try:
                     new_transaction = Transaction.objects.get(
                         active=True, room_id=avail_room)
                 except Transaction.DoesNotExist:
-                    new_transaction = Transaction(room_id=avail_room, billing_date=self.start_date)
+                    new_transaction = Transaction(
+                        room_id=avail_room, billing_date=self.start_date)
                     new_transaction.save()
 
                     try:
-                        new_fee = Fee.objects.get(property_id=self.catalog_id.property_id, description=f'{self.catalog_id.name} rate', amount=self.catalog_id.rate, fee_type=2)
+                        new_fee = Fee.objects.get(property_id=self.catalog_id.property_id,
+                                                  description=f'{self.catalog_id.name} rate', amount=self.catalog_id.rate, fee_type=2)
                     except Fee.DoesNotExist:
-                        new_fee = Fee(property_id=self.catalog_id.property_id, description=f'{self.catalog_id.name} rate', amount=self.catalog_id.rate, fee_type=2)
+                        new_fee = Fee(property_id=self.catalog_id.property_id,
+                                      description=f'{self.catalog_id.name} rate', amount=self.catalog_id.rate, fee_type=2)
                         new_fee.save()
                     print(new_fee)
                     all_add_ons = []
@@ -250,6 +254,7 @@ class Booking(models.Model):
 
                 self.tenant_id = new_tenant
                 print(self.tenant_id)
+
         else:
             print("tenant id and transcation already done")
         super(Booking, self).save(*args, **kwargs)
