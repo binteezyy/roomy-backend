@@ -7,6 +7,42 @@
 {% endblock %}
 
 {% block content %}
+<!-- modal -->
+  <div class="modal fade" id="logout_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <!-- modal content -->
+      <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
+
+        <!-- modal header -->
+        <div class="modal-header text-center">
+          <h4 class="text-center">Log out</h4>
+        </div>
+
+
+        <!-- modal body -->
+        <div class="modal-body">
+          {% if messages %}
+          {% for message in messages %}
+          {{ message }}
+          {% endfor %}
+          {% else %}
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                Are you sure do you want to log out? 😟
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="modal-footer">
+          <a href="{% url 'logout' %}" class="btn btn-black btn-block">Log Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="main-container" class="container-fluid" style="margin-top: 80px;">
     <div class="container">
       <div class="row">
@@ -25,7 +61,7 @@
               <a href="{% url 'profile' %}"><i class="far fa-user"></i>Profile</a>
             </li>
             <li>
-              <a href="{% url 'logout' %}"><i class="far fa-user"></i>Log out</a>
+              <a data-toggle="modal" data-target="#logout_modal"><i class="far fa-user"></i>Log out</a>
             </li>
           </ul>
         </div>
@@ -36,6 +72,7 @@
     </div>
   </div>
 {% endblock content %}
+
 
 
 {% block extra_js %}

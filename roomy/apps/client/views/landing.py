@@ -17,9 +17,13 @@ context = {
     "webpush":webpush,
 }
 def home(request):
-    dorms = Room.objects.filter(catalog_id__room_type=1)
+    condos = RoomCatalog.objects.filter(property_id__property_type=0).order_by('?')[:6]
+    apartments = RoomCatalog.objects.filter(property_id__property_type=1).order_by('?')[:6]
+    dorms = RoomCatalog.objects.filter(property_id__property_type=2).order_by('?')[:6]
 
     current_url = resolve(request.path_info).url_name
+
+
     try:
         payload = {"head": "Welcome to Roomy!", "body": f"Hi {request.user.first_name}, start booking apps now!","url": current_url}
         send_user_notification(user=request.user, payload=payload, ttl=1000)
@@ -31,15 +35,10 @@ def home(request):
     else:
         context.update({
             "dorms":dorms,
+            "condos":condos,
+            "apartments":apartments
         })
         return render(request,"web/components/landing/home.html",context)
-
-
-def booking_guide(request):
-    if request.user_agent.device.family == "Roomy Native":
-        return render(request,"mobile-native/components/landing/booking_guide.html",context)
-    else:
-        return render(request,"web/components/landing/booking_guide.html",context)
 
 def partner_with_us(request):
     if request.user_agent.device.family == "Roomy Native":
@@ -148,8 +147,8 @@ def privacy(request):
     else:
         return render(request,"web/components/landing/privacy.html",context)
 
-def help_center(request):
+def page_not_found(request):
     if request.user_agent.device.family == "Roomy Native":
-        return render(request,"mobile-native/components/landing/help_center.html",context)
+        return render(request,"mobile-native/components/landing/privacy.html",context)
     else:
-        return render(request,"web/components/landing/help_center.html",context)
+        return render(request,"web/components/404.html",context)
