@@ -264,7 +264,7 @@ class Message(models.Model):
     tenant_id = models.ForeignKey(TenantAccount, on_delete=models.CASCADE)
     title = models.CharField(max_length=32)
     body = models.TextField(blank=True, null=True)
-    time_stamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    time_stamp = models.DateField(auto_now_add=True, blank=True, null=True)
     sent = models.BooleanField(default=True)
     read = models.BooleanField(default=False)
 
@@ -276,7 +276,7 @@ class OwnerNotification(models.Model):
     owner_id = models.ForeignKey(OwnerAccount, on_delete=models.CASCADE)
     title = models.CharField(max_length=32)
     body = models.TextField(blank=True, null=True)
-    time_stamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    time_stamp = models.DateField(auto_now_add=True, blank=True, null=True)
     sent = models.BooleanField(default=True)
     read = models.BooleanField(default=False)
 
