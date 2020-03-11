@@ -23,7 +23,7 @@ urlpatterns = [
 
     path('privacy_policy/', landing.privacy, name='privacy'),
     path('help_center/', landing.help_center, name='help_center'),
-    path('authListener.json/', auth.authListener, name='authListener'),   
+    path('authListener/', auth.authListener, name='authListener'),
     path('404/', landing.page_not_found, name='page_not_found'),
 
     #property
