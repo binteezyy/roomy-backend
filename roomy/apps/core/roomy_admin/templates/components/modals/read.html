@@ -6,11 +6,8 @@
   }
 </style>
 <div class="modal-header">
-  <h4 class="modal-title">{% if viewtype == 'billing' %} Billing Information {% if billing.paid %}
-    <button type="button" class="btn btn-success btn-rounded">Paid</button>
-    {% else %}
-    <button type="button" class="btn btn-warning btn-rounded">Unpaid</button>
-    {% endif %}
+  <h4 class="modal-title">
+    {% if viewtype == 'billing' %} Billing Information
     {% elif viewtype == 'transaction' %} Transaction Information
     {% elif viewtype == 'tenants' %} Tenant Information
     {% elif viewtype == 'booking' %} Booking Information
@@ -20,7 +17,8 @@
     {% elif viewtype == 'catalog' %} Catalog Information
     {% elif viewtype == 'manage_tenants' %} Manage Tenants
     {% elif viewtype == 'onotif' %} Owner Notification
-    {% endif %}</h4>
+    {% endif %}
+  </h4>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -32,40 +30,42 @@
 
     {% if viewtype == 'billing' %}
     <div class="container">
-      <ul>
-        <li>
-          <h5> Property:
-            {{billing.transaction_id.room_id.property_id}}
-          </h5>
-        </li>
-        <li>
-          <h5> Tenant/s:
-            {% for tenant in tenants %}
-            {{tenant.user_id.username}},
-            {% endfor %}
-          </h5>
-        </li>
-        <li>
-          <h5> Date:
-            {{billing.time_stamp}}
-          </h5>
-        </li>
-        <li>
-          <h5> Fees: </h5>
-          <h5>
-            <ol>
-              {% for fee in fees %}
-              <li>{{fee}}</li>
-              {% endfor %}
-            </ol>
-          </h5>
-        </li>
-        <li>
-          <h5> Total Amount Due:
-            {{total}}
-          </h5>
-        </li>
-      </ul>
+      <table class="table table-sm table-bordered">
+        <tbody>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Property</td>
+            <td>{{billing.transaction_id.room_id.catalog_id.property_id.name}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Tenant(s)</td>
+            <td>
+              <div class="d-flex flex-column">
+                {% for tenant in tenants %}
+                <span>{{tenant.user_id.username}}</span>
+                {% endfor %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Date</td>
+            <td>{{billing.time_stamp}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Fee(s)</td>
+            <td>
+              <div class="d-flex flex-column">
+                {% for fee in fees %}
+                <span>{{fee}}</span>
+                {% endfor %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Total</td>
+            <td>{{total}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     {% elif viewtype == 'transaction' %}
@@ -95,8 +95,8 @@
             <td>
               <div class="d-flex flex-column">
                 {% for add_on in add_ons %}
-                  <span>{{add_on}}</span>
-                  {% endfor %}
+                <span>{{add_on}}</span>
+                {% endfor %}
               </div>
             </td>
           </tr>
@@ -285,44 +285,42 @@
     </div>
 
     {% elif viewtype == 'manage_tenants' %}
-    <div class="content container">
-      <div class="card-content">
-        <div class="container-fluid">
-          <h2>Tenants in
-            {{transaction.room_id.catalog_id.property_id.name}}
-            Catalog. {{transaction.room_id.catalog_id.name}}
-            No. {{transaction.room_id.number}}
-          </h2>
-          <div class="row p-3">
-            <div class="col">
-              <div class="table-responsive">
-                <table id="manage-tenants-table" class="table table-bordered table-hover text-center" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info">
-                  <thead>
-                    <tr role="row">
-                      <th>Tenant</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for tenant in tenants %}
-                    <tr>
-                      <td> {{ tenant.user_id.username }}</td>
-                      {% if tenants.count != 1 %}
-                      <td style="width: 30%"> <button type="button" class="remove-tenant btn btn-sm btn-raised btn-warning m-1" data-id="/remove-tenant/{{transaction.id}}/{{tenant.id}}">
-                          <span class="fa fa-trash"></span></button></td>
-                      {% else %}
-                      <td style="width: 30%"> <button type="button" class="remove-tenant btn btn-sm btn-raised btn-warning m-1" data-id="/remove-tenant/{{transaction.id}}/{{tenant.id}}" disabled>
-                          <span class="fa fa-trash"></span></button></td>
-                      {% endif %}
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="container">
+      <table class="table table-sm table-bordered">
+        <thead>
+          <tr role="row">
+            <th style="font-weight: bold; text-align: center;">Tenant</th>
+            <th style="width: 150px; font-weight: bold; text-align: center;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tenant in tenants %}
+
+          <tr>
+            <td>
+              <span>{{ tenant.user_id.username }}</span>
+            </td>
+            {% if tenants.count != 1 %}
+
+            <td>
+              <button type="button" class="remove-tenant btn btn-sm btn-raised btn-warning m-1" data-id="/remove-tenant/{{transaction.id}}/{{tenant.id}}" style="margin: 0 50px;">
+                <i class="fa fa-trash"></i></button>
+            </td>
+
+            {% else %}
+
+            <td>
+              <button type="button" class="remove-tenant btn btn-sm btn-raised btn-warning" data-id="/remove-tenant/{{transaction.id}}/{{tenant.id}}" style="margin: 0 50px;" disabled>
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+
+            {% endif %}
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
 
     {% elif viewtype == 'onotif' %}
@@ -340,7 +338,7 @@
         </li>
       </ul>
     </div>
-    
+
     {% endif %}
   </div>
 

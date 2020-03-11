@@ -135,15 +135,15 @@ Catalog
                                     "data": 'fields.id',
                                     render: function (data, type, row) {
                                         let render =
-                                            '<button type="button" class="upload-catalog-2d btn btn-raised btn-sm btn-info m-1" data-id="/upload/catalog2d/' + data + '">' +
-                                            '<span class="fa fa-file-upload">Upload 2d</span></button>' +
-                                            '<button type="button" class="upload-catalog-3d btn btn-raised btn-sm btn-dark m-1" data-id="/upload/catalog3d/' + data + '">' +
-                                            '<span class="fa fa-file-upload"> Upload 3d</span></button>' +
-                                            '<button type="button" class="read-catalog btn btn-raised btn-sm btn-primary m-1" data-id="/read/catalog/' + data + '">' +
+                                            '<button type="button" class="upload-catalog-2d btn btn-sm btn-secondary m-1" data-id="/upload/catalog2d/' + data + '">' +
+                                            '<span>Upload 2d</span></button>' +
+                                            '<button type="button" class="upload-catalog-3d btn btn-sm btn-secondary m-1" data-id="/upload/catalog3d/' + data + '">' +
+                                            '<span>Upload 3d</span></button>' +
+                                            '<button type="button" class="read-catalog btn btn-sm btn-info m-1" data-id="/read/catalog/' + data + '">' +
                                             '<span class="fa fa-eye"></span></button>' +
-                                            // '<button type="button" class="delete-catalog btn btn-sm btn-raised btn-warning m-1" data-id="/delete/catalog/' + data + '">' +
+                                            // '<button type="button" class="delete-catalog btn btn-sm btn-warning m-1" data-id="/delete/catalog/' + data + '">' +
                                             // '<span class="fa fa-trash"></span></button>' +
-                                            '<button type="button" class="update-catalog btn btn-sm btn-raised btn-success m-1" data-id="/update/catalog/' + data + '">' +
+                                            '<button type="button" class="update-catalog btn btn-sm btn-primary m-1" data-id="/update/catalog/' + data + '">' +
                                             '<span class="fa fa-edit"></span></button>';
                                         return render
                                     }
