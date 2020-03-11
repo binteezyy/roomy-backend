@@ -21,6 +21,7 @@ urlpatterns = [
     path('contact/', landing.contact, name='contact'),
     path('terms_of_use/', landing.terms_of_use, name='terms_of_use'),
     path('privacy_policy/', landing.privacy, name='privacy'),
+    path('404/', landing.page_not_found, name='page_not_found'),
     #property
     path('explore/', explore.index, name='explore'),
     path('explore/property/', property.property, name='property'),
