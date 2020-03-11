@@ -1,10 +1,28 @@
 {% load widget_tweaks %}
 
+<style media="screen">
+  .input-custom {
+    font-size: 15px;
+  }
+
+  .input-custom:active {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .input-custom:focus {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+</style>
+
 <form method="post" action="">
     {% csrf_token %}
 
     <div class="modal-header">
-        <h3 class="modal-title">Update</h3>
+        <h4 class="modal-title">Update</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -19,6 +37,7 @@
         </div>
 
         {% for field in form %}
+
         {% if field.label == 'Property address' %}
         <script>
             var searchInput = 'id_property_address'
@@ -28,20 +47,22 @@
                 autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
                     types: ['geocode']
                 })
-            }); 
+            });
         </script>
+
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-        <input type="text" name="property_address" maxlength="256" placeholder="{{field.label}}" class="form-control"
-            id="{{field.id_for_label}}" value={{field.value}}>
+        <input class="input-custom form-control" id="{{field.id_for_label}}"type="text" name="property_address" maxlength="256"
+             value={{field.value}}>
         <div class="{% if field.errors %} invalid{% endif %}">
             {% for error in field.errors %}
             <p class="help-block">{{ error }}</p>
             {% endfor %}
         </div>
+
         {% else %}
         <div class="form-group">
             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-            {% render_field field class="form-control" placeholder=field.label %}
+            {% render_field field class="input-custom form-control" placeholder=field.label %}
             <div class="{% if field.errors %} invalid{% endif %}">
                 {% for error in field.errors %}
                 <p class="help-block">{{ error }}</p>
@@ -53,7 +74,7 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="submit-btn btn btn-primary">Update</button>
+        <button type="button" class="submit-btn btn" style="color: white; background-color: #61299F;">Update</button>
     </div>
 
 </form>

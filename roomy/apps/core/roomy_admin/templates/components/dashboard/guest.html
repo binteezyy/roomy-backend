@@ -87,7 +87,7 @@ Tenants
                                 "<'row'<'col-md-6'><'col-md-6'>>" +
                                 "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
                             "initComplete": function (settings, json) {
-                                $("div.create-guest").html('<button type="button" id="create-guest" class="float-right btn btn-s btn-success btn-raised" name="button">Add Guest <i class="fas fa-plus"></i></button>');
+                                $("div.create-guest").html('<button type="button" id="create-guest" class="float-right btn" name="button" style="color: white; background-color: #61299F;">Add Guest</button>');
                                 $(".create-guest").modalForm({ formURL: "{% url 'create-guest' %}" });
                             },
                             "drawCallback": function (settings) {

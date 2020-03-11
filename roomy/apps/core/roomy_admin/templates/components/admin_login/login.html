@@ -5,21 +5,21 @@
 {% block layout %}
 
 <style media="screen">
-.input-custom {
-  font-size: 14px;
-}
+  .input-custom {
+    font-size: 15px;
+  }
 
-.input-custom:active {
-  border: 1px solid #532388;
-  box-shadow: none;
-  outline: none;
-}
+  .input-custom:active {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
 
-.input-custom:focus {
-  border: 1px solid #532388;
-  box-shadow: none;
-  outline: none;
-}
+  .input-custom:focus {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
 </style>
 
 <div class="container-fluid" style="height: 100vh; background-color: #202020;">
@@ -40,7 +40,7 @@
 
         <div class="fieldWrapper" style="margin: 10px 15px;">
           <div class="form-group" style="margin: 0 15px;">
-            <label for="{{field.id_for_label}}" style="font-size: 15px;">{{ field.label }}</label>
+            <label for="{{field.id_for_label}}" style="font-size: 15px; text-transform: capitalize;">{{ field.label }}</label>
             <input class="input-custom form-control" id="{{field.id_for_label}}" type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" value="{{field.value|default_if_none:''}}">
           </div>
         </div>

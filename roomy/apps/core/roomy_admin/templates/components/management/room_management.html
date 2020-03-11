@@ -88,7 +88,7 @@ Room
                 "<'row'<'col-md-6'><'col-md-6'>>" +
                 "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
               "initComplete": function (settings, json) {
-                $("div.create-room").html('<button type="button" id="create-room" class="float-right btn btn-s btn-success btn-raised" name="button">Add room <i class="fas fa-plus"></i></button>');
+                $("div.create-room").html('<button type="button" id="create-room" class="float-right btn" name="button" style="color: white; background-color: #61299F;">Add room</button>');
                 $(".create-room").modalForm({ formURL: "/create/room/" + val });
               },
               "drawCallback": function (settings) {

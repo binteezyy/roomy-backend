@@ -21,7 +21,7 @@ Home
   {% csrf_token %}
   <div class="row d-flex justify-content-start align-items-center" style="margin: 0 30px 5px 30px; padding: 0;">
 
-    <select class="form-control z-depth-1" id="select_property" name="select_property"
+    <select class="form-control" id="select_property" name="select_property"
       style="width: 100%; margin: 0; padding: 2px 5px; font-size: 17px; font-weight: bold; text-transform: uppercase; border: none; color: white; background-color: #303030;">
       {% for property in properties %}
       <option value="{{property.pk}}" style="font-size: 18px; text-transform: uppercase;">{{ property.name }}</option>
@@ -31,18 +31,18 @@ Home
   </div>
   <!-- end of property selector -->
 
-  <div class="row d-flex" style="margin: 0 20px;">
+  <div class="row d-flex justify-content-center align-items-center" style="margin: 0 20px;">
 
     <!-- tiles -->
-    <div class="d-flex flex-column" style="width: 100%; margin: 10px 10px;">
+    <div class="d-flex flex-column" style="width: 100%; margin: 20px;">
 
-      <div class="d-flex flex-wrap justify-content-center z-depth-1" style="margin: 0; padding-top: 20px;">
+      <div class="d-flex flex-wrap justify-content-center bg-white" style="margin: 0; padding: 40px 20px;">
 
         <div class="d-flex justify-content-between align-items-center"
           style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
           <div class="d-flex flex-column">
             <span class="active-tenants-span" style="color: black; font-size: 25px;"></span>
-            <span style="color: black; font-size: 15px; font-weight: 500;">Tenant(s)</span>
+            <span style="color: black; font-size: 14px;">Tenant(s)</span>
             <span style="font-size: 10px;">All active tenants</span>
           </div>
           <div class=""
@@ -54,7 +54,7 @@ Home
           style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
           <div class="d-flex flex-column">
             <span class="pending-bookings-span" style="color: black; font-size: 25px;"></span>
-            <span style="color: black; font-size: 15px; font-weight: 500;">Booking(s)</span>
+            <span style="color: black; font-size: 14px;">Booking(s)</span>
             <span style="font-size: 10px;">Waiting for approval</span>
           </div>
           <div class=""
@@ -66,7 +66,7 @@ Home
           style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
           <div class="d-flex flex-column">
             <span class="active-rooms-span" style="color: black; font-size: 25px;"></span>
-            <span style="color: black; font-size: 15px; font-weight: 500;">Active Room(s)</span>
+            <span style="color: black; font-size: 14px;">Active Room(s)</span>
             <span style="font-size: 10px;">As of this moment</span>
           </div>
           <div class=""
@@ -78,7 +78,7 @@ Home
           style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
           <div class="d-flex flex-column">
             <span class="avail-rooms-span" style="color: black; font-size: 25px;"></span>
-            <span style="color: black; font-size: 15px; font-weight: 500;">Available Room(s)</span>
+            <span style="color: black; font-size: 14px;">Available Room(s)</span>
             <span style="font-size: 10px;">As of this moment</span>
           </div>
           <div class=""
@@ -90,11 +90,11 @@ Home
           style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
           <div class="d-flex flex-column">
             <span class="payments-span" style="color: black; font-size: 25px;"></span>
-            <span style="color: black; font-size: 15px; font-weight: 500;">Payment</span>
+            <span style="color: black; font-size: 14px;">Payment</span>
             <span style="font-size: 10px;">For This Month</span>
           </div>
           <div class=""
-            style="width: 50px; height: 50px; background-image: url('static/img/tenant.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+            style="width: 50px; height: 50px; background-image: url('static/img/arrow_up.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
           </div>
         </div>
 
@@ -102,11 +102,11 @@ Home
           style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
           <div class="d-flex flex-column">
             <span class="expenses-span" style="color: black; font-size: 25px;"></span>
-            <span style="color: black; font-size: 15px; font-weight: 500;">Expense</span>
+            <span style="color: black; font-size: 14px;">Expense</span>
             <span style="font-size: 10px;">For This Month</span>
           </div>
           <div class=""
-            style="width: 50px; height: 50px; background-image: url('static/img/booking.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+            style="width: 50px; height: 50px; background-image: url('static/img/arrow_down.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
           </div>
         </div>
 
@@ -114,7 +114,7 @@ Home
           style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
           <div class="d-flex flex-column">
             <span class="net-span" style="color: black; font-size: 25px;"></span>
-            <span style="color: black; font-size: 15px; font-weight: 500;">Net Income</span>
+            <span style="color: black; font-size: 14px;">Net Income</span>
             <span style="font-size: 10px;">For This Month</span>
           </div>
           <div class=""
@@ -128,36 +128,33 @@ Home
     <!-- end of tiles -->
 
     <!-- report -->
-    <div class="z-depth-1" style="width: 100%; margin: 10px 10px;">
+    <div class="bg-white" style="width: 500px; margin: 10px 10px;">
 
       <!-- generate report -->
-      <div class="d-flex flex-column" style="margin-bottom: 20px; padding: 10px;">
+      <div class="d-flex flex-column" style="margin-bottom: 20px; padding: 20px;">
 
-        <span style="color: black; text-transform: uppercase; font-size: 18px; font-weight: bold;">GENERATE
-          REPORT</span>
-
+        <span style="margin-bottom: 20px; color: black; font-size: 18px; font-weight: bold;">Generate Report</span>
 
         <span id="title"
-          style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Report
-          Type</span>
+          style="margin-right: 10px; color: black; font-size: 15px; font-weight: bold;">Type</span>
 
         <select class="form-control form-control-sm" id="report_type" name="report_type"
-          style="margin: 10px 0; text-transform: uppercase;" onchange="filter()">
-          <option value="Room" style="text-transform: uppercase;">Room</option>
-          <option value="Tenant" style="text-transform: uppercase;">Tenant</option>
-          <option value="Payment" style="text-transform: uppercase;">Payment</option>
-          <option value="Expense" style="text-transform: uppercase;">Expense</option>
-          <option value="Cashflow" style="text-transform: uppercase;">Cashflow</option>
+          style="margin: 10px 0; onchange="filter()">
+          <option value="Room">Room</option>
+          <option value="Tenant">Tenant</option>
+          <option value="Payment">Payment</option>
+          <option value="Expense">Expense</option>
+          <option value="Cashflow">Cashflow</option>
         </select>
 
         <div class="" id="div_room_filter" style="display: none;">
           <span
-            style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Filter</span>
+            style="margin-right: 10px; color: black; font-size: 15px; font-weight: bold;">Filter</span>
           <select class="form-control form-control-sm" id="room_filter" name="room_filter"
-            style="margin: 10px 0; text-transform: uppercase;" onchange="filter()">
-            <option value="all" style="text-transform: uppercase;">All</option>
-            <option value="active" style="text-transform: uppercase;">Active only</option>
-            <option value="avail" style="text-transform: uppercase;">Available only</option>
+            style="margin: 10px 0; onchange="filter()">
+            <option value="all">All</option>
+            <option value="active">Active only</option>
+            <option value="avail">Available only</option>
           </select>
         </div>
 
@@ -167,9 +164,9 @@ Home
             style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Filter</span>
 
           <select class="form-control form-control-sm" id="payment_filter" name="payment_filter"
-            style="margin: 10px 0; text-transform: uppercase;" onchange="filter()">
-            <option value="All" style="text-transform: uppercase;">All</option>
-            <option value="Custom" style="text-transform: uppercase;">Custom</option>
+            style="margin: 10px 0; onchange="filter()">
+            <option value="All">All</option>
+            <option value="Custom">Custom</option>
           </select>
 
           <div class="" id="div_payment_filter_year" style="display: none;">
@@ -187,20 +184,6 @@ Home
             </div>
           </div>
 
-          <!-- <div class="" id="div_payment_filter_month" style="display: none;">
-            <span
-              style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Month</span>
-            <div class="d-flex flex-wrap justify-content-center align-items-center">
-              {% for month_year in month_years %}
-              <div class="form-group z-depth-1" style="margin: 10px; padding: 10px;">
-                <input type="checkbox" id="{{month_year|date:'M'}}" name="" value="{{month_year|date:'M'}}">
-                <label for="{{month_year|date:'M'}}"
-                  style="font-size: 15px; text-transform: uppercase;">{{month_year|date:"M"}}</label>
-              </div>
-              {% endfor %}
-            </div>
-          </div> -->
-
         </div>
 
         <div class="" id="div_expense_filter" style="display: none;">
@@ -209,9 +192,9 @@ Home
             style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Filter</span>
 
           <select class="form-control form-control-sm" id="expense_filter" name="expense_filter"
-            style="margin: 10px 0; text-transform: uppercase;" onchange="filter()">
-            <option value="All" style="text-transform: uppercase;">All</option>
-            <option value="Custom" style="text-transform: uppercase;">Custom</option>
+            style="margin: 10px 0; onchange="filter()">
+            <option value="All">All</option>
+            <option value="Custom">Custom</option>
           </select>
 
           <div class="" id="div_expense_filter_year">
@@ -228,20 +211,6 @@ Home
               {% endfor %}
             </div>
           </div>
-          <!-- 
-          <div class="" id="div_expense_filter_month">
-            <span
-              style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Month</span>
-            <div class="d-flex flex-wrap justify-content-center align-items-center">
-              {% for month_year in month_years %}
-              <div class="form-group z-depth-1" style="margin: 10px; padding: 10px;">
-                <input type="checkbox" id="{{month_year|date:'M'}}" name="" value="{{month_year|date:'M'}}">
-                <label for="{{month_year|date:'M'}}"
-                  style="font-size: 15px; text-transform: uppercase;">{{month_year|date:"M"}}</label>
-              </div>
-              {% endfor %}
-            </div>
-          </div> -->
 
         </div>
 
@@ -251,9 +220,9 @@ Home
             style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Filter</span>
 
           <select class="form-control form-control-sm" id="cashflow_filter" name="cashflow_filter"
-            style="margin: 10px 0; text-transform: uppercase;" onchange="filter()">
-            <option value="All" style="text-transform: uppercase;">All</option>
-            <option value="Custom" style="text-transform: uppercase;">Custom</option>
+            style="margin: 10px 0; onchange="filter()">
+            <option value="All">All</option>
+            <option value="Custom">Custom</option>
           </select>
 
           <div class="" id="div_cashflow_filter_year">
@@ -270,25 +239,11 @@ Home
               {% endfor %}
             </div>
           </div>
-          <!-- 
-          <div class="" id="div_expense_filter_month">
-            <span
-              style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Month</span>
-            <div class="d-flex flex-wrap justify-content-center align-items-center">
-              {% for month_year in month_years %}
-              <div class="form-group z-depth-1" style="margin: 10px; padding: 10px;">
-                <input type="checkbox" id="{{month_year|date:'M'}}" name="" value="{{month_year|date:'M'}}">
-                <label for="{{month_year|date:'M'}}"
-                  style="font-size: 15px; text-transform: uppercase;">{{month_year|date:"M"}}</label>
-              </div>
-              {% endfor %}
-            </div>
-          </div> -->
 
         </div>
 
-        <button class="btn btn-s btn-dark" id="generate_button" type="submit" name="button"
-          style="margin: 40px auto;">GENERATE</button>
+        <button class="btn btn-sm" id="generate_button" type="submit" name="button"
+          style="margin: 40px auto; color: white; background-color: #61299F;">GENERATE</button>
 </form>
 
 </div>

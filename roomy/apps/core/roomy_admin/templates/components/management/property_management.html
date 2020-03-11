@@ -65,7 +65,7 @@ Property
         "<'row'<'col-md-6'><'col-md-6'>>" +
         "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
       "initComplete": function (settings, json) {
-        $("div.create-property").html('<button type="button" id="create-property" class="float-right btn btn-s btn-success btn-raised" name="button">Add Property<i class="fas fa-plus"></i></button>');
+        $("div.create-property").html('<button type="button" id="create-property" class="float-right btn" name="button" style="color: white; background-color: #61299F;">Add Property</button>');
         $(".create-property").modalForm({ formURL: "{% url 'create-property' %}" });
       },
       "drawCallback": function (settings) {

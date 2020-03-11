@@ -29,12 +29,11 @@
 
   <!-- Sidebar -->
 
-  <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #202020;">
+  <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #151515;">
 
     <!-- logo -->
     <a href="{% url 'admin-index' %}" style="margin: 15px auto 15px auto;">
-      <!-- <img src="{% static "img\logo_white.png" %}" alt="" style="width: 170px; height: 35px; margin:0 auto;"> -->
-      <img src="{% static "img\roomy_full.png" %}" alt="" style="width: 170px; height: 35px; margin: 0 auto;">
+      <img src="{% static "img\roomy_full.png" %}" alt="" style="width: 150px; height: 40px; margin: 0 auto;">
     </a>
     <!-- end of logo -->
 
@@ -44,7 +43,6 @@
     <!-- Nav Item - Dashboard -->
 
     <li class="nav-item">
-
       <a class="nav-link" href="{% url 'admin-index' %}">
         <i class="fas fa-fw fa-home"></i>
         <span>Home</span></a>
@@ -55,7 +53,6 @@
 
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDashboard"
         aria-expanded="true" aria-controls="collapseCashflow">
-
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span>
       </a>
@@ -137,12 +134,7 @@
 
       <!-- Topbar -->
       <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top z-depth-1"
-        style="background-color: #282828;">
-
-        <!-- Sidebar Toggle (Topbar) -->
-        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-          <i class="fa fa-bars"></i>
-        </button>
+        style="background-color: #202020;">
 
         <!-- Topbar Navbar -->
         <div class="navbar-nav justify-content-start align-items-center ml-auto">
@@ -165,7 +157,7 @@
             <!-- Dropdown - Alerts -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
               aria-labelledby="alertsDropdown">
-              <h6 class="dropdown-header">
+              <h6 class="dropdown-header" style="border: none; background-color: #61299F;">
                 Notifications
               </h6>
               {% for notif in notifs %}
@@ -192,7 +184,7 @@
             <!-- Dropdown - Messages -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
               aria-labelledby="messagesDropdown">
-              <h6 class="dropdown-header">
+              <h6 class="dropdown-header" style="border: none; background-color: #61299F;">
                 Tenant Messages
               </h6>
               {% for message in messages %}
@@ -226,22 +218,13 @@
             </a>
 
             <!-- Dropdown - User Information -->
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown" style="padding: 10px; border: none;">
               <a class="dropdown-item" href="{% url 'owner-profile' %}">
-                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                <i class="fas fa-user fa-sm fa-fw mr-2" style="color: #61299F;"></i>
                 Profile
               </a>
-              <!-- <a class="dropdown-item" href="#">
-                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                Settings
-              </a>
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                Activity Log
-              </a> -->
-              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{% url 'admin-logout' %}">
-                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2" style="color: #61299F;"></i>
                 Logout
               </a>
             </div>
@@ -267,13 +250,13 @@
     <!-- End of Main Content -->
 
     <!-- Footer -->
-    <div class="container-fluid" style="background-color: #303030;">
+    <div class="container-fluid" style="margin-top: 40px; background-color: #202020;">
       <!-- copyright -->
       <div class="row d-flex justify-content-center" style="padding: 20px;">
         <div class="d-flex flex-column justify-content-center align-items-center">
           <span style="font-size: 11px; color: white;">&copy; Roomy 2019 - 2020. </span>
           <span style="font-size: 11px; color: white;">All rights reserved. Powered by <span
-              style="color: #FF3F00; font-size: 15px; font-weight: bold;">PPTT</span> </span>
+              style="color: #61299F; font-size: 15px; font-weight: bold;">PPTT</span> </span>
         </div>
       </div>
       <!-- end of copyright -->
