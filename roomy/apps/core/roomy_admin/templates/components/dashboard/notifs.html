@@ -48,7 +48,7 @@ Tenant Notification
 {% else %}
 <div class="row d-flex justify-content-center">
     <div class="d-flex justify-content-center" style="margin-top: 20px;">
-        <span style="font-size: 22px;">There are currently no registered properties under your account. <a href="{% url 'property_management' }%">Click here.</a></span>
+        <span style="font-size: 22px;">There are currently no registered properties under your account. <a href="{% url 'property_management' %}">Click here.</a></span>
     </div>
 </div>
 {% endif %}
@@ -73,7 +73,7 @@ Tenants
                                 "<'row'<'col-md-6'><'col-md-6'>>" +
                                 "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
                             "initComplete": function (settings, json) {
-                                $("div.create-notif").html('<button type="button" id="create-notif" class="float-right btn btn-s btn-success btn-raised" name="button">Add Notification <i class="fas fa-plus"></i></button>');
+                                $("div.create-notif").html('<button type="button" id="create-notif" class="float-right btn" name="button" style="color: white; background-color: #61299F;">Add Notification</button>');
                                 $(".create-notif").modalForm({ formURL: "{% url 'create-notif' %}" });
                             },
                             "drawCallback": function (settings) {
@@ -123,7 +123,7 @@ Tenants
                                         let render =
                                             // '<button type="button" class="delete-notif btn btn-sm btn-raised btn-warning m-1" data-id="/delete/notif/' + data + '">' +
                                             // '<span class="fa fa-trash"></span></button>' +
-                                            '<button type="button" class="update-notif btn btn-sm btn-raised btn-success m-1" data-id="/update/notif/' + data + '">' +
+                                            '<button type="button" class="update-notif btn btn-sm btn-primary m-1" data-id="/update/notif/' + data + '">' +
                                             '<span class="fa fa-edit"></span></button>';
                                         return render
                                     }

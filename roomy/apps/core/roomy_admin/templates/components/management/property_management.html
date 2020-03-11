@@ -65,7 +65,7 @@ Property
         "<'row'<'col-md-6'><'col-md-6'>>" +
         "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
       "initComplete": function (settings, json) {
-        $("div.create-property").html('<button type="button" id="create-property" class="float-right btn btn-s btn-success btn-raised" name="button">Add Property<i class="fas fa-plus"></i></button>');
+        $("div.create-property").html('<button type="button" id="create-property" class="float-right btn" name="button" style="color: white; background-color: #61299F;">Add Property</button>');
         $(".create-property").modalForm({ formURL: "{% url 'create-property' %}" });
       },
       "drawCallback": function (settings) {
@@ -104,14 +104,14 @@ Property
           "data": 'fields.id',
           render: function (data, type, row) {
             let render =
-              '<button type="button" class="upload-property btn btn-raised btn-sm btn-info m-1" data-id="/upload/property/' + data + '">' +
-              '<span class="fa fa-file-upload"></span></button>' +
-              '<button type="button" class="read-property btn btn-raised btn-sm btn-primary m-1" data-id="/read/property/' + data + '">' +
-              '<span class="fa fa-eye"></span></button>' +
+              '<button type="button" class="upload-property btn btn-sm btn-secondary m-1" data-id="/upload/property/' + data + '">' +
+              '<i class="fa fa-file-upload"></i></button>' +
+              '<button type="button" class="read-property btn btn-info btn-sm m-1" data-id="/read/property/' + data + '">' +
+              '<i class="fa fa-eye"></i></button>' +
               // '<button type="button" class="delete-property btn btn-sm btn-raised btn-warning m-1" data-id="/delete/property/' + data + '">' +
               // '<span class="fa fa-trash"></span></button>' +
-              '<button type="button" class="update-property btn btn-sm btn-raised btn-success m-1" data-id="/up/property/' + data + '">' +
-              '<span class="fa fa-edit"></span></button>';
+              '<button type="button" class="update-property btn btn-sm btn-primary m-1" data-id="/up/property/' + data + '">' +
+              '<i class="fa fa-edit"></i></button>';
             return render
           }
         },

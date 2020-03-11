@@ -60,7 +60,7 @@ Rental
 {% else %}
 <div class="row d-flex justify-content-center">
   <div class="d-flex justify-content-center" style="margin-top: 20px;">
-    <span style="font-size: 22px;">There are currently no registered properties under your account. <a href="{% url 'property_management' }%">Click here.</a></span>
+    <span style="font-size: 22px;">There are currently no registered properties under your account. <a href="{% url 'property_management' %}">Click here.</a></span>
   </div>
 </div>
 {% endif %}
@@ -119,14 +119,14 @@ Rental
                   "data": 'fields.id',
                   render: function (data, type, row) {
                     let render =
-                      '<button type="button" class="manage-tenants btn btn-raised btn-sm btn-secondary m-1" data-id="/manage-tenants/' + data + '">' +
-                      '<span class="fa fa-users"></span></button>' +
-                      '<button type="button" class="read-rental btn btn-raised btn-sm btn-primary m-1" data-id="/read/rental/' + data + '">' +
-                      '<span class="fa fa-eye"></span></button>' +
+                      '<button type="button" class="manage-tenants btn btn-sm btn-secondary m-1" data-id="/manage-tenants/' + data + '">' +
+                      '<i class="fa fa-users"></i></button>' +
+                      '<button type="button" class="read-rental btn btn-sm btn-info m-1" data-id="/read/rental/' + data + '">' +
+                      '<i class="fa fa-eye"></i></button>' +
                       // '<button type="button" class="delete-rental btn btn-sm btn-raised btn-warning m-1" data-id="/delete/rental/' + data + '">' +
-                      // '<span class="fa fa-trash"></span></button>' +
-                      '<button type="button" class="update-rental btn btn-sm btn-raised btn-success m-1" data-id="/update/rental/' + data + '">' +
-                      '<span class="fa fa-edit"></span></button>';
+                      // '<i class="fa fa-trash"></i></button>' +
+                      '<button type="button" class="update-rental btn btn-sm btn-primary m-1" data-id="/update/rental/' + data + '">' +
+                      '<i class="fa fa-edit"></i></button>';
                     return render
                   }
                 },

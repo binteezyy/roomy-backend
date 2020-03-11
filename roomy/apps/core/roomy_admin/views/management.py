@@ -109,7 +109,7 @@ def my_handler(sender, instance, created, **kwargs):
         except Fee.DoesNotExist:
             new_fee = Fee(property_id=instance.property_id, description=f'{instance.name} rate', amount=instance.rate, fee_type=2)
             new_fee.save()
-        
+
         transactions = Transaction.objects.filter(room_id__catalog_id__pk=instance.pk)
         print(transactions)
         for transaction in transactions:
@@ -246,34 +246,6 @@ def owner_profile(request):
                 'form2': form2,
             }
             return render(request, "components/management/owner_profile.html", context)
-    else:
-        logout(request)
-        form = UserLoginForm(request.POST or None)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-
-            user = authenticate(username=username, password=password)
-            login(request, user)
-
-            if next:
-                return redirect(next)
-            return HttpResponseRedirect(reverse('admin-index'))
-
-        context = {
-            'form': form,
-            'title': 'Login',
-        }
-        return render(request, 'components/admin_login/login.html', context)
-# admin management
-
-
-@login_required
-@user_passes_test(lambda u: u.is_staff)
-def admin_management(request):
-
-    if request.user.is_authenticated and OwnerAccount.objects.filter(user_id=request.user).exists():
-        return render(request, "components/management/account_management.html")
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
