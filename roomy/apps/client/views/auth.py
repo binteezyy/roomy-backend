@@ -10,7 +10,8 @@ from apps.commons.views.apis        import recaptcha_verify
 from apps.client.models.application import OwnerApplication
 from django.contrib.auth.models     import User
 from django.http                    import HttpResponseRedirect
-from django.contrib import messages
+from django.http                    import HttpResponse
+from django.contrib                 import messages
 
 # GLOBAL CONTEXT
 context = {
@@ -39,7 +40,7 @@ def clogin(request):
         "form": form,
     })
     # if request.method == 'POST'
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/login.html",context)
     else:
         return render(request,"web/components/login.html",context)
@@ -50,7 +51,7 @@ def clogout(request):
     return redirect(request.META.get('HTTP_REFERER', 'index'))
 
 def cforgot_password(request):
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/forgot_password.html",context)
     else:
         return render(request,"web/components/forgot_password.html",context)
@@ -77,7 +78,7 @@ def csign_up(request):
         "TITLE": "Sign Up",
         "form": form,
     })
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/sign_up.html",context)
     else:
         return render(request,"web/components/sign_up.html",context)
@@ -123,7 +124,7 @@ def get_in_touch(request):
         "RECAPTCHA_KEY": settings.RECAPTCHA_KEY,
         "form_type": "owner-application",
     })
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/get_in_touch.html",context)
     else:
         return render(request,"web/components/get_in_touch.html",context)
@@ -157,3 +158,9 @@ def owner_application_submit(request):
 
     })
     return render(request,"web/components/modals/submit+recaptcha.html",context)
+
+def authListener(request):
+    if request.user.is_authenticated: 
+        return HttpResponse("[{\"username\" : \"" + request.user.username + "\",\"first_name\" : \"" + request.user.first_name + "\"}]")
+    else:
+        return HttpResponse("[{\"username\" : \"0\",\"first_name\" : \"Guest\"}]")

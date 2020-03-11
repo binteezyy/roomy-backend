@@ -30,7 +30,7 @@ def home(request):
     except Exception as e:
         pass
     print("USER_AGENT:",request.user_agent)
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/home.html",context)
     else:
         context.update({
@@ -41,13 +41,13 @@ def home(request):
         return render(request,"web/components/landing/home.html",context)
 
 def partner_with_us(request):
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/partner_with_us.html",context)
     else:
         return render(request,"web/components/landing/partner_with_us.html",context)
 
 def about(request):
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/about.html",context)
     else:
         return render(request,"web/components/landing/about.html",context)
@@ -61,7 +61,7 @@ def faq(request):
         "faqs": faqs
     })
 
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/faq.html",context)
     else:
         return render(request,"web/components/landing/faq.html",context)
@@ -94,7 +94,7 @@ def modal_contact(request):
 def contact(request):
     form = ContactUsForm(request.POST or None)
 
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/contact.html",context)
     else:
         if request.method == "POST":
@@ -136,19 +136,19 @@ def contact(request):
         return render(request,"web/components/landing/contact/base.html",context)
 
 def terms_of_use(request):
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/terms_of_use.html",context)
     else:
         return render(request,"web/components/landing/terms_of_use.html",context)
 
 def privacy(request):
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/privacy.html",context)
     else:
         return render(request,"web/components/landing/privacy.html",context)
 
 def page_not_found(request):
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/privacy.html",context)
     else:
         return render(request,"web/components/404.html",context)

@@ -34,7 +34,7 @@ def index(request):
         "search": search,
         "rooms": rooms,
     })
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/explore/base.html",context)
     else:
         return render(request,"web/components/explore/base.html",context)
@@ -61,7 +61,7 @@ def room_view(request,pk):
         "booking":booking,
         "available": room_avail,
     })
-    if request.user_agent.is_mobile:
+    if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/property/room.html", context)
     else:
         return render(request,"web/components/property/room.html", context)
