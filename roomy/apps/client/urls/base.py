@@ -20,9 +20,7 @@ urlpatterns = [
     path('faq/', landing.faq, name='faq'),
     path('contact/', landing.contact, name='contact'),
     path('terms_of_use/', landing.terms_of_use, name='terms_of_use'),
-
     path('privacy_policy/', landing.privacy, name='privacy'),
-    path('help_center/', landing.help_center, name='help_center'),
     path('authListener/', auth.authListener, name='authListener'),
     path('404/', landing.page_not_found, name='page_not_found'),
 
