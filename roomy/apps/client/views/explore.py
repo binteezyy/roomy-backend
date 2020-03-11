@@ -42,7 +42,7 @@ def index(request):
 def room_view(request,pk):
     room = RoomCatalog.objects.get(pk=pk)
     room_avail = Room.objects.filter(catalog_id=room).exclude(status=2)
-
+    addons = Fee.objects.filter(Q(fee_type=1) & Q(property_id=room.property_id))
     # request.session['form_error'] = False
     try: booking = Booking.objects.get(catalog_id=room,user_id=request.user)
     except Exception as e:
@@ -60,6 +60,7 @@ def room_view(request,pk):
         "room":room,
         "booking":booking,
         "available": room_avail,
+        "addons": addons
     })
     if request.user_agent.is_mobile:
         return render(request,"mobile-native/components/property/room.html", context)
