@@ -72,9 +72,9 @@ def property_upload(request, pk):
             upload_image.save()
 
             property_object.property_image.add(upload_image)
-            return HttpResponseRedirect(reverse('property-management'))
+            return HttpResponseRedirect(reverse('property_management'))
         else:
-            return HttpResponseRedirect(reverse('property-management'))
+            return HttpResponseRedirect(reverse('property_management'))
     else:
         logout(request)
         form = UserLoginForm(request.POST or None)
