@@ -27,25 +27,20 @@
     <!-- links -->
     <ul class="navbar-nav mr-auto align-items-center">
       <li class="nav-item">
-        <a class="nav-link" style="color: #141414; font-size: 15px; font-weight: 600; text-transform: uppercase;" href="{% url 'explore' %}">Explore</a>
+        <a class="nav-link" style="color: #141414; font-size: 18px; font-weight: bold;" href="{% url 'explore' %}">Explore</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="color: #141414; font-size: 15px; font-weight: 600; text-transform: uppercase;" href="{% url 'booking_guide' %}">Booking</a>
+        <a class="nav-link" style="color: #141414; font-size: 18px; font-weight: bold;" href="{% url 'about' %}">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="color: #141414; font-size: 15px; font-weight: 600; text-transform: uppercase;" href="{% url 'about' %}">About</a>
+        <a class="nav-link" style="color: #141414; font-size: 18px; font-weight: bold;" href="{% url 'faq' %}">FAQ</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="color: #141414; font-size: 15px; font-weight: 600; text-transform: uppercase;" href="{% url 'faq' %}">FAQ</a>
+        <a class="nav-link" style="color: #141414; font-size: 18px; font-weight: bold;" href="{% url 'partner_with_us' %}">Partner With Us</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" style="color: #141414; font-size: 15px; font-weight: 600; text-transform: uppercase;" href="{% url 'contact' %}">Contact</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="color: #141414; font-size: 15px; font-weight: 600; text-transform: uppercase;" href="{% url 'partner_with_us' %}">Partner With Us</a>
-      </li>
-      <!-- end of links -->
     </ul>
+    <!-- end of links -->
+
 
     <!-- login -->
     <div class="nav-item d-flex align-items-center">
@@ -81,7 +76,7 @@
       {% else %}
 
       <a class="bnt-link" href="{% url 'login' %}" style="font-size: 15px; color: #FF3F00; font-weight: bold;">LOG IN</a>
-      
+
       {% endif %}
     </div>
 
@@ -170,7 +165,7 @@
           </li>
           <li class="nav-item">
             <div class="d-flex justify-content-start align-items-center">
-              <a class="nav-link nav-link-footer" href="{% url 'contact' %}">Contact</a>
+              <a class="nav-link nav-link-footer" href="{% url 'contact' %}">Contact Us</a>
             </div>
           </li>
           <li class="nav-item">
