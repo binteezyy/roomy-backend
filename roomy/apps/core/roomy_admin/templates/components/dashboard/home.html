@@ -133,10 +133,10 @@ Home
       <!-- generate report -->
       <div class="d-flex flex-column" style="margin-bottom: 20px; padding: 20px;">
 
-        <span style="margin-bottom: 20px; color: black; font-size: 18px; font-weight: bold;">Generate Report</span>
+        <span style="margin-bottom: 20px; color: black; font-size: 20px; font-weight: bold;">Generate Report</span>
 
         <span id="title"
-          style="margin-right: 10px; color: black; font-size: 15px; font-weight: bold;">Type</span>
+          style="margin-right: 10px; color: black; font-weight: bold;">Type</span>
 
         <select class="form-control form-control-sm" id="report_type" name="report_type"
           style="margin: 10px 0; onchange="filter()">
@@ -149,7 +149,7 @@ Home
 
         <div class="" id="div_room_filter" style="display: none;">
           <span
-            style="margin-right: 10px; color: black; font-size: 15px; font-weight: bold;">Filter</span>
+            style="margin-right: 10px; color: black; font-weight: bold;">Filter</span>
           <select class="form-control form-control-sm" id="room_filter" name="room_filter"
             style="margin: 10px 0; onchange="filter()">
             <option value="all">All</option>
@@ -161,7 +161,7 @@ Home
         <div class="" id="div_payment_filter" style="display: none;">
 
           <span
-            style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Filter</span>
+            style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Filter</span>
 
           <select class="form-control form-control-sm" id="payment_filter" name="payment_filter"
             style="margin: 10px 0; onchange="filter()">
@@ -171,14 +171,14 @@ Home
 
           <div class="" id="div_payment_filter_year" style="display: none;">
             <span
-              style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Date</span>
+              style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Date</span>
             <div class="d-flex flex-wrap justify-content-start align-items-center">
               {% for month_year in month_years %}
               <div class="form-group z-depth-1" style="margin: 10px; padding: 10px;">
                 <input type="checkbox" id="{{month_year|date:'m-Y'}}" name="div_payment_filter_year"
                   value="{{month_year|date:'m-Y'}}" {% if month_year == month_years.0 %} checked {%endif%}>
                 <label for="{{month_year|date:'m-Y'}}"
-                  style="font-size: 15px; text-transform: uppercase;">{{month_year|date:'M-Y'}}</label>
+                  style="text-transform: uppercase;">{{month_year|date:'M-Y'}}</label>
               </div>
               {% endfor %}
             </div>
@@ -189,7 +189,7 @@ Home
         <div class="" id="div_expense_filter" style="display: none;">
 
           <span
-            style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Filter</span>
+            style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Filter</span>
 
           <select class="form-control form-control-sm" id="expense_filter" name="expense_filter"
             style="margin: 10px 0; onchange="filter()">
@@ -199,14 +199,14 @@ Home
 
           <div class="" id="div_expense_filter_year">
             <span
-              style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Date</span>
+              style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Date</span>
             <div class="d-flex flex-wrap justify-content-start align-items-center">
               {% for month_year in month_years %}
               <div class="form-group z-depth-1" style="margin: 10px; padding: 10px;">
                 <input type="checkbox" id="{{month_year|date:'m-Y'}}" name="div_expense_filter_year"
                   value="{{month_year|date:'m-Y'}}" {% if month_year == month_years.0 %} checked {%endif%}>
                 <label for="{{month_year|date:'m-Y'}}"
-                  style="font-size: 15px; text-transform: uppercase;">{{month_year|date:'M-Y'}}</label>
+                  style="text-transform: uppercase;">{{month_year|date:'M-Y'}}</label>
               </div>
               {% endfor %}
             </div>
@@ -217,7 +217,7 @@ Home
         <div class="" id="div_cashflow_filter" style="display: none;">
 
           <span
-            style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Filter</span>
+            style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Filter</span>
 
           <select class="form-control form-control-sm" id="cashflow_filter" name="cashflow_filter"
             style="margin: 10px 0; onchange="filter()">
@@ -227,14 +227,14 @@ Home
 
           <div class="" id="div_cashflow_filter_year">
             <span
-              style="margin-right: 10px; color: black; font-size: 15px; text-transform: uppercase; font-weight: bold;">Date</span>
+              style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Date</span>
             <div class="d-flex flex-wrap justify-content-start align-items-center">
               {% for month_year in month_years %}
               <div class="form-group z-depth-1" style="margin: 10px; padding: 10px;">
                 <input type="checkbox" id="{{month_year|date:'m-Y'}}" name="div_cashflow_filter_year"
                   value="{{month_year|date:'m-Y'}}" {% if month_year == month_years.0 %} checked {%endif%}>
                 <label for="{{month_year|date:'m-Y'}}"
-                  style="font-size: 15px; text-transform: uppercase;">{{month_year|date:'M-Y'}}</label>
+                  style="text-transform: uppercase;">{{month_year|date:'M-Y'}}</label>
               </div>
               {% endfor %}
             </div>
@@ -242,7 +242,7 @@ Home
 
         </div>
 
-        <button class="btn btn-sm" id="generate_button" type="submit" name="button"
+        <button class="btn" id="generate_button" type="submit" name="button"
           style="margin: 40px auto; color: white; background-color: #61299F;">GENERATE</button>
 </form>
 

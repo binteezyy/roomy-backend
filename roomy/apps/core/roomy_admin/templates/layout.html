@@ -3,8 +3,7 @@
 
 {% block layout %}
 <!-- Notif Modal -->
-<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -51,8 +50,7 @@
     <!-- Nav Item - Dashboard Collapse Menu -->
     <li class="nav-item">
 
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDashboard"
-        aria-expanded="true" aria-controls="collapseCashflow">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDashboard" aria-expanded="true" aria-controls="collapseCashflow">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span>
       </a>
@@ -77,8 +75,7 @@
 
     <!-- Nav Item - Cashflow Collapse Menu -->
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCashflow" aria-expanded="true"
-        aria-controls="collapseCashflow">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCashflow" aria-expanded="true" aria-controls="collapseCashflow">
         <i class="fas fa-fw fa-dollar-sign"></i>
         <span>Cashflow</span>
       </a>
@@ -96,8 +93,7 @@
 
     <!-- Nav Item - Management Collapse Menu -->
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-        aria-expanded="true" aria-controls="collapseUtilities">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
         <i class="fas fa-fw fa-wrench"></i>
         <span>Management</span>
       </a>
@@ -133,8 +129,7 @@
     <div id="content">
 
       <!-- Topbar -->
-      <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top z-depth-1"
-        style="background-color: #202020;">
+      <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top z-depth-1" style="background-color: #202020;">
 
         <!-- Topbar Navbar -->
         <div class="navbar-nav justify-content-start align-items-center ml-auto">
@@ -147,16 +142,13 @@
 
           <!-- Nav Item - Alerts -->
           <div class="dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-bell fa-fw" style="color: white;"></i>
               <!-- Counter - Alerts -->
-              <span class="badge badge-danger badge-counter"><span
-                  id="notif-counter-span">{{unread_notif}}</span></span>
+              <span class="badge badge-danger badge-counter"><span id="notif-counter-span">{{unread_notif}}</span></span>
             </a>
             <!-- Dropdown - Alerts -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-              aria-labelledby="alertsDropdown">
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
               <h6 class="dropdown-header" style="border: none; background-color: #61299F;">
                 Notifications
               </h6>
@@ -175,15 +167,13 @@
 
           <!-- Nav Item - Messages -->
           <div class="dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-envelope fa-fw" style="color: white;"></i>
               <!-- Counter - Messages -->
               <span class="badge badge-danger badge-counter"><span id="message-count-span">{{unread}}</span>
             </a>
             <!-- Dropdown - Messages -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-              aria-labelledby="messagesDropdown">
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
               <h6 class="dropdown-header" style="border: none; background-color: #61299F;">
                 Tenant Messages
               </h6>
@@ -211,10 +201,9 @@
           <!-- Nav Item - User Information -->
           <div class="dropdown no-arrow">
 
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false" style="color: white;">
-              <span class="mr-2 d-none d-lg-inline small">Welcome,</span><span class="mr-2 d-none d-lg-inline small"
-                style="text-transform: uppercase;">{{ request.user.username }}</span>
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+              <div class="img-profile" style="width: 40px; height: 40px; margin: 0 10px 0 0; padding: 0; border: 2px solid #61299F; border-radius: 20px; background-image: url('{% static 'img/elon.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+              <span class="mr-2 d-none d-lg-inline small" style="text-transform: uppercase;">{{ request.user.username }}</span>
             </a>
 
             <!-- Dropdown - User Information -->
@@ -255,8 +244,7 @@
       <div class="row d-flex justify-content-center" style="padding: 20px;">
         <div class="d-flex flex-column justify-content-center align-items-center">
           <span style="font-size: 11px; color: white;">&copy; Roomy 2019 - 2020. </span>
-          <span style="font-size: 11px; color: white;">All rights reserved. Powered by <span
-              style="color: #61299F; font-size: 15px; font-weight: bold;">PPTT</span> </span>
+          <span style="font-size: 11px; color: white;">All rights reserved. Powered by <span style="color: #61299F; font-size: 15px; font-weight: bold;">PPTT</span> </span>
         </div>
       </div>
       <!-- end of copyright -->
@@ -285,10 +273,11 @@
       %
       for message in messages %
     }
-    $('.message-{{message.pk}}').click(function () {
+    $('.message-{{message.pk}}').click(function() {
       $('#modalWindow').modal('show');
     }); {
-      % endfor %
+      %
+      endfor %
     }
   });
 </script>
