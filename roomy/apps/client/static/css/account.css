@@ -1,12 +1,12 @@
 body{
-  background: #f8f7f9!important;
+  background: #61299F!important;
 }
 #main-container {
   margin-top: 20px;
 }
 
 #acc-nav{
-  background: linear-gradient(90deg,#f8f7f9,#fff);
+  background: linear-gradient(90deg, #61299F, #fff);
   box-shadow: 7px 0 8px #e9ebee;
   padding: 0;
   padding-top: 20px;
@@ -34,7 +34,7 @@ body{
 }
 
 #acc-nav li a:hover {
-  background-color: #5392f9;
+  background-color: #61299F;
   color: white;
 }
 
@@ -47,8 +47,8 @@ body{
 
 #acc-nav .focus {
   border-right: 3px solid;
-  border-right-color: #5392f9;
-  background-color: #f8f7f9;
+  border-right-color: #61299F;
+  background-color: #61299F;
 }
 #acc-nav .focus a{
   color: black;
