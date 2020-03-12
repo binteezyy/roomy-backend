@@ -1,4 +1,6 @@
 {% load static %}
+{% load pwa %}
+{% load webpush_notifications %}
 {% load sekizai_tags %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -7,7 +9,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  {% progressive_web_app_meta %}
+  {% webpush_header %}
   <title>{{ TITLE }}</title>
+  <link rel="shortcut icon" href="{% static "img\roomy.ico" %}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -24,7 +29,9 @@
 <body>
   {% block layout %}{% endblock %}
 
-  {% block layout_landing %}{% endblock %}
+  {% block layout_home %}{% endblock %}
+
+  {% block content_404 %}{% endblock %}
 
   {% block footer %}{% endblock %}
 
@@ -42,6 +49,7 @@
   <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
   <!-- Custom Script -->
   <script type="text/javascript" src="{% static "js\script.js" %}"></script>
+  <script type="text/javascript" src="{% static "js\service_worker.js" %}"></script>
 
   <!-- EXTRA JS -->
   {% block extra_js %}{% endblock %}
