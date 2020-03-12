@@ -1,15 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts                               import render
 from django.core.paginator                          import Paginator
-from django.shortcuts               import render, get_object_or_404, redirect, reverse
-from django.contrib import messages
-from apps.core.roomy_core.models import *
-from apps.commons.views.apis        import recaptcha_verify
-from django.conf                    import settings
-from django.urls import resolve
-from ..models.site import *
-from ..forms import *
-from webpush import send_user_notification
-from ..emails import ContactUs_Handler
+from django.shortcuts                               import render, get_object_or_404, redirect, reverse
+from django.contrib                                 import messages
+from apps.core.roomy_core.models                    import *
+from apps.commons.views.apis                        import recaptcha_verify
+from django.conf                                    import settings
+from django.urls                                    import resolve
+from ..models.site                                  import *
+from ..forms                                        import *
+from webpush                                        import send_user_notification
+from ..emails                                       import ContactUs_Handler
+from django.contrib.auth.decorators                 import login_required
 webpush = {"group": "my_group" }
 
 context = {
@@ -31,7 +32,10 @@ def home(request):
         pass
     print("USER_AGENT:",request.user_agent)
     if request.user_agent.device.family == "Roomy Native":
-        return render(request,"mobile-native/components/landing/home.html",context)
+        if request.user.is_authenticated:
+            return redirect('profile')
+        else:
+            return render(request,"mobile-native/components/landing/home.html",context)
     else:
         context.update({
             "dorms":dorms,
