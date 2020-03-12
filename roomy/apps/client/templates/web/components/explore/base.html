@@ -3,30 +3,31 @@
 
 
 {% block content %}
+<style media="screen">
+  .search-bar-custom:hover {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+  .search-bar-custom:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+  .search-bar-custom:active {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+</style>
+
 <div class="content" style="margin-top: 60px;">
   <div class="search_area form-inline mr-auto mb-4 d-flex justify-content-center">
     <form _lpchecked="1" style="width: 100%;" method="GET">
-      <div class="bar" style="background-color: #E5B7A7;">
-        <div class="d-flex bar_wrapper">
+      <div class="bar d-flex justify-content-center align-items-center" style="background-color: #B19CD9;">
+        <div class="d-flex justify-content-center align-items-center bar_wrapper">
           <input name="search" type="text" class="form-control search-bar-custom" placeholder="Search for a property or location" aria-label="Search" aria-describedby="search" style="border: none; outline: none;">
-          <button class="btn btn-lg" value="submit" id="search-icn" style="color: #151515; background-color: #FF3F00;">SEARCH</button>
-          <style media="screen">
-            .search-bar-custom:hover {
-              border: none;
-              outline: none;
-              box-shadow: none;
-            }
-            .search-bar-custom:focus {
-              border: none;
-              outline: none;
-              box-shadow: none;
-            }
-            .search-bar-custom:active {
-              border: none;
-              outline: none;
-              box-shadow: none;
-            }
-          </style>
+          <button class="btn btn-lg" value="submit" id="search-icn" style="color: white; background-color: #61299F;">SEARCH</button>
         </div>
       </div>
     </form>
@@ -48,86 +49,70 @@
 
           <!-- room container -->
           <div class="d-flex flex-column justify-content-center" style="width: 100%;">
+          <a href="{% url 'room' room.pk %}" style="color: black; text-decoration: none;">
 
-            <style>
-              .img-container {
-                position: relative;
-                width: 100%;
-                height: 350px;
-              }
-
-              .btn-over {
-                position: absolute;
-                top: 88%;
-                left: 90%;
-                transform: translate(-50%, -50%);
-                -ms-transform: translate(-50%, -50%);
-              }
-            </style>
-
-            <!-- room image -->
-            <div class="img-container">
-              <div class="image-cont wrapper d-flex justify-content-center"
-                style="width: 100%; height: 100%; background-image:url('{% if room.img_2d.all %}/media/{{ room.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-position: center; background-size: cover; background-repeat: no-repeat;">
-              </div>
-              <div class="btn-over d-flex">
-                <a class="btn btn-md" style="color: black; background-color: #FF3F00;" href="{% url 'room' room.pk %}">View</a>
-              </div>
-            </div>
-
-            <!-- room information -->
-            <div class="d-flex flex-column" style="margin-bottom: 20px; padding: 10px;">
-
-              <!-- room information first row -->
-              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-                <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 30px; font-size: 12px; text-transform: uppercase; background-color: #FF3F00;">
-                  {% if room.property_id.property_type == 0 %}
-                  Condominium
-                  {% elif room.property_id.property_type == 1 %}
-                  Apartment
-                  {% elif room.property_id.property_type == 2 %}
-                  Dormitory
-                  {% endif %}
-                </span>
-                <span style="font-size: 16px;"><i class="fas fa-star" style="color: #FF3F00;"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+              <!-- room image -->
+              <div class="img-container">
+                <div class="d-flex justify-content-end align-items-end"
+                  style="width: 100%; height: 300px; background-image:url('{% if room.img_2d.all %}/media/{{ room.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-position: center; background-size: cover; background-repeat: no-repeat;">
+                  <span style="margin: 10px; padding: 5px 10px; color: white; font-size; 18px; font-weight: bold; text-transform: uppercase; background-color: #61299F;">Php{{room.rate}}</span>
+                </div>
               </div>
 
-              <!-- room information second row -->
-              <div class="d-flex justify-content-between align-items-center">
-                <span style="font-size: 25px; font-weight: bold; text-transform: uppercase;">{{ room.name }}</span>
-                <span style="margin-right: 10px; font-size: 20px;">PHP{{ room.rate }}<span style="font-size: 16px;">/month</span></span>
-              </div>
+              <!-- room information -->
+              <div class="d-flex flex-column" style="margin-bottom: 20px; padding: 10px 0;">
 
-              <!-- room information third row -->
-              <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
-                <span style="font-size: 18px; font-style: italic; text-transform: uppercase;">{{ room.property_id.name}}</span>
-              </div>
+                <!-- room information first row -->
+                <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                  <span style="padding: 5px 15px; color: white; font-size: 15px; border: none; background-color: #61299F; border-radius: 20px;">
+                    {% if room.property_id.property_type == 0 %}
+                    Condominium
+                    {% elif room.property_id.property_type == 1 %}
+                    Apartment
+                    {% elif room.property_id.property_type == 2 %}
+                    Dormitory
+                    {% endif %}
+                  </span>
+                  <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+                </div>
 
-              <!-- room address -->
-              <div class="d-flex justify-content-start align-items-start" style="margin-bottom: 5px;">
-                <span style="margin: 0 15px 0 0; font-size: 15px;">{{ room.property_id.property_address }}</span>
-              </div>
+                <!-- room information second row -->
+                <div class="d-flex justify-content-start align-items-center">
+                  <span style="font-size: 22px; font-weight: bold; text-transform: uppercase;">{{ room.name }}</span>
+                </div>
 
-            </div>
-            <!-- end of room information -->
-          </div>
-          <!-- end of room container -->
+                <!-- room information third row -->
+                <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                  <span style="font-style: italic; text-transform: uppercase;">{{ room.property_id.name}}</span>
+                </div>
+
+                <!-- room address -->
+                <div class="d-flex justify-content-start align-items-start" style="margin-bottom: 5px;">
+                  <span style="margin: 0 15px 0 0;">{{ room.property_id.property_address }}</span>
+                </div>
+
+              </div>
+              <!-- end of room information -->
+
+          </a>
+        </div>
+        <!-- end of room container -->
 
           {% endfor %}
 
           <div class="d-flex flex-wrap justify-content-center align-items-center" style="margin-top: 40px;">
 
             {% if rooms.has_previous %}
-            <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page=1" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #E5B7A7; border-radius: 25px; background-color: #E5B7A7;">First</a>
-            <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ rooms.previous_page_number }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #E5B7A7; border-radius: 25px; background-color: #E5B7A7;">{{ rooms.previous_page_number }}</a>
+            <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page=1" style="width: 50px; height: 50px; text-align: center; color: white; font-size: 14px; border: 2px solid #B19CD9; border-radius: 25px; background-color: #B19CD9;">First</a>
+            <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ rooms.previous_page_number }}" style="width: 50px; height: 50px; text-align: center; color: white; font-size: 14px; border: 2px solid #B19CD9; border-radius: 25px; background-color: #B19CD9;">{{ rooms.previous_page_number }}</a>
             {% endif %}
-            <a class="d-flex justify-content-center align-items-center text-centered mb-4 mr-1" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #E5B7A7; border-radius: 25px; background-color: #E5B7A7; pointer-events: none;">{{ rooms.number }}</a>
+            <a class="d-flex justify-content-center align-items-center text-centered mb-4 mr-1" style="width: 50px; height: 50px; text-align: center; color: white; font-size: 14px; border: 2px solid #B19CD9; border-radius: 25px; background-color: #B19CD9; pointer-events: none;">{{ rooms.number }}</a>
             {% if rooms.has_next %}
-            <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ rooms.next_page_number }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #E5B7A7; border-radius: 25px; background-color: #E5B7A7;">{{ rooms.next_page_number }}</a>
-            <a class="d-flex justify-content-center align-items-center mb-4" href="?page={{ rooms.paginator.num_pages }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #E5B7A7; border-radius: 25px; background-color: #FF3F00;">Last</a>
+            <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ rooms.next_page_number }}" style="width: 50px; height: 50px; text-align: center; color: white; font-size: 14px; border: 2px solid #B19CD9; border-radius: 25px; background-color: #B19CD9;">{{ rooms.next_page_number }}</a>
+            <a class="d-flex justify-content-center align-items-center mb-4" href="?page={{ rooms.paginator.num_pages }}" style="width: 50px; height: 50px; text-align: center; color: white; font-size: 14px; border: 2px solid #B19CD9; border-radius: 25px; background-color: #61299F;">Last</a>
             {% endif %}
           </div>
-          
+
         </div>
         <div class="col-xl-3"></div>
 

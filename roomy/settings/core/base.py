@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'sslserver',
+    'channels',
     # APPS
 
     'widget_tweaks',
@@ -42,6 +43,15 @@ REST_FRAMEWORK = {
 }
 
 WSGI_APPLICATION = 'config.core.wsgi.application'
+ASGI_APPLICATION = "config.core.asgi.application"
+
+# Channels
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {"hosts": [("192.168.0.110:8000", 6379)]},
+    }
+}
 
 TEMPLATES = [
     {

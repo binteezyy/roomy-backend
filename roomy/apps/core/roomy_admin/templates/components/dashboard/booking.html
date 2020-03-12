@@ -61,7 +61,7 @@ Booking
 {% else %}
 <div class="row d-flex justify-content-center">
   <div class="d-flex justify-content-center" style="margin-top: 20px;">
-    <span style="font-size: 22px;">There are currently no registered properties under your account. <a href="{% url 'property_management' }%">Click here.</a></span>
+    <span style="font-size: 22px;">There are currently no registered properties under your account. <a href="{% url 'property_management' %}">Click here.</a></span>
   </div>
 </div>
 {% endif %}
@@ -125,12 +125,12 @@ Bookings
                 "data": 'fields.id',
                 render: function (data, type, row) {
                   let render =
-                    '<button type="button" class="read-booking btn btn-raised btn-sm btn-primary m-1" data-id="/read/booking/' + data + '">' +
-                    '<span class="fa fa-eye"></span></button>' +
+                    '<button type="button" class="read-booking btn btn-sm btn-info m-1" data-id="/read/booking/' + data + '">' +
+                    '<i class="fa fa-eye"></i></button>' +
                     // '<button type="button" class="delete-booking btn btn-sm btn-raised btn-warning m-1" data-id="/delete/booking/' + data + '">' +
                     // '<span class="fa fa-trash"></span></button>' +
-                    '<button type="button" class="update-booking btn btn-sm btn-raised btn-success m-1" data-id="/update/booking/' + data + '">' +
-                    '<span class="fa fa-edit"></span></button>';
+                    '<button type="button" class="update-booking btn btn-sm btn-primary m-1" data-id="/update/booking/' + data + '">' +
+                    '<i class="fa fa-edit"></i></button>';
                   return render
                 }
               },
