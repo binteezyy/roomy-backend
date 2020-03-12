@@ -92,10 +92,10 @@ Rooms
                     "data": 'fields.id',
                     render: function (data, type, row) {
                         let render =
-                            '<button type="button" class="read-onotif btn btn-raised btn-sm btn-primary m-1" data-id="/read/onotif/' + data + '">' +
-                            '<span class="fa fa-eye"></span></button>' +
-                            '<button type="button" class="update-onotif btn btn-sm btn-raised btn-success m-1" data-id="/update/onotif/' + data + '">' +
-                            '<span class="fa fa-edit"></span></button>';
+                            '<button type="button" class="read-onotif btn btn-sm btn-info m-1" data-id="/read/onotif/' + data + '">' +
+                            '<i class="fa fa-eye"></i></button>' +
+                            '<button type="button" class="update-onotif btn btn-sm btn-primary m-1" data-id="/update/onotif/' + data + '">' +
+                            '<i class="fa fa-edit"></i></button>';
                         return render
                     }
                 },

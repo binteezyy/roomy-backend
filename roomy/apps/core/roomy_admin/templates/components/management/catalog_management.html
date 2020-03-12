@@ -61,7 +61,7 @@ Catalogs
 {% else %}
 <div class="row d-flex justify-content-center">
     <div class="d-flex justify-content-center" style="margin-top: 20px;">
-        <span style="font-size: 22px;">There are currently no registered properties under your account. <a href="{% url 'property_management' }%">Click here.</a></span>
+        <span style="font-size: 22px;">There are currently no registered properties under your account. <a href="{% url 'property_management' %}">Click here.</a></span>
     </div>
 </div>
 {% endif %}
@@ -88,7 +88,7 @@ Catalog
                                 "<'row'<'col-md-6'><'col-md-6'>>" +
                                 "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
                             "initComplete": function (settings, json) {
-                                $("div.create-catalog").html('<button type="button" id="create-catalog" class="float-right btn btn-s btn-success btn-raised" name="button">Add Catalog <i class="fas fa-plus"></i></button>');
+                                $("div.create-catalog").html('<button type="button" id="create-catalog" class="float-right btn" name="button" style="color: white; background-color: #61299F;">Add Catalog</button>');
                                 $(".create-catalog").modalForm({ formURL: "/create/catalog/" + val });
                             },
                             "drawCallback": function (settings) {
@@ -135,15 +135,15 @@ Catalog
                                     "data": 'fields.id',
                                     render: function (data, type, row) {
                                         let render =
-                                            '<button type="button" class="upload-catalog-2d btn btn-raised btn-sm btn-info m-1" data-id="/upload/catalog2d/' + data + '">' +
-                                            '<span class="fa fa-file-upload">Upload 2d</span></button>' +
-                                            '<button type="button" class="upload-catalog-3d btn btn-raised btn-sm btn-dark m-1" data-id="/upload/catalog3d/' + data + '">' +
-                                            '<span class="fa fa-file-upload"> Upload 3d</span></button>' +
-                                            '<button type="button" class="read-catalog btn btn-raised btn-sm btn-primary m-1" data-id="/read/catalog/' + data + '">' +
+                                            '<button type="button" class="upload-catalog-2d btn btn-sm btn-secondary m-1" data-id="/upload/catalog2d/' + data + '">' +
+                                            '<span>Upload 2d</span></button>' +
+                                            '<button type="button" class="upload-catalog-3d btn btn-sm btn-secondary m-1" data-id="/upload/catalog3d/' + data + '">' +
+                                            '<span>Upload 3d</span></button>' +
+                                            '<button type="button" class="read-catalog btn btn-sm btn-info m-1" data-id="/read/catalog/' + data + '">' +
                                             '<span class="fa fa-eye"></span></button>' +
-                                            // '<button type="button" class="delete-catalog btn btn-sm btn-raised btn-warning m-1" data-id="/delete/catalog/' + data + '">' +
+                                            // '<button type="button" class="delete-catalog btn btn-sm btn-warning m-1" data-id="/delete/catalog/' + data + '">' +
                                             // '<span class="fa fa-trash"></span></button>' +
-                                            '<button type="button" class="update-catalog btn btn-sm btn-raised btn-success m-1" data-id="/update/catalog/' + data + '">' +
+                                            '<button type="button" class="update-catalog btn btn-sm btn-primary m-1" data-id="/update/catalog/' + data + '">' +
                                             '<span class="fa fa-edit"></span></button>';
                                         return render
                                     }
