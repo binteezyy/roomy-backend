@@ -383,13 +383,13 @@ def create_notif_on_status_change(sender, instance, created, **kwargs):
                                body=f'You have cancelled your booking for {instance.catalog_id.name}. Please try and explore other catalogs and retry your booking.')
         tenant_notif.save()
         print(tenant_notif)
-    print("send notif to channel")
-    channel_layer = get_channel_layer()
-    async_to_sync(channel_layer.group_send)(
-        instance.tenant_id.user_id.id, {"type": "user_message",
-                                        "event": "New booking notification",
-                                        "message": f'New booking notification for {instance.catalog_id.name}'
-                                        })
+    # print("send notif to channel")
+    # channel_layer = get_channel_layer()
+    # async_to_sync(channel_layer.group_send)(
+    #     instance.tenant_id.user_id.id, {"type": "user_message",
+    #                                     "event": "New booking notification",
+    #                                     "message": f'New booking notification for {instance.catalog_id.name}'
+    #                                     })
 
 
 @receiver(post_save, sender=Request)
