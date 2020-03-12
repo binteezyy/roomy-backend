@@ -13,7 +13,7 @@
     $(window).scroll(function() {
       var scroll = $(window).scrollTop();
       if (scroll > 667) {
-        $(".navbar").css("background", "#F6FAFC");
+        $(".navbar").css("background", "#FFFFFF");
       } else {
         $(".navbar").css("background", "rgba(255, 255, 255, 0.25)");
       }
@@ -24,7 +24,7 @@
 {% block layout %}
 
 <!-- navbar -->
-<nav class="navbar navbar-expand-xl navbar-light fixed-top" id="navbar" style="box-shadow: none; background-color: rgba(255, 255, 255, 0.25);">
+<nav class="navbar navbar-expand-xl navbar-light fixed-top" id="navbar" style="box-shadow: none;">
 
   <!-- logo -->
   <a href="{% url 'home' %}" style="margin: 5px 10px 5px 10px;">
@@ -60,33 +60,34 @@
       {% if user.is_authenticated %}
 
       <div class="dropdown">
-        <a class="d-flex align-items-center dropdown-toggle" data-offset="50" href="#" id="dropdownMenuLink" data-toggle="dropdown" style="padding: 5px 10px; color: black;">
-          <div class="" style="margin-right: 5px;">
-            <span style="font-size: 15px; font-weight: bold;">Welcome,</span> <span style="color: #FF3F00; font-size: 15px; font-weight: bold; text-transform: uppercase;">{{ user.username }}</span>
+        <a class="d-flex align-items-center" data-offset="50" href="#" id="dropdownMenuLink" data-toggle="dropdown" style="padding: 5px 10px; color: black;">
+          <div class="d-flex justify-content-center align-items-center" style="margin-right: 5px;">
+            <div class="img-profile"
+              style="width: 40px; height: 40px; margin: 0 10px 0 0; padding: 0; border-radius: 20px; background-image: url('{% static 'img/elon.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div> <span id="username-span" style="font-size: 14px; font-weight: bold; text-transform: uppercase;">{{ user.username }}</span>
           </div>
         </a>
-        <div class="dropdown-menu dropdown-menu-right shadow bg-white" aria-labelledby="dropdownMenuLink" style="margin: 5px 0; padding: 20px; border: none;">
+        <div class="dropdown-menu dropdown-menu-right shadow bg-white" aria-labelledby="dropdownMenuLink" style="width: 200px; margin: 5px 0; padding: 20px; border: none;">
           <a class="nav-link" style="margin: 0 0 20px 0; padding: 0;" href="{% url 'profile' %}">
-            <i class="fas fa-user-alt" style="margin-right: 10px; color: #FF3F00;"></i>
+            <i class="fas fa-user-alt" style="margin-right: 10px; color: #61299F;"></i>
             Profile
           </a>
           <a class="nav-link" style="margin: 0 0 20px 0; padding: 0;" href="{% url 'bookings' %}">
-            <i class="fas fa-address-book" style="margin-right: 10px; color: #FF3F00;"></i>
+            <i class="fas fa-address-book" style="margin-right: 10px; color: #61299F;"></i>
             Bookings
           </a>
           <a class="nav-link" style="margin: 0 0 20px 0; padding: 0; color: black;" href="{% url 'messages' %}">
-            <i class="fas fa-envelope" style="margin-right: 10px; color: #FF3F00;"></i>
+            <i class="fas fa-envelope" style="margin-right: 10px; color: #61299F;"></i>
             Messages
           </a>
           <a class="nav-link" style="margin: 0 0 20px 0; padding: 0;" href="{% url 'logout' %}">
-            <i class="fas fa-sign-out-alt" style="margin-right: 10px; color: #FF3F00;"></i>
+            <i class="fas fa-sign-out-alt" style="margin-right: 10px; color: #61299F;"></i>
             Log Out
           </a>
         </div>
       </div>
 
       {% else %}
-      <a class="bnt-link" href="{% url 'login' %}" style="font-size: 15px; color: #FF3F00; font-weight: bold;">LOG IN</a>
+      <a class="bnt-link" href="{% url 'login' %}" style="font-size: 15px; color: #61299F; font-weight: bold;">LOG IN</a>
       {% endif %}
     </div>
 
@@ -130,7 +131,7 @@
 {% block footer %}
 
 <!-- footer -->
-<div class="container-fluid d-flex flex-column" style="margin-top: 100px; background-color: #F6FAFC;">
+<div class="container-fluid d-flex flex-column" style="margin-top: 100px; background-color: #FFFFFF;">
   <div class="d-flex flex-column flex-wrap align-items-stretch" style="min-height: 300px; padding: 20px;">
 
     <style media="screen">
@@ -249,7 +250,7 @@
   <div class="row d-flex justify-content-center" style="padding: 20px;">
     <div class="d-flex flex-column justify-content-center align-items-center">
       <span style="font-size: 12px; color: white;">&copy; Roomy 2019 - 2020. </span>
-      <span style="font-size: 12px; color: white;">All rights reserved. Powered by <span style="color: #FF3F00; font-size: 15px; font-weight: bold;">PPTT</span> </span>
+      <span style="font-size: 12px; color: white;">All rights reserved. Powered by <span style="color: #61299F; font-size: 15px; font-weight: bold;">PPTT</span> </span>
     </div>
   </div>
   <!-- end of copyright -->
