@@ -14,31 +14,28 @@ FAQ
       <div class="col-md-1"></div>
       <div class="col-md-9 bg-white" style="padding: 20px">
         <h3>Frequently Asked Questions (FAQs)</h3>
-      </div>
-    </div>
-
-    {% for faq in faqs %}
-    <div class="row" style="margin-bottom: 20px;">
-
-      <div class="col-md-1"></div>
-
-      <div class="accordion col-md-9" id="faqs">
-        <div class="card z-depth-0 bordered">
-          <div class="card-header" id="headingOne" style="margin: 0; padding: 0;">
-            <div type="button" data-toggle="collapse" data-target="#collapse{{faq.pk}}" aria-expanded="true" aria-controls="collapseOne" style="margin: 0; padding: 10px;">
-              <span class="mb-0" style="font-size: 20px; font-weight: bold;">{{ faq.question }}</span>
-            </div>
-          </div>
-          <div id="collapse{{faq.pk}}" class="collapse {% if forloop.first %}show{% endif %}" aria-labelledby="headingOne" data-parent="#faqs">
-            <div class="card-body" style="margin: 0; padding: 10px;">
-              <span style="color: grey;">{{ faq.answer }}</span>
+        {% for faq in faqs %}
+        <div class="row" style="margin-bottom: 20px; padding: 10px;">
+          <div class="accordion col-md-8" id="faqs">
+            <div class="card z-depth-0 bordered">
+              <div class="card-header" id="headingOne" style="margin: 0; padding: 0;">
+                <div type="button" data-toggle="collapse" data-target="#collapse{{faq.pk}}" aria-expanded="true" aria-controls="collapseOne" style="margin: 0; padding: 10px;">
+                  <span class="mb-0" style="font-size: 20px; font-weight: bold;">{{ faq.question }}</span>
+                </div>
+              </div>
+              <div id="collapse{{faq.pk}}" class="collapse {% if forloop.first %}show{% endif %}" aria-labelledby="headingOne" data-parent="#faqs">
+                <div class="card-body" style="margin: 0; padding: 10px;">
+                  <span style="color: grey;">{{ faq.answer }}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        {% endfor %}
 
+      </div>
     </div>
-    {% endfor %}
+
 
     <div class="row d-flex flex-wrap justify-content-center align-items-center" style="margin: 20px 0;">
       {% if faqs.has_previous %}
