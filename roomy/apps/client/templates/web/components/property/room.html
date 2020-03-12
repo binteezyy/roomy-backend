@@ -95,7 +95,7 @@
           <span style="font-size: 30px; font-weight: bold; text-transform: uppercase;">{{ room.name }}</span>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
             <div class="">
-              <span style="padding: 5px 10px; color: white; font-size: 15px; border: none; background-color: #61299F;">
+              <span style="padding: 5px 15px; color: white; font-size: 15px; border: none; background-color: #61299F; border-radius: 20px;">
                 {% if room.property_id.property_type == 0 %}
                 Condominium
                 {% elif room.property_id.property_type == 1 %}
@@ -140,7 +140,7 @@
           <h4>Add-ons</h4>
           <div class="d-flex justify-content-center align-items-center">
             {% for addon in addons %}
-                <span style="margin: 10px; padding: 5px 10px; color: white; background-color: #61299F;">{{ addon.description }}</span>
+                <span style="margin: 10px; padding: 5px 15px; color: white; background-color: #61299F; border-radius: 20px;">{{ addon.description }}</span>
             {% endfor %}
           </div>
         </div>

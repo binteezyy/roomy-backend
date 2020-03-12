@@ -1,14 +1,8 @@
-body{
-  background: #61299F!important;
-}
 #main-container {
   margin-top: 20px;
 }
 
 #acc-nav{
-  background: linear-gradient(90deg, #61299F, #fff);
-  box-shadow: 7px 0 8px #e9ebee;
-  padding: 0;
   padding-top: 20px;
 }
 
@@ -30,7 +24,8 @@ body{
   display: block;
   padding: 20px 0;
   min-height: 50px;
-  text-decoration: none
+  text-decoration: none;
+  color: #61299F;
 }
 
 #acc-nav li a:hover {
@@ -49,7 +44,8 @@ body{
   border-right: 3px solid;
   border-right-color: #61299F;
   background-color: #61299F;
+  color: white;
 }
 #acc-nav .focus a{
-  color: black;
+  color: white;
 }

@@ -37,7 +37,7 @@
 
         <div class="fieldWrapper" style="margin: 10px 15px;">
           <div class="form-group" style="margin: 0 15px;">
-            <label for="{{field.id_for_label}}">{{field.label}}</label>
+            <label for="{{field.id_for_label}}" style="text-transform: lowercase;">{{field.label}}</label>
             <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}}"
                 style="margin-bottom: 5px;" value="{{field.value|default_if_none:''}}"
                 class="input-custom form-control {% if field.errors %}is-invalid{% endif %}">
