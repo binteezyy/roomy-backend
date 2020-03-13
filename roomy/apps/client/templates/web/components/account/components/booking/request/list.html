@@ -95,10 +95,14 @@
 
 {% block account_container %}
 {% include "web/components/modals/_modal.html" with size="modal-lg" %}
-  <nav aria-label="breadcrumb">
+  <nav aria-label="breadcrumb" style="width: 100%;">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'bookings' %}">Bookings</a></li>
-      <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'booking-view' booking.pk %}">{{ booking.catalog_id.name }}</a></li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'bookings' %}" style="color: #61299F;">Bookings</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <span style="text-transform: uppercase;">{{catalog.name }}</span>
+      </li>
       <li class="breadcrumb-item" aria-current="page">Requests</li>
     </ol>
   </nav>

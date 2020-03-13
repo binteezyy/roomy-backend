@@ -33,6 +33,7 @@
         book.pk
       }
     }
+
     .img {
       background-image:url({% if book.catalog_id.img_2d.all %}/media/{{ book.catalog_id.img_2d.all.0 }}{% else %}{% static "img\placeholder_900x500.png" %}{% endif %});
       background-position: center center;
@@ -60,7 +61,7 @@
 
             {% if book.catalog_id.floor > 0 %}
 
-            <span style="font-size: 15px; text-transform: uppercase;">{{ book.catalog_id.floor|num_to_ordinal}} floor, Room #{{ room.number }}</span>
+            <span style="font-size: 15px; text-transform: uppercase;">{{ book.catalog_id.floor|num_to_ordinal}} floor</span>
 
             {% endif %}
 
@@ -80,8 +81,6 @@
         </div>
       </a>
   </div>
-
-
 
   {% endfor %}
 
