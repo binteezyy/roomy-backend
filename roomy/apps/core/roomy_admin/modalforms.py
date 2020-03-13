@@ -29,12 +29,12 @@ class TransactionModalForm(BSModalForm):
 class ExpenseModelForm(forms.ModelForm):
     class Meta:
         model = Expense
-        exclude = ['']
+        exclude = ['time_stamp']
 
 class ExpenseModalForm(BSModalForm):
     class Meta:
         model = Expense
-        exclude = ['']
+        exclude = ['time_stamp']
 
 class GuestModalForm(BSModalForm):
     class Meta:
