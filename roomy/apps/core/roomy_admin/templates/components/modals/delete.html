@@ -1,0 +1,54 @@
+{% load widget_tweaks %}
+
+<form method="post" action="">
+    {% csrf_token %}
+
+    <div class="modal-header">
+        <h3 class="modal-title">{% if viewtype == 'manage_tenants' %} Remove {%else%} Delete
+            {%endif%}
+            {% if billing %}Billing
+            {% elif fee %} Fee
+            {% elif viewtype == 'manage_tenants' %} Tenant
+            {% elif transaction %} Transaction
+            {% elif expense %} Expense
+            {% elif guest %} Guest
+            {% elif trequest %} Request
+            {% elif notif %} Notification
+            {% elif booking %} Booking
+            {% elif propertyo %} Property
+            {% elif room %} Room
+            {% elif adminacc %} Admin Account
+            {% elif catalog %} Catalog
+            {% endif %}</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+
+        <p>Are you sure you want to {% if viewtype == 'manage_tenants' %} remove {% else %}delete {%endif%} <strong>
+                {% if billing %}
+                {{ billing }}</strong>
+            {% elif fee %} <strong> {{fee}}</strong>
+            {% elif viewtype == 'manage_tenants' %} <strong> {{tenant}} from {{transaction.room_id.catalog_id.name}},
+                F{{transaction.room_id.catalog_id.floor}} R{{transaction.room_id.number}}</strong>
+            {% elif transaction %} <strong> {{transaction}}</strong>
+            {% elif expense %} <strong> {{expense}}</strong>
+            {% elif guest %} <strong> {{guest}}</strong>
+            {% elif trequest %} <strong> {{trequest}}</strong>
+            {% elif notif %} <strong> {{notif}}</strong>
+            {% elif booking %} <strong> {{booking}}</strong>
+            {% elif propertyo %} <strong> {{propertyo}}</strong>
+            {% elif room %} <strong> {{room}}</strong>
+            {% elif adminacc %} <strong> {{adminacc}}</strong>
+            {% elif catalog %} <strong> {{catalog}}</strong>
+            {% endif %}
+            ?</p>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </div>
+
+</form>

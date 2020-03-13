@@ -1,0 +1,68 @@
+{% load static %}
+
+<style media="screen">
+  .input-custom {
+    font-size: 15px;
+  }
+
+  .input-custom:active {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .input-custom:focus {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+</style>
+
+<script>
+    $(document).ready(function(){
+        $('input[type="file"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            alert('The file "' + fileName +  '" has been selected.');
+            $('#label-custom').text(fileName);
+            $('#file_title').val(fileName);
+        });
+    });
+</script>
+
+<div class="modal-header">
+    <h4 class="modal-title">Upload Image</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <div class="d-flex flex-column justify-content-center" style="padding: 20px;">
+
+    <label for="">Title</label>
+    <input class="input-custom form-control" type="text" name="filetitle" id="file_title" maxlength="32" style="margin-bottom: 20px;" required>
+
+    <div class="input-group" style="margin-bottom: 20px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroupFileAddon01" style="border: none; color: white; background-color: #61299F;">File</span>
+      </div>
+      <div class="custom-file">
+        <input type="file" name="myfile" class="input-custom custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" accept="image/x-png,image/gif,image/jpeg" style="cursor: pointer; box-shadow: none; outline: none;"
+          onChange="getFileNameWithExt(event)" required>
+        <label class="custom-file-label" for="inputGroupFile01" id="label-custom">Click here to select an image</label>
+      </div>
+    </div>
+
+    <button class="btn" type="submit" style="margin: 40px auto; color: white; background-color: #61299F;">Submit</button>
+
+  </div>
+</form>
+
+{% if uploaded_file_url %}
+<p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+{% endif %}
+{% endblock %}

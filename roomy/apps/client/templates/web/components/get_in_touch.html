@@ -1,0 +1,101 @@
+{% extends "web/layout/layout.html" %}
+{% load sekizai_tags %}
+{% load static %}
+
+{% block extra_js %}
+<script type="text/javascript">
+  document.getElementById("owner-application").addEventListener("submit", function() {
+    var recaptcha = $("#g-recaptcha-response").val();
+    if (recaptcha === "") {
+      event.preventDefault();
+      alert("Please check the recaptcha");
+    } else {
+      form.submit();
+    }
+  });
+</script>
+{% endblock %}
+
+{% block content %}
+
+<!--
+
+<form id="owner-application" class="form-validate {% if form.is_valid %}validated{% endif %}" method="POST">
+
+  -->
+
+  <style media="screen">
+    .input-custom {
+      font-size: 15px;
+    }
+
+    .input-custom:active {
+      border: 1px solid #61299F;
+      box-shadow: none;
+      outline: none;
+    }
+
+    .input-custom:focus {
+      border: 1px solid #61299F;
+      box-shadow: none;
+      outline: none;
+    }
+
+  </style>
+
+<div class="container-fluid" style="margin-top: 80px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-9 bg-white" style="padding: 20px;">
+
+        <h3>Partner With Us</h3>
+
+        <div class="d-flex flex-column justify-content-center" style="margin: 0; padding: 20px;">
+
+          {% csrf_token %}
+          {% for field in form %}
+
+          <!-- fields -->
+          <div class="d-flex flex-column justify-content-center form-group-form-check" style="width: 100%;">
+
+            <label for="{{field.id_for_label}}" style="font-size: 14px; font-weight: bold;">{{field.label}}</label>
+            <input class="input-custom form-control {% if field.errors %}is-invalid{% endif %}" type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}} {% if field.errors %}is-invalid{% endif %}" style="margin-bottom: 20px;"
+              value="{{field.value|default_if_none:''}}">
+
+            {% for error in field.errors %}
+
+            <div class="invalid-feedback">
+              {{ error }}
+            </div>
+
+            {% endfor %}
+
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+
+          </div>
+          <!-- end of fields -->
+
+          {% endfor %}
+
+          <!-- wrapper -->
+          <div class="d-flex flex-column justify-content-center" style="margin: 20px auto;">
+            <div class="" style="margin: 20px auto;">
+              {% include "web/components/recaptchav2.html" with RECAPTCHA_KEY=RECAPTCHA_KEY %}
+            </div>
+            <button class="btn" id="presubmit" type="submit" style="margin: 20px auto; color: white; background-color: #61299F;">Submit</button>
+          </div>
+          <!-- end of wrapper -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include "_modal.html" with modal_size="modal" %}
+
+</div>
+
+{% endblock %}

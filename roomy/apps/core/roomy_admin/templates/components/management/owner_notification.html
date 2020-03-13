@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+Owner Notifications
+{% endblock %}
+
+{% block extra_css %}
+<!-- SELECT2 -->
+<link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include "_modal.html" %}
+<div class="content container">
+    <div class="card-content">
+        <div class="container-fluid">
+          <div class="" style="margin-bottom: 20px;">
+            <span style="margin-right: 10px; color: black; font-size: 22px; text-transform: uppercase; font-weight: bold;">Notifications</span>
+          </div>
+            <div class="row p-3">
+                <div class="col">
+                    <div class="table table-responsive-sm">
+                        <table id="owner-notif-table" class="table table-bordered table-hover" width="100%"
+                            cellspacing="0" role="grid" aria-describedby="dataTable_info">
+                            <thead class="thead-dark">
+                                <tr role="row">
+                                    <th>Id</th>
+                                    <th>Title</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block header %}
+Rooms
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var table = $('#owner-notif-table').DataTable({
+            "dataType": 'json',
+            "ajax": {
+                "processing": true,
+                "dataSrc": '',
+                "url": "{% url 'owner-notif-table' %}",
+            },
+            "drawCallback": function (settings) {
+                $(".update-onotif").each(function () {
+                    $(this).modalForm({ formURL: $(this).data('id') });
+                });
+                $(".read-onotif").each(function () {
+                    $(this).modalForm({ formURL: $(this).data('id') });
+                });
+            },
+            "columnDefs": [
+                {
+                    "className": 'col-onotif-id text-center',
+                    "targets": 0,
+                    "data": "fields.id",
+                },
+                {
+                    "className": 'col-onotif-title text-center',
+                    "targets": 1,
+                    "data": "fields.title",
+                },
+                {
+                    "className": 'col-onotif-date text-center',
+                    "targets": 2,
+                    "data": "fields.date",
+                },
+                {
+                    "className": 'col-onotif-status text-center',
+                    "targets": 3,
+                    "data": "fields.status",
+                },
+                {
+                    "className": 'col-details text-center',
+                    "targets": -1,
+                    "data": 'fields.id',
+                    render: function (data, type, row) {
+                        let render =
+                            '<button type="button" class="read-onotif btn btn-sm btn-info m-1" data-id="/read/onotif/' + data + '">' +
+                            '<i class="fa fa-eye"></i></button>' +
+                            '<button type="button" class="update-onotif btn btn-sm btn-primary m-1" data-id="/update/onotif/' + data + '">' +
+                            '<i class="fa fa-edit"></i></button>';
+                        return render
+                    }
+                },
+            ]
+        })
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% load sekizai_tags static %}
+<div class="modal-header">
+  <h4 class="modal-title">{{ catalog.property_id.name }}</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<form class="" method="POST">
+  {% csrf_token %}
+  <div class="modal-body">
+    {% if request.session.form_error %}
+    <div class="alert alert-danger" role="alert">{{request.session.form_error_msg}}</div>
+    {% endif %}
+    <h5>{{ catalog.name }}</h5>
+
+      <p>Add-ons:
+        <select class="add-on-select form-control js-states" name="addons[]" multiple="multiple">
+          {% for addon in addons %}
+            <option value="{{addon.pk}}">{{addon.description}}//{{addon.amount}}</option>
+          {% endfor %}
+        </select>
+      </p>
+      <p>Start Date: <input type="text" class="datepicker form-control" name="start-date"></p>
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary btn-block">Reserve a Room</button>
+  </div>
+</form>
+
+<link rel="stylesheet" href="{% static "vendor/select2/css/select2.min.css" %}">
+<link rel="stylesheet" href="{% static "vendor/select2/css/select2-bootstrap.min.css" %}">
+
+<script src="{% static "vendor/select2/js/select2.full.min.js" %}"></script>
+<script type="text/javascript">
+  function dropdownFormat (data) {
+    split = data.text.split("//")
+    return $('<div class="row">' +
+        '<div class="col-6">'+split[0]+'</div>'+
+        '<div class="col-6">'+split[1]+'</div>'+
+    '</div>');
+  };
+  function dropdownOutput(data){
+    split = data.text.split("//")
+    return split[0];
+  }
+
+  $('.add-on-select').select2({
+    templateResult: dropdownFormat,
+    templateSelection: dropdownOutput,
+    width: "100%",
+  });
+  var tomorrow = new Date() + 1;
+  $('.datepicker').datepicker("setDate",tomorrow)
+</script>

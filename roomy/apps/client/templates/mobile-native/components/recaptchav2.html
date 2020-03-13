@@ -1,0 +1,6 @@
+{% load sekizai_tags %}
+<div class="g-recaptcha" data-sitekey="{{ RECAPTCHA_KEY }}"></div>
+
+{% addtoblock "js" %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endaddtoblock %}

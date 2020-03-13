@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h5 class="modal-title">Confirm Owner Application?</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row d-flex justify-content-center">
+    {% include "web/components/recaptchav2.html" with RECAPTCHA_KEY=RECAPTCHA_KEY %}
+  </div>
+</div>
+<div class="modal-footer">
+  <button id="form-submit" type="button" class="btn btn-primary btn-block waves-effect waves-light">Save changes</button>
+</div>
+</form>
+
+
+<script type="text/javascript">
+  var form = document.getElementById("{{ form_type }}");
+
+  
+
+</script>

@@ -1,0 +1,82 @@
+{% extends "web/layout/layout.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static "css/account.css" %}">
+  <link rel="stylesheet" href="{% static "vendor/font-awesome/css/fontawesome.min.css" %}">
+{% endblock %}
+
+{% block content %}
+<!-- modal -->
+  <div class="modal fade" id="logout_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <!-- modal content -->
+      <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
+
+        <!-- modal header -->
+        <div class="modal-header text-center">
+          <h4 class="text-center">Log out</h4>
+        </div>
+
+        <!-- modal body -->
+        <div class="modal-body">
+          {% if messages %}
+          {% for message in messages %}
+          {{ message }}
+          {% endfor %}
+          {% else %}
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                Are you sure do you want to log out? 😟
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="modal-footer">
+          <a href="{% url 'logout' %}" class="btn btn-black btn-block">Log Out</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div id="main-container" class="container-fluid" style="margin-top: 80px;">
+    <div class="container">
+      <div class="row">
+        <div id="acc-nav" class="col-md-3 bg-white">
+          <ul>
+            <li {% if account_view == 'booking' %}class="focus"{% endif %}>
+              <a class="d-flex align-items-center" href="{% url 'bookings' %}"><i class="far fa-calendar-check" style="margin-right: 10px;"></i>Bookings</a>
+            </li>
+            <li {% if account_view == 'saved' %}class="focus"{% endif %}>
+              <a class="d-flex align-items-center" href="{% url 'saved' %}"><i class="far fa-heart" style="margin-right: 10px;"></i>Saved</a>
+            </li>
+            <li {% if account_view == 'messages' %}class="focus"{% endif %}>
+              <a class="d-flex align-items-center" href="{% url 'messages' %}"><i class="fas fa-envelope-open-text" style="margin-right: 10px;"></i>Messages</a>
+            </li>
+            <li {% if account_view == 'profile' %}class="focus"{% endif %}>
+              <a class="d-flex align-items-center" href="{% url 'profile' %}"><i class="far fa-user" style="margin-right: 10px;"></i>Profile</a>
+            </li>
+            <li>
+              <a class="d-flex align-items-center" data-toggle="modal" data-target="#logout_modal"><i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i>Log out</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-9">
+            {% block account_container %}{% endblock %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+
+
+{% block extra_js %}
+  <script type="text/javascript" src="{% static "js/search-bar.js" %}"></script>
+{% endblock %}

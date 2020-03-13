@@ -1,0 +1,59 @@
+{% load static %}
+{% load pwa %}
+{% load webpush_notifications %}
+{% load sekizai_tags %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  {% progressive_web_app_meta %}
+  {% webpush_header %}
+  <title>{{ TITLE }}</title>
+  <link rel="shortcut icon" href="{% static "img\roomy.ico" %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static "vendor\bootstrap\css\bootstrap.css" %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static "vendor\mdbootstrap\css\mdb.css" %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="{% static "css\style.css" %}">
+  {% block extra_css %}{% endblock %}
+
+</head>
+
+
+<body>
+  {% block layout %}{% endblock %}
+
+  {% block layout_home %}{% endblock %}
+
+  {% block content_404 %}{% endblock %}
+
+  {% block footer %}{% endblock %}
+
+  <!-- JQuery -->
+  <script type="text/javascript" src="{% static "vendor\jquery\jquery.js" %}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static "vendor\mdbootstrap\js\popper.min.js" %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static "vendor\bootstrap\js\bootstrap.min.js" %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static "vendor\mdbootstrap\js\mdb.min.js" %}"></script>
+  <!-- Dropzone Script -->
+  <script type="text/javascript" src="{% static "vendor\dropzone\dropzone.js" %}"></script>
+  <!-- django-bootstrap-modal-forms -->
+  <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+  <!-- Custom Script -->
+  <script type="text/javascript" src="{% static "js\script.js" %}"></script>
+  <script type="text/javascript" src="{% static "js\service_worker.js" %}"></script>
+
+  <!-- EXTRA JS -->
+  {% block extra_js %}{% endblock %}
+  {% render_block "js" %}
+</body>
+
+</html>

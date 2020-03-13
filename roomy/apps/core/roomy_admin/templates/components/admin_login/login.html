@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block layout %}
+
+<style media="screen">
+  .input-custom:active {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .input-custom:focus {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+</style>
+
+<div class="container-fluid" style="height: 100vh; background-color: #202020;">
+  <div class="row d-flex flex-wrap justify-content-center align-items-center">
+
+    <div class="d-flex flex-column justify-content-center rounded" style="width: 400px; margin: 80px 20px; padding: 10px; background-color: white;">
+
+      <!-- logo -->
+      <a href="{% url 'admin-index' %}" style="margin: 10px auto 20px auto;">
+        <img src="{% static "img\roomy_full.png" %}" alt="" style="width:150px; height: 40px; margin:0 auto;">
+      </a>
+      <!-- end of logo -->
+
+      <!-- login form -->
+      <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+
+        <div class="fieldWrapper" style="margin: 10px 15px;">
+          <div class="form-group" style="margin: 0 15px;">
+            <label for="{{field.id_for_label}}" style="font-size: 15px; text-transform: capitalize;">{{ field.label }}</label>
+            <input class="input-custom form-control" id="{{field.id_for_label}}" type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" value="{{field.value|default_if_none:''}}">
+          </div>
+        </div>
+
+        {% endfor %}
+
+        <div class="d-flex flex-column justify-content-center" style="margin: 40px auto; padding: 0 30px;">
+          <button class="btn btn-block" style="margin: 0 auto; color: white; background-color: #532388;" type="submit" name="button">Login</button>
+          <a class="text-center" style="margin: 10px auto; font-size: 14px;" href="#">Forgot password?</a>
+        </div>
+      </form>
+      <!-- login form -->
+
+    </div>
+  </div>
+</div>
+
+{% endblock layout %}

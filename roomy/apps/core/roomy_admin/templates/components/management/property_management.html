@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+Properties
+{% endblock %}
+
+{% block extra_css %}
+
+<!-- SELECT2 -->
+<link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{% include "_modal.html" %}
+
+<div class="content container">
+  <div class="card-content">
+    <div class="container-fluid">
+      <div class="" style="margin-bottom: 20px;">
+        <span style="margin-right: 10px; color: black; font-size: 22px; text-transform: uppercase; font-weight: bold;">Property</span>
+      </div>
+      <div class="row p-3">
+        <div class="col">
+          <div class="table table-responsive-sm">
+            <table id="property-table" class="table table-bordered table-hover" width="100%" cellspacing="0" role="grid"
+              aria-describedby="dataTable_info">
+              <thead class="thead-dark">
+                <tr role="row">
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block header %}
+Property
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#property-table').DataTable({
+      "dataType": 'json',
+      "ajax": {
+        "processing": true,
+        "dataSrc": '',
+        "url": "{% url 'admin-property-table'%}",
+      },
+      "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-property'>>>>" +
+        "<'row'<'col-md-6'><'col-md-6'>>" +
+        "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
+      "initComplete": function (settings, json) {
+        $("div.create-property").html('<button type="button" id="create-property" class="float-right btn" name="button" style="color: white; background-color: #61299F;">Add Property</button>');
+        $(".create-property").modalForm({ formURL: "{% url 'create-property' %}" });
+      },
+      "drawCallback": function (settings) {
+        $(".upload-property").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+        $(".read-property").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+        // $(".delete-property").each(function () {
+        //   $(this).modalForm({ formURL: $(this).data('id') });
+        // });
+        $(".update-property").each(function () {
+          $(this).modalForm({ formURL: $(this).data('id') });
+        });
+      },
+      "columnDefs": [
+        {
+          "className": 'col-property-id text-center',
+          "targets": 0,
+          "data": "fields.id",
+        },
+        {
+          "className": 'col-property-name text-center',
+          "targets": 1,
+          "data": "fields.name",
+        },
+        {
+          "className": 'col-property-type text-center',
+          "targets": 2,
+          "data": "fields.type",
+        },
+        {
+          "className": 'col-details text-center',
+          "targets": -1,
+          "data": 'fields.id',
+          render: function (data, type, row) {
+            let render =
+              '<button type="button" class="upload-property btn btn-sm btn-secondary m-1" data-id="/upload/property/' + data + '">' +
+              '<i class="fa fa-file-upload"></i></button>' +
+              '<button type="button" class="read-property btn btn-info btn-sm m-1" data-id="/read/property/' + data + '">' +
+              '<i class="fa fa-eye"></i></button>' +
+              // '<button type="button" class="delete-property btn btn-sm btn-raised btn-warning m-1" data-id="/delete/property/' + data + '">' +
+              // '<span class="fa fa-trash"></span></button>' +
+              '<button type="button" class="update-property btn btn-sm btn-primary m-1" data-id="/up/property/' + data + '">' +
+              '<i class="fa fa-edit"></i></button>';
+            return render
+          }
+        },
+      ]
+    })
+  });
+</script>
+{% endblock %}

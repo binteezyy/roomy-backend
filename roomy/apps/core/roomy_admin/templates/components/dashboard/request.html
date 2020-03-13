@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+Tenant Request
+{% endblock %}
+
+{% block extra_css %}
+<!-- SELECT2 -->
+<link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if properties %}
+{% include "_modal.html" %}
+<div class="content container">
+    <div class="card-content">
+        <div class="container-fluid">
+            <div class="" style="margin-bottom: 20px;">
+                <span
+                    style="margin-right: 10px; color: black; font-size: 22px; text-transform: uppercase; font-weight: bold;">Request</span>
+            </div>
+
+            <div class="d-flex flex-column justify-content-start" style="margin: 10px;">
+                <span style="color: black; font-size: 18px; text-transform: uppercase; font-weight: 500;">Filter</span>
+                <div class="d-flex align-items-center">
+                    <span style="margin-right: 10px; color: black; text-transform: capitalize;">Property</span>
+                    <select class="mdb-select md-form custom-select custom-select-sm form-control form-control-sm"
+                        style="width: auto; max-width: 300px; margin: 0 50px 0 0; font-size: 14px; text-transform: uppercase;">
+                        {% for property in properties %}
+                        <option value="{{property.pk}}" style="font-size: 14px; text-transform: uppercase;">
+                            {{ property.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="row p-3">
+                <div class="col">
+                    <div class="table table-responsive-sm">
+                        <table id="request-table" class="table table-bordered table-hover" width="100%" cellspacing="0"
+                            role="grid" aria-describedby="dataTable_info">
+                            <thead class="thead-dark">
+                                <tr role="row">
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Subject</th>
+                                    <th>Description</th>
+                                    <th>Room</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row d-flex justify-content-center">
+    <div class="d-flex justify-content-center" style="margin-top: 20px;">
+        <span style="font-size: 22px;">There are currently no registered properties under your account. <a href="{% url 'property_management' %}">Click here.</a></span>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block header %}
+Tenants
+{% endblock %}
+
+{% block extra_js %}
+<script type=" text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        var val = $('.mdb-select').val();
+                        $('#request-span').html($(".mdb-select option:selected").text());
+                        var table = $('#request-table').DataTable({
+                            "dataType": 'json',
+                            "ajax": {
+                                "processing": true,
+                                "dataSrc": '',
+                                "url": "/request/table/" + val,
+                            },
+                            "drawCallback": function (settings) {
+                                $(".update-request").each(function () {
+                                    $(this).modalForm({ formURL: $(this).data('id') });
+                                });
+                                // $(".delete-request").each(function () {
+                                //     $(this).modalForm({ formURL: $(this).data('id') });
+                                // });
+                            },
+                            "columnDefs": [
+                                {
+                                    "className": 'col-request-id text-center',
+                                    "targets": 0,
+                                    "data": "fields.id",
+                                },
+                                {
+                                    "className": 'col-request-date text-center',
+                                    "targets": 1,
+                                    "data": "fields.date",
+                                },
+                                {
+                                    "className": 'col-request-subject text-center',
+                                    "targets": 2,
+                                    "data": "fields.subject",
+                                },
+                                {
+                                    "className": 'col-request-description text-center',
+                                    "targets": 3,
+                                    "data": "fields.description",
+                                },
+                                {
+                                    "className": 'col-request-room text-center',
+                                    "targets": 4,
+                                    "data": "fields.room",
+                                },
+                                {
+                                    "className": 'col-request-status text-center',
+                                    "targets": 5,
+                                    "data": "fields.status",
+                                },
+                                {
+                                    "className": 'col-details text-center',
+                                    "targets": -1,
+                                    "data": 'fields.id',
+                                    render: function (data, type, row) {
+                                        let render =
+                                            // '<button type="button" class="delete-request btn btn-sm btn-raised btn-warning m-1" data-id="/delete/request/' + data + '">' +
+                                            // '<span class="fa fa-trash"></span></button>' +
+                                            '<button type="button" class="update-request btn btn-sm btn-primary m-1" data-id="/update/request/' + data + '">' +
+                                            '<i class="fa fa-edit"></i></button>';
+                                        return render
+                                    }
+                                },
+                            ]
+                        })
+                        $(".mdb-select").on("change", function () {
+                            table.ajax.url("/request/table/" + $(this).val()).load();
+                            $('#request-span').html($(".mdb-select option:selected").text());
+                        });
+                    });
+                </script>
+                {% endblock %}
