@@ -1,0 +1,135 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+Tenant Notification
+{% endblock %}
+
+{% block extra_css %}
+<!-- SELECT2 -->
+<link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if properties %}
+{% include "_modal.html" %}
+<div class="content container">
+    <div class="card-content">
+        <div class="container-fluid">
+            <div class="" style="margin-bottom: 20px;">
+                <span
+                    style="margin-right: 10px; color: black; font-size: 22px; text-transform: uppercase; font-weight: bold;">Notifications</span>
+            </div>
+
+            <div class="row p-3">
+                <div class="col">
+                    <div class="table table-responsive-sm">
+                        <table id="notif-table" class="table table-bordered table-hover" width="100%" cellspacing="0"
+                            role="grid" aria-describedby="dataTable_info">
+                            <thead class="thead-dark">
+                                <tr role="row">
+                                    <th>Id</th>
+                                    <th>Tenant</th>
+                                    <th>Title</th>
+                                    <th>Body</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row d-flex justify-content-center">
+    <div class="d-flex justify-content-center" style="margin-top: 20px;">
+        <span style="font-size: 22px;">There are currently no registered properties under your account. <a href="{% url 'property_management' %}">Click here.</a></span>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block header %}
+Tenants
+{% endblock %}
+
+{% block extra_js %}
+<script type=" text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#notif-table').DataTable({
+                            "dataType": 'json',
+                            "ajax": {
+                                "processing": true,
+                                "dataSrc": '',
+                                "url": "{% url 'admin-notif-table'%}",
+                            },
+                            "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-notif'>>>>" +
+                                "<'row'<'col-md-6'><'col-md-6'>>" +
+                                "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
+                            "initComplete": function (settings, json) {
+                                $("div.create-notif").html('<button type="button" id="create-notif" class="float-right btn" name="button" style="color: white; background-color: #61299F;">Add Notification</button>');
+                                $(".create-notif").modalForm({ formURL: "{% url 'create-notif' %}" });
+                            },
+                            "drawCallback": function (settings) {
+                                $(".update-notif").each(function () {
+                                    $(this).modalForm({ formURL: $(this).data('id') });
+                                });
+                                // $(".delete-notif").each(function () {
+                                //     $(this).modalForm({ formURL: $(this).data('id') });
+                                // });
+                            },
+                            "columnDefs": [
+                                {
+                                    "className": 'col-notif-id text-center',
+                                    "targets": 0,
+                                    "data": "fields.id",
+                                },
+                                {
+                                    "className": 'col-notif-tenant text-center',
+                                    "targets": 1,
+                                    "data": "fields.tenant",
+                                },
+                                {
+                                    "className": 'col-notif-title text-center',
+                                    "targets": 2,
+                                    "data": "fields.title",
+                                },
+                                {
+                                    "className": 'col-notif-body text-center',
+                                    "targets": 3,
+                                    "data": "fields.body",
+                                },
+                                {
+                                    "className": 'col-notif-date text-center',
+                                    "targets": 4,
+                                    "data": "fields.date",
+                                },
+                                {
+                                    "className": 'col-notif-status text-center',
+                                    "targets": 5,
+                                    "data": "fields.status",
+                                },
+                                {
+                                    "className": 'col-details text-center',
+                                    "targets": -1,
+                                    "data": 'fields.id',
+                                    render: function (data, type, row) {
+                                        let render =
+                                            // '<button type="button" class="delete-notif btn btn-sm btn-raised btn-warning m-1" data-id="/delete/notif/' + data + '">' +
+                                            // '<span class="fa fa-trash"></span></button>' +
+                                            '<button type="button" class="update-notif btn btn-sm btn-primary m-1" data-id="/update/notif/' + data + '">' +
+                                            '<span class="fa fa-edit"></span></button>';
+                                        return render
+                                    }
+                                },
+                            ]
+                        })
+                    });
+                </script>
+                {% endblock %}

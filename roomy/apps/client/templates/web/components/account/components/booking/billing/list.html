@@ -1,0 +1,138 @@
+{% extends "web/components/account/base.html" %}
+{% load static %}
+{% load numbers %}
+{% block extra_css %}
+
+{{ block.super}}
+<link rel="stylesheet" href="{% static "vendor/datatables/datatables.min.css" %}">
+<style media="screen">
+  table {
+    text-align: center;
+  }
+
+  .col-request-description {
+    width: 50px;
+    overflow-x: hidden;
+  }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script type="text/javascript" src="{% static "vendor/datatables/datatables.min.js" %}"></script>
+<script type="text/javascript" src="{% static "vendor/datatables/Bootstrap-4-4.1.1/js/bootstrap.min.js" %}"></script>
+<script type="text/javascript">
+  $('#requests-Table').DataTable({
+    "dataType": 'json',
+    "select": true,
+    "ajax": {
+      "processing": true,
+      "dataSrc": '',
+      "url": "{% url 'booking-billing-table' booking.pk %}",
+    },
+
+    "dom": "<'row'<'col-md-4'l><'col-md-8'f<'float-right'B>>>" +
+      "<'row'<'col-md-6'><'col-md-6'>>" +
+      "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
+    "buttons": [{
+        text: '<i class="fa fa-print" style="margin-right: 5px;"></i>Print',
+        extend: 'print',
+        className: 'btn',
+        exportOptions: {
+          columns: [0, 1, 2]
+        },
+        key: {
+          key: 'p',
+          altKey: true
+        }
+      },
+
+
+    ],
+    "oLanguage": {
+      "sSearch": "<i class='fas fa-search'></i>"
+    },
+    "order": [
+      [1, "desc"]
+    ],
+    "initComplete": function(settings, json) {
+
+    },
+    "columnDefs": [{
+        "className": 'col-request-id',
+        "targets": 0,
+        "data": "status",
+      },
+      {
+        "className": 'col-request-subject',
+        "targets": 1,
+        "data": "subject",
+      },
+
+      {
+        "className": 'col-request-action',
+        "targets": -1,
+        "data": 'id',
+        "orderable": false,
+        render: function(data, type, row) {
+          let render = '<button type="button" class="btn btn-sm btn-info" data-id="/read/request/' + data + '">' +
+            '<span class="fa fa-eye"></span></button>' +
+            // '<button type="button" class="delete-billing btn btn-sm btn-raised btn-warning m-1" data-id="/delete/billing/' + data + '">' +
+            // '<span class="fa fa-trash"></span></button>' +
+            '<button type="button" class="update-billing btn btn-sm btn-danger" data-id="/update/billing/' + data + '">' +
+            '<span class="fa fa-trash"></span></button>';
+          return render
+        },
+      }
+    ]
+  });
+</script>
+  
+{% endblock %}
+
+{% block account_container %}
+{% include "web/components/modals/_modal.html" with size="modal-lg" %}
+
+<nav aria-label="breadcrumb" style="width: 100%;">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="{% url 'bookings' %}" style="color: #61299F;">Bookings</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <span style="text-transform: uppercase;">{{catalog.name }}</span>
+    </li>
+    <li class="breadcrumb-item" aria-current="page">Billings</li>
+  </ol>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          My Billings
+        </div>
+        <div class="card-body">
+          <div class="table-responsive p-2">
+            <form method="POST" id="quote">
+              {% csrf_token %}
+              <table id="requests-Table" class="table table-bordered table-striped" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info">
+                <thead>
+                  <tr role="row" class="text-center">
+                    <th style="width: 40%;">Billing Date</th>
+                    <th style="width: 15%">Total</th>
+
+                    <th>Action(s)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

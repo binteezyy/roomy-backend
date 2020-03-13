@@ -1,0 +1,167 @@
+{% extends "web/components/account/base.html" %}
+{% load static %}
+{% load numbers %}
+
+{% block extra_css %}
+
+{{ block.super}}
+
+<style media="screen">
+  #main .row {
+    margin-bottom: 1rem;
+  }
+
+  #booking-info {
+    line-height: 0.5;
+  }
+
+  #booking-info h2 {
+    font-weight: 500;
+  }
+
+  #booking-info h5 {
+    font-weight: 500;
+  }
+
+  .input-custom {
+    font-size: 15px;
+  }
+
+  .input-custom:active {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .input-custom:focus {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+  $("#request-btn").modalForm({
+    formURL: "{% url 'booking-request' roomies.pk %}"
+  });
+</script>
+{% endblock %}
+
+{% block account_container %}
+
+{% include "web/components/modals/_modal.html" with size="modal-lg" %}
+
+<div class="container-fluid">
+  <div class="container">
+    <div class="row bg-white" style="padding: 20px;">
+      <nav aria-label="breadcrumb" style="width: 100%;">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'bookings' %}" style="color: #61299F;">Bookings</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            <span style="text-transform: uppercase;">{{catalog.name }}</span>
+          </li>
+        </ol>
+      </nav>
+
+      <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
+        <div class="d-flex flex-column">
+          <a href="{% url 'room' tenant_account.tenant_id.transaction_id.room_id.catalog_id.pk %}" style="color: #61299F; font-size: 28px; font-weight: bold; text-transform: uppercase; text-decoration: none">
+            {{ catalog.name }}
+          </a>
+          <span style="font-size: 20px; text-transform: uppercase;">{{catalog.property_id.name}}</span>
+          
+          <span style="font-size: 15px; text-transform: uppercase;">{{ catalog.floor|num_to_ordinal }} Floor, Room #{{ room.number }}</span>
+
+          {% if roomies|length > 1 %}
+          <div class="col-7">
+            <p>My Roomies</p>
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+
+      <div class="d-flex flex-column" style="width: 100%; margin: 25px 0;">
+
+        <div class="card bordered" style="margin-bottom: 20px; box-shadow: none;">
+          <a href="#collapseRequest" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
+            <h6 class="m-0 font-weight-bold text-dark">My Requests</h6>
+          </a>
+          <div id="collapseRequest" style="padding: 10px 20px;">
+            <button class="btn btn-block" type="button" name="button" id="request-btn" style="margin: 10px 0 ; color: white; background-color: #61299F;">Request</button>
+
+            {% if requests %}
+            <div class="card my-2" style="margin: 20px 0;">
+              <div class="card-body">
+                <div class="text-truncate" style="width: 300px; text-transform: capitalize;">{{ requests.description }}</div>
+                <span class="text-muted font-italic" style="font-size: 14px;">Recent request</span>
+                <span class="float-right" {% if requests.status == 0 %} style="color: #61299F; font-weight: bold;" {% endif %}>{{ requests.get_status_display }}</span>
+              </div>
+            </div>
+            <a class="btn-link" href="{% url 'booking-request-list' booking.pk %}" style="margin: 10px 0; color: #61299F; font-weight: bold;">See more<i class="fas fa-angle-double-right" style="margin-left: 5px;"></i></a>
+            {% else %}
+            <div class="alert alert-secondary my-2" role="alert">
+              You have no requests
+            </div>
+            {% endif %}
+
+          </div>
+
+        </div>
+
+        <div class="card bordered" style="margin-bottom: 20px; box-shadow: none;">
+
+          <a href="#collapseBilling" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
+            <h6 class="m-0 font-weight-bold text-dark">My Billing</h6>
+          </a>
+
+          <div id="collapseBilling" style="padding: 10px 20px;">
+
+            {% if billings %}
+            {% for BILLING in billings %}
+            <a style="text-decoration:none" href="#">
+              <div class="card my-2 text-white" {% if BILLING.is_paid == "Paid" %}style="background-color: #61299F;" {% else %}style="background-color: #F32013;" {% endif %}>
+                <div class="card-body">
+
+                  {% if forloop.first %}
+                  <h3 class="cardtitle"> [{{BILLING.transaction_id.room_id.catalog_id.property_id.name}}] {{ BILLING.get_date }}
+                  </h3>
+
+                  {% else %}
+                  <h5 class="card-title">
+                    [{{BILLING.transaction_id.room_id.catalog_id.property_id.name}}] {{ BILLING.get_date }}
+                  </h5>
+
+                  {% endif %}
+
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="font-italic">Total: Php {{BILLING.billing_total}}</span>
+
+                    <span class="font-weight-bold">
+                      {{ BILLING.is_paid }}
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </a>
+            {% endfor %}
+
+            <a class="btn-link" href="{% url 'booking-billing-list' booking.pk %}" style="margin: 10px 0; color: #61299F; font-weight: bold;">See more<i class="fas fa-angle-double-right" style="margin-left: 5px;"></i></a>
+
+            {% else %}
+            <div class="alert alert-secondary my-2" role="alert">You have no billings</div>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

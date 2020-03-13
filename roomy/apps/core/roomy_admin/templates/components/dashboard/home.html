@@ -1,0 +1,419 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block google_chart %}
+
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+<style media="screen">
+  .select-custom:active {
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+  .select-custom:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+  .select-custom option {
+    font-weight: bold;
+  }
+
+</style>
+
+{% if properties %}
+
+<!-- property selector -->
+<form class="d-flex flex-column" action="{% url 'generate-report' %}" method="POST" style="margin-top: 20px;">
+  {% csrf_token %}
+  <div class="row d-flex justify-content-start align-items-center" style="margin: 0 30px 5px 30px; padding: 0;">
+
+    <select class="select-custom form-control bg-white" id="select_property" name="select_property"
+      style="width: 100%; margin: 0; padding: 2px 5px; font-size: 20px; font-weight: bold; text-transform: uppercase; border: none; outline: none; box-shadow: none;">
+      {% for property in properties %}
+      <option value="{{property.pk}}" style="font-size: 18px; text-transform: uppercase;">{{ property.name }}</option>
+      {% endfor %}
+    </select>
+
+  </div>
+  <!-- end of property selector -->
+
+  <div class="row d-flex justify-content-center align-items-center" style="margin: 0 20px;">
+
+    <!-- tiles -->
+    <div class="d-flex flex-column" style="width: 100%; margin: 20px;">
+
+      <div class="d-flex flex-wrap justify-content-center bg-white" style="margin: 0; padding: 40px 20px;">
+
+        <div class="d-flex justify-content-between align-items-center"
+          style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
+          <div class="d-flex flex-column">
+            <span class="active-tenants-span" style="color: black; font-size: 25px;"></span>
+            <span style="color: black; font-size: 14px;">Tenant(s)</span>
+            <span style="font-size: 10px;">All active tenants</span>
+          </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/tenant.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center"
+          style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
+          <div class="d-flex flex-column">
+            <span class="pending-bookings-span" style="color: black; font-size: 25px;"></span>
+            <span style="color: black; font-size: 14px;">Booking(s)</span>
+            <span style="font-size: 10px;">Waiting for approval</span>
+          </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/booking.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center"
+          style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
+          <div class="d-flex flex-column">
+            <span class="active-rooms-span" style="color: black; font-size: 25px;"></span>
+            <span style="color: black; font-size: 14px;">Active Room(s)</span>
+            <span style="font-size: 10px;">As of this moment</span>
+          </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/lock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center"
+          style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
+          <div class="d-flex flex-column">
+            <span class="avail-rooms-span" style="color: black; font-size: 25px;"></span>
+            <span style="color: black; font-size: 14px;">Available Room(s)</span>
+            <span style="font-size: 10px;">As of this moment</span>
+          </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/unlock.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center"
+          style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
+          <div class="d-flex flex-column">
+            <span class="payments-span" style="color: black; font-size: 25px;"></span>
+            <span style="color: black; font-size: 14px;">Payment</span>
+            <span style="font-size: 10px;">For This Month</span>
+          </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/arrow_up.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center"
+          style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
+          <div class="d-flex flex-column">
+            <span class="expenses-span" style="color: black; font-size: 25px;"></span>
+            <span style="color: black; font-size: 14px;">Expense</span>
+            <span style="font-size: 10px;">For This Month</span>
+          </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/arrow_down.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center"
+          style="width: 200px; min-width: 200px; min-height: 90px; margin: 0 20px 20px 20px; padding: 0 15px; border: 1px solid #151515;">
+          <div class="d-flex flex-column">
+            <span class="net-span" style="color: black; font-size: 25px;"></span>
+            <span style="color: black; font-size: 14px;">Net Income</span>
+            <span style="font-size: 10px;">For This Month</span>
+          </div>
+          <div class=""
+            style="width: 50px; height: 50px; background-image: url('static/img/net_income.png'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- end of tiles -->
+
+    <!-- report -->
+    <div class="bg-white" style="width: 500px; margin: 10px 10px;">
+
+      <!-- generate report -->
+      <div class="d-flex flex-column" style="margin-bottom: 20px; padding: 20px;">
+
+        <span style="margin-bottom: 20px; color: black; font-size: 20px; font-weight: bold;">Generate Report</span>
+
+        <span id="title"
+          style="margin-right: 10px; color: black; font-weight: bold;">Type</span>
+
+        <select class="form-control" id="report_type" name="report_type"
+          style="margin: 10px 0;" onchange="filter()">
+          <option value="Room">Room</option>
+          <option value="Tenant">Tenant</option>
+          <option value="Payment">Payment</option>
+          <option value="Expense">Expense</option>
+          <option value="Cashflow">Cashflow</option>
+        </select>
+
+        <div class="" id="div_room_filter" style="display: none;">
+          <span
+            style="margin-right: 10px; color: black; font-weight: bold;">Filter</span>
+          <select class="form-control" id="room_filter" name="room_filter"
+            style="margin: 10px 0; onchange="filter()">
+            <option value="all">All</option>
+            <option value="active">Active only</option>
+            <option value="avail">Available only</option>
+          </select>
+        </div>
+
+        <div class="" id="div_payment_filter" style="display: none;">
+
+          <span
+            style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Filter</span>
+
+          <select class="form-control" id="payment_filter" name="payment_filter"
+            style="margin: 10px 0;" onchange="filter()">
+            <option value="All">All</option>
+            <option value="Custom">Custom</option>
+          </select>
+
+          <div class="" id="div_payment_filter_year" style="display: none;">
+            <span
+              style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Date</span>
+            <div class="d-flex flex-wrap justify-content-start align-items-center">
+              {% for month_year in month_years %}
+              <div class="form-group z-depth-1" style="margin: 10px; padding: 10px;">
+                <input type="checkbox" id="{{month_year|date:'m-Y'}}" name="div_payment_filter_year"
+                  value="{{month_year|date:'m-Y'}}" {% if month_year == month_years.0 %} checked {%endif%}>
+                <label for="{{month_year|date:'m-Y'}}"
+                  style="text-transform: uppercase;">{{month_year|date:'M-Y'}}</label>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="" id="div_expense_filter" style="display: none;">
+
+          <span
+            style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Filter</span>
+
+          <select class="form-control" id="expense_filter" name="expense_filter"
+            style="margin: 10px 0; onchange="filter()">
+            <option value="All">All</option>
+            <option value="Custom">Custom</option>
+          </select>
+
+          <div class="" id="div_expense_filter_year">
+            <span
+              style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Date</span>
+            <div class="d-flex flex-wrap justify-content-start align-items-center">
+              {% for month_year in month_years %}
+              <div class="form-group z-depth-1" style="margin: 10px; padding: 10px;">
+                <input type="checkbox" id="{{month_year|date:'m-Y'}}" name="div_expense_filter_year"
+                  value="{{month_year|date:'m-Y'}}" {% if month_year == month_years.0 %} checked {%endif%}>
+                <label for="{{month_year|date:'m-Y'}}"
+                  style="text-transform: uppercase;">{{month_year|date:'M-Y'}}</label>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="" id="div_cashflow_filter" style="display: none;">
+
+          <span
+            style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Filter</span>
+
+          <select class="form-control" id="cashflow_filter" name="cashflow_filter"
+            style="margin: 10px 0;" onchange="filter()">
+            <option value="All">All</option>
+            <option value="Custom">Custom</option>
+          </select>
+
+          <div class="" id="div_cashflow_filter_year">
+            <span
+              style="margin-right: 10px; color: black; text-transform: uppercase; font-weight: bold;">Date</span>
+            <div class="d-flex flex-wrap justify-content-start align-items-center">
+              {% for month_year in month_years %}
+              <div class="form-group z-depth-1" style="margin: 10px; padding: 10px;">
+                <input type="checkbox" id="{{month_year|date:'m-Y'}}" name="div_cashflow_filter_year"
+                  value="{{month_year|date:'m-Y'}}" {% if month_year == month_years.0 %} checked {%endif%}>
+                <label for="{{month_year|date:'m-Y'}}"
+                  style="text-transform: uppercase;">{{month_year|date:'M-Y'}}</label>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+        </div>
+
+        <button class="btn" id="generate_button" type="submit" name="button"
+          style="margin: 40px auto; color: white; background-color: #61299F;">GENERATE</button>
+</form>
+
+</div>
+<!-- end of generate report -->
+
+</div>
+<!-- end of report -->
+
+</div>
+
+{% else %}
+
+<div class="d-flex justify-content-center" style="margin-top: 50px;">
+  <span style="font-size: 18px;">There are currently no registered properties under your account. <a
+      href="{% url 'property_management' %}">Click here.</a></span>
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script type="text/javascript">
+
+  function filter() {
+
+    var type = document.getElementById("report_type").value;
+
+    if (type == "none") {
+      document.getElementById("div_room_filter").style.display = "none";
+      document.getElementById("div_payment_filter").style.display = "none";
+      document.getElementById("div_expense_filter").style.display = "none";
+      document.getElementById("div_cashflow_filter").style.display = "none";
+    } else if (type == "Tenant") {
+      document.getElementById("div_room_filter").style.display = "none";
+      document.getElementById("div_payment_filter").style.display = "none";
+      document.getElementById("div_expense_filter").style.display = "none";
+      document.getElementById("div_cashflow_filter").style.display = "none";
+    } else if (type == "Room") {
+      document.getElementById("div_room_filter").style.display = "block";
+      document.getElementById("div_payment_filter").style.display = "none";
+      document.getElementById("div_expense_filter").style.display = "none";
+      document.getElementById("div_cashflow_filter").style.display = "none";
+    } else if (type == "Payment") {
+      document.getElementById("div_payment_filter").style.display = "block";
+      document.getElementById("div_room_filter").style.display = "none";
+      document.getElementById("div_expense_filter").style.display = "none";
+      document.getElementById("div_cashflow_filter").style.display = "none";
+
+      var payment_filter = document.getElementById("payment_filter").value;
+
+      if (payment_filter == "Custom") {
+        document.getElementById("div_payment_filter_year").style.display = "block";
+        document.getElementById("div_payment_filter_month").style.display = "block";
+      } else {
+        document.getElementById("div_payment_filter_year").style.display = "none";
+        document.getElementById("div_payment_filter_month").style.display = "none";
+      }
+    } else if (type == "Expense") {
+      document.getElementById("div_expense_filter").style.display = "block";
+      document.getElementById("div_room_filter").style.display = "none";
+      document.getElementById("div_payment_filter").style.display = "none";
+      document.getElementById("div_cashflow_filter").style.display = "none";
+      var expense_filter = document.getElementById("expense_filter").value;
+
+      if (expense_filter == "Custom") {
+        document.getElementById("div_expense_filter_year").style.display = "block";
+        document.getElementById("div_expense_filter_month").style.display = "block";
+      } else {
+        document.getElementById("div_expense_filter_year").style.display = "none";
+        document.getElementById("div_expense_filter_month").style.display = "none";
+      }
+    } else if (type == "Cashflow") {
+      document.getElementById("div_cashflow_filter").style.display = "block";
+      document.getElementById("div_payment_filter").style.display = "none";
+      document.getElementById("div_room_filter").style.display = "none";
+      document.getElementById("div_expense_filter").style.display = "none";
+
+      var cashflow_filter = document.getElementById("cashflow_filter").value;
+
+      if (cashflow_filter == "Custom") {
+        document.getElementById("div_cashflow_filter_year").style.display = "block";
+        document.getElementById("div_cashflow_filter_month").style.display = "block";
+      } else {
+        document.getElementById("div_cashflow_filter_year").style.display = "none";
+        document.getElementById("div_cashflow_filter_month").style.display = "none";
+      }
+    }
+  }
+
+</script>
+
+<script type="text/javascript">
+
+  $(document).ready(function () {
+
+    $("#div_room_filter").show();
+    $("#div_payment_filter").removeAttr("style").hide();
+    $("#div_expense_filter").removeAttr("style").hide();
+    $('input[type="checkbox"]').on('change', function () {
+      $('input[type="checkbox"]').not(this).prop('checked', false);
+    });
+
+    var val = $('#select_property').val();
+    $('.property-name-span').html($("#select_property option:selected").text());
+    $.ajax({
+      url: '/home-ajax',
+      data: {
+        'val': val,
+      },
+      dataType: 'json',
+      success: function (data) {
+        if (data) {
+          $('.active-tenants-span').html(data.active_tenants);
+          $('.pending-bookings-span').html(data.pending_bookings);
+          $('.active-rooms-span').html(data.active_rooms);
+          $('.avail-rooms-span').html(data.avail_rooms);
+          $('.payments-span').html(data.payments);
+          $('.expenses-span').html(data.expenses);
+          $('.net-span').html(data.net_income);
+        }
+      }
+    });
+    $("#select_property").on("change", function () {
+      var val = $('#select_property').val();
+      $('.property-name-span').html($("#select_property option:selected").text());
+      $('#generate-rooms-list').attr("href", "/generate/rooms/" + val);
+      $('#generate-tenants-list').attr("href", "/generate/tenants/" + val);
+      $('#generate-payments-list').attr("href", "/generate/payments/" + val);
+      $('#generate-expenses-list').attr("href", "/generate/expenses/" + val);
+      $.ajax({
+        url: '/home-ajax',
+        data: {
+          'val': val,
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data) {
+            $('.active-tenants-span').html(data.active_tenants);
+            $('.pending-bookings-span').html(data.pending_bookings);
+            $('.active-rooms-span').html(data.active_rooms);
+            $('.avail-rooms-span').html(data.avail_rooms);
+            $('.payments-span').html(data.payments);
+            $('.expenses-span').html(data.expenses);
+            $('.net-span').html(data.net_income);
+          }
+        }
+      });
+    });
+
+  });
+
+</script>
+
+{% endblock extra_js %}

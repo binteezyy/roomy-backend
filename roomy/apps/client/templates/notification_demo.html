@@ -1,0 +1,28 @@
+{% extends "web/base.html" %}
+{% load static %}
+{% load webpush_notifications %}
+
+{% block layout %}
+{% webpush_button %}
+<button type="button" id="notif" name="button"></button>
+
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    const webSocketBridge = new channels.WebSocketBridge();
+    const nl = document.querySelector("#notifylist");
+
+    webSocketBridge.connect('/notifications/');
+    webSocketBridge.listen(function(action, stream) {
+      console.log("RESPONSE:", action);
+      if(action.event == "New User") {
+        var el = document.createElement("li");
+        el.innerHTML = `New user <b>${action.username}</b> has joined!`;
+        nl.appendChild(el);
+      }
+    })
+    document.ws = webSocketBridge; /* for debugging */
+  })
+</script>
+<script type="text/javascript" src="{% static "js/service_worker.js" %}"></script>
+{% endblock %}

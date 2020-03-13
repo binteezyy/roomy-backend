@@ -1,0 +1,296 @@
+{% extends "mobile-native/layout/layout_home.html" %}
+
+{% load static %}
+
+{% block title %}
+Roomy
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center align-items-start" style="height: 100vh; padding-top: 61px; background-image: url('/static/img/banner.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+
+  <!-- search bar -->
+  <div class="d-flex justify-content-center align-items-center" style="width: 100%; margin-bottom: 10px; padding-top: 100px;">
+
+    <form class="form-inline mr-auto mb-4 d-flex justify-content-center" _lpchecked="1" style="width: 100%; margin-bottom: 50px;" action="/explore/?search=q" method="GET">
+      <div class="input-group mb-3 d-flex justify-content-center align-items-center" style="width: 80%;">
+        <input type="search" name="q" class="form-control form-control-lg search-bar-custom" placeholder="Search for a property or location" aria-label="Search" aria-describedby="button-addon2" style="width: 100%; border: none; outline: none;">
+        <div class="input-group-append">
+          <button class="btn rounded" value="submit" id="search-icn" style="color: white; background-color: #61299F;">SEARCH</button>
+        </div>
+        <style media="screen">
+          .search-bar-custom:hover {
+            border: none;
+            outline: none;
+            box-shadow: none;
+          }
+
+          .search-bar-custom:focus {
+            border: none;
+            outline: none;
+            box-shadow: none;
+          }
+
+          .search-bar-custom:active {
+            border: none;
+            outline: none;
+            box-shadow: none;
+          }
+        </style>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<!-- main content -->
+<div class="container-fluid" style="margin-top: 50px;">
+  <div class="container">
+
+    <!-- places -->
+    <div class="row d-flex flex-column flex-wrap justify-content-center align-items-center" style="margin-bottom: 30px;">
+      <h3>Places</h3>
+      <span style="margin:0 auto 0 auto; font-size: 18px; text-align: center;">Discover listings from the top cities in the country</span>
+    </div>
+    <div class="row d-flex flex-wrap justify-content-center align-items-center" style="margin-bottom: 100px;">
+
+      <a href="/explore/?search=manila" class="d-flex justify-content-center align-items-end"
+        style="width: 200px; height: 200px; margin: 5px; padding: 0; background-image: url('/static/img/manila.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <div style="width: 100%; margin: 0; padding: 10px; background-color: rgba(255, 255, 255, 0.5);">
+          <span style="color: black; font-size: 18px; font-weight: bold; text-transform: uppercase;">City of Manila</span>
+        </div>
+      </a>
+
+      <a href="/explore/?search=taguig" class="d-flex justify-content-center align-items-end"
+        style="width: 200px; height: 200px; margin: 5px; background-image: url('/static/img/taguig.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <div style="width: 100%; margin: 0; padding: 10px; background-color: rgba(255, 255, 255, 0.5);">
+          <span style="color: black; font-size: 18px; font-weight: bold; text-transform: uppercase;">Taguig City</span>
+        </div>
+      </a>
+
+      <a href="/explore/?search=makati" class="d-flex justify-content-center align-items-end"
+        style="width: 200px; height: 200px; margin: 5px; background-image: url('/static/img/makati.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <div style="width: 100%; margin: 0; padding: 10px; background-color: rgba(255, 255, 255, 0.5);">
+          <span style="color: black; font-size: 18px; font-weight: bold; text-transform: uppercase;">Makati City</span>
+        </div>
+      </a>
+
+      <a href="/explore/?search=quezon" class="d-flex justify-content-center align-items-end"
+        style="width: 200px; height: 200px; margin: 5px;  background-image: url('/static/img/quezon.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <div style="width: 100%; margin: 0; padding: 10px; background-color: rgba(255, 255, 255, 0.5);">
+          <span style="color: black; font-size: 18px; font-weight: bold; text-transform: uppercase;">Quezon City</span>
+        </div>
+      </a>
+
+      <a href="/explore/?search=pasay" class="d-flex justify-content-center align-items-end"
+        style="width: 200px; height: 200px; margin: 5px;  background-image: url('/static/img/pasay.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <div style="width: 100%; margin: 0; padding: 10px; background-color: rgba(255, 255, 255, 0.5);">
+          <span style="color: black; font-size: 18px; font-weight: bold; text-transform: uppercase;">Pasay City</span>
+        </div>
+      </a>
+
+    </div>
+    <!-- end of places -->
+
+    <!-- catergories -->
+    <div class="row d-flex flex-column flex-wrap justify-content-center align-items-center" style="margin-bottom: 30px;">
+      <h3>Categories</h3>
+      <span style="margin:0 auto 0 auto; font-size: 18px; text-align: center;">Choose a category that best fits your needs</span>
+    </div>
+
+    <div class="row d-flex justify-content-around align-items-center" style="margin-bottom: 100px;">
+
+      <a href="#" class="d-flex justify-content-end align-items-end"
+        style="width: 300px; height: 300px; margin: 5px; padding: 0; background-image: url('/static/img/condominium.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <div style="width: 100%; height: 40px; margin: 0; padding: 10px; background-color: rgba(255, 255, 255, 0.5);">
+          <span style="color: black; font-size: 18px; font-weight: bold; text-transform: uppercase;">Condominium</span>
+        </div>
+      </a>
+
+      <a href="#" class="d-flex justify-content-end align-items-end"
+        style="width: 300px; height: 300px; margin: 5px; padding: 0; background-image: url('/static/img/apartment.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <div style="width: 100%; height: 40px; margin: 0; padding: 10px; background-color: rgba(255, 255, 255, 0.5);">
+          <span style="color: black; font-size: 18px; font-weight: bold; text-transform: uppercase;">Apartment</span>
+        </div>
+      </a>
+
+      <a href="#" class="d-flex justify-content-end align-items-end"
+        style="width: 300px; height: 300px; margin: 5px; padding: 0; background-image: url('/static/img/dormitory.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <div style="width: 100%; height: 40px; margin: 0; padding: 10px; background-color: rgba(255, 255, 255, 0.5);">
+          <span style="color: black; font-size: 18px; font-weight: bold; text-transform: uppercase;">Dormitory</span>
+        </div>
+      </a>
+
+    </div>
+    <!-- end of catergories -->
+
+  </div>
+</div>
+
+<style media="screen">
+  .room-container:hover {
+    background-color: #E9E9E9;
+    margin: 0 5px;
+  }
+</style>
+
+<!-- Dormitory -->
+<div class="container-fluid" style="padding: 0 5%;margin-bottom: 50px;">
+  <div class="container-fluid bg-white">
+    <div class="row d-flex flex-column" style="margin: 0; padding: 15px 0;">
+      <h3 style="font-weight: 1000;">Dormitory</h3>
+      <span style="margin: 10px 0;">Affordable Residence halls perfect for students</span>
+      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; min-height: 300px;padding: 5px;">
+        {% for dorm in dorms %}
+        <div class="d-flex justify-content-center" style="margin: 20px;">
+          <a class="room-container" href="{% url 'room' dorm.pk %}" style="padding: 10px; color:black; text-decoration: none;">
+
+            <!-- room image -->
+            <div class="img-container d-flex justify-content-end align-items-end"
+              style="width: 300px; height: 200px; margin: 0 auto 5px auto; background-image:url('{% if dorm.img_2d.all %}/media/{{ dorm.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+              <span style="margin: 5px; padding: 2px 5px; color: white; font-size; 14px; font-weight: bold; text-transform: uppercase; background-color: #61299F;">Php{{dorm.rate}}</span>
+            </div>
+            <!-- end of room image -->
+
+            <!-- room information first row -->
+            <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+              <span style="margin: 5px 0; padding: 2px 10px; font-size: 12px; color: white; background-color: #61299F; border-radius: 20px;">{{ dorm.property_id.get_property_type_display}}</span>
+              <span style="font-size: 14px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+            </div>
+
+            <!-- room information second row -->
+            <div class="d-flex justify-content-start align-items-center">
+              <span style="font-size: 18px; font-weight: bold; text-transform: uppercase;">{{dorm.name}}</span>
+            </div>
+
+            <!-- room information third row -->
+            <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 5px;">
+              <span style="font-size: 14px; font-style: italic;">{{dorm.property_id.name}}</span>
+            </div>
+
+            <!-- room address -->
+            <div class="d-flex justify-content-start">
+              <span style="width: 250px; font-size: 15px;">{{dorm.property_id.property_address}}</span>
+            </div>
+            <!-- end of room address -->
+
+          </a>
+        </div>
+        {% endfor %}
+
+      </div>
+      <a class="btn-link" href="#" style="margin: 0 auto; color: #61299F; font-weight: bold;">See more<i class="fas fa-angle-double-right" style="margin-left: 5px;"></i></a>
+    </div>
+  </div>
+</div>
+<!-- end of Dormitory -->
+
+<!-- condominium -->
+<div class="container-fluid" style="padding: 0 5%;margin-bottom: 50px;">
+  <div class="container-fluid bg-white">
+    <div class="row d-flex flex-column" style="margin: 0; padding: 15px 0;">
+      <h3 style="font-weight: 1000;">Condominium</h3>
+      <span style="margin: 10px 0;">For people who prefer a luxurious and flexible lifestyle</span>
+      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; min-height: 300px; padding: 5px;">
+
+        {% for condo in condos %}
+        <div class="d-flex justify-content-center" style="margin: 20px;">
+          <a class="room-container" href="{% url 'room' condo.pk %}" style="padding: 10px; color:black; text-decoration: none;">
+
+            <!-- room image -->
+            <div class="img-container d-flex justify-content-end align-items-end"
+              style="width: 300px; height: 200px; margin: 0 auto 5px auto; background-image:url('{% if condo.img_2d.all %}/media/{{ condo.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+              <span style="margin: 5px; padding: 2px 5px; color: white; font-size: 14px; font-weight: bold; text-transform: uppercase; background-color: #61299F;">Php{{condo.rate}}</span>
+            </div>
+            <!-- end of room image -->
+
+            <!-- room information first row -->
+            <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+              <span style="margin: 5px 0; padding: 2px 10px; font-size: 12px; color: white; background-color: #61299F; border-radius: 20px;">{{ condo.property_id.get_property_type_display}}</span>
+              <span style="font-size: 14px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+            </div>
+
+            <!-- room information second row -->
+            <div class="d-flex justify-content-start align-items-center">
+              <span style="font-size: 18px; font-weight: bold; text-transform: uppercase;">{{condo.name}}</span>
+            </div>
+
+            <!-- room information third row -->
+            <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 5px;">
+              <span style="font-size: 14px; font-style: italic;">{{condo.property_id.name}}</span>
+            </div>
+
+            <!-- room address -->
+            <div class="d-flex justify-content-start">
+              <span style="width: 250px; font-size: 15px;">{{condo.property_id.property_address}}</span>
+            </div>
+            <!-- end of room address -->
+
+          </a>
+        </div>
+        {% endfor %}
+
+      </div>
+      <a class="btn-link" href="#" style="margin: 0 auto; color: #61299F; font-weight: bold;">See more<i class="fas fa-angle-double-right" style="margin-left: 5px;"></i></a>
+    </div>
+  </div>
+</div>
+<!-- end of condominium -->
+
+<!-- apartment -->
+<div class="container-fluid" style="padding: 0 5%;margin-bottom: 50px;">
+  <div class="container-fluid bg-white">
+    <div class="row d-flex flex-column" style="margin: 0; padding: 15px 0;">
+      <h3 style="font-weight: 1000;">Apartment</h3>
+      <span style="margin: 10px 0;">Sustainable and affordable residential units</span>
+      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; min-height: 300px; padding: 5px;">
+
+        {% for apartment in apartments %}
+        <div class="d-flex justify-content-center" style="margin: 20px;">
+          <a class="room-container" href="{% url 'room' apartment.pk %}" style="padding: 10px; color:black; text-decoration: none;">
+
+            <!-- room image -->
+            <div class="img-container d-flex justify-content-end align-items-end"
+              style="width: 300px; height: 200px; margin: 0 auto 5px auto; background-image:url('{% if apartment.img_2d.all %}/media/{{ apartment.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+              <span style="margin: 5px; padding: 2px 5px; color: white; font-size: 14px; font-weight: bold; text-transform: uppercase; background-color: #61299F;">Php{{apartment.rate}}</span>
+            </div>
+            <!-- end of room image -->
+
+            <!-- room information first row -->
+            <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+              <span style="margin: 5px 0; padding: 2px 10px; font-size: 12px; color: white; background-color: #61299F; border-radius: 20px;">{{ apartment.property_id.get_property_type_display}}</span>
+              <span style="font-size: 14px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+            </div>
+
+            <!-- room information second row -->
+            <div class="d-flex justify-content-start align-items-center">
+              <span style="font-size: 18px; font-weight: bold; text-transform: uppercase;">{{apartment.name}}</span>
+            </div>
+
+            <!-- room information third row -->
+            <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 5px;">
+              <span style="font-size: 14px; font-style: italic;">{{apartment.property_id.name}}</span>
+            </div>
+
+            <!-- room address -->
+            <div class="d-flex justify-content-start">
+              <span style="width: 250px; font-size: 15px;">{{apartment.property_id.property_address}}</span>
+            </div>
+            <!-- end of room address -->
+
+          </a>
+        </div>
+        {% endfor %}
+
+      </div>
+      <a class="btn-link" href="#" style="margin: 0 auto; color: #61299F; font-weight: bold;">See more<i class="fas fa-angle-double-right" style="margin-left: 5px;"></i></a>
+    </div>
+  </div>
+</div>
+<!-- end of apartment -->
+
+<!-- end of main content -->
+
+
+{% endblock %}

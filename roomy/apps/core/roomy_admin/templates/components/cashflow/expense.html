@@ -1,0 +1,147 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+Expense
+{% endblock %}
+
+{% block extra_css %}
+<!-- SELECT2 -->
+<link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if properties %}
+{% include "_modal.html" %}
+<div class="content container">
+    <div class="card-content">
+        <div class="container-fluid">
+
+            <div class="" style="margin-bottom: 20px;">
+                <span
+                    style="margin-right: 10px; color: black; font-size: 22px; text-transform: uppercase; font-weight: bold;">Expense</span>
+            </div>
+
+            <div class="d-flex flex-column justify-content-start" style="margin: 10px;">
+                <span style="color: black; font-size: 18px; text-transform: uppercase; font-weight: 500;">Filter</span>
+                <div class="d-flex align-items-center">
+                    <span style="margin-right: 10px; color: black; text-transform: capitalize;">Property</span>
+                    <select class="mdb-select md-form custom-select custom-select-sm form-control form-control-sm"
+                        style="width: auto; max-width: 300px; margin: 0 50px 0 0; font-size: 14px; text-transform: uppercase;">
+                        {% for property in properties %}
+                        <option value="{{property.pk}}" style="font-size: 14px; text-transform: uppercase;">
+                            {{ property.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="row p-3">
+                <div class="col">
+                    <div class="table table-responsive-sm">
+                        <table id="expense-table" class="table table-bordered table-hover" width="100%" cellspacing="0"
+                            role="grid" aria-describedby="dataTable_info">
+                            <thead class="thead-dark">
+                                <tr role="row">
+                                    <th>Id</th>
+                                    <th>Time</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row d-flex justify-content-center">
+    <div class="d-flex justify-content-center" style="margin-top: 20px;">
+        <span style="font-size: 22px;">There are currently no registered properties under your account. <a href="{% url 'property_management' %}">Click here.</a></span>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block header %}
+Expense
+{% endblock %}
+
+{% block extra_js %}
+<script type=" text/javascript" src="{% static 'vendor/DataTables/datatables.min.js' %}"></script>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        var val = $('.mdb-select').val();
+                        $('#expense-span').html($(".mdb-select option:selected").text());
+                        var table = $('#expense-table').DataTable({
+                            "dataType": 'json',
+                            "ajax": {
+                                "processing": true,
+                                "dataSrc": '',
+                                "url": "/expense/table/" + val,
+                            },
+                            "dom": "<'row'<'col-md-4'l><'col-md-8'<'row float-right'<'col-6 'Bf><'col-6 create-expense'>>>>" +
+                                "<'row'<'col-md-6'><'col-md-6'>>" +
+                                "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
+                            "initComplete": function (settings, json) {
+                                $("div.create-expense").html('<button type="button" id="create-expense" class="float-right btn" name="button" style="color: white; background-color: #61299F;">Add expense</button>');
+                                $(".create-expense").modalForm({ formURL: "/create/expense/" + val });
+                            },
+                            "drawCallback": function (settings) {
+                                // $(".delete-expense").each(function () {
+                                //     $(this).modalForm({ formURL: $(this).data('id') });
+                                // });
+                                $(".update-expense").each(function () {
+                                    $(this).modalForm({ formURL: $(this).data('id') });
+                                });
+                            },
+                            "columnDefs": [
+                                {
+                                    "className": 'col-expense-id text-center',
+                                    "targets": 0,
+                                    "data": "fields.id",
+                                },
+                                {
+                                    "className": 'col-expense-type text-center',
+                                    "targets": 1,
+                                    "data": "fields.time",
+                                },
+                                {
+                                    "className": 'col-expense-description text-center',
+                                    "targets": 2,
+                                    "data": "fields.description",
+                                },
+                                {
+                                    "className": 'col-expense-amount text-center',
+                                    "targets": 3,
+                                    "data": "fields.amount",
+                                },
+                                {
+                                    "className": 'col-details text-center',
+                                    "targets": -1,
+                                    "data": 'fields.id',
+                                    render: function (data, type, row) {
+                                        let render =
+                                            // '<button type="button" class="delete-expense btn btn-sm btn-raised btn-warning m-1" data-id="/delete/expense/' + data + '">' +
+                                            // '<span class="fa fa-trash"></span></button>' +
+                                            '<button type="button" class="update-expense btn btn-sm btn-raised btn-success m-1" data-id="/update/expense/' + data + '">' +
+                                            '<span class="fa fa-edit"></span></button>';
+                                        return render
+                                    }
+                                },
+                            ]
+                        })
+                        $(".mdb-select").on("change", function () {
+                            table.ajax.url("/expense/table/" + $(this).val()).load();
+                            $('#expense-span').html($(".mdb-select option:selected").text());
+
+                            val = $('.mdb-select').val();
+                            $(".create-expense").modalForm({ formURL: "/create/expense/" + val });
+                        });
+                    });
+                </script>
+                {% endblock %}

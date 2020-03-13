@@ -1,0 +1,95 @@
+{% extends "mobile-native/layout/layout.html" %}
+{% load static %}
+
+{% block title %}
+How To Book
+{% endblock %}
+
+{% block content %}
+
+<!-- main content -->
+<div class="container-fluid">
+  <div class="container">
+    <div class="row d-flex flex-column justify-content-center align-items-content">
+
+      <div class="" style="margin: 20px 0 40px 0; padding: 40px 20px 40px 20px;">
+        <h2 class="text-center">The Booking Guide</h2>
+        <h5 class="text-center">Aenean eget accumsan lacus, sed facilisis nunc. Ut eu bibendum odio, sit amet pulvinar massa.</h5>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="col-md-6 d-flex justify-content-center" style="margin-bottom: 40px;">
+          <img src="{% static "img\placeholder_300x300.png" %}" alt="">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center" style="margin-bottom: 40px;">
+          <h3 style="margin-right: 30px; margin-left: 30px;">Step 1</h3>
+          <h5 style="margin-right: 30px; margin-left: 30px;">Enter your personal details</h5>
+          <p style="margin-right: 30px; margin-left: 30px;">
+            Pellentesque non auctor justo. Sed sapien augue, dapibus ut pretium ut, vehicula quis est. Proin posuere lacinia est, at fringilla diam facilisis eget. Fusce consequat ex sed libero aliquet consectetur.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="col-md-6 d-flex justify-content-center" style="margin-bottom: 40px;">
+          <img src="{% static "img\placeholder_300x300.png" %}" alt="">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center" style="margin-bottom: 40px;">
+          <h3 style="margin-right: 30px; margin-left: 30px;">Step 2</h3>
+          <h5 style="margin-right: 30px; margin-left: 30px;">Enter your booking details</h5>
+          <p style="margin-right: 30px; margin-left: 30px;">
+            Nam venenatis, erat eget fermentum tincidunt, eros tellus venenatis nisi, sit amet ornare velit urna semper magna. Suspendisse potenti. Cras ultricies accumsan pulvinar. In vitae semper est. Donec at urna id lectus accumsan tincidunt in nec orci.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="col-md-6 d-flex justify-content-center" style="margin-bottom: 40px;">
+          <img src="{% static "img\placeholder_300x300.png" %}" alt="">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center" style="margin-bottom: 40px;">
+          <h3 style="margin-right: 30px; margin-left: 30px;">Step 3</h3>
+          <h5 style="margin-right: 30px; margin-left: 30px;">Enter your booking details</h5>
+          <p style="margin-right: 30px; margin-left: 30px;">
+            Praesent malesuada tellus sapien, vitae accumsan ligula aliquet ut. Maecenas dictum vitae erat a eleifend. Nam mi lacus, volutpat ac sollicitudin et, hendrerit eget metus. Pellentesque faucibus tincidunt placerat. Cras feugiat iaculis convallis. Vestibulum dignissim felis id fringilla ornare.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="col-md-6 d-flex justify-content-center" style="margin-bottom: 80px;">
+          <img src="{% static "img\placeholder_300x300.png" %}" alt="">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center" style="margin-bottom: 40px;">
+          <h3 style="margin-right: 30px; margin-left: 30px;">Step 4</h3>
+          <h5 style="margin-right: 30px; margin-left: 30px;">Done!</h5>
+          <p style="margin-right: 30px; margin-left: 30px;">
+            Phasellus leo nunc, condimentum eu consectetur a, semper eget arcu. In fringilla ex quis nisi aliquam varius. Curabitur nec vestibulum nisl.
+          </p>
+        </div>
+      </div>
+
+
+
+
+      <div class="text-center z-depth-1" style="margin: 20px 20px 140px 20px; padding: 50px 20px 50px 20px;">
+        <h1>Ready?</h1>
+        <h5 class="text-center">
+          Fivamus convallis pellentesque placerat.
+        </h5>
+        <br>
+        <button class="btn" style="background-color: #5392f9;" type="button" name="button" data-toggle="modal" data-target="#signupModal">SIGN UP NOW</button>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<!-- end of main content -->
+
+{% endblock %}

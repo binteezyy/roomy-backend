@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+User Profile
+{% endblock %}
+
+{% block extra_css %}
+<!-- SELECT2 -->
+<link rel="stylesheet" href="{% static 'vendor/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<style media="screen">
+  .input-custom:active {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .input-custom:focus {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+</style>
+
+{% include "_modal.html" %}
+
+<form method="POST" style="margin: 0; padding: 0;">
+  {% csrf_token %}
+  <div class="content container">
+    <div class="card-content">
+      <div class="container-fluid">
+
+        <!-- header -->
+        <div class="" style="margin-bottom: 10px;">
+          <span style="margin-right: 10px; color: black; font-size: 22px; text-transform: uppercase; font-weight: bold;">EDit Profile</span>
+        </div>
+        <!-- end of header -->
+
+        <!-- input -->
+        <div class="row flex-column bg-white" style="margin: 10px; padding: 30px;">
+          <div class="form-group">
+            <label for="{{form1.username.id_for_label}}">Username</label>
+            <input type="text" name="{{form1.username.id_for_label}}" id="{{form1.username.id_for_label}}" class="input-custom form-control" value="{{form1.username.value}}" required>
+          </div>
+          <div class="form-row form-group">
+            <div class="col">
+              <label for="{{form1.first_name.id_for_label}}">First name</label>
+              <input class="input-custom form-control" id="{{form1.first_name.id_for_label}}" type="text" name="{{form1.first_name.id_for_label}}" value="{{form1.first_name.value}}" required>
+            </div>
+            <div class="col">
+              <label for="{{form1.last_name.id_for_label}}">Last name</label>
+              <input class="input-custom form-control" id="{{form1.last_name.id_for_label}}" type="text" name="{{form1.last_name.id_for_label}}" value="{{form1.last_name.value}}" required>
+            </div>
+          </div>
+          <div class="form-row form-group">
+            <div class="col">
+              <label for="{{form2.birthday.id_for_label}}">Birth date</label>
+              <input class="input-custom form-control" id="{{form2.birthday.id_for_label}}" type="date" name="{{form2.birthday.id_for_label}}" value="{{form2.birthday.value|date:'Y-m-d'}}" required>
+            </div>
+            <div class="col">
+              <label for="{{form2.cell_number.id_for_label}}">Mobile</label>
+              <input class="input-custom form-control" id="{{form2.cell_number.id_for_label}}" type="tel" name="{{form2.cell_number.id_for_label}}" pattern="09[0-9]{9}" value="0{{form2.cell_number.value}}" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="{{form1.email.id_for_label}}">Email</label>
+            <input type="text" name="{{form1.email.id_for_label}}" id="{{form1.email.id_for_label}}" class="input-custom form-control" value="{{form1.email.value}}" required>
+          </div>
+          <div class="form-group">
+            <label for="{{form2.provincial_address.id_for_label}}">Address</label>
+            <input class="input-custom form-control" id="{{form2.provincial_address.id_for_label}}" type="text" name="{{form2.provincial_address.id_for_label}}" value="{{form2.provincial_address.value}}" required>
+          </div>
+        </div>
+        <!-- end of input -->
+
+        <!-- button -->
+        <div class="row">
+          <button class="btn" type="submit" name="button" style="margin: 20px auto; color: white; background-color: #61299F;">Update</button>
+        </div>
+        <!-- end of button -->
+
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}
+
+{% block header %}
+User Profile
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  var searchInput = 'id_account_form-provincial_address'
+
+  $(document).ready(function() {
+    var autocomplete;
+    autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+      types: ['geocode']
+    })
+  });
+</script>
+{% endblock %}

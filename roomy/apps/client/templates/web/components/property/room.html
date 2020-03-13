@@ -1,0 +1,269 @@
+{% extends "web/layout/layout.html" %}
+{% load static %}
+
+{% block extra_css %}
+{% if room.img_3d.all %}
+  <link rel="stylesheet" href="{% static "vendor/pannellum/pannellum.css" %}">
+  <style>
+    #panorama {
+        width: 600px;
+        height: 400px;
+    }
+    </style>
+{% endif %}
+  <link rel="stylesheet" href="{% static "vendor/jquery/ui/jquery-ui.min.css" %}">
+  <link rel="stylesheet" href="{% static "vendor/jquery/ui/jquery-ui.theme.css" %}">
+  <link rel="stylesheet" href="{% static "vendor/jquery/ui/themes/datepicker.css" %}">
+
+
+{% endblock %}
+
+{% block extra_js %}
+  {% if room.img_3d.all %}
+  <!-- PANELLUM -->
+  <script src="{% static "vendor/pannellum/pannellum.js" %}"></script>
+  <script type="text/javascript">
+
+  viewer = pannellum.viewer('panorama', {
+      "type": "equirectangular",
+      "panorama": "{{MEDIA_URL}}{{ room.img_3d.all.0}}",
+      "autoLoad": true,
+    });
+
+  </script>
+  {% endif %}
+  <script src="{% static "vendor/jquery/ui/jquery-ui.min.js" %}"></script>
+  <script src="{% static "vendor/jquery/ui/ui/widgets/datepicker.js" %}"></script>
+  <script src="{% static "vendor/jquery/ui/ui/widgets/datepicker-format.min.js" %}"></script>
+  <script type="text/javascript">
+    book_modal = $("#book-button").modalForm({
+      {% if user.is_authenticated %}
+        formURL: "{% url 'booking-confirm' room.pk %}"
+      {% else %}
+        formURL: "{% url 'modal-login' %}"
+      {% endif %}
+    });
+
+    {% if user.is_authenticated %}
+    $('.modal').on('shown.bs.modal', function () {
+      $( ".datepicker" ).datepicker({
+        dateFormat: 'MM dd,yy',
+        minDate: "dateToday",
+
+      });
+      $(".datepicker").css("z-index", "9999");
+
+    })
+    {% endif %}
+
+    {% if request.session.form_error %}
+    book_modal.click()
+    {% endif %}
+    $('.modal').on('hidden.bs.modal', function (e) {
+      $.ajax({
+            url: "{% url 'clear-form' %}",
+            // data: form.serialize(),
+            dataType: 'json',
+            success: function (data) {
+                if (data.is_taken) {
+                    alert(data.error_message);
+                  }
+                }
+              });
+    })
+
+  </script>
+{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+  {% include "web/components/modals/_modal.html" with size="" %}
+{% else %}
+  {% include "web/components/modals/_modal.html" with size="" %}
+{% endif %}
+<!-- main content -->
+<div class="container-fluid" style="margin-top: 80px;">
+
+  <div class="container">
+    <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 20px;">
+
+      <!-- room information -->
+      <div class="col-md-7 bg-white" style="margin: 10px; padding: 20px;">
+
+        <!-- room info first row -->
+        <div class="d-flex justify-content-between align-items-center">
+          <span style="font-size: 30px; font-weight: bold; text-transform: uppercase;">{{ room.name }}</span>
+          <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+            <div class="">
+              <span style="padding: 5px 15px; color: white; font-size: 15px; border: none; background-color: #61299F; border-radius: 20px;">
+                {% if room.property_id.property_type == 0 %}
+                Condominium
+                {% elif room.property_id.property_type == 1 %}
+                Apartment
+                {% elif room.property_id.property_type == 2 %}
+                Dormitory
+                {% endif %}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- room info second row -->
+        <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 10px;">
+          <span style="font-size: 18px; font-style: italic; text-transform: uppercase;">{{ room.property_id.name}}</span>
+        </div>
+
+        <!-- room address -->
+        <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 5px;">
+          <span style="margin-bottom: 5px; font-size: 17px;">{{ room.property_id.property_address }}</span>
+        </div>
+
+        <!-- room description -->
+        <div class="description">
+          <div class="" style="min-height: 300px; padding: 10px; background-color: #F5F5F5;">
+            {{room.description|linebreaksbr}}
+          </div>
+        </div>
+
+      </div>
+      <!-- end of room information -->
+
+      <!-- booking -->
+      <div class="col-md-4" style="margin: 10px;">
+
+        <div class="d-flex flex-column bg-white" style="margin-bottom: 20px; padding: 20px;">
+          <h4>Rate</h4>
+          <span style="font-size: 18px;">Php {{ room.rate }} / month</span>
+        </div>
+
+        <div class="bg-white" style="margin-bottom: 20px; padding: 20px;">
+          <h4>Add-ons</h4>
+          <div class="d-flex justify-content-center align-items-center">
+            {% for addon in addons %}
+                <span style="margin: 10px; padding: 5px 15px; color: white; background-color: #61299F; border-radius: 20px;">{{ addon.description }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <!-- end of package inclusion -->
+
+        <!-- booking button -->
+        {% if available.count > 0 %}
+        <form method="POST" id="booking">
+          {% csrf_token %}
+          <input type="hidden" name="" value="{{ room.pk }}">
+          <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 30px;">
+            <button type="button" id="book-button" class="btn btn-lg" style="padding-right: 80px; padding-left: 80px; color: white; background-color: #61299F; font-size: 20px;">BOOK NOW</button>
+          </div>
+        </form>
+        {% else %}
+        <div class="alert alert-danger alert-dismissible text-center font-italic" role="alert">
+          Fully Booked
+        </div>
+        {% endif %}
+
+        <!-- end of booking button -->
+      </div>
+      <!-- end of booking -->
+    </div>
+
+    <!-- photos -->
+    {% if room.img_2d.all %}
+    <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 20px;">
+      <div class="col p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
+        <h4>Photos</h4>
+
+        <div class="d-flex flex-wrap justify-content-around align-items-center" style="min-height: 300px;">
+          {% for foto in room.img_2d.all %}
+          <div class="" style="width: 300px;">
+            <img class="img-fluid" src="{{MEDIA_URL}}{{ foto.img_path}}" alt="">
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    {% endif %}
+      {% if room.img_3d.all %}
+      <div class="col p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
+        <h4>360 view</h4>
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
+          <a style="margin: 10px;">
+            <!--img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt=""-->
+            <div id="panorama"></div>
+          </a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    <!-- end of photos -->
+
+    <!-- reviews -->
+    <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 50px;">
+
+      <div class="col-md-4 p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
+        <h4>Pureza Mansion</h4>
+        <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 10px;">
+          <span style="font-size: 14px; ">Manila, Metro Manila</span>
+          <span style="margin: 0 10px 0 10px;"><i class="fas fa-grip-lines-vertical"></i></span>
+          <span style="font-size: 14px;">Joined in October 2019</span>
+        </div>
+        <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 15px;">
+          <span style="font-size: 14px;"><i class="fas fa-star"></i> 1 review </span>
+          <span style="margin: 0 10px 0 10px; font-size: 14px;"><i class="fas fa-check-circle" style="margin-right: 5px;"></i>Verified</span>
+        </div>
+        <div class="d-flex flex-column justify-content-start align-items-start" style="margin-bottom: 15px;">
+          <span>Phasellus sodales, sapien vel placerat tempus, ex erat vulputate dolor, a dictum ante ipsum eget ipsum.</span> <br>
+          <span>Response Rate: 100%</span>
+          <span>Response Time: within an hour</span>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button class="btn" type="button" name="button" style="color: white; background-color: #61299F;">Contact</button>
+        </div>
+      </div>
+
+      <div class="col-md-7 p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
+
+        <div class="wrapper" id="reviews" style="padding-bottom: 50px;">
+          <h4 style="margin-bottom: 20px;">Reviews</h4>
+
+          <!-- tenant review -->
+          <div class="d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center" style="margin: 0 10px 10px 0;">
+              <div class="d-flex justify-content-start align-items-center">
+                <div class=""
+                  style="width: 50px; height: 50px; margin-right: 10px; border-radius: 25px; background-image: url('/static/img/placeholder.png'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+                <div class="d-flex flex-column">
+                  <span style="font-size: 15px; font-weight: bold;">Geralt</span>
+                  <span style="font-size: 14px; color: grey;">November 2019</span>
+                </div>
+              </div>
+              <div class="">
+                <i class="fas fa-star" style="color: #61299F;"></i>
+                <i class="fas fa-star" style="color: #61299F;"></i>
+                <i class="fas fa-star" style="color: #61299F;"></i>
+                <i class="fas fa-star" style="color: #61299F;"></i>
+                <i class="fas fa-star-half-alt" style="color: #61299F;"></i>
+              </div>
+            </div>
+            <div class="message">
+              <p>
+                Mauris venenatis aliquet consequat. Aliquam erat volutpat. Quisque hendrerit nibh sit amet porta porttitor. Etiam gravida, augue et pellentesque elementum, eros arcu condimentum massa, nec ultricies eros massa a nulla. Donec
+                ultricies sapien sed ornare commodo. Nam rhoncus, elit at tempor congue, enim leo tincidunt ipsum, sit amet volutpat mauris tortor nec lacus.
+              </p>
+            </div>
+          </div>
+          <!-- end of tenant review -->
+
+        </div>
+
+      </div>
+      <!-- end of reviews -->
+    </div>
+    <!-- end of reviews -->
+
+  </div>
+</div>
+<!-- end of main content -->
+
+
+
+{% endblock %}

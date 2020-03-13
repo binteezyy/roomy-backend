@@ -1,0 +1,266 @@
+{% extends "mobile-native/layout/layout.html" %}
+{% load static %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<!-- main content -->
+<div class="container-fluid">
+  <div class="container">
+    <div class="row d-flex flex-row justify-content-center" style="margin-top: 20px; margin-bottom: 10px;">
+
+      <!-- content -->
+      <div class="col-md-8 shadow p-3 mb-5 bg-white rounded">
+
+        <!-- step one  -->
+        <div id="step_one" class="tabcontent" style="display: block;">
+          <!-- personal information  -->
+          <div class="wrapper" style="margin-bottom: 40px;">
+            <h4>Personal information</h4>
+            <h6>May we know about you?</h6>
+            <hr>
+            <div class="d-flex flex-wrap justify-content-start align-items-center">
+              <div class="form-group" style="margin: 10px;">
+                <label for="">First name</label>
+                <input class="form-control" type="text" name="" value="">
+              </div>
+              <div class="form-group" style="margin: 10px;">
+                <label for="">Last name</label>
+                <input class="form-control" type="text" name="" value="">
+              </div>
+            </div>
+          </div>
+          <!-- end of personal information  -->
+          <!-- contact information  -->
+          <div class="wrapper" style="margin-bottom: 40px;">
+            <h4>Contact</h4>
+            <h6>How can we reach you?</h6>
+            <hr>
+            <div class="d-flex flex-wrap justify-content-start align-items-center">
+              <div class="form-group" style="margin: 10px;">
+                <label for="">Mobile</label>
+                <input class="form-control" type="text" name="" value="">
+              </div>
+            </div>
+          </div>
+          <!-- end of contact information  -->
+          <!-- address information  -->
+          <div class="wrapper" style="margin-bottom: 40px;">
+            <h4>Address</h4>
+            <h6>Where do you permanently reside?</h6>
+            <hr>
+            <div class="d-flex flex-wrap justify-content-start align-items-center">
+              <div class="form-group" style="margin: 10px;">
+                <label for="">Street</label>
+                <input class="form-control" type="email" name="" value="">
+              </div>
+              <div class="form-group" style="margin: 10px;">
+                <label for="">Barangay</label>
+                <input class="form-control" type="text" name="" value="">
+              </div>
+              <div class="form-group" style="margin: 10px;">
+                <label for="">City</label>
+                <input class="form-control" type="text" name="" value="">
+              </div>
+            </div>
+          </div>
+          <!-- end of address information  -->
+          <!-- supporting documents  -->
+          <div class="wrapper" style="margin-bottom: 40px;">
+            <h4>Supporting Documents</h4>
+            <h6>Please upload a valid government ID.</h6>
+            <hr>
+            <div class="d-flex justify-content-center align-items-center file-upload-wrapper"
+              style="width: 100%; height: 250px; outline: 2px dashed black; background-image: url('/static/img/placeholder_900x500.png'); background-repeat: no-repeat; background-size: cover; background-position: center; ">
+              <input type="file" id="input-file-now" class="file-upload" style="width: 100%; height: 100%; opacity: 0; cursor: pointer; " />
+            </div>
+          </div>
+          <!-- end of supporting documents  -->
+
+          <div class="wrapper" style="margin-top: 40px; float: right;">
+            <a class="tablinks btn btn-dark" onclick="stepProcess(event, 'step_two')" href="#navbar">next</a>
+          </div>
+        </div>
+        <!-- end of step one  -->
+
+        <!-- step two  -->
+        <div id="step_two" class="tabcontent">
+          <!-- booking information  -->
+          <div class="wrapper" style="margin-bottom: 40px;">
+            <h4>Booking details</h4>
+            <h6>How long are you planning to stay?</h6>
+            <hr>
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="form-group" style="margin: 10px;">
+                <label for="">Duration</label>
+                <select class="form-control" name="">
+                  <option value="">select duration of stay</option>
+                  <option value="">1 month</option>
+                  <option value="">2 months</option>
+                  <option value="">3 months</option>
+                  <option value="">4 months</option>
+                  <option value="">5 months</option>
+                  <option value="">6 months</option>
+                  <option value="">7 months</option>
+                  <option value="">8 months</option>
+                  <option value="">9 months</option>
+                  <option value="">10 months</option>
+                  <option value="">11 months</option>
+                  <option value="">12 months</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin: 10px;">
+                <label for="">Move-in</label>
+                <input class="form-control" type="date" name="" value="">
+              </div>
+            </div>
+          </div>
+          <!-- end of booking information  -->
+
+          <!-- add-ons  -->
+          <div class="wrapper">
+            <h4>Add-ons</h4>
+            <h6>Optional amenities you can avail of</h6>
+            <hr>
+            <div class="d-flex flex-column justify-content-start align-items-start">
+              <div class="custom-control custom-checkbox" style="margin: 10px;">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked1">
+                <label class="custom-control-label" for="defaultUnchecked1">Small locker + Php200</label>
+              </div>
+              <div class="custom-control custom-checkbox" style="margin: 10px;">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked2">
+                <label class="custom-control-label" for="defaultUnchecked2">Medium locker + Php400</label>
+              </div>
+              <div class="custom-control custom-checkbox" style="margin: 10px;">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked3">
+                <label class="custom-control-label" for="defaultUnchecked3">Large locker + Php600</label>
+              </div>
+              <div class="custom-control custom-checkbox" style="margin: 10px;">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked4">
+                <label class="custom-control-label" for="defaultUnchecked4">Padlock + Php100</label>
+              </div>
+            </div>
+          </div>
+          <!-- end of add-ons  -->
+          <div class="wrapper" style="margin-top: 40px; float: right;">
+            <a class="tablinks btn btn-dark" onclick="stepProcess(event, 'step_one')" href="#navbar">back</a>
+            <a class="tablinks btn btn-dark" onclick="stepProcess(event, 'step_three')" href="#navbar">next</a>
+          </div>
+        </div>
+        <!-- end of step two  -->
+
+        <!-- step three  -->
+        <div id="step_three" class="tabcontent">
+          <!-- summary  -->
+          <div class="wrapper" style="margin-bottom: 40px;">
+            <h4>Summary</h4>
+            <h6>Make sure to check if all the informations you've entered are correct.</h6>
+            <hr>
+            <div class="d-flex flex-wrap">
+              <div class="col-md-12 d-flex flex-column">
+                <h5>Personal information</h5>
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <td style="width: 150px;">Name</td>
+                      <td class="text-left">Geralt of rivia</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 150px;">Mobile</td>
+                      <td class="text-left">09238712334</td>
+                    </tr>
+                    <tr style="width: 150px;">
+                      <td>Address</td>
+                      <td class="text-left">Blk14 Lot12 Foxglove St. Addas IV-a Mambog Bacoor, Cavite</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div class="col-md-12 d-flex flex-column">
+                <h5>Booking details</h5>
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <td style="width: 150px;">Property</td>
+                      <td class="text-left">Pureza Mansion</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 150px;">Room No</td>
+                      <td class="text-left">B20</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 150px;">Duration</td>
+                      <td class="text-left">5 months</td>
+                    </tr>
+                    <tr>
+                      <td style="width: 150px;">Move-in</td>
+                      <td class="text-left">February 1, 2020</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div class="col-md-12 d-flex flex-column" style="padding: 20px;">
+                <h5>Payment details</h5>
+                <div class="wrapper" style="margin-top: 10px;">
+                  <span style="margin-bottom: 5px; margin-left: 10px;">Rent</span>
+                  <div class="wrapper d-flex justify-content-between align-items-center">
+                    <span style="margin-bottom: 5px; margin-left: 30px; font-style: italic;">1 month advance (monthly fee)</span>
+                    <span style="font-size: 25px;">Php4000</span>
+                  </div>
+                  <div class="wrapper d-flex justify-content-between align-items-center">
+                    <span style="margin-bottom: 5px; margin-left: 30px; font-style: italic;">1 month deposit (one time fee)</span>
+                    <span style="font-size: 25px;">Php4000</span>
+                  </div>
+                </div>
+                <div class="wrapper">
+                  <span style="margin-bottom: 5px; margin-left: 10px;">Add-ons</span>
+                  <div class="wrapper d-flex justify-content-between align-items-center">
+                    <span style="margin-bottom: 5px; margin-left: 30px; font-style: italic;">Medium Locker (monthly fee)</span>
+                    <span style="font-size: 25px;">+ Php400</span>
+                  </div>
+                  <div class="wrapper d-flex justify-content-between align-items-center">
+                    <span style="margin-bottom: 5px; margin-left: 30px; font-style: italic;">Padlock (one time fee)</span>
+                    <span style="font-size: 25px;">+ Php100</span>
+                  </div>
+                </div>
+                <div class="wrapper d-flex justify-content-end">
+                  <div class="wrapper d-flex flex-column flex-wrap" style="margin-top: 10px; padding-top: 20px; border-top: 2px solid black;">
+                    <span style="font-size: 25px;"> <span style="font-size: 30px;">TOTAL</span> <b>Php8500</b> </span>
+                    <span style="font-size: 20px; text-align: right;">all in payment</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div class="col-md-8 d-flex flex-column" style="padding: 20px;">
+                <div class="wrapper">
+                  <span>Once our staff has approved your booking, you'll receive your first bill along with instructions on how to pay.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of summary -->
+          <div class="wrapper" style="margin-top: 20px; float: right;">
+            <a class="tablinks btn btn-dark" onclick="stepProcess(event, 'step_two')" href="#navbar">back</a>
+            <button class="btn btn-dark" type="button" name="button">book now</button>
+          </div>
+        </div>
+        <!-- end of step three  -->
+
+      </div>
+      <!-- end of content -->
+
+    </div>
+  </div>
+</div>
+<!-- end of main content -->
+
+
+{% endblock %}

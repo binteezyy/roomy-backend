@@ -1,0 +1,56 @@
+{% extends "web/layout/layout.html" %}
+{% load static %}
+
+{% block title %}
+FAQ
+{% endblock %}
+
+{% block content %}
+
+<!-- main content -->
+<div class="container-fluid" style="margin-top: 80px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-9 bg-white" style="padding: 20px">
+        <h3>Frequently Asked Questions (FAQs)</h3>
+        {% for faq in faqs %}
+        <div class="row" style="margin-bottom: 20px; padding: 10px;">
+          <div class="accordion col-md-8" id="faqs">
+            <div class="card z-depth-0">
+              <div class="card-header" id="headingOne" style="margin: 0; padding: 0;">
+                <div type="button" data-toggle="collapse" data-target="#collapse{{faq.pk}}" aria-expanded="true" aria-controls="collapseOne" style="margin: 0; padding: 10px; background-color: #F5F5F5;">
+                  <span class="mb-0" style="font-size: 20px; font-weight: bold; text-transform: capitalize;">{{ faq.question }}</span>
+                </div>
+              </div>
+              <div id="collapse{{faq.pk}}" class="collapse {% if forloop.first %}show{% endif %}" aria-labelledby="headingOne" data-parent="#faqs">
+                <div class="card-body" style="margin: 0; padding: 10px; background-color: #F5F5F5;">
+                  <span style="color: grey;">{{ faq.answer }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+
+
+    <div class="row d-flex flex-wrap justify-content-center align-items-center" style="margin: 20px 0;">
+      {% if faqs.has_previous %}
+      <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page=1" style="width: 50px; height: 50px; text-align: center; font-size: 14px; color: white; border: 2px solid #B19CD9; border-radius: 25px; background-color: #B19CD9;">First</a>
+      <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ faqs.previous_page_number }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; color: white; border: 2px solid #B19CD9; border-radius: 25px; background-color: #B19CD9;">{{ faqs.previous_page_number }}</a>
+      {% endif %}
+      <a class="d-flex justify-content-center align-items-center mb-4 mr-1 text-white" style="width: 50px; height: 50px; text-align: center; font-size: 14px; color: white; border: 2px solid #B19CD9; border-radius: 25px; background-color: #B19CD9; pointer-events: none;">{{ faqs.number }}</a>
+      {% if faqs.has_next %}
+      <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ faqs.next_page_number }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; color: white; border: 2px solid #B19CD9; border-radius: 25px; background-color: #B19CD9;">{{ faqs.next_page_number }}</a>
+      <a class="mb-4" href="?page={{ faqs.paginator.num_pages }}" style="width: 50px; height: 50px; text-align: center; font-size: 14px; border: 2px solid #B19CD9; border-radius: 25px; color: white; background-color: #B19CD9;">Last</a>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+<!-- end of main content -->
+
+{% endblock %}

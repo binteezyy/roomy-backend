@@ -1,0 +1,86 @@
+{% extends "mobile-native/layout/layout.html" %}
+{% load static %}
+
+{% block title %}
+Contact
+{% endblock %}
+
+{% block content %}
+
+<!-- main content -->
+<div class="container-fluid">
+  <div class="container">
+    <div class="row d-flex flex-row flex-wrap jusfity-content-center align-items-stretch" style="min-height: 700px; margin-top: 20px; padding-bottom: 20px;">
+      <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 20px; flex-grow: 1;">
+        <img src="{% static "img\placeholder_1200x500.png" %}" alt="" style="width:100%; margin: 0; padding: 0;">
+      </div>
+
+      <div class="d-flex flex-column justify-content-center align-items-center z-depth-1" style="margin-bottom: 20px; padding: 80px 20px 80px 20px; flex-grow: 1;">
+        <h4>We'd love to hear from you.</h4>
+        <h6>Need to get in touch with our team? We're all ears.</h6>
+        <div class="d-flex flex-row justify-content-center align-items-center">
+          <button class="btn" style="width: 200px; background-color: #5392f9;" type="button" name="button" data-toggle="modal" data-target="#contactUsModal">Contact Us</button>
+        </div>
+        <span style="margin: 10px 0 10px 0; font-size: 18px;">or</span>
+        <h5>Reach us on social media.</h5>
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="www.facebook.com" style="margin: 10px;">
+            <img src="{% static "img\facebook.png" %}" style="width: 50px; height: 50px;" alt="">
+          </a>
+          <a href="www.twitter.com" style="margin: 10px;">
+            <img src="{% static "img\twitter.png" %}" style="width: 50px; height: 50px;" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- contact us modal -->
+  <form class="" action="#" method="post">
+
+    <!-- modal -->
+    <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+
+        <!-- modal content -->
+        <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
+
+          <!-- modal header -->
+          <div class="modal-header text-center">
+            <h4 class="text-center">Contact Us</h4>
+          </div>
+
+          <!-- modal body -->
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="col-form-label" for="">Name</label>
+                    <input class="form-control" type="text" name="" value="">
+                    <label class="col-form-label" for="">Email</label>
+                    <input class="form-control" type="email" name="" value="">
+                    <label class="col-form-label" for="">Mobile</label>
+                    <input class="form-control" type="text" name="" value="">
+                    <label class="col-form-label" for="">Message</label>
+                    <textarea class="form-control" name="name" rows="6" cols="50"></textarea> <br>
+                    <button class="btn btn-dark" style="margin: 0 auto;" type="button" name="button">Submit</button> <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </form>
+  <!-- end of login modal -->
+
+  <!-- end of content -->
+
+</div>
+<!-- end of main content -->
+
+{% endblock %}

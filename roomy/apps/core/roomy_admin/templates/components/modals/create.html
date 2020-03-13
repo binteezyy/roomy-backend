@@ -1,0 +1,105 @@
+{% load widget_tweaks %}
+{% load static %}
+
+<style media="screen">
+  .input-custom {
+    font-size: 15px;
+  }
+
+  .input-custom:active {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .input-custom:focus {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+
+</style>
+
+<form method="post" action="">
+    {% csrf_token %}
+    <div class="modal-header">
+        <h4 class="modal-title"> {% if viewtype == 'add_tenant' %} Add Tenant {% else %}Create{% endif %}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% if viewtype == 'add_tenant' %}
+    <div class="modal-body">
+        <div class="mb-2">
+
+        </div>
+        <div class="form-group">
+            <label for="id_username" style="font-size: 15px;">Username</label>
+            <input class="input-custom form-control" id="id_username" type="text" name="username" maxlength="56" required>
+        </div>
+        <div class="form-group">
+            <label for="id_password" style="font-size: 15px;">Password</label>
+            <input class="input-custom textinput textInput form-control" id="id_password" type="password" name="password" required >
+        </div>
+        <div class="form-group">
+            <label for="id_room" style="font-size: 15px;">Room</label>
+            <select name="room" placeholder="Room" class="input-custom form-control" id="id_room">
+                <option value="" selected="">---------</option>
+                {% for room in rooms %}
+                <option value="{{room.pk}}">{{room}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <a href="https://localhost:8080/sign-up/" onclick="window.open('https://localhost:8080/sign-up/',
+        'newwindow',
+        'width=750,height=750'); return false;" style="color: #61299F; font-size: 15px;">Not yet registered? Click here</a>
+    </div>
+    {% else %}
+    <div class=" modal-body">
+        <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
+            {% for error in form.non_field_errors %}
+            {{ error }}
+            {% endfor %}
+        </div>
+
+        {% for field in form %}
+        {% if field.label == 'Property address' %}
+        <script>
+            var searchInput = 'id_property_address'
+
+            $(document).ready(function () {
+                var autocomplete;
+                autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+                    types: ['geocode']
+                })
+            });
+        </script>
+        <label for="{{ field.id_for_label }}" style="font-size: 15px;">{{ field.label }}</label>
+        <input type="text" name="property_address" maxlength="256" placeholder="{{field.label}}" class="input-custom form-control"
+            id="{{field.id_for_label}}">
+        <div class="{% if field.errors %} invalid{% endif %}">
+            {% for error in field.errors %}
+            <p class="help-block">{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}" style="font-size: 15px;">{{ field.label }}</label>
+            {% render_field field class="input-custom form-control" placeholder=field.label %}
+            <div class="{% if field.errors %} invalid{% endif %}">
+                {% for error in field.errors %}
+                <p class="help-block">{{ error }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        {%endif%}
+        {% endfor %}
+    </div>{% endif %}
+
+
+    <div class="modal-footer">
+        <button type="button" class="submit-btn btn" style="color: white; background-color: #61299F;">{% if viewtype == 'add_tenant' %} Add Tenant
+            {% else %}Create{% endif %}</button>
+    </div>
+
+</form>

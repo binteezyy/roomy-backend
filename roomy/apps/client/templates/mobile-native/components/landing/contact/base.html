@@ -1,0 +1,193 @@
+{% extends "mobile-native/layout/layout.html" %}
+{% load static %}
+
+{% block extra_js %}
+<script type="text/javascript">
+  $('textarea').keyup(function() {
+
+    var characterCount = $(this).val().length,
+      current = $('#current'),
+      maximum = $('#maximum'),
+      theCount = $('#the-count');
+
+    current.text(characterCount);
+
+
+    /*This isn't entirely necessary, just playin around*/
+    if (characterCount < 70) {
+      current.css('color', '#666');
+    }
+    if (characterCount > 70 && characterCount < 90) {
+      current.css('color', '#6d5555');
+    }
+    if (characterCount > 90 && characterCount < 100) {
+      current.css('color', '#793535');
+    }
+    if (characterCount > 100 && characterCount < 120) {
+      current.css('color', '#841c1c');
+    }
+    if (characterCount > 120 && characterCount < 139) {
+      current.css('color', '#8f0001');
+    }
+
+    if (characterCount >= 140) {
+      maximum.css('color', '#8f0001');
+      current.css('color', '#8f0001');
+      theCount.css('font-weight', 'bold');
+    } else {
+      maximum.css('color', '#666');
+      theCount.css('font-weight', 'normal');
+    }
+  });
+
+  {
+    %
+    if form.errors or messages %
+  }
+  $(".modal").modal("show"); {
+    % endif %
+  }
+
+  document.getElementById("contact-form").addEventListener("submit", function() {
+    var recaptcha = $("#g-recaptcha-response").val();
+    if (recaptcha === "") {
+      event.preventDefault();
+      alert("Please check the recaptcha");
+    } else {
+      form.submit();
+    }
+  });
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- main content -->
+<style media="screen">
+  .con {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .con div {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 1000px) {
+    .con {
+      flex-direction: column;
+    }
+
+    .con div {
+      width: 100%;
+    }
+  }
+</style>
+
+<!-- main content -->
+<div class="container-fluid">
+  <div class="container">
+    <div class="con row">
+      <div class="d-flex flex-column justify-content-center align-items-center text-center" style="height: 80vh; padding: 20px;">
+        <span style="font-size: 35px; font-weight: bold; text-transform: uppercase;">CONTACT US</span> <br>
+        <h4>Need to talk with us? We're all ears.</h4>
+        <h5>We'd love to hear a feedback from you.</h5>
+        <div class="d-flex flex-row justify-content-center align-items-center" style="margin-top: 20px;">
+          <button class="btn" style="width: 200px; color: white; background-color: #61299F;" type="button" type="button" name="button" data-toggle="modal" data-target="#contactUsModal">MESSAGE</button>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center align-items-center"
+        style="min-height: 350px; margin: 20px auto; background-image: url('{% static 'img/team.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of main content -->
+
+<!-- contact us modal -->
+<form id="contact-form" action="#" method="POST">
+
+  <!-- modal -->
+  <div class="modal fade" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <!-- modal content -->
+      <div class="modal-content" style="margin: 0 auto; border-radius: 15px;">
+
+        <!-- modal header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Contact Us</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+
+        <!-- modal body -->
+        <div class="modal-body">
+          {% if messages %}
+          {% for message in messages %}
+          {{ message }}
+          {% endfor %}
+          {% else %}
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+
+                  {% csrf_token %}
+                  {% for field in form %}
+                  <div class="fieldWrapper" style="">
+                    <div class="form-group">
+                      <label class="col-form-label" for="" style="font-size: 15px; font-weight: bold;">{{field.label}}</label>
+
+                      {% if field.name == "message" %}
+
+                      <textarea class="input-custom form-control textarea" name="{{ field.html_name }}" id="{{field.id_for_label}}" style="resize:none;" maxlength="300" rows="{{field.field.widget.attrs.rows}}" cols="{{field.field.widget.attrs.cols}}"></textarea>
+                      <div class="d-flex justify-content-end" style="margin-top: 10px;">
+                        <span id="current" style="font-size: 14px;">0</span>
+                        <span id="maximum" style="font-size: 14px;">/300</span>
+                      </div>
+
+                      {% else %}
+
+                      <input class="input-custom form-control {% if field.errors %}is-invalid{% endif %}" type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}}" style="margin-bottom: 5px;"
+                        value="{{field.value|default_if_none:''}}" placeholder="">
+
+                      {% endif %}
+
+                      {% for error in field.errors %}
+                      <div class="invalid-feedback">
+                        <strong>{{ error|escape }}</strong>
+                      </div>
+                      {% endfor %}
+                    </div>
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                  </div>
+                  {% endfor %}
+
+                  <div class="d-flex flex-column justify-content-center" style="margin: 20px auto;">
+                    <div class="" style="margin: 20px auto;">
+                      {% include "web/components/recaptchav2.html" with RECAPTCHA_KEY=RECAPTCHA_KEY %}
+                    </div>
+                    <button class="btn" type="submit" name="button" style="margin: 20px auto; color: white; background-color: #61299F;">Submit</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</form>
+<!-- end of contact us modal -->
+
+{% endblock %}

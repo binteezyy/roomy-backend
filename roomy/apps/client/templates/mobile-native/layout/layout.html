@@ -1,0 +1,143 @@
+{% extends "mobile-native/base.html" %} 
+{% load static %}
+
+{% block extra_js %}
+{% endblock %}
+
+{% block layout %}
+
+<div class="content">
+  {% block content %}{% endblock content %}
+</div>
+
+{% endblock %}
+
+{% block footer %}
+
+<!-- footer -->
+<div class="container-fluid d-flex flex-column" style="margin-top: 100px; background-color: #FFFFFF;">
+  <div class="d-flex flex-column flex-wrap align-items-stretch" style="min-height: 300px; padding: 20px;">
+
+    <style media="screen">
+      @media screen and (max-width: 600px) {
+        .wrapper-link {
+          flex-direction: column;
+        }
+
+        .wrapper-link .link-container {
+          margin-bottom: 50px;
+        }
+      }
+    </style>
+
+    <!-- links -->
+    <div class="row wrapper-link d-flex flex-wrap justify-content-around">
+
+      <style media="screen">
+        .nav-link-footer {
+          margin: 0 0 5px 2px;
+          padding: 0;
+          color: black;
+          font-size: 15px;
+          border-bottom: 2px solid transparent;
+        }
+      </style>
+
+      <!-- Company Link-->
+      <div class="link-container" style="margin: 10px 30px 10px 30px;">
+        <!-- Links -->
+        <h5 class="text-uppercase">Roomy</h5>
+        <ul class="navbar-nav d-flex flex-column justify-content-start text-left">
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'about' %}">About</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'faq' %}">FAQ</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'contact' %}">Contact Us</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'terms_of_use' %}">Terms of Use</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <a class="nav-link nav-link-footer" href="{% url 'privacy' %}">Privacy Policy</a>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+
+      <!-- Follow Social Links -->
+      <div class="link-container" style="margin: 10px 30px 10px 30px;">
+        <!-- links -->
+        <h5 class="text-uppercase">FOLLOW</h5>
+        <ul class="navbar-nav d-flex flex-column justify-content-start align-items-start text-left">
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <img src="{% static "img\facebook.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+              <span>&nbsp</span>
+              <a class="nav-link nav-link-footer" href="www.facebook.com">Facebook</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <img src="{% static "img\twitter.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+              <span>&nbsp</span>
+              <a class="nav-link nav-link-footer" href="www.twitter.com">Twitter</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <img src="{% static "img\instagram.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+              <span>&nbsp</span>
+              <a class="nav-link nav-link-footer" href="www.instagram.com">Instagram</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="d-flex justify-content-start align-items-center">
+              <img src="{% static "img\youtube.png" %}" alt="" style="width: 15px; height: 15px; margin: 0 0 5px 2px; padding: 0; ">
+              <span>&nbsp</span>
+              <a class="nav-link nav-link-footer" href="www.youtube.com">Youtube</a>
+            </div>
+          </li>
+        </ul>
+        <!-- end of links -->
+
+      </div>
+
+      <!-- Download Link -->
+      <div class="link-container" style="margin: 10px 30px 10px 30px;">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <h5 style=" margin-bottom: 10px;">DOWNLOAD OUR APP NOW</h5>
+          <a href="play.google.com"><img src="{% static "img\svg_playstore.svg" %}" alt=""></a>
+        </div>
+      </div>
+
+    </div>
+    <!-- end of links -->
+
+  </div>
+</div>
+
+<div class="container-fluid" style="background-color: #303030;">
+  <!-- copyright -->
+  <div class="row d-flex justify-content-center" style="padding: 20px;">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <span style="font-size: 12px; color: white;">&copy; Roomy 2019 - 2020. </span>
+      <span style="font-size: 12px; color: white;">All rights reserved. Powered by <span style="color: #61299F; font-size: 15px; font-weight: bold;">PPTT</span> </span>
+    </div>
+  </div>
+  <!-- end of copyright -->
+</div>
+<!-- end of footer -->
+{% endblock %}

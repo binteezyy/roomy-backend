@@ -1,0 +1,24 @@
+{% extends "mobile-native/layout/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid" style="min-height: 100vh; display: flex; align-items: center">
+  <div class="container">
+    <div class="con row">
+      <div class="d-flex justify-content-start align-items-end" style="width: 100%; height: 45vh; background-image: url('{% static 'img/meeting.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <div class="d-flex flex-column justify-content-start" style="width: 100%; margin: 0; padding: 10px; background-color: rgba(255, 255, 255, 0.6);">
+          <span style="font-size: 22px; font-weight: bold;">Partner With Us</span>
+          <span style="font-size: 15px;">Nam vitae velit rhoncus, convallis est ut, iaculis neque.</span>
+          <div class="d-flex justify-content-start">
+            <a class="btn" style="width: 200px; color: white; background-color: #61299F;" type="button" href="{% url 'get_in_touch' %}">GET IN TOUCH</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- end of main content -->
+
+{% endblock %}

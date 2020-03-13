@@ -1,0 +1,80 @@
+{% extends "mobile-native/layout/layout.html" %}
+{% load static %}
+
+{% block content %}
+                    
+<style media="screen">
+  .input-custom {
+    font-size: 15px;
+  }
+
+  .input-custom:active {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .input-custom:focus {
+    border: 1px solid #61299F;
+    box-shadow: none;
+    outline: none;
+  }
+
+</style>
+
+<div class="container">
+  <div class="row d-flex flex-wrap justify-content-center align-items-center" style="margin: 10px;">
+    <div class="col-md-5 d-flex flex-column justify-content-center" style="margin: 20px; padding: 20px;">
+      <span style="margin: 5px auto 15px auto; font-size: 25px;">Create an account</span>
+      <div class="d-flex justify-content-center" style="margin: 0 15px 10px 15px;">
+        <a class="btn btn-block" style="margin: 0 15px; color: white; background-color: #DB4437; color: white;" href="{% url 'social:begin' 'google-oauth2' %}">
+          <i class="fab fa-google" style="color: white; margin-right: 10px;"></i>Sign up with google
+        </a>
+      </div>
+      <span style="margin: 0 50px 0 50px; text-align: center; font-size: 14px;">We will never share any information without your permission.</span>
+      <form class="form" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+
+        <div class="fieldWrapper" style="margin: 10px 15px;">
+          <div class="form-group" style="margin: 0 15px;">
+            <label for="{{field.id_for_label}}" style="text-transform: lowercase;">{{field.label}}</label>
+            <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}}"
+                style="margin-bottom: 5px;" value="{{field.value|default_if_none:''}}"
+                class="input-custom form-control {% if field.errors %}is-invalid{% endif %}">
+
+             {% for error in field.errors %}
+             <div class="invalid-feedback">
+               <span style="color: red;">{{ error }}</span>
+             </div>
+             {% endfor %}
+
+            {% if field.help_text %}
+            <div class="" style="margin: 10px;">
+              <span id="passwordHelpBlock" class="form-text text-muted" style="font-size: 14px; text-align: center;">
+                {{ field.help_text|safe }}
+              </span>
+            </div>
+            {% endif %}
+
+          </div>
+        </div>
+        {% endfor %}
+
+        <div class="d-flex justify-content-center" style="margin: 10px 15px;">
+          <button class="btn btn-block" style="margin: 0 15px; color: white; background-color: #61299F;" type="submit" name="button">Sign up</button>
+        </div>
+      </form>
+      <div class="text-center" style="margin-bottom: 20px; font-size: 14px;">
+        <span>Already have an account?</span>
+        <a href="{% url 'login' %}" type="button" name="button">Log in</a>
+      </div>
+    </div>
+  </div>
+  <form class="" action="index.html" method="post">
+
+
+  </form>
+</div>
+
+{% endblock %}

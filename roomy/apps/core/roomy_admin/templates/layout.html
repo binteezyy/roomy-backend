@@ -1,0 +1,302 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block layout %}
+<!-- Notif Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of Notif Modal -->
+
+<style media="screen">
+  @media only screen and (min-width: 500px) {
+    #logo-mini {
+      display: none;
+    }
+
+    #logo-full {
+      display: block;
+    }
+  }
+
+  @media only screen and (max-width: 770px) {
+    #logo-full {
+      display: none;
+    }
+
+    #logo-mini {
+      display: block;
+    }
+  }
+</style>
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+  <!-- Sidebar -->
+
+  <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #161616;" onchange="changeFunction()">
+
+    <!-- logo -->
+    <a id="logo-full" href="{% url 'admin-index' %}" style="margin: 15px auto 15px auto;">
+      <img id="logo" src="{% static "img\roomy_full.png" %}" alt="" style="width: 150px; height: 40px; margin: 0 auto;">
+    </a>
+    <a id="logo-mini" href="{% url 'admin-index' %}" style="margin: 15px auto 15px auto;">
+      <img id="logo" src="{% static "img\roomy_mini.png" %}" alt="" style="width: 60px; height: 54px; margin: 0 auto;">
+    </a>
+    <!-- end of logo -->
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'admin-index' %}">
+        <i class="fas fa-fw fa-home"></i>
+        <span>Home</span></a>
+    </li>
+
+    <!-- Nav Item - Dashboard Collapse Menu -->
+    <li class="nav-item">
+
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDashboard" aria-expanded="true" aria-controls="collapseCashflow">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span>
+      </a>
+      <div id="collapseDashboard" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+
+          <a class="collapse-item" href="{% url 'booking' %}"><i class="fas fa-fw fa-book"></i> <span>Booking</span>
+          </a>
+          <a class="collapse-item" href="{% url 'rental' %}"><i class="fas fa-fw fa-address-book"></i>
+            <span>Rental</span> </a>
+          <a class="collapse-item" href="{% url 'tenant' %}"><i class="fas fa-fw fa-user"></i>Tenant</a>
+          <a class="collapse-item" href="{% url 'guest' %}"><i class="fas fa-fw fa-user-friends"></i> <span>Guest</span>
+          </a>
+          <a class="collapse-item" href="{% url 'notif' %}"><i class="fas fa-fw fa-bell"></i> <span>Tenant
+              Notifications</span> </a>
+          <a class="collapse-item" href="{% url 'request' %}"><i class="fas fa-fw fa-comment"></i> <span>Tenant
+              Request</span> </a>
+
+        </div>
+      </div>
+    </li>
+
+    <!-- Nav Item - Cashflow Collapse Menu -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCashflow" aria-expanded="true" aria-controls="collapseCashflow">
+        <i class="fas fa-fw fa-dollar-sign"></i>
+        <span>Cashflow</span>
+      </a>
+      <div id="collapseCashflow" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="{% url 'billing' %}"><i class="fas fa-fw fa-hand-holding-usd"></i></i>
+            <span>Billing</span> </a>
+          <a class="collapse-item" href="{% url 'expense' %}"><i class="fas fa-fw fa-credit-card"></i>
+            <span>Expense</span> </a>
+          <a class="collapse-item" href="{% url 'fee' %}"><i class="fas fa-fw fa-file-invoice-dollar"></i></i>
+            <span>Fee</span> </a>
+        </div>
+      </div>
+    </li>
+
+    <!-- Nav Item - Management Collapse Menu -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Management</span>
+      </a>
+      <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="{% url 'property_management' %}"><i class="fas fa-fw fa-building"></i>
+            <span>Property</span> </a>
+          <a class="collapse-item" href="{% url 'catalog_management' %}"><i class="fas fa-fw fa-book"></i>
+            <span>Catalog</span> </a>
+          <a class="collapse-item" href="{% url 'room_management' %}"><i class="fas fa-fw fa-bed"></i> <span>Room</span>
+          </a>
+          <a class="collapse-item" href="{% url 'owner_notification' %}"><i class="fas fa-fw fa-bell"></i>
+            <span>Notifications</span> </a>
+        </div>
+      </div>
+    </li>
+
+  </ul>
+  <!-- End of Sidebar -->
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top z-depth-1" id="topbar" style="background-color: #202020;">
+
+        <!-- Topbar Navbar -->
+        <div class="navbar-nav justify-content-start align-items-center ml-auto">
+
+          <!-- <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+              Launch demo modal
+            </button>
+          </div> -->
+
+          <!-- Nav Item - Alerts -->
+          <div class="dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-bell fa-fw" style="color: white;"></i>
+              <!-- Counter - Alerts -->
+              <span class="badge badge-danger badge-counter"><span id="notif-counter-span">{{unread_notif}}</span></span>
+            </a>
+            <!-- Dropdown - Alerts -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+              <h6 class="dropdown-header" style="border: none; background-color: #61299F;">
+                Notifications
+              </h6>
+              {% for notif in notifs %}
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'owner_notification' %}">
+                <div>
+                  <div class="small text-gray-500">{{notif.time_stamp}}</div>
+                  <span class="font-weight-bold">{{notif.title}}</span>
+                </div>
+              </a>
+              {% endfor %}
+              <a class="dropdown-item text-center small text-gray-500" href="{% url 'owner_notification' %}">Show All
+                Alerts</a>
+            </div>
+          </div>
+
+          <!-- Nav Item - Messages -->
+          <div class="dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-envelope fa-fw" style="color: white;"></i>
+              <!-- Counter - Messages -->
+              <span class="badge badge-danger badge-counter"><span id="message-count-span">{{unread}}</span>
+            </a>
+            <!-- Dropdown - Messages -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+              <h6 class="dropdown-header" style="border: none; background-color: #61299F;">
+                Tenant Messages
+              </h6>
+              {% for message in messages %}
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'request' %}">
+                {% if not message.read %}<div class="font-weight-bold"> {%endif%}
+                  <div class="text-truncate"> {{ message.subject }}</div>
+                  <div class="small text-gray-500">
+                    Property: {{ message.transaction_id.room_id.catalog_id.property_id.name }}
+                    Catalog: {{message.transaction_id.room_id.catalog_id.name}}
+                    Room: {{message.transaction_id.room_id.number}}
+                    Floor: {{message.transaction_id.room_id.catalog_id.floor}}
+                  </div>
+                  {% if not message.read %}
+                </div>{%endif%}
+              </a>
+              {% endfor %}
+              <a class="dropdown-item text-center small text-gray-500" href="{% url 'request' %}">Read More
+                Messages</a>
+            </div>
+          </div>
+
+          <div class="topbar-divider d-none d-sm-block"></div>
+
+          <!-- Nav Item - User Information -->
+          <div class="dropdown no-arrow">
+
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+              <div class="img-profile"
+                style="width: 40px; height: 40px; margin: 0 10px 0 0; padding: 0; border-radius: 20px; background-image: url('{% static 'img/elon.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+              <span class="mr-2 d-none d-lg-inline small" style="text-transform: uppercase;">{{ request.user.username }}</span>
+            </a>
+
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown" style="padding: 10px; border: none;">
+              <a class="dropdown-item" href="{% url 'owner-profile' %}">
+                <i class="fas fa-user fa-sm fa-fw mr-2" style="color: #61299F;"></i>
+                Profile
+              </a>
+              <a class="dropdown-item" href="{% url 'admin-logout' %}">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2" style="color: #61299F;"></i>
+                Logout
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </nav>
+      <!-- End of Topbar -->
+
+      <!-- Begin Page Content -->
+      <div class="container-fluid" style="min-height: 100vh;">
+
+        <!-- Content Row -->
+        {% block content %}
+
+        {% endblock %}
+
+      </div>
+      <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <div class="container-fluid" style="margin-top: 40px; background-color: #202020;">
+      <!-- copyright -->
+      <div class="row d-flex justify-content-center" style="padding: 20px;">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <span style="font-size: 11px; color: white;">&copy; Roomy 2019 - 2020. </span>
+          <span style="font-size: 11px; color: white;">All rights reserved. Powered by <span style="color: #61299F; font-size: 15px; font-weight: bold;">PPTT</span> </span>
+        </div>
+      </div>
+      <!-- end of copyright -->
+    </div>
+    <!-- End of Footer -->
+
+  </div>
+  <!-- End of Content Wrapper -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const webSocketBridge = new channels.WebSocketBridge();
+
+      webSocketBridge.connect('/notif-channel/booking/');
+      webSocketBridge.listen(function (action, stream) {
+        console.log("RESPONSE:", action, stream);
+      })
+
+      document.ws = webSocketBridge;
+    })
+  </script>
+</div>
+<!-- End of Page Wrapper -->
+
+<script>
+  $(document).ready(() => {
+    // SideNav Initialization
+    // $(".button-collapse").sideNav();
+
+    new WOW().init();
+  });
+
+</script>
+
+
+{% endblock %}
+<!-- end of sidebar & content -->

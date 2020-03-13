@@ -1,0 +1,361 @@
+{% load static %}
+{% load widget_tweaks %}
+<style media="screen">
+  .section p {
+    font-size: 0.75rem !important;
+  }
+</style>
+<div class="modal-header">
+  <h4 class="modal-title">
+    {% if viewtype == 'billing' %} Billing Information
+    {% elif viewtype == 'transaction' %} Transaction Information
+    {% elif viewtype == 'tenants' %} Tenant Information
+    {% elif viewtype == 'booking' %} Booking Information
+    {% elif viewtype == 'adminacc' %} Admin Account
+    {% elif viewtype == 'property' %} Property Information
+    {% elif viewtype == 'room' %} Room Information
+    {% elif viewtype == 'catalog' %} Catalog Information
+    {% elif viewtype == 'manage_tenants' %} Manage Tenants
+    {% elif viewtype == 'onotif' %} Owner Notification
+    {% endif %}
+  </h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+
+  <div class="container-fluid">
+
+    {% if viewtype == 'billing' %}
+    <div class="container">
+      <table class="table table-sm table-bordered">
+        <tbody>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Property</td>
+            <td>{{billing.transaction_id.room_id.catalog_id.property_id.name}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Tenant(s)</td>
+            <td>
+              <div class="d-flex flex-column">
+                {% for tenant in tenants %}
+                <span>{{tenant.user_id.username}}</span>
+                {% endfor %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Date</td>
+            <td>{{billing.time_stamp}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Fee(s)</td>
+            <td>
+              <div class="d-flex flex-column">
+                {% for fee in fees %}
+                <span>{{fee}}</span>
+                {% endfor %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Total</td>
+            <td>{{total}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    {% elif viewtype == 'transaction' %}
+    <div class="container">
+      <table class="table table-sm table-bordered">
+        <tbody>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Room</td>
+            <td>{{room}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Tenant(s)</td>
+            <td>
+              <div class="d-flex flex-column">
+                {% for tenant in tenants %}
+                <span>{{tenant.user_id.username}}</span>
+                {% endfor %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Start date</td>
+            <td>{{date}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Fee(s)</td>
+            <td>
+              <div class="d-flex flex-column">
+                {% for add_on in add_ons %}
+                <span>{{add_on}}</span>
+                {% endfor %}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Total</td>
+            <td>{{total}}</td>
+
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Rating</td>
+            <td>{{rating}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    {% elif viewtype == 'tenants' %}
+    <div class="container">
+      <table class="table table-sm table-bordered">
+        <tbody>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Name</td>
+            <td>{{tenant.user_id.first_name}} {{tenant.user_id.last_name}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Birthday</td>
+            <td>{{birthday}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Mobile</td>
+            <td>{{tenant.cell_number}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Address</td>
+            <td>{{tenant.provincial_address}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    {% elif viewtype == 'booking' %}
+    <div class="container">
+      <ul>
+        <li>
+          <h5> Applicant: {{user.username}} - {{user.first_name}} {{user.last_name}}
+          </h5>
+        </li>
+        <li>
+          <h5> Start date: {{booking.start_date}}
+          </h5>
+        </li>
+        <li>
+          <h5> Applicant message: {{booking.message}}
+          </h5>
+        </li>
+        <li>
+          <h5> Property: {{booking.catalog_id.property_id}}
+          </h5>
+        </li>
+        <li>
+          <h5> Room: {{room}}
+          </h5>
+        </li>
+        <li>
+          <h5> Room type: {{type}}
+          </h5>
+        </li>
+        <li>
+          <h5> Total Amount:
+            {{total}}
+          </h5>
+          <h5>
+            <ol>
+              <h5> Fees: </h5>
+              {% for fee in fees %}
+              <li>{{fee}}</li>
+              {% endfor %}
+              <li> Room rate: {{rate}}</li>
+            </ol>
+          </h5>
+        </li>
+        <li>
+          <h5> Documents submitted:
+            <ol>
+              <li>
+                {{booking.document1_id}}
+              </li>
+              <li>
+                {{booking.document2_id}}
+              </li>
+
+            </ol>
+          </h5>
+        </li>
+        <li>
+          <h5> Status: {{status}}
+          </h5>
+        </li>
+      </ul>
+    </div>
+
+    {% elif viewtype == 'property' %}
+    <div class="container">
+      <table class="table table-sm table-bordered">
+        <tbody>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Property</td>
+            <td>{{property.name}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Type</td>
+            <td>{{type}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Description</td>
+            <td>{{property.description}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Address</td>
+            <td>{{property.property_address}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="" style="margin-bottom: 20px;">
+        <span>Property Images</span>
+        <div class="d-flex justify-content-center" style="width: 100%; margin-top: 10px; border: 1px solid lightgrey;">
+          <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 300px; min-height: 300px; padding: 20px;">
+            {% for image in images %}
+            <img src="/media/{{image.img_path}}" style="width: 100%; margin: 10px;">
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% elif viewtype == 'catalog' %}
+    <div class="container">
+      <table class="table table-sm table-bordered">
+        <tbody>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Property</td>
+            <td>{{catalog.property_id.name}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Name</td>
+            <td>{{catalog.name}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Type</td>
+            <td>{{type}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Description</td>
+            <td>{{catalog.description}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Floor</td>
+            <td>{{catalog.floor}}</td>
+          </tr>
+          <tr>
+            <td style="width: 150px; font-size: 16px; font-weight: bold;">Rate</td>
+            <td>Php {{catalog.rate}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="" style="margin-bottom: 20px;">
+        <span>2D Images</span>
+        <div class="d-flex justify-content-center" style="width: 100%; margin-top: 10px; border: 1px solid lightgrey;">
+          <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 300px; min-height: 300px; padding: 20px;">
+            {% for image in images_2d %}
+            <img src="/media/{{image.img_path}}" style="width: 100%; margin: 10px;">
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="" style="margin-bottom: 20px;">
+        <span>3D Images</span>
+        <div class="d-flex justify-content-center" style="width: 100%; margin-top: 10px; border: 1px solid lightgrey;">
+          <div class="d-flex justify-content-center align-items-center" style="width: 300px; min-height: 300px; padding: 10px;">
+            {% for image in images_3d %}
+            <img src="/media/{{image.img_path}}" style="width: 100%;">
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% elif viewtype == 'manage_tenants' %}
+    <div class="container">
+      <table class="table table-sm table-bordered">
+        <thead>
+          <tr role="row">
+            <th style="font-weight: bold; text-align: center;">Tenant</th>
+            <th style="width: 150px; font-weight: bold; text-align: center;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tenant in tenants %}
+
+          <tr>
+            <td>
+              <span>{{ tenant.user_id.username }}</span>
+            </td>
+            {% if tenants.count != 1 %}
+
+            <td>
+              <button type="button" class="remove-tenant btn btn-sm btn-raised btn-warning m-1" data-id="/remove-tenant/{{transaction.id}}/{{tenant.id}}" style="margin: 0 50px;">
+                <i class="fa fa-trash"></i></button>
+            </td>
+
+            {% else %}
+
+            <td>
+              <button type="button" class="remove-tenant btn btn-sm btn-raised btn-warning" data-id="/remove-tenant/{{transaction.id}}/{{tenant.id}}" style="margin: 0 50px;" disabled>
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+
+            {% endif %}
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% elif viewtype == 'onotif' %}
+    <div class="container">
+      <ul>
+        <li>
+          <h5> Title:
+            {{onotif.title}}
+          </h5>
+        </li>
+        <li>
+          <h5> Body:
+            {{onotif.body}}
+          </h5>
+        </li>
+      </ul>
+    </div>
+
+    {% endif %}
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" data-dismiss="modal" style="color: white; background-color: #61299F;">Close</button>
+</div>
+
+{% if viewtype == 'manage_tenants' %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".remove-tenant").each(function() {
+      $(this).modalForm({
+        formURL: $(this).data('id')
+      });
+    });
+  });
+</script>
+{% endif %}

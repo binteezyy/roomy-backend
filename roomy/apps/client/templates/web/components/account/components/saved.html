@@ -1,0 +1,25 @@
+{% extends "web/components/account/base.html" %}
+{% load static %}
+
+
+{% block account_container %}
+{% if saved %}
+{% else %}
+<div class="container-fluid">
+  <div class="container">
+    <div class="row bg-white" style="padding: 20px;">
+      <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
+        <div class="wrapper">
+          <h4>Saved</h4>
+          <span style="font-size: 15px;">Compare places and prices</span>
+        </div>
+      </div>
+      <div class="d-flex flex-column justify-content-center aling-items-center" style="width: 100%; margin: 20px auto;">
+        <img src="{% static "img/undraw_phone_call_grmk.png" %}" alt="" class="mx-auto" style="width:20vw;display:block">
+      </div>
+      <button type="button" class="btn" name="button" style="margin: 20px auto; color: white; background-color: #61299F;">Find Places</button>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

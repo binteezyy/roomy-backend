@@ -1,0 +1,134 @@
+{% extends "web/layout/layout.html" %}
+{% load static %}
+
+
+{% block content %}
+<style media="screen">
+  .search-bar-custom:hover {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+  .search-bar-custom:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+  .search-bar-custom:active {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+</style>
+
+<div class="content" style="margin-top: 60px;">
+  <div class="search_area form-inline mr-auto mb-4 d-flex justify-content-center">
+    <form _lpchecked="1" style="width: 100%;" method="GET">
+      <div class="bar d-flex justify-content-center align-items-center" style="background-color: #B19CD9;">
+        <div class="d-flex justify-content-center align-items-center bar_wrapper">
+          <input name="search" type="text" class="form-control search-bar-custom" placeholder="Search for a property or location" aria-label="Search" aria-describedby="search" style="border: none; outline: none;">
+          <button class="btn btn-lg" value="submit" id="search-icn" style="color: white; background-color: #61299F;">SEARCH</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="container-fluid" style="margin-bottom: 50px;">
+    <div class="container d-flex flex-column justify-content-center align-items-center">
+      <div class="row d-flex flex-column justify-content-center align-items-center" style="width: 100%;">
+
+        <div class="row" style="margin-bottom: 50px;">
+          {% if message and search != "" %}
+          <span style="font-style: italic;">{{ message }} {{ specific_brand }}{{ text }}{{ cat }} </span>
+          {% endif %}
+        </div>
+
+        <div class="col-xl-3"></div>
+        <div class="col-xl-6 d-flex flex-wrap justify-content-center align-items-center">
+          {% for room in rooms %}
+
+          <!-- room container -->
+          <div class="d-flex flex-column justify-content-center" style="width: 100%;">
+          <a href="{% url 'room' room.pk %}" style="color: black; text-decoration: none;">
+
+              <!-- room image -->
+              <div class="img-container">
+                <div class="d-flex justify-content-end align-items-end"
+                  style="width: 100%; height: 300px; background-image:url('{% if room.img_2d.all %}{{MEDIA_URL}}{{ room.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-position: center; background-size: cover; background-repeat: no-repeat;">
+                  <span style="margin: 10px; padding: 5px 10px; color: white; font-size; 18px; font-weight: bold; text-transform: uppercase; background-color: #61299F;">Php{{room.rate}}</span>
+                </div>
+              </div>
+
+              <!-- room information -->
+              <div class="d-flex flex-column" style="margin-bottom: 20px; padding: 10px 0;">
+
+                <!-- room information first row -->
+                <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                  <span style="padding: 5px 15px; color: white; font-size: 15px; border: none; background-color: #61299F; border-radius: 20px;">
+                    {% if room.property_id.property_type == 0 %}
+                    Condominium
+                    {% elif room.property_id.property_type == 1 %}
+                    Apartment
+                    {% elif room.property_id.property_type == 2 %}
+                    Dormitory
+                    {% endif %}
+                  </span>
+                  <span style="font-size: 15px;"><i class="fas fa-star"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
+                </div>
+
+                <!-- room information second row -->
+                <div class="d-flex justify-content-start align-items-center">
+                  <span style="font-size: 22px; font-weight: bold; text-transform: uppercase;">{{ room.name }}</span>
+                </div>
+
+                <!-- room information third row -->
+                <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
+                  <span style="font-style: italic; text-transform: uppercase;">{{ room.property_id.name}}</span>
+                </div>
+
+                <!-- room address -->
+                <div class="d-flex justify-content-start align-items-start" style="margin-bottom: 5px;">
+                  <span style="margin: 0 15px 0 0;">{{ room.property_id.property_address }}</span>
+                </div>
+
+              </div>
+              <!-- end of room information -->
+
+          </a>
+        </div>
+        <!-- end of room container -->
+
+          {% endfor %}
+
+          <div class="d-flex flex-wrap justify-content-center align-items-center" style="margin-top: 40px;">
+
+            {% if rooms.has_previous %}
+            <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page=1" style="width: 50px; height: 50px; text-align: center; color: white; font-size: 14px; border: 2px solid #B19CD9; border-radius: 25px; background-color: #B19CD9;">First</a>
+            <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ rooms.previous_page_number }}" style="width: 50px; height: 50px; text-align: center; color: white; font-size: 14px; border: 2px solid #B19CD9; border-radius: 25px; background-color: #B19CD9;">{{ rooms.previous_page_number }}</a>
+            {% endif %}
+            <a class="d-flex justify-content-center align-items-center text-centered mb-4 mr-1" style="width: 50px; height: 50px; text-align: center; color: white; font-size: 14px; border: 2px solid #B19CD9; border-radius: 25px; background-color: #B19CD9; pointer-events: none;">{{ rooms.number }}</a>
+            {% if rooms.has_next %}
+            <a class="d-flex justify-content-center align-items-center mb-4 mr-1" href="?page={{ rooms.next_page_number }}" style="width: 50px; height: 50px; text-align: center; color: white; font-size: 14px; border: 2px solid #B19CD9; border-radius: 25px; background-color: #B19CD9;">{{ rooms.next_page_number }}</a>
+            <a class="d-flex justify-content-center align-items-center mb-4" href="?page={{ rooms.paginator.num_pages }}" style="width: 50px; height: 50px; text-align: center; color: white; font-size: 14px; border: 2px solid #B19CD9; border-radius: 25px; background-color: #61299F;">Last</a>
+            {% endif %}
+          </div>
+
+        </div>
+        <div class="col-xl-3"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of main content -->
+
+{% endblock content %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/search-bar.css" %}">
+<link rel="stylesheet" href="{% static "vendor/animate.css" %}">
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static "js/search-bar.js" %}"></script>
+{% endblock %}
