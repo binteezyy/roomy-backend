@@ -1,59 +1,108 @@
 {% extends "web/components/account/base.html" %}
 {% load static %}
 {% load numbers %}
+{% block extra_css %}
+  {{ block.super}}
+  <style media="screen">
+      #main .row{
+        margin-bottom: 1rem;
+      }
+      #booking-info {
+        line-height: 0.5;
+      }
+      #booking-info h2{
+        font-weight: 500;
+      }
+      #booking-info h5{
+        font-weight: 500;
+      }
+  </style>
+{% endblock %}
+
+{% block extra_js %}
+  <script type="text/javascript">
+  $("#request-btn").modalForm({
+      formURL: "{% url 'booking-request' roomies.pk %}"
+  });
+  </script>
+{% endblock %}
 
 {% block account_container %}
-
-<div class="container-fluid">
-  <div class="container">
-    <div class="row bg-white" style="padding: 20px;">
-      <nav aria-label="breadcrumb" style="width: 100%;">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="{% url 'bookings' %}" style="color: #61299F;">Bookings</a>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            <span style="text-transform: uppercase;">{{catalog.name }}</span>
-          </li>
-        </ol>
-      </nav>
-
-      <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
-        <div class="d-flex flex-column">
-          <a href="{% url 'room' tenant_account.tenant_id.transaction_id.room_id.catalog_id.pk %}" style="color: #61299F; font-size: 28px; font-weight: bold; text-transform: uppercase; text-decoration: none">
-            {{ catalog.name }}
-          </a>
-          <span style="font-size: 20px; text-transform: uppercase;">{{catalog.property_id.name}}</span>
-          <span  style="font-size: 15px; text-transform: uppercase;">{{ catalog.floor|num_to_ordinal }} Floor, Room #{{ room.number }}</span>
-        </div>
+{% include "web/components/modals/_modal.html" with size="modal-lg" %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'bookings' %}">Bookings</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ catalog.name }}</li>
+    </ol>
+  </nav>
+  <div id="main" class="container-fluid p-2">
+    <!-- Booking Info -->
+    <div class="row">
+      <div id="booking-info" class="col">
+        <a href="{% url 'room' tenant_account.tenant_id.transaction_id.room_id.catalog_id.pk %}" style="text-decoration:none">
+          <h2>{{ catalog.name }}</h2></a>
+        <h5>Property {{catalog.property_id.name}}</h5>
+        <p>{{ catalog.floor|num_to_ordinal }} Floor</p>
+        <p>Room #{{ room.number }}</p>
       </div>
+      {% if roomies|length > 1 %}
+      <div class="col-7">
+        <p>My Roomies</p>
+      </div>
+      {% endif %}
+    </div>
 
-      <div class="d-flex flex-column" style="width: 100%; margin: 25px 0;">
-
-        <div class="card" style="margin-bottom: 20px;">
-          <a href="#collapseRequest" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
-            <h6 class="m-0 font-weight-bold text-dark">My Requests</h6>
-          </a>
-          <div id="collapseRequest" class="col card-body">
-            <div class="">
-              <p>{{ tenant_account.tenant_id}}</p>
-              <button class="btn" type="button" name="button" style="color: white; background-color: #61299F;">Request</button>
+    <div class="row card">
+      <a href="#collapseRequest" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
+        <h6 class="m-0 font-weight-bold text-dark">My Requests</h6>
+      </a>
+      <div id="collapseRequest" class="col card-body">
+          <div>
+            <button class="btn btn-primary btn-block" type="button" name="button" id="request-btn">Request</button>
+          </div>
+          {% if requests %}
+          <div class="card my-2">
+            <div class="card-body">
+              <div class="text-truncate" style="width:300px;">{{ requests.description }}</div>
+              <span class="text-muted font-italic">Recent request</span>
+              <span class="float-right {% if requests.status == 0 %}text-primary{% endif %} ">{{ requests.get_status_display }}</span>
             </div>
           </div>
-        </div>
+          <a href="{% url 'booking-request-list' booking.pk %}">SEE MORE ></a>
+          {% else %}
+          <div class="alert alert-secondary my-2" role="alert">You have no requests</div>
+          {% endif %}
 
-        <div class="card" style="margin-bottom: 20px;">
-          <a href="#collapseBilling" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
-            <h6 class="m-0 font-weight-bold text-dark">My Billing</h6>
-          </a>
-          <div id="collapseBilling" class="col card-body">
-            <div class="">
-              <p>{{ tenant_account.tenant_id}}</p>
-              <button class="btn" type="button" name="button" style="color: white; background-color: #61299F;">Request</button>
+      </div>
+    </div>
+    <div class="row card">
+      <a href="#collapseBilling" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
+        <h6 class="m-0 font-weight-bold text-dark">My Billing</h6>
+      </a>
+      <div id="collapseBilling" class="col card-body">
+        {% if billings %}
+        {% for BILLING in billings %}
+        <a style="text-decoration:none" href="#">
+          <div class="card my-2 text-white {% if BILLING.is_paid == "Paid" %}bg-success{% else %}bg-danger{% endif %} ">
+            <div class="card-body">
+              {% if forloop.first %}
+              <h3 class="card-title">[{{BILLING.transaction_id.room_id.catalog_id.property_id.name}}] {{ BILLING.get_date }}</h3>
+              {% else %}
+              <h5 class="card-title">[{{BILLING.transaction_id.room_id.catalog_id.property_id.name}}] {{ BILLING.get_date }}</h5>
+              {% endif %}
+
+              <span class="font-italic">Total: </span>
+              <span class="float-right font-weight-bold">{{ BILLING.is_paid }}</span>
+              <span>{{BILLING.billing_total}}</span>
             </div>
           </div>
-        </div>
+        </a>
+        {% endfor %}
 
+        <a href="{% url 'booking-billing-list' booking.pk %}">SEE MORE ></a>
+        {% else %}
+        <div class="alert alert-secondary my-2" role="alert">You have no billings</div>
+        {% endif %}
       </div>
     </div>
   </div>

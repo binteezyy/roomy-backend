@@ -140,7 +140,18 @@ class Billing(models.Model):
     def __str__(self):
         return f'{self.paid}, {self.time_stamp}, {self.transaction_id}'
 
-
+    def is_paid(self):
+        if self.paid:
+            return "Paid"
+        else:
+            return "Pending"
+    def billing_total(self):
+        total = 0
+        for y in self.billing_fee.all():
+            total += y.amount
+        return total
+    def get_date(self):
+        return self.time_stamp.strftime("%B %d, %Y")
 class Request(models.Model):
     r_status = [
         (0, 'Pending'),
