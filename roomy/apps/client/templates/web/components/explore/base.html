@@ -54,7 +54,7 @@
               <!-- room image -->
               <div class="img-container">
                 <div class="d-flex justify-content-end align-items-end"
-                  style="width: 100%; height: 300px; background-image:url('{% if room.img_2d.all %}/media/{{ room.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-position: center; background-size: cover; background-repeat: no-repeat;">
+                  style="width: 100%; height: 300px; background-image:url('{% if room.img_2d.all %}{{MEDIA_URL}}{{ room.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-position: center; background-size: cover; background-repeat: no-repeat;">
                   <span style="margin: 10px; padding: 5px 10px; color: white; font-size; 18px; font-weight: bold; text-transform: uppercase; background-color: #61299F;">Php{{room.rate}}</span>
                 </div>
               </div>

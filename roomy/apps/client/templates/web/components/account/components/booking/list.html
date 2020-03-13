@@ -28,13 +28,8 @@
   {% for book in bookings %}
 
   <style media="screen">
-    #bookcard- {
-        {
-        book.pk
-      }
-    }
-    .img {
-      background-image:url({% if book.catalog_id.img_2d.all %}/media/{{ book.catalog_id.img_2d.all.0 }}{% else %}{% static "img\placeholder_900x500.png" %}{% endif %});
+    #bookcard-{{book.pk}} .img {
+      background-image:url({% if book.catalog_id.img_2d.all %}{{MEDIA_URL}}{{ book.catalog_id.img_2d.all.0 }}{% else %}{% static "img\placeholder_900x500.png" %}{% endif %});
       background-position: center center;
       background-size: cover;
       background-repeat: no-repeat;

@@ -1,6 +1,5 @@
 {% extends "web/layout/layout_home.html" %}
 {% load static %}
-
 {% block title %}
 Roomy
 {% endblock %}
@@ -148,7 +147,7 @@ Roomy
 
             <!-- room image -->
             <div class="img-container d-flex justify-content-end align-items-end"
-              style="width: 300px; height: 200px; margin: 0 auto 5px auto; background-image:url('{% if dorm.img_2d.all %}/media/{{ dorm.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+              style="width: 300px; height: 200px; margin: 0 auto 5px auto; background-image:url('{% if dorm.img_2d.all %}{{MEDIA_URL}}{{ dorm.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
               <span style="margin: 5px; padding: 2px 5px; color: white; font-size; 14px; font-weight: bold; text-transform: uppercase; background-color: #61299F;">Php{{dorm.rate}}</span>
             </div>
             <!-- end of room image -->
@@ -203,7 +202,7 @@ Roomy
 
             <!-- room image -->
             <div class="img-container d-flex justify-content-end align-items-end"
-              style="width: 300px; height: 200px; margin: 0 auto 5px auto; background-image:url('{% if condo.img_2d.all %}/media/{{ condo.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+              style="width: 300px; height: 200px; margin: 0 auto 5px auto; background-image:url('{% if condo.img_2d.all %}{{MEDIA_URL}}{{ condo.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
               <span style="margin: 5px; padding: 2px 5px; color: white; font-size: 14px; font-weight: bold; text-transform: uppercase; background-color: #61299F;">Php{{condo.rate}}</span>
             </div>
             <!-- end of room image -->
@@ -257,7 +256,7 @@ Roomy
 
             <!-- room image -->
             <div class="img-container d-flex justify-content-end align-items-end"
-              style="width: 300px; height: 200px; margin: 0 auto 5px auto; background-image:url('{% if apartment.img_2d.all %}/media/{{ apartment.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+              style="width: 300px; height: 200px; margin: 0 auto 5px auto; background-image:url('{% if apartment.img_2d.all %}{{MEDIA_URL}}{{ apartment.img_2d.all.0 }} {% else %}/static/img/placeholder.png {% endif %}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
               <span style="margin: 5px; padding: 2px 5px; color: white; font-size: 14px; font-weight: bold; text-transform: uppercase; background-color: #61299F;">Php{{apartment.rate}}</span>
             </div>
             <!-- end of room image -->

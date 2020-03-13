@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 
+
 class ClientAdmin(AdminSite):
     name        = "client_admin"
     site_header = "Roomy — Client"
@@ -21,9 +22,9 @@ client_admin = ClientAdmin(name='client_admin')
 urlpatterns = [
 ]
 
+
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += [path('__debug__/', include(debug_toolbar.urls)),]
-
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)

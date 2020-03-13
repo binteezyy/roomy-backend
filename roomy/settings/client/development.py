@@ -21,7 +21,7 @@ DATABASES = {
 INTERNAL_IPS = ['127.0.0.1',]
 MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
 DEBUG_TOOLBAR_PANELS = [
-    'debug_toolbar.panels.versions.VersionsPanel', 
+    'debug_toolbar.panels.versions.VersionsPanel',
     'debug_toolbar.panels.timer.TimerPanel',
     'debug_toolbar.panels.settings.SettingsPanel',
     'debug_toolbar.panels.headers.HeadersPanel',
@@ -39,3 +39,11 @@ DEBUG_TOOLBAR_PANELS = [
 DEBUG_TOOLBAR_CONFIG = {
     'JQUERY_URL': '',
 }
+
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+
+STATIC_ROOT = '/static/'
+STATIC_URL = '/static/'
+
+MEDIA_ROOT = '/media'
+MEDIA_URL = '/media/'
