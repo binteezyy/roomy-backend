@@ -18,8 +18,17 @@
       }
   </style>
 {% endblock %}
+
+{% block extra_js %}
+  <script type="text/javascript">
+  $("#request-btn").modalForm({
+      formURL: "{% url 'booking-request' roomies.pk %}"
+  });
+  </script>
+{% endblock %}
+
 {% block account_container %}
-<!-- -->
+{% include "web/components/modals/_modal.html" with size="modal-lg" %}
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{% url 'bookings' %}">Bookings</a></li>
@@ -48,10 +57,22 @@
         <h6 class="m-0 font-weight-bold text-dark">My Requests</h6>
       </a>
       <div id="collapseRequest" class="col card-body">
-        <div class="">
-          <p>{{ tenant_account.tenant_id}}</p>
-          <button class="btn btn-success" type="button" name="button">Request</button>
-        </div>
+          <div>
+            <button class="btn btn-primary btn-block" type="button" name="button" id="request-btn">Request</button>
+          </div>
+          {% if requests %}
+          <div class="card my-2">
+            <div class="card-body">
+              <div class="text-truncate" style="width:300px;">{{ requests.description }}</div>
+              <span class="text-muted font-italic">Recent request</span>
+              <span class="float-right {% if requests.status == 0 %}text-primary{% endif %} ">{{ requests.get_status_display }}</span>
+            </div>
+          </div>
+          <a href="{% url 'booking-request-list' booking.pk %}">SEE MORE ></a>
+          {% else %}
+          <div class="alert alert-secondary my-2" role="alert">You have no requests</div>
+          {% endif %}
+
       </div>
     </div>
     <div class="row card">
@@ -59,10 +80,22 @@
         <h6 class="m-0 font-weight-bold text-dark">My Billing</h6>
       </a>
       <div id="collapseBilling" class="col card-body">
-        <div class="">
-          <p>{{ tenant_account.tenant_id}}</p>
-          <button class="btn btn-success" type="button" name="button">Request</button>
+        {% if billings %}
+        {% for BILLING in billings %}
+        <div class="card my-2 text-white {% if BILLING.is_paid == "Paid" %}bg-success{% else %}bg-danger{% endif %} ">
+          <div class="card-body">
+            <h5 class="card-title">[{{BILLING.transaction_id.room_id.catalog_id.property_id.name}}] {{ BILLING.get_date }}</h5>
+            <span class="font-italic">Total: </span>
+            <span class="float-right">{{ BILLING.is_paid }}</span>
+            <span>{{BILLING.billing_total}}</span>
+          </div>
         </div>
+        {% endfor %}
+
+        <a href="{% url 'booking-request-list' booking.pk %}">SEE MORE ></a>
+        {% else %}
+        <div class="alert alert-secondary my-2" role="alert">You have no billings</div>
+        {% endif %}
       </div>
     </div>
   </div>

@@ -82,13 +82,15 @@ class OwnerApplicationForm(forms.ModelForm):
             'phone_number',
         ]
 
+class RoomRequestForm(forms.ModelForm):
+    message = forms.CharField(label='Message',widget=forms.Textarea(attrs={"rows":"5", "cols":"20"}))
+    class Meta:
+        model = OwnerApplication
+        fields = [
+            'message',
+        ]
+        
+    def cleaned_data(self, *args, **kwargs):
+        message = self.cleaned_data.get('message')
 
-    # def validation(self, *args, **kwargs):
-    #     from django.core.validators import validate_email,validate_slug
-    #     from django.utils.translation import gettext as _
-    #     validate_slug(self.cleaned_data.get('full_name'))
-    #     try:
-    #         validate_email(self.cleaned_data.get('email'))
-    #     except Exception as e:
-    #         raise forms.ValidationError(_("Invalid Email"),code="invalid")
-    #     return super(OwnerApplicationForm, self).clean(*args, **kwargs)
+        return super(RoomRequestForm, self).clean(*args, **kwargs)
