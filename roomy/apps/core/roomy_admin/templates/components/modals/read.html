@@ -225,7 +225,7 @@
         <div class="d-flex justify-content-center" style="width: 100%; margin-top: 10px; border: 1px solid lightgrey;">
           <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 300px; min-height: 300px; padding: 20px;">
             {% for image in images %}
-            <img src="/media/{{image.img_path}}" style="width: 100%; margin: 10px;">
+            <img src="{{MEDIA_URL}}{{image.img_path}}" style="width: 100%; margin: 10px;">
             {% endfor %}
           </div>
         </div>
@@ -267,7 +267,7 @@
         <div class="d-flex justify-content-center" style="width: 100%; margin-top: 10px; border: 1px solid lightgrey;">
           <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 300px; min-height: 300px; padding: 20px;">
             {% for image in images_2d %}
-            <img src="/media/{{image.img_path}}" style="width: 100%; margin: 10px;">
+            <img src="{{MEDIA_URL}}{{image.img_path}}" style="width: 100%; margin: 10px;">
             {% endfor %}
           </div>
         </div>
@@ -277,7 +277,7 @@
         <div class="d-flex justify-content-center" style="width: 100%; margin-top: 10px; border: 1px solid lightgrey;">
           <div class="d-flex justify-content-center align-items-center" style="width: 300px; min-height: 300px; padding: 10px;">
             {% for image in images_3d %}
-            <img src="/media/{{image.img_path}}" style="width: 100%;">
+            <img src="{{MEDIA_URL}}{{image.img_path}}" style="width: 100%;">
             {% endfor %}
           </div>
         </div>

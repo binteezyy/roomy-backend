@@ -63,3 +63,10 @@ DEBUG_TOOLBAR_PANELS = [
 DEBUG_TOOLBAR_CONFIG = {
     'JQUERY_URL': '',
 }
+
+
+STATIC_ROOT = '/static/'
+STATIC_URL = '/static/'
+
+MEDIA_ROOT = '/media'
+MEDIA_URL = '/media/'
