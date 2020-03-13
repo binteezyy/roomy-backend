@@ -1,69 +1,62 @@
-{% extends "mobile-native/components/account/base.html" %}
+{% extends "web/components/account/base.html" %}
 {% load static %}
 {% load numbers %}
-{% block extra_css %}
-  {{ block.super}}
-  <style media="screen">
-      #main .row{
-        margin-bottom: 1rem;
-      }
-      #booking-info {
-        line-height: 0.5;
-      }
-      #booking-info h2{
-        font-weight: 500;
-      }
-      #booking-info h5{
-        font-weight: 500;
-      }
-  </style>
-{% endblock %}
-{% block account_container %}
-<!-- -->
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'bookings' %}">Bookings</a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{ catalog.name }}</li>
-    </ol>
-  </nav>
-  <div id="main" class="container-fluid p-2">
-    <!-- Booking Info -->
-    <div class="row">
-      <div id="booking-info" class="col">
-        <a href="{% url 'room' tenant_account.tenant_id.transaction_id.room_id.catalog_id.pk %}" style="text-decoration:none">
-          <h2>{{ catalog.name }}</h2></a>
-        <h5>Property {{catalog.property_id.name}}</h5>
-        <p>{{ catalog.floor|num_to_ordinal }} Floor</p>
-        <p>Room #{{ room.number }}</p>
-      </div>
-      {% if roomies|length > 1 %}
-      <div class="col-7">
-        <p>My Roomies</p>
-      </div>
-      {% endif %}
-    </div>
 
-    <div class="row card">
-      <a href="#collapseRequest" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
-        <h6 class="m-0 font-weight-bold text-dark">My Requests</h6>
-      </a>
-      <div id="collapseRequest" class="col card-body">
-        <div class="">
-          <p>{{ tenant_account.tenant_id}}</p>
-          <button class="btn btn-success" type="button" name="button">Request</button>
+{% block account_container %}
+
+<div class="container-fluid">
+  <div class="container">
+    <div class="row bg-white" style="padding: 20px;">
+      <nav aria-label="breadcrumb" style="width: 100%;">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'bookings' %}" style="color: #61299F;">Bookings</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            <span style="text-transform: uppercase;">{{catalog.name }}</span>
+          </li>
+        </ol>
+      </nav>
+
+      <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
+        <div class="d-flex flex-column">
+          <a href="{% url 'room' tenant_account.tenant_id.transaction_id.room_id.catalog_id.pk %}" style="color: #61299F; font-size: 28px; font-weight: bold; text-transform: uppercase; text-decoration: none">
+            {{ catalog.name }}
+          </a>
+          <span style="font-size: 20px; text-transform: uppercase;">{{catalog.property_id.name}}</span>
+          <span  style="font-size: 15px; text-transform: uppercase;">{{ catalog.floor|num_to_ordinal }} Floor, Room #{{ room.number }}</span>
         </div>
       </div>
-    </div>
-    <div class="row card">
-      <a href="#collapseBilling" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
-        <h6 class="m-0 font-weight-bold text-dark">My Billing</h6>
-      </a>
-      <div id="collapseBilling" class="col card-body">
-        <div class="">
-          <p>{{ tenant_account.tenant_id}}</p>
-          <button class="btn btn-success" type="button" name="button">Request</button>
+
+      <div class="d-flex flex-column" style="width: 100%; margin: 25px 0;">
+
+        <div class="card" style="margin-bottom: 20px;">
+          <a href="#collapseRequest" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
+            <h6 class="m-0 font-weight-bold text-dark">My Requests</h6>
+          </a>
+          <div id="collapseRequest" class="col card-body">
+            <div class="">
+              <p>{{ tenant_account.tenant_id}}</p>
+              <button class="btn" type="button" name="button" style="color: white; background-color: #61299F;">Request</button>
+            </div>
+          </div>
         </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <a href="#collapseBilling" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDetail">
+            <h6 class="m-0 font-weight-bold text-dark">My Billing</h6>
+          </a>
+          <div id="collapseBilling" class="col card-body">
+            <div class="">
+              <p>{{ tenant_account.tenant_id}}</p>
+              <button class="btn" type="button" name="button" style="color: white; background-color: #61299F;">Request</button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
+</div>
+
 {% endblock %}

@@ -88,14 +88,14 @@
     <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 20px;">
 
       <!-- room information -->
-      <div class="col-md-7 p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
+      <div class="col-md-7 bg-white" style="margin: 10px; padding: 20px;">
 
         <!-- room info first row -->
         <div class="d-flex justify-content-between align-items-center">
           <span style="font-size: 30px; font-weight: bold; text-transform: uppercase;">{{ room.name }}</span>
           <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 5px;">
             <div class="">
-              <span style="padding: 5px 15px 5px 15px; border: none; border-radius: 30px; font-size: 12px; text-transform: uppercase; background-color: #FF3F00;">
+              <span style="padding: 5px 15px; color: white; font-size: 15px; border: none; background-color: #61299F; border-radius: 20px;">
                 {% if room.property_id.property_type == 0 %}
                 Condominium
                 {% elif room.property_id.property_type == 1 %}
@@ -109,48 +109,40 @@
         </div>
 
         <!-- room info second row -->
-        <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 10px;">
+        <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 10px;">
           <span style="font-size: 18px; font-style: italic; text-transform: uppercase;">{{ room.property_id.name}}</span>
-          <span style="font-size: 16px;"><i class="fas fa-star" style="color: #FF3F00;"></i> 4.9 <span style="color: grey;">(1 review)</span></span>
         </div>
 
         <!-- room address -->
-        <div class="d-flex justify-content-start align-items-start" style="margin-bottom: 5px;">
-          <span style="margin: 0 13px 0 0; font-size: 16px;">{{ room.property_id.property_address }}</span>
+        <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 5px;">
+          <span style="margin-bottom: 5px; font-size: 17px;">{{ room.property_id.property_address }}</span>
         </div>
-        <hr style="border-top: 1px solid #FF3F00;">
 
         <!-- room description -->
         <div class="description">
-          <p style="padding: 0 0 20px 0">
+          <div class="" style="min-height: 300px; padding: 10px; background-color: #F5F5F5;">
             {{room.description|linebreaksbr}}
-          </p>
+          </div>
         </div>
 
       </div>
       <!-- end of room information -->
 
-
-
       <!-- booking -->
-      <div class="col-md-4 p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
-        <div class="" style="margin-bottom: 20px;">
-          <h5>Rates</h5>
-          <hr style="border-top: 1px solid #FF3F00;">
-          <span style="font-size: 25px;"><b>Php {{ room.rate }}</b>/month</span> <br>
-          <span style="font-size: 14px;"><b>1 month advance, 1 month deposit</span>
+      <div class="col-md-4" style="margin: 10px;">
+
+        <div class="d-flex flex-column bg-white" style="margin-bottom: 20px; padding: 20px;">
+          <h4>Rate</h4>
+          <span style="font-size: 18px;">Php {{ room.rate }} / month</span>
         </div>
 
-
-        <div class="" style="margin-bottom: 20px;">
-          <h5>Add-ons</h5>
-          <hr style="border-top: 1px solid #FF3F00;">
-          <p>
+        <div class="bg-white" style="margin-bottom: 20px; padding: 20px;">
+          <h4>Add-ons</h4>
+          <div class="d-flex justify-content-center align-items-center">
             {% for addon in addons %}
-                <span class="badge badge-pill badge-primary">{{ addon.description }}</span>
+                <span style="margin: 10px; padding: 5px 15px; color: white; background-color: #61299F; border-radius: 20px;">{{ addon.description }}</span>
             {% endfor %}
-
-          </p>
+          </div>
         </div>
         <!-- end of package inclusion -->
 
@@ -160,7 +152,7 @@
           {% csrf_token %}
           <input type="hidden" name="" value="{{ room.pk }}">
           <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 30px;">
-            <button type="button" id="book-button" class="btn btn-lg" style="padding-right: 80px; padding-left: 80px; background-color: #FF3F00; font-size: 20px;">BOOK NOW</button>
+            <button type="button" id="book-button" class="btn btn-lg" style="padding-right: 80px; padding-left: 80px; color: white; background-color: #61299F; font-size: 20px;">BOOK NOW</button>
           </div>
         </form>
         {% else %}
@@ -178,19 +170,21 @@
     {% if room.img_2d.all %}
     <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 20px;">
       <div class="col p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
-        <h5>Photos</h5>
-        {% for foto in room.img_2d.all %}
-        <div class="d-flex flex-wrap justify-content-center align-items-center" style="min-height: 300px;">
-          <a style="width: 220px; margin: 10px;" data-toggle="modal" data-target="#photoModal">
+        <h4>Photos</h4>
+
+        <div class="d-flex flex-wrap justify-content-around align-items-center" style="min-height: 300px;">
+          {% for foto in room.img_2d.all %}
+          <div class="" style="width: 300px;">
             <img class="img-fluid" src="/media/{{ foto.img_path}}" alt="">
-          </a>
+          </div>
+          {% endfor %}
         </div>
-        {% endfor %}
+
       </div>
     {% endif %}
       {% if room.img_3d.all %}
       <div class="col p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
-        <h5>360 view</h5>
+        <h4>360 view</h4>
         <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
           <a style="margin: 10px;">
             <!--img class="img-fluid" src="{% static "img\placeholder_900x500.png" %}" alt=""-->
@@ -206,7 +200,7 @@
     <div class="row d-flex flex-wrap justify-content-center align-items-start" style="margin-bottom: 50px;">
 
       <div class="col-md-4 p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
-        <h5>Pureza Mansion</h5>
+        <h4>Pureza Mansion</h4>
         <div class="d-flex justify-content-start align-items-center" style="margin-bottom: 10px;">
           <span style="font-size: 14px; ">Manila, Metro Manila</span>
           <span style="margin: 0 10px 0 10px;"><i class="fas fa-grip-lines-vertical"></i></span>
@@ -222,14 +216,14 @@
           <span>Response Time: within an hour</span>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-          <button class="btn" type="button" name="button" style="background-color: #FF3F00;">Contact</button>
+          <button class="btn" type="button" name="button" style="color: white; background-color: #61299F;">Contact</button>
         </div>
       </div>
 
       <div class="col-md-7 p-3 mb-5 bg-white" style="margin: 10px; padding: 20px;">
 
         <div class="wrapper" id="reviews" style="padding-bottom: 50px;">
-          <h5 style="margin-bottom: 20px;">Reviews</h5>
+          <h4 style="margin-bottom: 20px;">Reviews</h4>
 
           <!-- tenant review -->
           <div class="d-flex flex-column">
@@ -243,11 +237,11 @@
                 </div>
               </div>
               <div class="">
-                <i class="fas fa-star" style="color: #FF3F00;"></i>
-                <i class="fas fa-star" style="color: #FF3F00;"></i>
-                <i class="fas fa-star" style="color: #FF3F00;"></i>
-                <i class="fas fa-star" style="color: #FF3F00;"></i>
-                <i class="fas fa-star-half-alt" style="color: #FF3F00;"></i>
+                <i class="fas fa-star" style="color: #61299F;"></i>
+                <i class="fas fa-star" style="color: #61299F;"></i>
+                <i class="fas fa-star" style="color: #61299F;"></i>
+                <i class="fas fa-star" style="color: #61299F;"></i>
+                <i class="fas fa-star-half-alt" style="color: #61299F;"></i>
               </div>
             </div>
             <div class="message">

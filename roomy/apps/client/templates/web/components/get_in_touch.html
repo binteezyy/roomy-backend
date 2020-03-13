@@ -24,6 +24,24 @@
 
   -->
 
+  <style media="screen">
+    .input-custom {
+      font-size: 15px;
+    }
+
+    .input-custom:active {
+      border: 1px solid #61299F;
+      box-shadow: none;
+      outline: none;
+    }
+
+    .input-custom:focus {
+      border: 1px solid #61299F;
+      box-shadow: none;
+      outline: none;
+    }
+
+  </style>
 
 <div class="container-fluid" style="margin-top: 80px;">
   <div class="container">
@@ -32,7 +50,6 @@
       <div class="col-md-9 bg-white" style="padding: 20px;">
 
         <h3>Partner With Us</h3>
-        <hr style="border-top: 1px solid #FF3F00;">
 
         <div class="d-flex flex-column justify-content-center" style="margin: 0; padding: 20px;">
 
@@ -68,7 +85,7 @@
             <div class="" style="margin: 20px auto;">
               {% include "web/components/recaptchav2.html" with RECAPTCHA_KEY=RECAPTCHA_KEY %}
             </div>
-            <button class="btn" id="presubmit" type="submit" style="margin: 20px auto; background-color: #FF3F00;">Send</button>
+            <button class="btn" id="presubmit" type="submit" style="margin: 20px auto; color: white; background-color: #61299F;">Submit</button>
           </div>
           <!-- end of wrapper -->
 
