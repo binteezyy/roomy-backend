@@ -1,4 +1,4 @@
-{% extends "web/layout/layout.html" %}
+{% extends "mobile-native/layout/layout.html" %}
 {% load static %}
 
 {% block extra_css %}
@@ -77,9 +77,9 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-  {% include "web/components/modals/_modal.html" with size="" %}
+  {% include "mobile-native/components/modals/_modal.html" with size="" %}
 {% else %}
-  {% include "web/components/modals/_modal.html" with size="" %}
+  {% include "mobile-native/components/modals/_modal.html" with size="" %}
 {% endif %}
 <!-- main content -->
 <div class="container-fluid" style="margin-top: 80px;">
