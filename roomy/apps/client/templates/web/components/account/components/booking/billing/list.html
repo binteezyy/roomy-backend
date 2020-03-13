@@ -2,6 +2,7 @@
 {% load static %}
 {% load numbers %}
 {% block extra_css %}
+
 {{ block.super}}
 <link rel="stylesheet" href="{% static "vendor/datatables/datatables.min.css" %}">
 <style media="screen">
@@ -86,10 +87,12 @@
     ]
   });
 </script>
+  
 {% endblock %}
 
 {% block account_container %}
 {% include "web/components/modals/_modal.html" with size="modal-lg" %}
+
 <nav aria-label="breadcrumb" style="width: 100%;">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
@@ -118,6 +121,7 @@
                   <tr role="row" class="text-center">
                     <th style="width: 40%;">Billing Date</th>
                     <th style="width: 15%">Total</th>
+
                     <th>Action(s)</th>
                   </tr>
                 </thead>

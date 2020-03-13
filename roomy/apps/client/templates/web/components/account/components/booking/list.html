@@ -33,7 +33,6 @@
         book.pk
       }
     }
-
     .img {
       background-image:url({% if book.catalog_id.img_2d.all %}/media/{{ book.catalog_id.img_2d.all.0 }}{% else %}{% static "img\placeholder_900x500.png" %}{% endif %});
       background-position: center center;
