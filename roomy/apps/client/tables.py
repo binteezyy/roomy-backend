@@ -24,3 +24,18 @@ def RequestsTable(request,pk):
         data.append(x)
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')
+
+
+@login_required
+def BillingsTable(request,pk):
+    billings = Billing.objects.filter(transaction_id= Booking.objects.get(pk=pk).tenant_id.transaction_id.pk)
+    data = []
+    for r in billings:
+        print(r)
+        x = {"status": str(r.get_date()),
+             "subject" : str(r.billing_total()),
+             "date-created":"may lawit",
+             }
+        data.append(x)
+    data = json.dumps(data)
+    return HttpResponse(data, content_type='application/json')

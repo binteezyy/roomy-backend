@@ -26,7 +26,7 @@
     "ajax": {
      "processing": true,
      "dataSrc":'',
-     "url": "{% url 'booking-request-table' booking.pk %}",
+     "url": "{% url 'booking-billing-table' booking.pk %}",
     },
 
     "dom":"<'row'<'col-md-4'l><'col-md-8'f<'float-right'B>>>" +
@@ -63,17 +63,7 @@
         "targets":   1,
         "data": "subject",
       },
-      { "className": 'col-request-description',
-        "targets":   2,
-        "data": "description",
-        render:function(data, type, row)
-          {
-            let render = '<div style="width:300px; overflow:hidden;white-space:nowrap;text-overflow: ellipsis;">' +
-                            data +
-                          '</div>'
-            return render
-          },
-      },
+
       { "className": 'col-request-action',
         "targets":   -1,
         "data": 'id',
@@ -99,7 +89,7 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{% url 'bookings' %}">Bookings</a></li>
       <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'booking-view' booking.pk %}">{{ booking.catalog_id.name }}</a></li>
-      <li class="breadcrumb-item" aria-current="page">Requests</li>
+      <li class="breadcrumb-item" aria-current="page">Billings</li>
     </ol>
   </nav>
   <div class="container-fluid">
@@ -107,7 +97,7 @@
       <div class="col">
         <div class="card">
           <div class="card-header">
-            Requests
+            My Billings
           </div>
           <div class="card-body">
             <div class="table-responsive p-2">
@@ -116,9 +106,8 @@
               <table id="requests-Table" class="table table-bordered table-striped" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info">
                 <thead>
                   <tr role="row" class="text-center">
-                    <th style="width:10%;">Status</th>
-                    <th style="width:10%">Subject</th>
-                    <th style="width:40%">Description</th>
+                    <th style="width:40%;">Billing Date</th>
+                    <th style="width:15%">Total</th>
                     <th>Action(s)</th>
                   </tr>
                 </thead>

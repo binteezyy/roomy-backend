@@ -81,7 +81,7 @@ def BookingRequest(request,pk):
         return redirect(request.META.get('HTTP_REFERER', 'index'))
     else:
 
-        return render(request,"web/components/account/components/booking/request.html",context)
+        return render(request,"web/components/account/components/booking/request/base.html",context)
 
 def BookingRequestList(request,pk):
     booking = Booking.objects.get(pk=pk)
@@ -90,6 +90,15 @@ def BookingRequestList(request,pk):
         "booking": booking,
     })
     return render(request,"web/components/account/components/booking/request/list.html",context)
+
+def BookingBillingList(request,pk):
+    booking = Booking.objects.get(pk=pk)
+
+    context.update({
+        "booking": booking,
+    })
+    return render(request,"web/components/account/components/booking/billing/list.html",context)
+
 def saved(request):
     if request.user.is_authenticated:
 

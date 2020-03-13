@@ -82,17 +82,24 @@
       <div id="collapseBilling" class="col card-body">
         {% if billings %}
         {% for BILLING in billings %}
-        <div class="card my-2 text-white {% if BILLING.is_paid == "Paid" %}bg-success{% else %}bg-danger{% endif %} ">
-          <div class="card-body">
-            <h5 class="card-title">[{{BILLING.transaction_id.room_id.catalog_id.property_id.name}}] {{ BILLING.get_date }}</h5>
-            <span class="font-italic">Total: </span>
-            <span class="float-right">{{ BILLING.is_paid }}</span>
-            <span>{{BILLING.billing_total}}</span>
+        <a style="text-decoration:none" href="#">
+          <div class="card my-2 text-white {% if BILLING.is_paid == "Paid" %}bg-success{% else %}bg-danger{% endif %} ">
+            <div class="card-body">
+              {% if forloop.first %}
+              <h3 class="card-title">[{{BILLING.transaction_id.room_id.catalog_id.property_id.name}}] {{ BILLING.get_date }}</h3>
+              {% else %}
+              <h5 class="card-title">[{{BILLING.transaction_id.room_id.catalog_id.property_id.name}}] {{ BILLING.get_date }}</h5>
+              {% endif %}
+
+              <span class="font-italic">Total: </span>
+              <span class="float-right font-weight-bold">{{ BILLING.is_paid }}</span>
+              <span>{{BILLING.billing_total}}</span>
+            </div>
           </div>
-        </div>
+        </a>
         {% endfor %}
 
-        <a href="{% url 'booking-request-list' booking.pk %}">SEE MORE ></a>
+        <a href="{% url 'booking-billing-list' booking.pk %}">SEE MORE ></a>
         {% else %}
         <div class="alert alert-secondary my-2" role="alert">You have no billings</div>
         {% endif %}
