@@ -190,7 +190,10 @@ class TenantAccount(models.Model):
         return f'Tenant: {self.user_id.username} - {self.user_id.first_name} {self.user_id.last_name}'
 
     def get_bday(self):
-        return self.birthday.strftime("%Y-%m-%d")
+        try:
+            return self.birthday.strftime("%Y-%m-%d")
+        except Exception as e:
+            return None
 
     def save(self, *args, **kwargs):
         if self.transaction_id:
