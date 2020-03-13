@@ -135,15 +135,15 @@ Roomy
 
 <!-- Dormitory -->
 <div class="container-fluid" style="padding: 0 5%;margin-bottom: 50px;">
-  <div class="container-fluid bg-white">
+  <div class="container-fluid">
     <div class="row d-flex flex-column" style="margin: 0; padding: 15px 0;">
       <h3 style="font-weight: 1000;">Dormitory</h3>
       <span style="margin: 10px 0;">Affordable Residence halls perfect for students</span>
-      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; min-height: 300px;padding: 5px;">
+      <div class="d-flex flex-wrap justify-content-center align-items-start" style="width: 100%; min-height: 300px;padding: 5px;">
 
         {% for dorm in dorms %}
-        <div class="d-flex justify-content-center" style="margin: 20px;">
-          <a class="room-container" href="{% url 'room' dorm.pk %}" style="padding: 10px; color:black; text-decoration: none;">
+        <div class="d-flex justify-content-center bg-white" style="margin: 20px;">
+          <a class="room-container" href="{% url 'room' dorm.pk %}" style="margin: 0; color:black; text-decoration: none;">
 
             <!-- room image -->
             <div class="img-container d-flex justify-content-end align-items-end"
@@ -190,15 +190,15 @@ Roomy
 
 <!-- condominium -->
 <div class="container-fluid" style="padding: 0 5%;margin-bottom: 50px;">
-  <div class="container-fluid bg-white">
+  <div class="container-fluid">
     <div class="row d-flex flex-column" style="margin: 0; padding: 15px 0;">
       <h3 style="font-weight: 1000;">Condominium</h3>
       <span style="margin: 10px 0;">For people who prefer a luxurious and flexible lifestyle</span>
-      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; min-height: 300px; padding: 5px;">
+      <div class="d-flex flex-wrap justify-content-center align-items-start" style="width: 100%; min-height: 300px; padding: 5px;">
 
         {% for condo in condos %}
-        <div class="d-flex justify-content-center" style="margin: 20px;">
-          <a class="room-container" href="{% url 'room' condo.pk %}" style="padding: 10px; color:black; text-decoration: none;">
+        <div class="d-flex justify-content-center bg-white" style="margin: 20px;">
+          <a class="room-container" href="{% url 'room' condo.pk %}" style="margin: 0; padding: 10px; color:black; text-decoration: none;">
 
             <!-- room image -->
             <div class="img-container d-flex justify-content-end align-items-end"
@@ -244,15 +244,15 @@ Roomy
 
 <!-- apartment -->
 <div class="container-fluid" style="padding: 0 5%;margin-bottom: 50px;">
-  <div class="container-fluid bg-white">
+  <div class="container-fluid">
     <div class="row d-flex flex-column" style="margin: 0; padding: 15px 0;">
       <h3 style="font-weight: 1000;">Apartment</h3>
       <span style="margin: 10px 0;">Sustainable and affordable residential units</span>
-      <div class="d-flex flex-wrap justify-content-center align-items-center" style="width: 100%; min-height: 300px; padding: 5px;">
+      <div class="d-flex flex-wrap justify-content-center align-items-start" style="width: 100%; min-height: 300px; padding: 5px;">
 
         {% for apartment in apartments %}
-        <div class="d-flex justify-content-center" style="margin: 20px;">
-          <a class="room-container" href="{% url 'room' apartment.pk %}" style="padding: 10px; color:black; text-decoration: none;">
+        <div class="d-flex justify-content-center bg-white" style="margin: 20px;">
+          <a class="room-container" href="{% url 'room' apartment.pk %}" style="margin: 0; padding: 10px; color:black; text-decoration: none;">
 
             <!-- room image -->
             <div class="img-container d-flex justify-content-end align-items-end"
