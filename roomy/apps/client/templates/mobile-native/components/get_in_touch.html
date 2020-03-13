@@ -1,4 +1,4 @@
-{% extends "web/layout/layout.html" %}
+{% extends "mobile-native/layout/layout.html" %}
 {% load sekizai_tags %}
 {% load static %}
 
@@ -83,7 +83,7 @@
           <!-- wrapper -->
           <div class="d-flex flex-column justify-content-center" style="margin: 20px auto;">
             <div class="" style="margin: 20px auto;">
-              {% include "web/components/recaptchav2.html" with RECAPTCHA_KEY=RECAPTCHA_KEY %}
+              {% include "mobile-native/components/recaptchav2.html" with RECAPTCHA_KEY=RECAPTCHA_KEY %}
             </div>
             <button class="btn" id="presubmit" type="submit" style="margin: 20px auto; color: white; background-color: #61299F;">Submit</button>
           </div>

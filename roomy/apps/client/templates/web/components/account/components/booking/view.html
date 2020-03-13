@@ -73,6 +73,7 @@
             {{ catalog.name }}
           </a>
           <span style="font-size: 20px; text-transform: uppercase;">{{catalog.property_id.name}}</span>
+          
           <span style="font-size: 15px; text-transform: uppercase;">{{ catalog.floor|num_to_ordinal }} Floor, Room #{{ room.number }}</span>
 
           {% if roomies|length > 1 %}
