@@ -1,112 +1,12 @@
-{% extends "web/base.html" %}
+{% extends "mobile-native/base.html" %} 
 {% load static %}
+
 {% block extra_js %}
 {% endblock %}
+
 {% block layout %}
 
-<!-- navbar -->
-<nav class="navbar navbar-expand-xl navbar-light fixed-top" style="background-color: #FFFFFF; box-shadow: none;">
-
-  <!-- logo -->
-  <a href="{% url 'home' %}" style="margin: 5px 10px 5px 10px;">
-    <img src="{% static "img\roomy_full.png" %}" alt="" style="width: 125px; height: 35px; margin: 0 auto;">
-  </a>
-
-  <!-- expand button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
-
-  <!-- navigation -->
-  <div class="navbar-collapse collapse" id="navbarsExample04">
-
-    <!-- links -->
-    <ul class="navbar-nav mr-auto align-items-center">
-      <li class="nav-item">
-        <a class="nav-link" style="color: #141414; font-size: 18px;" href="{% url 'explore' %}">Explore</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="color: #141414; font-size: 18px;" href="{% url 'about' %}">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="color: #141414; font-size: 18px;" href="{% url 'faq' %}">FAQ</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="color: #141414; font-size: 18px;" href="{% url 'partner_with_us' %}">Partner With Us</a>
-      </li>
-    </ul>
-    <!-- end of links -->
-
-
-    <!-- login -->
-    <div class="nav-item d-flex align-items-center">
-
-      {% if user.is_authenticated %}
-
-      <div class="dropdown" style="margin: 0 auto;">
-        <a class="d-flex align-items-center" data-offset="50" href="#" id="dropdownMenuLink" data-toggle="dropdown" style="padding: 5px 10px; color: black;">
-          <div class="d-flex justify-content-center align-items-center" style="margin-right: 5px auto;">
-            <div class="img-profile"
-              style="width: 40px; height: 40px; margin: 0 10px 0 0; padding: 0; border-radius: 20px; background-image: url('{% static 'img/elon.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div> <span style="color: #61299F; font-size: 14px; font-weight: bold; text-transform: uppercase;">{{ user.username }}</span>
-          </div>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right shadow bg-white" aria-labelledby="dropdownMenuLink" style="width: 200px; margin: 5px 0; padding: 20px; border: none;">
-          <a class="nav-link" style="margin: 0 0 20px 0; padding: 0;" href="{% url 'profile' %}">
-            <i class="fas fa-user-alt" style="margin-right: 10px; color: #61299F;"></i>
-            Profile
-          </a>
-          <a class="nav-link" style="margin: 0 0 20px 0; padding: 0;" href="{% url 'bookings' %}">
-            <i class="fas fa-address-book" style="margin-right: 10px; color: #61299F;"></i>
-            Bookings
-          </a>
-          <a class="nav-link" style="margin: 0 0 20px 0; padding: 0; color: black;" href="{% url 'messages' %}">
-            <i class="fas fa-envelope" style="margin-right: 10px; color: #61299F;"></i>
-            Messages
-          </a>
-          <a class="nav-link" style="margin: 0 0 20px 0; padding: 0;" href="{% url 'logout' %}">
-            <i class="fas fa-sign-out-alt" style="margin-right: 10px; color: #61299F;"></i>
-            Log Out
-          </a>
-        </div>
-      </div>
-
-      {% else %}
-
-      <a class="bnt-link" href="{% url 'login' %}" style="margin: 0 auto; font-size: 15px; color: #61299F; font-weight: bold;">LOG IN</a>
-
-      {% endif %}
-    </div>
-
-  </div>
-  <!-- end of navigation -->
-</nav>
-<!-- end of navbar -->
-
-<div style="position: fixed; bottom:0; min-width: 250px; padding: 25px 15px; z-index:99999;">
-  <!-- Position toasts -->
-  <div style="bottom: 0; left: 0;">
-    <div class="toast fade show">
-      <div class="toast-header">
-        <strong class="mr-auto"><i class="fa fa-globe"></i> Hello, world!</strong>
-        <small class="text-muted">just now</small>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
-      </div>
-      <div class="toast-body">
-        This is a basic toast message.
-      </div>
-    </div>
-
-    <div class="toast fade show">
-      <div class="toast-header">
-        <strong class="mr-auto"><i class="fa fa-globe"></i> Hello, world!</strong>
-        <small class="text-muted">5 minutes ago</small>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
-      </div>
-      <div class="toast-body">
-        See? This is another toast message.
-      </div>
-    </div>
-  </div>
-</div>
-<div class="content" style="margin-top: 50px;">
+<div class="content">
   {% block content %}{% endblock content %}
 </div>
 

@@ -88,7 +88,7 @@ def home_ajax(request):
     payments = 0
 
     for billing in billings:
-        for fee in billing.fees.all():
+        for fee in billing.billing_fee.all():
             payments += int(fee.amount)
 
     expenses_o = Expense.objects.filter(property_id=property_o, time_stamp__month__gte=date.today(
