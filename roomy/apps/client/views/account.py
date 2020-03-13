@@ -27,7 +27,7 @@ def bookings(request):
     else:
         return render(request,"web/components/account/components/booking/list.html",context)
 
-
+@login_required(login_url='/login/')
 def BookingView(request,pk):
     acc = Booking.objects.get(pk=pk)
     if request.user.is_authenticated and request.user == acc.user_id:
@@ -66,9 +66,6 @@ def BookingRequest(request,pk):
     })
 
     if request.method == "POST":
-        for key, value in request.POST.items():
-           print('Key: %s' % (key) )
-
         try:
             r = Request.objects.create(
                 subject = "Room Request",
@@ -91,6 +88,7 @@ def BookingRequestList(request,pk):
     })
     return render(request,"web/components/account/components/booking/request/list.html",context)
 
+@login_required(login_url='/login/')
 def BookingBillingList(request,pk):
     booking = Booking.objects.get(pk=pk)
 
@@ -99,6 +97,7 @@ def BookingBillingList(request,pk):
     })
     return render(request,"web/components/account/components/booking/billing/list.html",context)
 
+@login_required(login_url='/login/')
 def saved(request):
     if request.user.is_authenticated:
 
@@ -112,6 +111,7 @@ def saved(request):
     else:
         return redirect('login')
 
+@login_required(login_url='/login/')
 def messages(request):
     if request.user.is_authenticated:
 
@@ -125,15 +125,26 @@ def messages(request):
     else:
         return redirect('login')
 
+@login_required(login_url='/login/')
 def profile(request):
-    if request.user.is_authenticated:
+    tenant = TenantAccount.objects.get(user_id=request.user.pk)
+    context.update({
+        "account_view":"profile",
+        "tenant": tenant,
+    })
+    if request.method == "POST":
+        try:
+            tenant.provincial_address = request.POST.get('address')
+            tenant.birthday = request.POST.get('bday')
+            # tenant.cell_number = request.POST.get('mobile') # TODO: FIX MODEL
+            tenant.save()
+        except Exception as e:
+            print(e)
+            # TODO: ERROR HANDLE
 
-        context.update({
-            "account_view":"profile",
-        })
+        return redirect(request.META.get('HTTP_REFERER', 'index'))
+    else:
         if request.user_agent.device.family == "Roomy Native":
             return render(request,"mobile-native/components/account/components/profile.html",context)
         else:
             return render(request,"web/components/account/components/profile.html",context)
-    else:
-        return redirect('login')
