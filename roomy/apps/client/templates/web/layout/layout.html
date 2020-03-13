@@ -2,10 +2,10 @@
 {% load static %}
 {% block extra_js %}
 <script type="text/javascript">
-  $(".toast").toast({
-    autohide: false
-  });
-  $('.toast').toast('show');
+  // $(".toast").toast({
+  //   autohide: false
+  // });
+  // $('.toast').toast('show');
 </script>
 {% endblock %}
 {% block layout %}
@@ -86,8 +86,7 @@
 </nav>
 <!-- end of navbar -->
 
-<div style="position: fixed; bottom:0; min-width: 250px; padding: 25px 15px; z-index:99999;">
-  <!-- Position toasts -->
+<!--div style="position: fixed; bottom:0; min-width: 250px; padding: 25px 15px; z-index:99999;">
   <div style="bottom: 0; left: 0;">
     <div class="toast fade show">
       <div class="toast-header">
@@ -111,7 +110,7 @@
       </div>
     </div>
   </div>
-</div>
+</div-->
 <div class="content" style="margin-top: 50px;">
   {% block content %}{% endblock content %}
 </div>

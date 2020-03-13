@@ -189,6 +189,9 @@ class TenantAccount(models.Model):
     def __str__(self):
         return f'Tenant: {self.user_id.username} - {self.user_id.first_name} {self.user_id.last_name}'
 
+    def get_bday(self):
+        return self.birthday.strftime("%Y-%m-%d")
+
     def save(self, *args, **kwargs):
         if self.transaction_id:
             trans = Transaction.objects.get(pk=self.transaction_id.pk)
@@ -307,7 +310,7 @@ class Guest(models.Model):
 
 class Expense(models.Model):
     property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
-    time_stamp = models.DateField()
+    time_stamp = models.DateField(auto_now_add=True)
     description = models.CharField(max_length=56)
     amount = models.DecimalField(max_digits=9, decimal_places=2)
 
