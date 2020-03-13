@@ -47,12 +47,12 @@
     {% if book.status == 1 %}<a href="{% url 'booking-view' book.id %}" class="bookings" style="text-decoration:none; color: black">
       {% else %}<a href="#" class="bookings" style="text-decoration:none; color: black">
         {% endif %}
-        <div class="row no-gutters">
-          <div class="col-7" id="bookcard-{{book.pk}}">
+        <div class="row flex-column no-gutters">
+          <div class="" id="bookcard-{{book.pk}}" style="min-height: 200px;"></div>
             <div class="img">
             </div>
           </div>
-          <div class="col-5 card-body px-4 d-flex flex-column justify-content-start">
+          <div class="card-body px-4 d-flex flex-column justify-content-start">
 
             <span style="font-size: 28px; text-transform: uppercase;">{{ book.catalog_id.name}}</span>
 
