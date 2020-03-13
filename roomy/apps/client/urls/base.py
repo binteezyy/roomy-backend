@@ -2,6 +2,7 @@ from django.urls import path,include
 from ..views import *
 from ..views.session import session_urls
 from .notification import notification_urls
+from ..tables import *
 urlpatterns = [
     #navigation
     path('modals/', include('apps.client.urls.modals')),
@@ -32,8 +33,18 @@ urlpatterns = [
     path('explore/property/amenities', property.amenities, name='amenities'),
     path('explore/property/photos', property.photos, name='photos'),
     path('explore/property/room/booking', property.booking, name='booking'),
+
+    ## ACCOUNT
     path('account/bookings', account.bookings, name='bookings'),
     path('account/bookings/<int:pk>', account.BookingView, name='booking-view'),
+    # ACCOUNT - REQUEST
+    path('account/bookings/<int:pk>/request/create', account.BookingRequest, name='booking-request'),
+    path('account/bookings/<int:pk>/request/', account.BookingRequestList, name='booking-request-list'),
+    path('account/bookings/<int:pk>/request/table', RequestsTable, name='booking-request-table'),
+    # ACCOUNT - BILLING
+    path('account/bookings/<int:pk>/billing/', account.BookingBillingList, name='booking-billing-list'),
+    path('account/bookings/<int:pk>/billing/table', BillingsTable, name='booking-billing-table'),
+    # ACCOUNT - ETC
     path('account/saved', account.saved, name='saved'),
     path('account/messages', account.messages, name='messages'),
     path('account/profile', account.profile, name='profile'),
