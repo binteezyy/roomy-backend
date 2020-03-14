@@ -27,7 +27,7 @@
 
   viewer = pannellum.viewer('panorama', {
       "type": "equirectangular",
-      "panorama": "/media/{{ room.img_3d.all.0}}",
+      "panorama": "{{MEDIA_URL}}{{ room.img_3d.all.0}}",
       "autoLoad": true,
     });
 
@@ -176,7 +176,7 @@
         <div class="d-flex flex-wrap justify-content-around align-items-center" style="min-height: 300px;">
           {% for foto in room.img_2d.all %}
           <div class="" style="width: 300px;">
-            <img class="img-fluid" src="/media/{{ foto.img_path}}" alt="">
+            <img class="img-fluid" src="{{MEDIA_URL}}{{ foto.img_path}}" alt="">
           </div>
           {% endfor %}
         </div>
