@@ -35,6 +35,11 @@ def home(request):
         if request.user.is_authenticated:
             return redirect('profile')
         else:
+            context.update({
+                "dorms":dorms,
+                "condos":condos,
+                "apartments":apartments
+            })
             return render(request,"mobile-native/components/landing/home.html",context)
     else:
         context.update({
@@ -92,51 +97,54 @@ def modal_contact(request):
             "TITLE": "Login",
             "form": form,
         })
-        return render(request,"web/components/modals/authenticate.html",context)
+        if request.user_agent.device.family == "Roomy Native":
+            return render(request,"mobile-native/components/modals/authenticate.html",context)
+        else:
+            return render(request,"web/components/modals/authenticate.html",context)
 
 
 def contact(request):
     form = ContactUsForm(request.POST or None)
 
+    if request.method == "POST":
+        recaptcha = False
+        try:
+            recaptcha = recaptcha_verify(request.POST["g-recaptcha-response"])['success']
+        except Exception as e:
+            pass
+        if form.is_valid():
+            form.clean()
+            name = form.cleaned_data.get('name')
+            email = form.cleaned_data.get('email')
+            phone_number = form.cleaned_data.get('phone_number')
+            message = form.cleaned_data.get('message')
+
+            try:
+                contact_us = ContactUs.objects.create(
+                    name = name,
+                    email = email,
+                    phone_number = phone_number,
+                    message = message
+                )
+
+                contact_us.save()
+                ContactUs_Handler(name,email,phone_number,message)
+                messages.success(request, 'Thank you for your feedback! We will be reviewing it later.')
+            except Exception as e:
+                print("CONTACT FORM ERROR OCCURED:",e)
+                contact_us.delete()
+                messages.success(request, 'Something went wrong 😞')
+                # TODO: CONTACT FORM ERROR HANDLING
+        else:
+            print("WEW")
+
+    context.update({
+        "form": form,
+        "RECAPTCHA_KEY": settings.RECAPTCHA_KEY,
+    })
     if request.user_agent.device.family == "Roomy Native":
         return render(request,"mobile-native/components/landing/contact.html",context)
     else:
-        if request.method == "POST":
-            recaptcha = False
-            try:
-                recaptcha = recaptcha_verify(request.POST["g-recaptcha-response"])['success']
-            except Exception as e:
-                pass
-            if form.is_valid():
-                form.clean()
-                name = form.cleaned_data.get('name')
-                email = form.cleaned_data.get('email')
-                phone_number = form.cleaned_data.get('phone_number')
-                message = form.cleaned_data.get('message')
-
-                try:
-                    contact_us = ContactUs.objects.create(
-                        name = name,
-                        email = email,
-                        phone_number = phone_number,
-                        message = message
-                    )
-
-                    contact_us.save()
-                    ContactUs_Handler(name,email,phone_number,message)
-                    messages.success(request, 'Thank you for your feedback! We will be reviewing it later.')
-                except Exception as e:
-                    print("CONTACT FORM ERROR OCCURED:",e)
-                    contact_us.delete()
-                    messages.success(request, 'Something went wrong 😞')
-                    # TODO: CONTACT FORM ERROR HANDLING
-            else:
-                print("WEW")
-
-        context.update({
-            "form": form,
-            "RECAPTCHA_KEY": settings.RECAPTCHA_KEY,
-        })
         return render(request,"web/components/landing/contact/base.html",context)
 
 def terms_of_use(request):

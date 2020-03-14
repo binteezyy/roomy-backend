@@ -50,4 +50,7 @@ def booking_modal(request,pk):
         "catalog": catalog,
         "addons": addons,
     })
-    return render(request,"web/components/property/modal/booking.html",context)
+    if request.user_agent.device.family == "Roomy Native":
+        return render(request,"mobile-native/components/property/modal/booking.html",context)
+    else:
+        return render(request,"web/components/property/modal/booking.html",context)
