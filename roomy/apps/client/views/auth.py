@@ -151,13 +151,19 @@ def modal_auth(request):
             "TITLE": "Login",
             "form": form,
         })
-        return render(request,"web/components/modals/authenticate.html",context)
+        if request.user_agent.device.family == "Roomy Native":
+            return render(request,"mobile-native/components/modals/authenticate.html",context)
+        else:
+            return render(request,"web/components/modals/authenticate.html",context)
 
 def owner_application_submit(request):
     context.update({
 
     })
-    return render(request,"web/components/modals/submit+recaptcha.html",context)
+    if request.user_agent.device.family == "Roomy Native":
+        return render(request,"mobile-native/components/modals/submit+recaptcha.html",context)
+    else:
+        return render(request,"web/components/modals/submit+recaptcha.html",context)
 
 def authListener(request):
     if request.user.is_authenticated: 

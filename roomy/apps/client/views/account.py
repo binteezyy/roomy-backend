@@ -77,8 +77,10 @@ def BookingRequest(request,pk):
             print(e)
         return redirect(request.META.get('HTTP_REFERER', 'index'))
     else:
-
-        return render(request,"web/components/account/components/booking/request/base.html",context)
+        if request.user_agent.device.family == "Roomy Native":
+            return render(request,"mobile-native/components/account/components/booking/request/base.html",context)
+        else:
+            return render(request,"web/components/account/components/booking/request/base.html",context)
 
 def BookingRequestList(request,pk):
     booking = Booking.objects.get(pk=pk)
@@ -86,7 +88,10 @@ def BookingRequestList(request,pk):
     context.update({
         "booking": booking,
     })
-    return render(request,"web/components/account/components/booking/request/list.html",context)
+    if request.user_agent.device.family == "Roomy Native":
+        return render(request,"mobile-native/components/account/components/booking/request/list.html",context)
+    else:
+        return render(request,"web/components/account/components/booking/request/list.html",context)
 
 @login_required(login_url='/login/')
 def BookingBillingList(request,pk):
@@ -95,7 +100,10 @@ def BookingBillingList(request,pk):
     context.update({
         "booking": booking,
     })
-    return render(request,"web/components/account/components/booking/billing/list.html",context)
+    if request.user_agent.device.family == "Roomy Native":
+        return render(request,"mobile-native/components/account/components/booking/billing/list.html",context)
+    else:
+        return render(request,"web/components/account/components/booking/billing/list.html",context)
 
 @login_required(login_url='/login/')
 def saved(request):
