@@ -8,6 +8,7 @@ GLOBAL_APPS = [
     'apps.core.roomy_admin',
     'apps.core.roomy_core',
     'django_user_agents',
+    'corsheaders',
 ]
 
 # Cache backend is optional, but recommended to speed up user agent parsing

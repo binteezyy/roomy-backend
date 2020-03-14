@@ -38,6 +38,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '799962262985-1bco370hresk0df19akuo4bmi02or742.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'KZ6ztb5sc_iaGrbKtrSvASTd'
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -45,7 +46,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_user_agents.middleware.UserAgentMiddleware'
+    'django_user_agents.middleware.UserAgentMiddleware',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    "https://roomy.jjspscl.com",
+    "https://storage.googleapis.com"
 ]
 
 AUTH_PASSWORD_VALIDATORS = [
