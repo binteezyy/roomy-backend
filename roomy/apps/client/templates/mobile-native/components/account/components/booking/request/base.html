@@ -1,0 +1,94 @@
+{% load sekizai_tags %}
+
+{% addtoblock "js" %}
+  <script type="text/javascript">
+  $('textarea').keyup(function() {
+
+    var characterCount = $(this).val().length,
+      current = $('#current'),
+      maximum = $('#maximum'),
+      theCount = $('#the-count');
+
+    current.text(characterCount);
+
+
+    /*This isn't entirely necessary, just playin around*/
+    if (characterCount < 70) {
+      current.css('color', '#666');
+    }
+    if (characterCount > 70 && characterCount < 90) {
+      current.css('color', '#6d5555');
+    }
+    if (characterCount > 90 && characterCount < 100) {
+      current.css('color', '#793535');
+    }
+    if (characterCount > 100 && characterCount < 120) {
+      current.css('color', '#841c1c');
+    }
+    if (characterCount > 120 && characterCount < 139) {
+      current.css('color', '#8f0001');
+    }
+
+    if (characterCount >= 140) {
+      maximum.css('color', '#8f0001');
+      current.css('color', '#8f0001');
+      theCount.css('font-weight', 'bold');
+    } else {
+      maximum.css('color', '#666');
+      theCount.css('font-weight', 'normal');
+    }
+  });
+  alert(1);
+  </script>
+{% endaddtoblock %}
+<form class="" method="POST">
+  {% csrf_token %}
+  <div class="modal-header">
+    <h5 class="modal-title">Request</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="fieldWrapper" style="">
+        <div class="form-group">
+          <label class="col-form-label" for="" style="font-size: 15px; font-weight: bold;">{{field.label}}</label>
+
+          {% if field.name == "message" %}
+
+          <textarea class="input-custom form-control textarea" name="{{ field.html_name }}" id="{{field.id_for_label}}" style="resize:none;" maxlength="300" rows="{{field.field.widget.attrs.rows}}" cols="{{field.field.widget.attrs.cols}}"></textarea>
+          <div class="d-flex justify-content-end" style="margin-top: 10px;">
+            <span id="current" style="font-size: 14px;">0</span>
+            <span id="maximum" style="font-size: 14px;">/300</span>
+          </div>
+
+          {% else %}
+
+          <input class="input-custom form-control {% if field.errors %}is-invalid{% endif %}" type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{field.id_for_label}}" style="margin-bottom: 5px;"
+            value="{{field.value|default_if_none:''}}" placeholder="">
+
+          {% endif %}
+
+          {% for error in field.errors %}
+          <div class="invalid-feedback">
+            <strong>{{ error|escape }}</strong>
+          </div>
+          {% endfor %}
+        </div>
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn" style="color: white; background-color: #61299F;">Request</button>
+  </div>
+
+</form>
