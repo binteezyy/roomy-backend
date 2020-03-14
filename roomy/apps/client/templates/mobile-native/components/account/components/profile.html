@@ -21,65 +21,95 @@
   }
 </style>
 
-<form>
-  <div class="container-fluid">
-    <div class="container">
-      <div class="row bg-white" style="padding: 20px;">
-        <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
-          <div class="wrapper">
-            <h4>Edit profile</h4>
-            <span style="font-size: 15px;">Property managers will get to know you with the info below.</span>
-          </div>
-          <div class="d-flex justify-content-end align-items-end">
-            <button class="btn" type="submit" name="button" style="color: white; background-color: #61299F;">Update</button>
-          </div>
-        </div>
-        <div class="flex-column" style="width: 100%; margin-top: 10px; padding: 20px;">
-          <div class="form-row form-group">
-            <div class="col">
-              <label for="">First name</label>
-              <input class="form-control" id="" type="text" name="" value="" required>
+<div class="container-fluid">
+  <div class="container">
+    <div class="row card my-2">
+      <div class="card-header">
+        <h4>Edit profile</h4>
+      </div>
+      <div class="card-body">
+        <span style="font-size: 15px;">Property managers will get to know you with the info below.</span>
+        <form id="form-profile" method="POST">
+          {% csrf_token %}
+          <div class="flex-column" style="width: 100%; margin-top: 10px; padding: 20px;">
+            <div class="form-group">
+                <label for="">First name</label>
+                <input class="form-control" type="text" name="first-name" value="{{ request.user.first_name}}" required>
             </div>
-            <div class="col">
+            <div class="form-group">
               <label for="">Last name</label>
-              <input class="form-control" id="" type="text" name="" value="" required>
+              <input class="form-control" type="text" name="last-name" value="{{ request.user.last_name}}" required>
             </div>
-          </div>
-          <div class="form-row form-group">
-            <div class="col">
+            <div class="form-group">
               <label for="">Birth date</label>
-              <input class="form-control" id="" type="date" name="" value="" required>
+              <input class="form-control" type="date" name="bday" value="{{tenant.get_bday}}">
             </div>
-            <div class="col">
+            <div class="form-group">
               <label for="">Mobile</label>
-              <input class="form-control" id="" type="tel" name="" pattern="09[0-9]{9}" value="" required>
+                <input class="form-control" type="tel" name="mobile" pattern="09[0-9]{9}" value="{% if tenant.cell_number %}{{tenant.cell_number}}{% else %}{% endif %}">
             </div>
-          </div>
-          <div class="form-group">
-            <label for="">Address</label>
-            <input class="form-control" id="" type="text" name="" value="" required>
-          </div>
-          <div class="form-group">
-            <label for="">Email</label>
-            <input type="text" name="" id="" class="form-control" value="" required>
-          </div>
-          <div class="form-group">
-            <label for="">Password</label>
-            <input type="password" name="" id="" class="form-control" value="" required>
-          </div>
-          <div class="form-group" style="margin-top: 40px;">
-            <span>Link your google account</span> <br>
-            <a class="btn" style="margin: 10px 0; color: white; background-color: #DB4437;" href="{% url 'social:begin' 'google-oauth2' %}">
+            <div class="form-group">
+              <label for="">Address</label>
+              <input class="form-control" type="text" name="address" value="{{tenant.provincial_address}}">
+            </div>
+            <div class="form-group">
+              <label for="">Email</label>
+              <input type="email" name="email" id="" class="form-control" value="{{request.user.email}}" required>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit" name="button" value="form-profile">Update Profile</button>
+            <!--div class="form-group" style="margin-top: 40px;">
+              <span>Link your google account</span> <br>
+              <a class="btn" style="margin: 10px 0; color: white; background-color: #DB4437;" href="{% url 'social:begin' 'google-oauth2' %}">
               <i class="fab fa-google" style="margin-right: 10px; color: white;"></i>Log in with google
             </a>
+          </div-->
           </div>
-        </div>
+        </form>
       </div>
     </div>
+    <!--div class="row card my-2">
+      <div class="card-header">
+        <h4>Change Password</h4>
+      </div>
+  
+      <div class="card-body" style="padding: 20px;">
+        <form class="" action="index.html" method="post">
+  
+        </form>
+        <div class="form-group form-row">
+          <label for="">Current Password</label>
+          <input type="password" name="" id="password" class="form-control" value="" required>
+        </div>
+        <div class="form-row form-group">
+          <div class="form-group col">
+            <label for="">New Password</label>
+            <input type="password" name="" id="password" class="form-control" value="" required>
+          </div>
+          <div class="form-group col">
+            <label for="">Confirm New Password</label>
+            <input type="password" name="" id="confirm_password" class="form-control" value="" required>
+          </div>
+          <button class="btn btn-success btn-block" type="submit" name="button" style="color: white; background-color: #61299F;">Change Password</button>
+        </div>
+      </div>
+    </div-->
   </div>
-</form>
-
-
-
+  
+  
+  <script type="text/javascript">
+    var password = document.getElementById("password"),
+      confirm_password = document.getElementById("confirm_password");
+  
+    function validatePassword() {
+      if (password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
+      } else {
+        confirm_password.setCustomValidity('');
+      }
+    }
+  
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+  </script>
 
 {% endblock %}
