@@ -28,12 +28,7 @@
   {% for book in bookings %}
 
   <style media="screen">
-    #bookcard- {
-        {
-        book.pk
-      }
-    }
-    .img {
+    #bookcard-{{book.pk}} .img {
       background-image:url({% if book.catalog_id.img_2d.all %}{{MEDIA_URL}}{{ book.catalog_id.img_2d.all.0 }}{% else %}{% static "img\placeholder_900x500.png" %}{% endif %});
       background-position: center center;
       background-size: cover;
@@ -48,11 +43,11 @@
       {% else %}<a href="#" class="bookings" style="text-decoration:none; color: black">
         {% endif %}
         <div class="row no-gutters">
-          <div class="flex-column" id="bookcard-{{book.pk}}">
+          <div class="col-7" id="bookcard-{{book.pk}}">
             <div class="img">
             </div>
           </div>
-          <div class="card-body px-4 d-flex flex-column justify-content-start">
+          <div class="col-5 card-body px-4 d-flex flex-column justify-content-start">
 
             <span style="font-size: 28px; text-transform: uppercase;">{{ book.catalog_id.name}}</span>
 
@@ -60,7 +55,7 @@
 
             {% if book.catalog_id.floor > 0 %}
 
-            <span style="font-size: 15px; text-transform: uppercase;">{{ book.catalog_id.floor|num_to_ordinal}} floor, Room #{{ room.number }}</span>
+            <span style="font-size: 15px; text-transform: uppercase;">{{ book.catalog_id.floor|num_to_ordinal}} floor</span>
 
             {% endif %}
 
@@ -80,8 +75,6 @@
         </div>
       </a>
   </div>
-
-
 
   {% endfor %}
 
