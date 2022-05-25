@@ -78,7 +78,7 @@ pycparser==2.20
 pycrypto==2.6.1
 pygobject==3.26.1
 PyHamcrest==2.0.2
-PyJWT==1.7.1
+PyJWT==2.4.0
 pyOpenSSL==17.5.0
 pyserial==3.4
 python-apt==1.6.5+ubuntu0.2
